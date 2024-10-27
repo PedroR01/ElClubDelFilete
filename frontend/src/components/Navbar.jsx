@@ -3,10 +3,10 @@ import logo from "../img/logoNavbar.png";
 
 export default function Navbar() {
   return (
-    <nav className="sticky w-full max-h-24 bg-[#3c3228]/50">
+    <nav className="fixed w-full max-h-24 bg-[#3c3228]/50">
       <ul className="flex items-center justify-center">
         <li className="py-2 mx-auto">
-          <img className="h-16" src={logo} alt="" />
+          <a href="/"><img className="h-16" src={logo} alt="" /></a>
         </li>
         <div className="flex gap-5 mx-auto rye-regular text-xl text-[#CDA053]">
           <li>
@@ -16,7 +16,7 @@ export default function Navbar() {
             <button>Galería</button>
           </li>
           <li>
-            <button>Blog</button>
+            <button><a href="/blog">Blog</a></button>
           </li>
         </div>
       </ul>

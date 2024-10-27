@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-export default function Modal() {
+export default function Modal({ state }) {
   const estadoInicial = {
     nombre: "",
     email: "",
@@ -15,53 +15,69 @@ export default function Modal() {
     setContactInfo({ ...contactInfo, [name]: newValue });
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
     console.log("Form sent");
+    state(false); // Cerrar el modal al enviar el formulario
   };
 
   return (
-    <div className="bg-[#8B2A1F] max-h-[50%]">
-      <form onSubmit={handleSubmit}>
-        <ul>
-          <li>
-            <label>
+    <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 backdrop-blur-sm z-50">
+      <div className="bg-[#692a23] rounded-lg shadow-lg p-8 max-w-lg w-full mx-4">
+        <header className="flex justify-end">
+          <button
+            className="text-slate-200 hover:text-slate-300"
+            onClick={() => state(false)}
+          >
+            ✕
+          </button>
+        </header>
+        <form onSubmit={handleSubmit} className="space-y-6">
+          <div>
+            <label className="block text-slate-200">
               Nombre
               <input
                 name="nombre"
                 title="Nombre"
                 type="text"
-                defaultValue={""}
+                className="mt-1 block w-full p-2 border border-gray-300 rounded-md"
                 onChange={handleChange}
               />
             </label>
-          </li>
-          <li>
-            <label>
+          </div>
+          <div>
+            <label className="block text-slate-200">
               Email
               <input
                 name="email"
                 title="Email"
-                type="text"
-                defaultValue={""}
+                type="email"
+                className="mt-1 block w-full p-2 border border-gray-300 rounded-md"
                 onChange={handleChange}
               />
             </label>
-          </li>
-          <li>
-            <label>
+          </div>
+          <div>
+            <label className="block text-slate-200">
               Mensaje
-              <input
+              <textarea
                 name="mensaje"
                 title="Mensaje"
-                type="text"
-                defaultValue={""}
+                className="mt-1 block w-full p-2 border border-gray-300 rounded-md"
                 onChange={handleChange}
               />
             </label>
-          </li>
-        </ul>
-        <button type="submit"></button>
-      </form>
+          </div>
+          <div className="flex justify-end">
+            <button
+              type="submit"
+              className="bg-[#DDAA58] text-white px-4 py-2 rounded-md hover:bg-[#af833b]"
+            >
+              Enviar
+            </button>
+          </div>
+        </form>
+      </div>
     </div>
   );
 }
