@@ -33,3 +33,12 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+@layer utilities {
+  .text-wb-center {
+    text-align: -webkit-center;
+  }
+  .text-wb-center-support {
+    -webkit-text-size-adjust: 100%;
+  }
+}

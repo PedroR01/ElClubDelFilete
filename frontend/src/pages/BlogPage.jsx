@@ -22,8 +22,8 @@ export default function BlogPage() {
                 </p>
                 <Button
                     text="PDF"
-                    bgColor={"#DDAA58"}
-                    textColor={"#8B2A1F"}
+                    bgColor={"bg-[#DDAA58] "}
+                    textColor={"text-[#8B2A1F] "}
                 />
             </div>
         </div>
