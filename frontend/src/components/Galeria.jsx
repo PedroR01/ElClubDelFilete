@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
+import momo from "../img/momo.jpeg";
+import momo2 from "../img/momo2.jpeg";
 
 function Galeria() {
   const obras = [
-    { id: 1, nombre: 'Jaime', titulo: 'bla bla bla', descripcion: 'Descripción del proceso de trabajo, curso u opinión.', pieza: 'Descripción de la pieza.', imagen: `${process.env.PUBLIC_URL}/img/logo192.png`},
-    { id: 2, nombre: 'Nombre Alumno 2', titulo: 'Título de la Obra 2', descripcion: 'Descripción del proceso de trabajo, curso u opinión.', pieza: 'Descripción de la pieza.', imagen: `${process.env.PUBLIC_URL}/img/logo512.png` }
+    { id: 1, nombre: 'Jaime', titulo: 'bla bla bla', descripcion: 'Descripción del proceso de trabajo, curso u opinión.', pieza: 'Descripción de la pieza.', imagen: momo},
+    { id: 2, nombre: 'Nombre Alumno 2', titulo: 'Título de la Obra 2', descripcion: 'Descripción del proceso de trabajo, curso u opinión.', pieza: 'Descripción de la pieza.', imagen: momo2}
   ];
 
   const [currentIndex, setCurrentIndex] = useState(0);
