@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import Modal from "../components/Modal";
 import Button from "../components/Button";
+import Galeria from "../components/Galeria";
 import logoIntro from "../img/logoIntro.png";
 import { useState } from "react";
 
@@ -48,6 +49,7 @@ export default function LandingPage() {
                 </ul>
             </div>
             {modal && (<Modal state={(e) => setModal(e)} />)}
+            <Galeria/>
         </>
     );
 }
