@@ -11,7 +11,7 @@ function Galeria() {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   return (
-    <div className="relative w-full max-w-3xl mx-auto bg-orange-950 overflow-hidden shadow-lg">
+    <div className="relative w-full max-w-3xl mx-auto bg-dark-brown overflow-hidden shadow-lg">
       <div className="flex">
         <div className="w-1/3 p-4 bg-yellow-200">
           <h3 className="text-lg font-bold">{obras[currentIndex].nombre}</h3>
@@ -20,7 +20,7 @@ function Galeria() {
           <p className="mt-2 font-semibold">Pieza:</p>
           <p>{obras[currentIndex].pieza}</p>
         </div>
-        <img src={obras[currentIndex].imagen} alt={`Obra ${currentIndex + 1}`} className="w-2/3 object-cover" />
+        <img src={obras[currentIndex].imagen} alt={`Obra ${currentIndex + 1}`} className="w-2/3 object-cover pt-4 pb-12" />
       </div>
 
       <button onClick={() => setCurrentIndex((prevIndex) => prevIndex === 0 ? obras.length - 1 : prevIndex - 1)} className="absolute left-2 top-1/2 transform -translate-y-1/2 p-2 bg-gray-800 bg-opacity-50 text-white rounded-full">
