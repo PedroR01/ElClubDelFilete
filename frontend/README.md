@@ -3,6 +3,7 @@
 ## Librerias
 
 - React
+- React Router Dom
 - TailwindCSS (desarrollo)
 
 ## Recomendaciones

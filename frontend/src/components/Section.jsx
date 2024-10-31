@@ -5,7 +5,6 @@ export default function Section({ name, description }) {
 
   return (
     <>
-
     </>
   );
 }
