@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import Modal from "../components/Modal";
 import Button from "../components/Button";
+import Galeria from "../components/Galeria";
 import logoIntro from "../img/logoIntro.png";
 import { useState } from "react";
 import Slider from "../components/Slider";
@@ -59,9 +60,8 @@ export default function LandingPage() {
                         <p className="inria-serif-bold text-[#FEFFEB] text-xl tracking-wide leading-normal">Lorem ipsum dolor sit amet consectetur. Amet malesuada quis nunc fermentum. Condimentum a commodo fringilla sit gravida porta. Proin a bibendum fringilla sed sit cursus mi ac elit. Facilisis sem et potenti lectus augue at.</p>
                     </li>
                 </ul>
+            {modal && (<Modal state={(e) => setModal(e)} />)}
             </section>
-                {modal && (<Modal state={(e) => setModal(e)} />)}
-
                 {/* SECCIÓN CURSOS */}
                 <section className="bg[#FEFFEB]">
                     <h2 className="rye-regular text-[#bd8a33] text-3xl">CURSOS MENSUALES</h2>
@@ -81,7 +81,7 @@ export default function LandingPage() {
 
 
                 {/* SECCIÓN GALERIA */}
-
+                <Galeria/>
                 <section className="bg[#47321B]">
                     <img className="forma-imagen" src={logoBlog} alt="" />
                 </section></>}
