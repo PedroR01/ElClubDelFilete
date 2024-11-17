@@ -6,7 +6,7 @@ import { useState } from "react";
 import Slider from "../components/Slider";
 import logoNavbar from "../img/logoNavbar.png";
 import logoBlog from "../img/blog_image.png";
-import Curso from "../components/Curso";
+import Curso from "./CursoPage";
 
 
 export default function LandingPage() {
@@ -83,7 +83,7 @@ export default function LandingPage() {
                 {/* SECCIÓN GALERIA */}
 
                 <section className="bg[#47321B]">
-
+                    <img className="forma-imagen" src={logoBlog} alt="" />
                 </section></>}
 
         </>

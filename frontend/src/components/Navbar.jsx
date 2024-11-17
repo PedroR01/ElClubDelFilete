@@ -8,17 +8,11 @@ export default function Navbar() {
         <li className="py-2 mx-auto">
           <a href="/"><img className="h-16" src={logo} alt="" /></a>
         </li>
-        <div className="flex gap-5 mx-auto rye-regular text-xl text-[#CDA053]">
-          <li>
-            <button>Cursos</button>
-          </li>
-          <li>
-            <button>Galería</button>
-          </li>
-          <li>
-            <button><a href="/blog">Blog</a></button>
-          </li>
-        </div>
+        <li className="flex gap-5 mx-auto rye-regular text-xl text-[#CDA053]">
+          <button>Cursos</button>
+          <button>Galería</button>
+          <button><a href="/blog">Blog</a></button>
+        </li>
       </ul>
     </nav>
   );

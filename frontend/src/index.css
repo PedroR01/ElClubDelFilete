@@ -14,6 +14,10 @@
   font-style: normal;
 }
 
+.forma-imagen {
+  clip-path: polygon(0 0, 36% 0, 100% 100%, 0% 100%);
+}
+
 .inria-serif-bold {
   font-family: "Inria Serif", serif;
   font-weight: 700;

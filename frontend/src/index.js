@@ -8,7 +8,7 @@ import Footer from "./components/Footer";
 import BlogPage from "./pages/BlogPage";
 import LandingPage from "./pages/LandingPage";
 import ErrorPage from "./pages/ErrorPage";
-import Curso from "./components/Curso";
+import CarouselCurvo from "./components/CarouselCurvo";
 
 const error = () => (
   <>
@@ -25,7 +25,8 @@ const router = createBrowserRouter([
     element: (
       <>
         <Navbar />
-        <LandingPage />
+        {/* <LandingPage/> */}
+        <CarouselCurvo />
         <Footer />
       </>
     ),
