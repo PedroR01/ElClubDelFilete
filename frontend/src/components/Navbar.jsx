@@ -1,6 +1,7 @@
 import React from "react";
 import logo from "../img/logoNavbar.png";
 
+
 export default function Navbar() {
   return (
     <nav className="fixed top-0 w-full max-h-24 z-10 bg-[#3c3228]/50">
@@ -12,6 +13,7 @@ export default function Navbar() {
           <button>Cursos</button>
           <button>Galería</button>
           <button><a href="/blog">Blog</a></button>
+          <button><a href="/historia">Historia</a></button>
         </li>
       </ul>
     </nav>
