@@ -1,9 +1,27 @@
 import React from "react";
+import img1 from "../img/historia/el club del filete-1.jpg";
+import img2 from "../img/historia/el club del filete-2.jpg";
+import img3 from "../img/historia/el club del filete-3.jpg";
+import img4 from "../img/historia/el club del filete-4.jpg";
+import img5 from "../img/historia/el club del filete-5.jpg";
+import img6 from "../img/historia/el club del filete-6.jpg";
+import img7 from "../img/historia/el club del filete-7.jpg";
+import img8 from "../img/historia/el club del filete-8.jpg";
+import img9 from "../img/historia/el club del filete-9.jpg";
+import img10 from "../img/historia/el club del filete-10.jpg";
+import img11 from "../img/historia/el club del filete-11.jpg";
+import img12 from "../img/historia/el club del filete-12.jpg";
+import img13 from "../img/historia/el club del filete-13.jpg";
+import img14 from "../img/historia/el club del filete-14.jpg";
+import img15 from "../img/historia/el club del filete-15.jpg";
+import img16 from "../img/historia/el club del filete-16.jpg";
+import img17 from "../img/historia/el club del filete-17.jpg";
+import img18 from "../img/historia/el club del filete-18.jpg";
 
 export default function Historia(){
     return (
-        <div className="flex flex-row m-20 bg-gray-200 p-4">
-            <div className="w-1/3 bg-red-400 p-4">
+        <div className="relative h-screen w-full bg-gray-100">
+            {/*<div className="w-1/3 bg-red-400 p-4">
                 <h1>Historia del filete</h1>
                 <p class="whitespace-pre-line mb-8">
                     El filete porteño es mucho más que un estilo decorativo; es una tradición que llevo en cada trazo y cada espiral, algo que, de alguna manera, siento que he vivido en carne propia. Esta historia empieza en las calles de Buenos Aires, a fines del Siglo XIX cuando los carros de los inmigrantes comenzaron a llenarse de color y de formas únicas. Con pinceladas audaces y detalles vibrantes, esos primeros fileteadores, en su mayoría trabajadores de origen humilde, lograron que cada carro reflejara algo propio en medio de una ciudad que no paraba de crecer. Así, nacía el filete, un arte popular que se hizo símbolo de identidad en Buenos Aires y más tarde en Latinoamérica.
@@ -24,7 +42,7 @@ export default function Historia(){
                 </p>
             </div>
             
-            <div className="w-1/3 bg-yellow-400 p-4">
+            <div className="w-1/3 bg-yellow-400 p-4 h-1/2">
                 <h1>Historia Cris</h1>
 
                 <p class="whitespace-pre-line mb-8">
@@ -38,7 +56,7 @@ export default function Historia(){
 
             </div>
             
-            <div className="w-1/3 bg-green-300 p-4">
+            <div className="w-1/3 bg-green-300 p-4 h-1/2">
                 <h1>Hisotoria del club</h1>
 
                 <p class="whitespace-pre-line mb-8">
@@ -49,10 +67,29 @@ export default function Historia(){
                 <p class="whitespace-pre-line mb-8">
                     La idea surge de la necesidad del público de aprender este arte, por eso me decidí a crear esta plataforma digital de enseñanza que ahora ya es una COMUNIDAD FILETEADORA
                 </p>
-            </div>
+            </div>*/}
             
 
+            <div className="grid grid-cols-3 gap-0 h-full w-full">
+                <img src={img1} alt="imagen1" />
+                <img src={img2} alt="imagen2" />
+                <img src={img3} alt="imagen3" />
+                <img src={img4} alt="imagen1" />
+                <img src={img5} alt="imagen2" />
+                <img src={img6} alt="imagen3" />
+                <img src={img7} alt="imagen1" />
+                <img src={img8} alt="imagen2" />
+                <img src={img9} alt="imagen3" />
+                <img src={img10} alt="imagen1" />
+                <img src={img11} alt="imagen2" />
+                <img src={img12} alt="imagen3" />
+                <img src={img13} alt="imagen1" />
+                <img src={img14} alt="imagen2" />
+                <img src={img15} alt="imagen3" />
+                <img src={img16} alt="imagen1" />
+                <img src={img17} alt="imagen2" />
+                <img src={img18} alt="imagen3" />
+            </div>
         </div>
-        
     );
 }
