@@ -1,4 +1,5 @@
 import React from "react";
+import Mancha from "../components/Mancha"
 import img1 from "../img/historia/el club del filete-1.jpg";
 import img2 from "../img/historia/el club del filete-2.jpg";
 import img3 from "../img/historia/el club del filete-3.jpg";
@@ -69,7 +70,6 @@ export default function Historia(){
                 </p>
             </div>*/}
             
-
             <div className="grid grid-cols-3 gap-0 h-full w-full">
                 <img src={img1} alt="imagen1" />
                 <img src={img2} alt="imagen2" />
@@ -90,6 +90,12 @@ export default function Historia(){
                 <img src={img17} alt="imagen2" />
                 <img src={img18} alt="imagen3" />
             </div>
+
+            <Mancha/>
+
+
         </div>
     );
 }
+
+
