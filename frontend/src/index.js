@@ -26,8 +26,7 @@ const router = createBrowserRouter([
     element: (
       <>
         <Navbar />
-        {/* <LandingPage/> */}
-        <CarouselCurvo />
+        <LandingPage />
         <Footer />
       </>
     ),
@@ -35,7 +34,7 @@ const router = createBrowserRouter([
   },
   {
     //Blog
-    path: "/blog",
+    path: "/novedades",
     element: (
       <>
         <Navbar />
@@ -50,11 +49,11 @@ const router = createBrowserRouter([
     path: "/historia",
     element: (
       <>
-        <Navbar/>
-        <Historia/>
-        <Footer/>
+        <Navbar />
+        <Historia />
+        <Footer />
       </>
-    )
+    ),
   },
 ]);
 

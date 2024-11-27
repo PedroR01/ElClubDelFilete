@@ -1,19 +1,15 @@
 export default function Footer() {
   return (
-    <footer className="bg-dark-brown text-[#FEFFEB] py-4">
+    <footer className="bg-[#FEFFEB] text-[#2B1F12] py-4">
       <div className="container mx-auto flex flex-wrap justify-between items-center text-center md:text-left">
         <div className="w-full md:w-1/3 mb-4 md:mb-0">
-          <h5 className="font-bold">Realizado por</h5>
-          <p>Administrador</p>
+          <p>Realizado por <span className="font-bold">Voltio⚡</span></p>
         </div>
         <div className="w-full md:w-1/3 mb-4 md:mb-0">
-          <h5 className="font-bold">Proyecto</h5>
-          <p>Realizado por Proyecto Código</p>
+          <p className="font-bold">Administrador</p>
         </div>
-
         <div className="w-full md:w-1/3">
-          <h5 className="font-bold">Contact us</h5>
-          <p>x@gmail.com</p>
+          <p>Contáctanos <span className="font-bold">gpVoltio@gmail.com</span></p>
         </div>
       </div>
     </footer>

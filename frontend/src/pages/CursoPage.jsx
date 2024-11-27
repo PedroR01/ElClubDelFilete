@@ -23,14 +23,14 @@ export default function CursoPage({ onClick }) {
                     <button className="max-w-20" onClick={() => onClick(null)}><img src={returnIcon} alt="return button" /></button>
                     <ul className="space-y-9">
                         <li className="space-y-5">
-                            <span className="inria-serif-bold text-[#565552] text-xl tracking-wide leading-normal">Duración</span>
+                            <span className="inria-sans-regular-bold text-[#565552] text-xl tracking-wide leading-normal">Duración</span>
                             <h1 className="rye-regular text-[#bd8a33] text-3xl">Título</h1>
-                            <p className="inria-serif-regular text-[#565552] text-xl tracking-wide leading-normal">Lorem ipsum dolor sit amet
+                            <p className="inria-sans-regular-regular text-[#565552] text-xl tracking-wide leading-normal">Lorem ipsum dolor sit amet
                                 consectetur. Amet malesuada quis nunc fermentum. Condimentum a commodo fringilla sit gravida porta. Proin a bibendum fringilla sed sit cursus mi ac elit. Facilisis sem et potenti lectus augue at.</p>
                             <Button text={"Abrir"} bgColor={"bg-[#bd8a33] "} textColor={"text-[#FEFFEB] "} event={() => onConfirmRedirect()} />
                         </li>
                         <li>
-                            <span className="inria-serif-bold text-[#565552] text-xl tracking-wide leading-normal">Cursos relacionados</span>
+                            <span className="inria-sans-regular-bold text-[#565552] text-xl tracking-wide leading-normal">Cursos relacionados</span>
                             <Slider images={[imgCurso1, imgCurso2, imgCurso3]} />
                         </li>
                     </ul>

@@ -1,5 +1,6 @@
 {
-  "name": "elclubdelfilete",
+  "homepage": "./",
+  "name": "el_club_del_filete",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

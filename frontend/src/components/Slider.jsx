@@ -94,7 +94,7 @@ export default function Slider({ images, clickHandler }) {
         {images.map((image, index) => (
           <button
             key={index}
-            className="w-full flex-shrink-0"
+            className="w-1/4 h-1/4 flex-shrink-0 md:h-44"
             onClick={() => handleImageClick(image)}
           >
             <img
@@ -111,7 +111,7 @@ export default function Slider({ images, clickHandler }) {
       {!smallScreen && (
         <>
           <button
-            className="absolute top-1/2 left-0 transform -translate-y-1/2 text-white bg-gray-800 bg-transparent py-2
+            className="absolute top-1/4 left-0 transform -translate-y-1/2 text-white bg-transparent py-2
           focus:outline-none p-4 md:p-5 lg:p-6"
             onClick={prevSlide}
           >
@@ -123,7 +123,7 @@ export default function Slider({ images, clickHandler }) {
             />
           </button>
           <button
-            className="absolute top-1/2 right-2 transform -translate-y-1/2 bg-transparent focus:outline-none 
+            className="absolute top-1/4 right-2 transform -translate-y-1/2 bg-transparent focus:outline-none 
                       p-4 md:p-5 lg:p-6"
             onClick={nextSlide}
           >
