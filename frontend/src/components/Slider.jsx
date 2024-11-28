@@ -88,17 +88,17 @@ export default function Slider({ images, clickHandler }) {
       {...eventHandlers}
     >
       <div
-        className="flex transition-transform ease-out duration-300"
+        className="flex transition-transform ease-out duration-300 gap-8"
         style={{ transform: `translateX(-${currentIndex * 100}%)` }}
       >
         {images.map((image, index) => (
           <button
             key={index}
-            className="w-1/4 h-1/4 flex-shrink-0 md:h-44"
+            className="w-1/4 h-1/2 flex-shrink-0 md:h-[50%] aspect-[3/4]"
             onClick={() => handleImageClick(image)}
           >
             <img
-              className="w-full object-cover"
+              className="w-full h-full object-cover"
               src={image}
               draggable="false"
               alt={`Slide ${index}`}
@@ -111,29 +111,27 @@ export default function Slider({ images, clickHandler }) {
       {!smallScreen && (
         <>
           <button
-            className="absolute top-1/4 left-0 transform -translate-y-1/2 text-white bg-transparent py-2
-          focus:outline-none p-4 md:p-5 lg:p-6"
-            onClick={prevSlide}
-          >
-            <img
-              src={slide}
-              alt="left slide"
-              className="w-8 h-8 md:w-10 md:h-10 lg:w-12 lg:h-12 -rotate-180"
-              draggable="false"
-            />
-          </button>
-          <button
-            className="absolute top-1/4 right-2 transform -translate-y-1/2 bg-transparent focus:outline-none 
-                      p-4 md:p-5 lg:p-6"
-            onClick={nextSlide}
-          >
-            <img
-              src={slide}
-              alt="right slide"
-              className="w-8 h-8 md:w-10 md:h-10 lg:w-12 lg:h-12"
-              draggable="false"
-            />
-          </button>
+                aria-label="Next"
+                className="flex absolute top-1/2 right-0 w-9 h-9 z-10 ml-5 items-center justify-center rounded-full bg-[#FFFBF2]
+             border-2 border-black button-shadow 
+             transition duration-300 ease-in-out hover:-translate-x-2 
+             hover:bg-[#D1C1B4] hover:button-shadow active:bg-[#FFDD6A] 
+             hover:shadow-lg active:shadow-none"
+                onClick={nextSlide}
+            >
+                <img className="w-[25%]" src={slide} alt="right slide" />
+            </button>
+            <button
+                aria-label="Previous"
+                className="flex absolute top-1/2 left-0 w-9 h-9 z-10 ml-5 items-center justify-center rounded-full bg-[#FFFBF2]
+             border-2 border-black
+             transition duration-300 ease-in-out hover:-translate-x-2 
+             hover:bg-[#D1C1B4] hover:button-shadow active:bg-[#FFDD6A] 
+             hover:shadow-lg active:shadow-none"
+                onClick={prevSlide}
+            >
+                <img className="w-[25%] rotate-180" src={slide} alt="left slide" />
+            </button>
         </>
       )}
 
