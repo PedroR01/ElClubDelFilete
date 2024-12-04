@@ -8,7 +8,6 @@ import Footer from "./components/Footer";
 import BlogPage from "./pages/BlogPage";
 import LandingPage from "./pages/LandingPage";
 import ErrorPage from "./pages/ErrorPage";
-import CarouselCurvo from "./components/CarouselCurvo";
 import Historia from "./pages/HistoriaFilete";
 
 const error = () => (

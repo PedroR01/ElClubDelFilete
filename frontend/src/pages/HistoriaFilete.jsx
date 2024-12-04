@@ -1,5 +1,5 @@
 import React from "react";
-import Mancha from "../components/Mancha"
+import Mancha from "../components/InfoMancha"
 import img1 from "../img/historia/el club del filete-1.jpg";
 import img2 from "../img/historia/el club del filete-2.jpg";
 import img3 from "../img/historia/el club del filete-3.jpg";
@@ -18,10 +18,11 @@ import img15 from "../img/historia/el club del filete-15.jpg";
 import img16 from "../img/historia/el club del filete-16.jpg";
 import img17 from "../img/historia/el club del filete-17.jpg";
 import img18 from "../img/historia/el club del filete-18.jpg";
+import InfoMancha from "../components/InfoMancha";
 
-export default function Historia(){
+export default function Historia() {
     return (
-        <div className="relative h-screen w-full bg-gray-100">
+        <div className="flex h-screen w-full bg-[#2f0c0d]">
             {/*<div className="w-1/3 bg-red-400 p-4">
                 <h1>Historia del filete</h1>
                 <p class="whitespace-pre-line mb-8">
@@ -69,8 +70,8 @@ export default function Historia(){
                     La idea surge de la necesidad del público de aprender este arte, por eso me decidí a crear esta plataforma digital de enseñanza que ahora ya es una COMUNIDAD FILETEADORA
                 </p>
             </div>*/}
-            
-            <div className="grid grid-cols-3 gap-0 h-full w-full">
+
+            {/* <div className="grid grid-cols-3 gap-0 h-full w-full">
                 <img src={img1} alt="imagen1" />
                 <img src={img2} alt="imagen2" />
                 <img src={img3} alt="imagen3" />
@@ -89,12 +90,23 @@ export default function Historia(){
                 <img src={img16} alt="imagen1" />
                 <img src={img17} alt="imagen2" />
                 <img src={img18} alt="imagen3" />
+            </div> */}
+            <div className="h-screen w-full mt-20">
+                <InfoMancha />
+
             </div>
-
-            <Mancha/>
-
-
         </div>
+        // Historia Cris
+
+        // Que decirte de mi… Nací en el año 1985 un Martes 22 de Octubre bajo el signo de Libra en un hospital público de la Ciudad de La Plata, Provincia de Buenos Aires. Desde que tengo uso de razón uso el arte como mi método de expresión y cuando conocí al Filete Porteño fue amor a primera vista, en una sola técnica pictórica encontré todo lo que me representaba: oficio, identidad cultural, diseños complejos, retratos, letras y trabajo, este último fué de los elementos que más me llamó la atención ya que siempre supe que para que esto funcione me tenia que dar de comer,
+
+        // Si queres saber más sobre mi historia en la sección de Novedades hablo un poco más profundo, pero creo que con esto ya sabes por donde viene la mano.
+
+        // HIstoria del Club
+
+        // El Club del Filete es una plataforma online de enseñanza que busca democratizar el acceso a la enseñanza del Filete Porteño, aprovechando las ventajas de la virtualidad para llevar la identidad argentina a todos los rincones del mundo, tanto para los argentinos que se encuentran lejos de su tierra como para el resto del mundo que quiere conocer la Cultura Argentina.
+
+        // La idea surge de la necesidad del público de aprender este arte, por eso me decidí a crear esta plataforma digital de enseñanza que ahora ya es una COMUNIDAD FILETEADORA
     );
 }
 

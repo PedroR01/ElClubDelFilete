@@ -44,6 +44,11 @@ code {
     monospace;
 }
 
+/* FORMA CUSTOM PARA LA MANCHA */
+/* Polygon 2 */
+
+/* --------------------------- */
+
 @layer utilities {
   .text-wb-center {
     text-align: -webkit-center;
