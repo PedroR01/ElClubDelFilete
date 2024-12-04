@@ -31,20 +31,20 @@ export default function LandingPage() {
     };
 
     return (
-        <div className="overflow-x-hidden overscroll-x-none">
+        <div className="overflow-x-hidden overscroll-x-none pb-8">
             {infoCurso ? <Curso onClick={(navigation) => openCurso(navigation)} /> : <>
-                <div className="absolute bg-black w-full -z-10 -top-20">
-                    <img className="w-full opacity-40" src={introClubGif} alt="" />
+                <div className="absolute bg-black w-full h-[62%] -z-10 md:-top-20 md:h-auto">
+                    <img className="w-full h-full opacity-40 md:h-auto" src={introClubGif} alt="" />
                 </div>
                 <section className="flex  w-full pt-24 justify-center">
                     {/* SECCIÓN INICIAL */}
-                    <div className="flex flex-col items-center  justify-center flex-nowrap md:w-3/5 gap-8">
+                    <div className="flex flex-col w-4/5 items-center  justify-center flex-nowrap md:w-3/5 gap-8">
                         <img
                             src={logoIntro}
                             alt="Logo club del filete"
-                            className="h-60 w-60 md:h-64 md:w-72 object-cover mb-4"
+                            className="h-40 w-44 md:h-64 md:w-72 object-cover mb-4"
                         />
-                        <p className="inria-sans-regular text-[#FEFFEB] text-xl tracking-wide leading-normal text-justify md:leading-10 md:tracking-wider">Lorem ipsum dolor sit amet consectetur. Amet malesuada quis nunc fermentum. Condimentum a commodo fringilla sit gravida porta. </p>
+                        <p className="inria-sans-regular text-[#FEFFEB] text-sm tracking-wide leading-normal md:text-justify md:text-xl md:leading-10 md:tracking-wider">Lorem ipsum dolor sit amet consectetur. Amet malesuada quis nunc fermentum. Condimentum a commodo fringilla sit gravida porta. </p>
                         <Button
                             text="Contactame"
                             bgColor={"bg-[#bd8a33] "}
@@ -56,26 +56,26 @@ export default function LandingPage() {
                     {modal && (<Modal state={(e) => setModal(e)} />)}
                 </section>
                 {/* SECCIÓN CURSOS */}
-                <section id="academia" className="flex flex-col bg-[#FEFFEB] rounded-[4rem]  pt-24 shadow-academia gap-9 md:mt-44">
+                <section id="academia" className="flex flex-col bg-[#FEFFEB] rounded-3xl pt-8 mt-8 shadow-academia gap-9 md:rounded-[4rem] md:pt-24 md:mt-44">
                     <h2 className="rye-regular text-[#2B1F12] text-3xl text-center">ACADEMÍA</h2>
-                    <ul className="flex flex-col gap-4">
+                    <ul className="flex flex-col gap-16">
                         <li>
-                            <h4 className="rye-regular text-[#2B1F12] text-xl md:ml-16">Introducción al Filete</h4>
+                            <h4 className="rye-regular text-[#2B1F12] text-lg md:text-xl ml-6 md:ml-16">Introducción al Filete</h4>
                             <CarouselCurvo />
                         </li>
                         <li>
-                            <h4 className="rye-regular text-[#2B1F12] text-xl md:ml-16">Últimos lanzamientos</h4>
+                            <h4 className="rye-regular text-[#2B1F12] text-lg md:text-xl ml-6  md:ml-16">Últimos lanzamientos</h4>
                             <Slider images={[logoBlog, logoIntro, logoNavbar]} clickHandler={(imgClicked) => openCurso(imgClicked)} />
                         </li>
                         <li>
-                            <h4 className="rye-regular text-[#2B1F12] text-xl md:ml-16">Estudiantes avanzados</h4>
+                            <h4 className="rye-regular text-[#2B1F12] text-lg md:text-xl ml-6  md:ml-16">Estudiantes avanzados</h4>
                             <CarouselCurvo />
                         </li>
                     </ul>
 
                 </section>
 
-                <h2 id="galería" className="rye-regular text-[#2B1F12] text-3xl text-center">GALERÍA</h2>
+                <h2 id="galería" className="rye-regular text-[#2B1F12] text-3xl text-center mt-20">GALERÍA</h2>
                 {/* SECCIÓN GALERIA */}
                 <Galeria />
             </>}
