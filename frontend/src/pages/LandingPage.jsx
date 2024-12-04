@@ -31,7 +31,7 @@ export default function LandingPage() {
     };
 
     return (
-        <>
+        <div className="overflow-x-hidden overscroll-x-none">
             {infoCurso ? <Curso onClick={(navigation) => openCurso(navigation)} /> : <>
                 <div className="absolute bg-black w-full -z-10 -top-20">
                     <img className="w-full opacity-40" src={introClubGif} alt="" />
@@ -56,7 +56,7 @@ export default function LandingPage() {
                     {modal && (<Modal state={(e) => setModal(e)} />)}
                 </section>
                 {/* SECCIÓN CURSOS */}
-                <section className="flex flex-col bg-[#FEFFEB] rounded-[4rem]  pt-24 shadow-academia gap-9 md:mt-44">
+                <section id="academia" className="flex flex-col bg-[#FEFFEB] rounded-[4rem]  pt-24 shadow-academia gap-9 md:mt-44">
                     <h2 className="rye-regular text-[#2B1F12] text-3xl text-center">ACADEMÍA</h2>
                     <ul className="flex flex-col gap-4">
                         <li>
@@ -75,11 +75,11 @@ export default function LandingPage() {
 
                 </section>
 
-                <h2 className="rye-regular text-[#2B1F12] text-3xl text-center">GALERÍA</h2>
+                <h2 id="galería" className="rye-regular text-[#2B1F12] text-3xl text-center">GALERÍA</h2>
                 {/* SECCIÓN GALERIA */}
                 <Galeria />
             </>}
 
-        </>
+        </div>
     );
 }
