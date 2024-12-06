@@ -1,12 +1,12 @@
 import React from "react";
 import Slider from "../components/Slider";
-import returnIcon from "../img/return.png";
-import manchaFondo from "../img/manchaFondo.png";
-import florFondo from "../img/florFondo.png";
-import separador from "../img/separador.png";
-import imgCurso1 from "../img/imgCurso1.png";
-import imgCurso2 from "../img/imgCurso2.png";
-import imgCurso3 from "../img/imgCurso3.png";
+import returnIcon from "../img/iconos/return.png";
+import manchaFondo from "../img/misc/manchaFondo.png";
+import florFondo from "../img/misc/florFondo.png";
+import separador from "../img/misc/separador.png";
+import imgCurso1 from "../img/portadas/club14.jpg";
+import imgCurso2 from "../img/portadas/club16.jpg";
+import imgCurso3 from "../img/portadas/club18.jpg";
 import Button from "../components/Button";
 
 export default function CursoPage({ onClick }) {

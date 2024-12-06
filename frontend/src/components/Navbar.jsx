@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import logo from "../img/logoNavbar.png";
+import logo from "../img/logos/logoNavbar.png";
 
 export default function Navbar() {
   const [showNavbar, setShowNavbar] = useState(true); // Controla la visibilidad de la navbar

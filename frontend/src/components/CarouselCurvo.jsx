@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Curso from "./Curso";
-import slide from "../img/slide.png";
+import slide from "../img/iconos/slide.png";
 
 export default function CarouselCurvo() {
     // Dependiendo el tamaño de la pantalla se van a mostrar entre 5-8 cursos en simultaneo.

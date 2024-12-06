@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import slide from "../img/slide.png";
+import slide from "../img/iconos/slide.png";
 
 export default function Slider({ images, clickHandler }) {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -111,27 +111,27 @@ export default function Slider({ images, clickHandler }) {
       {!smallScreen && (
         <>
           <button
-                aria-label="Next"
-                className="flex absolute top-1/2 right-0 w-9 h-9 z-10 ml-5 items-center justify-center rounded-full bg-[#FFFBF2]
+            aria-label="Next"
+            className="flex absolute top-1/2 right-0 w-9 h-9 z-10 ml-5 items-center justify-center rounded-full bg-[#FFFBF2]
              border-2 border-black button-shadow 
              transition duration-300 ease-in-out hover:-translate-x-2 
              hover:bg-[#D1C1B4] hover:button-shadow active:bg-[#FFDD6A] 
              hover:shadow-lg active:shadow-none"
-                onClick={nextSlide}
-            >
-                <img className="w-[25%]" src={slide} alt="right slide" />
-            </button>
-            <button
-                aria-label="Previous"
-                className="flex absolute top-1/2 left-0 w-9 h-9 z-10 ml-5 items-center justify-center rounded-full bg-[#FFFBF2]
+            onClick={nextSlide}
+          >
+            <img className="w-[25%]" src={slide} alt="right slide" />
+          </button>
+          <button
+            aria-label="Previous"
+            className="flex absolute top-1/2 left-0 w-9 h-9 z-10 ml-5 items-center justify-center rounded-full bg-[#FFFBF2]
              border-2 border-black
              transition duration-300 ease-in-out hover:-translate-x-2 
              hover:bg-[#D1C1B4] hover:button-shadow active:bg-[#FFDD6A] 
              hover:shadow-lg active:shadow-none"
-                onClick={prevSlide}
-            >
-                <img className="w-[25%] rotate-180" src={slide} alt="left slide" />
-            </button>
+            onClick={prevSlide}
+          >
+            <img className="w-[25%] rotate-180" src={slide} alt="left slide" />
+          </button>
         </>
       )}
 
