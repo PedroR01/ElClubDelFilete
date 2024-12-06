@@ -1,23 +1,45 @@
 import React, { useState, useEffect } from "react";
-import Curso from "./Curso";
 import slide from "../img/iconos/slide.png";
+import curso1 from "../img/portadas/club1.jpg";
+
+
 
 export default function CarouselCurvo() {
-    // Dependiendo el tamaño de la pantalla se van a mostrar entre 5-8 cursos en simultaneo.
-    // Desde md (768) - 2xl(1536) o xl (1280)
     const [screenSize, setScreenSize] = useState("desktop");
     const [currentIndex, setCurrentIndex] = useState(0);
-    const cursos = Array.from({ length: 21 }, (_, i) => ({
-    })); // Genero un array de componentes curso para hacer la prueba
+    const [currentSlide, setCurrentSlide] = useState(0);
+    const maxSliders = 3;
+    // Al ser 21 cursos, donde en version de escritorio se muestran de a 7 en simultaneo, el numero maximo de "vueltas" debe ser 3
+    const cursos = Array.from({ length: 21 }, (_, i) => ({})); // Genera un array para pruebas
 
     const prevSlide = () => {
-        const newIndex = currentIndex === 0 ? cursos.length - 7 : currentIndex - 1;
+        let newIndex = 0;
+        let sliderIndex = 0;
+        if (currentIndex === 0) {
+            //newIndex = cursos.length - 7;
+            // habria que borrar el boton y no permitir que siga scrolleando para atras
+
+        } else {
+            newIndex = currentIndex - 1;
+            sliderIndex = currentSlide - 7;
+        }
         setCurrentIndex(newIndex);
+        setCurrentSlide(sliderIndex);
     };
 
     const nextSlide = () => {
-        const newIndex = currentIndex === cursos.length - 7 ? 0 : currentIndex + 1;
+        let newIndex = 0;
+        let sliderIndex = 0;
+        if (currentIndex === (maxSliders - 1)) {
+            //newIndex = cursos.length - 7;
+            // habria que borrar el boton y no permitir que siga scrolleando para adelante
+        } else {
+            newIndex = currentIndex + 1;
+            sliderIndex = currentSlide + 7;
+
+        }
         setCurrentIndex(newIndex);
+        setCurrentSlide(sliderIndex);
     };
 
     useEffect(() => {
@@ -28,7 +50,7 @@ export default function CarouselCurvo() {
                 setScreenSize("notebook");
             else if (window.innerWidth >= 1280)
                 setScreenSize("desktop");
-        }
+        };
 
         checkResolution();
         window.addEventListener("resize", checkResolution);
@@ -36,47 +58,76 @@ export default function CarouselCurvo() {
         return () => window.removeEventListener("resize", checkResolution);
     }, []);
 
-    let widthSize;
-    // tablet = 5
-    if (screenSize === "tablet")
-        widthSize = "3/5";
-    // notebook = 6/7
-    else if (screenSize === "notebook")
-        widthSize = "w-1/6";
-    // desktop = 8
-    else
-        widthSize = "w-1/8";
+    /*
+        let widthSize;
+        // tablet = 5
+        if (screenSize === "tablet")
+            widthSize = "3/5";
+        // notebook = 6/7
+        else if (screenSize === "notebook")
+            widthSize = "w-1/6";
+        // desktop = 8
+        else
+            widthSize = "w-1/8";
+    */
 
-    const handlePrevSlide = () => {
-        setCurrentIndex(-1);
-    }
+    const getCursoStyle = (index) => {
+        const middleIndex = currentSlide + 3; // El índice central del carrusel
+        const distanceFromMiddle = index - middleIndex;
 
-    const handleNextSlide = () => {
-        setCurrentIndex(1);
-    }
-    // relative w-full max-w-4xl mx-auto overflow-hidden select-none
+        // Define transformaciones para los cursos según su posición
+        if (distanceFromMiddle >= -1 && distanceFromMiddle <= 1) {
+            return { transform: "scale(.9)", zIndex: 5 };
+        } else if (distanceFromMiddle === -2) {
+            return {
+                transform: "perspective(600px) rotateY(8deg) scale(1)",
+                zIndex: 3,
+            };
+        } else if (distanceFromMiddle === 2) {
+            return {
+                transform: "perspective(600px) rotateY(-8deg) scale(1)",
+                zIndex: 3,
+            };
+        } else if (distanceFromMiddle === -3) {
+            return {
+                transform: "perspective(730px) rotateY(20deg) scale(1.1)",
+                zIndex: 2,
+            };
+        } else if (distanceFromMiddle === 3) {
+            return {
+                transform: "perspective(730px) rotateY(-20deg) scale(1.1)",
+                zIndex: 2,
+            };
+        }
 
+        console.log(currentIndex)
+    };
+    // {`flex h-60 gap-4 transition-transform ease-out duration-500 transform translate-x-[-${currentIndex * 100}%]`}
     return (
-        <div className="flex relative w-full mx-auto">
+        <div className="flex relative w-full mx-auto overflow-hidden">
             <div
                 className="transform text-white bg-gray-800 bg-transparent py-2 focus:outline-none p-4 md:p-5 lg:p-6"
             >
-                <div className="flex h-60 gap-2 transition-transform ease-out duration-500"
+                <ul
+                    className={`flex h-60 gap-4 transition-transform ease-out duration-500`}
                     style={{
-                        transform: `translateX(-${currentIndex * (100 / 7)}%)`, // Mueve el carrusel a lo largo del eje horizontal según el currentIndex
-                        width: `${(cursos.length / 7) * 100}%`, // Define el ancho total del contenedor que contiene todos los cursos. 
-                    }}>
-                    {cursos.map((curso, index) => (
-                        <Curso key={index} style={{ flex: `0 0 ${100 / 7}%` }} />
-                        /*
-                        está creando dinámicamente los cursos y representándolos con el 
-                        componente Curso cada vez que se ejecuta el mapeo sobre el array cursos.
-                        Cada curso tiene un estilo personalizado para 
-                        asegurarse de que ocupe un 1/7 del ancho del contenedor
-                        */
+                        transform: `translateX(-${currentIndex * (100 / maxSliders)}%)`, // Mueve el carrusel a lo largo del eje horizontal según el currentIndex y la cantidad de vueltas máximas que puede dar (3)
+                        width: `${100 * maxSliders}%`, // Define el ancho total del contenedor que contiene todos los cursos.
+                    }}
+                >
+                    {cursos.map((_, index) => (
+                        <li key={index}>
+                            <button className="shadow-lg">
+                                <img
+                                    style={{
+                                        ...getCursoStyle(index), // Aplica estilos dinámicos
+                                    }} src={curso1} alt="" /></button>
+
+                        </li>
                     ))}
-                </div>
+                </ul>
             </div>
+
             <button
                 aria-label="Next"
                 className="flex absolute top-1/2 right-0 w-9 h-9 z-10 ml-5 items-center justify-center rounded-full bg-[#FFFBF2]
@@ -100,5 +151,5 @@ export default function CarouselCurvo() {
                 <img className="w-[25%] rotate-180" src={slide} alt="left slide" />
             </button>
         </div>
-    )
-};
+    );
+}
