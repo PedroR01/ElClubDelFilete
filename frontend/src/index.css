@@ -8,9 +8,15 @@
   font-style: normal;
 }
 
-.inria-serif-regular {
-  font-family: "Inria Serif", serif;
+.inria-sans-regular {
+  font-family: "Inria Sans", sans-serif;
   font-weight: 400;
+  font-style: normal;
+}
+
+.inria-sans-bold {
+  font-family: "Inria Sans", sans-serif;
+  font-weight: 700;
   font-style: normal;
 }
 
@@ -18,7 +24,7 @@
   clip-path: polygon(0 0, 36% 0, 100% 100%, 0% 100%);
 }
 
-.inria-serif-bold {
+.inria-sans-regular-bold {
   font-family: "Inria Serif", serif;
   font-weight: 700;
   font-style: normal;
@@ -38,11 +44,20 @@ code {
     monospace;
 }
 
+/* FORMA CUSTOM PARA LA MANCHA */
+/* Polygon 2 */
+
+/* --------------------------- */
+
 @layer utilities {
   .text-wb-center {
     text-align: -webkit-center;
   }
   .text-wb-center-support {
     -webkit-text-size-adjust: 100%;
+  }
+
+  .shadow-academia {
+    box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
   }
 }
