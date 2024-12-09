@@ -97,6 +97,11 @@ code {
   .h-inherit {
     height: inherit;
   }
+
+  .text-last {
+    text-align-last: center;
+  }
+
   .text-wb-center {
     text-align: -webkit-center;
   }
