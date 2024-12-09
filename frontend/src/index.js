@@ -9,6 +9,7 @@ import LandingPage from "./pages/LandingPage";
 import ErrorPage from "./pages/ErrorPage";
 import Historia from "./pages/HistoriaPage";
 import NovedadesPage from "./pages/NovedadesPage";
+import NovedadDestacadaPage from "./pages/novedades/NovedadDestacadaPage";
 
 const error = () => (
   <>
@@ -38,6 +39,18 @@ const router = createBrowserRouter([
       <>
         <Navbar />
         <NovedadesPage />
+        <Footer />
+      </>
+    ),
+    errorElement: error(),
+  },
+  {
+    //Noticia Destacada
+    path: "/novedades/Descomponiendo el Proceso de Diseño: El Estilo Fileteo",
+    element: (
+      <>
+        <Navbar />
+        <NovedadDestacadaPage />
         <Footer />
       </>
     ),

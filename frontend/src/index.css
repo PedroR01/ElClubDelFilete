@@ -47,13 +47,23 @@ code {
 .flex-flow-noWrap {
   flex-flow: nowrap;
 }
-.aspect-7_4 {
-  aspect-ratio: 7/4;
+.aspect-3_4 {
+  aspect-ratio: 3/4;
+}
+.shadow-blog-main {
+  box-shadow: rgb(0, 0, 0) 0px 14px 37px -10px;
+}
+
+.shadow-blog-sec {
+  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
 }
 
 @layer utilities {
   .h-wb-fill {
     height: -webkit-fill-available;
+  }
+  .h-inherit {
+    height: inherit;
   }
   .text-wb-center {
     text-align: -webkit-center;
