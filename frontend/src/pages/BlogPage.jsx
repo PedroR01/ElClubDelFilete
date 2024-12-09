@@ -1,6 +1,6 @@
 import React from "react";
 import Button from "../components/Button";
-import blogImage from "../img/blog_image.png";
+import blogImage from "../img/portadas/blog_image.png";
 
 
 export default function BlogPage() {

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import slide from "../img/slide.png";
+import slide from "../img/iconos/slide.png";
 
 export default function Slider({ images, clickHandler }) {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -8,13 +8,17 @@ export default function Slider({ images, clickHandler }) {
   const [isSwiping, setIsSwiping] = useState(false); // Estado para rastrear si se está deslizando
 
   const prevSlide = () => {
-    const newIndex = currentIndex === 0 ? images.length - 1 : currentIndex - 1;
-    setCurrentIndex(newIndex);
+    // Evitar índices menores a 0
+    if (currentIndex > 0) {
+      setCurrentIndex(currentIndex - 1);
+    }
   };
-
+  
   const nextSlide = () => {
-    const newIndex = currentIndex === images.length - 1 ? 0 : currentIndex + 1;
-    setCurrentIndex(newIndex);
+    // Evitar avanzar más allá del límite
+    if (currentIndex < images.length - 4) {
+      setCurrentIndex(currentIndex + 1);
+    }
   };
 
   // Manejo del inicio del deslizamiento 
@@ -84,21 +88,24 @@ export default function Slider({ images, clickHandler }) {
 
   return (
     <div
-      className="relative w-full max-w-4xl mx-auto overflow-hidden select-none"
+      className="relative w-full max-w-7xl mx-auto overflow-hidden select-none"
       {...eventHandlers}
     >
       <div
-        className="flex transition-transform ease-out duration-300 gap-8"
+        className="flex transition-transform ease-out duration-300 gap-4"
         style={{ transform: `translateX(-${currentIndex * 100}%)` }}
       >
         {images.map((image, index) => (
           <button
             key={index}
-            className="w-1/4 h-1/2 flex-shrink-0 md:h-[50%] aspect-[3/4]"
+            className="w-[20%] flex-shrink-0  aspect-[3.5/5] rounded-3xl overflow-hidden "
+            style={{
+              boxShadow: '0 10px 20px rgba(0, 0, 0, 0.3)' // Personalización de sombra
+            }}
             onClick={() => handleImageClick(image)}
           >
             <img
-              className="w-full h-full object-cover"
+              className="w-full h-full object-cover rounded-3xl"
               src={image}
               draggable="false"
               alt={`Slide ${index}`}
@@ -111,27 +118,27 @@ export default function Slider({ images, clickHandler }) {
       {!smallScreen && (
         <>
           <button
-                aria-label="Next"
-                className="flex absolute top-1/2 right-0 w-9 h-9 z-10 ml-5 items-center justify-center rounded-full bg-[#FFFBF2]
+            aria-label="Next"
+            className="flex absolute top-1/2 right-0 w-9 h-9 z-10 ml-5 items-center justify-center rounded-full bg-[#FFFBF2]
              border-2 border-black button-shadow 
              transition duration-300 ease-in-out hover:-translate-x-2 
              hover:bg-[#D1C1B4] hover:button-shadow active:bg-[#FFDD6A] 
              hover:shadow-lg active:shadow-none"
-                onClick={nextSlide}
-            >
-                <img className="w-[25%]" src={slide} alt="right slide" />
-            </button>
-            <button
-                aria-label="Previous"
-                className="flex absolute top-1/2 left-0 w-9 h-9 z-10 ml-5 items-center justify-center rounded-full bg-[#FFFBF2]
+            onClick={nextSlide}
+          >
+            <img className="w-[25%]" src={slide} alt="right slide" />
+          </button>
+          <button
+            aria-label="Previous"
+            className="flex absolute top-1/2 left-0 w-9 h-9 z-10 ml-5 items-center justify-center rounded-full bg-[#FFFBF2]
              border-2 border-black
              transition duration-300 ease-in-out hover:-translate-x-2 
              hover:bg-[#D1C1B4] hover:button-shadow active:bg-[#FFDD6A] 
              hover:shadow-lg active:shadow-none"
-                onClick={prevSlide}
-            >
-                <img className="w-[25%] rotate-180" src={slide} alt="left slide" />
-            </button>
+            onClick={prevSlide}
+          >
+            <img className="w-[25%] rotate-180" src={slide} alt="left slide" />
+          </button>
         </>
       )}
 
