@@ -5,10 +5,10 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import reportWebVitals from "./reportWebVitals";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
-import BlogPage from "./pages/BlogPage";
 import LandingPage from "./pages/LandingPage";
 import ErrorPage from "./pages/ErrorPage";
 import Historia from "./pages/HistoriaPage";
+import NovedadesPage from "./pages/NovedadesPage";
 
 const error = () => (
   <>
@@ -37,7 +37,7 @@ const router = createBrowserRouter([
     element: (
       <>
         <Navbar />
-        <BlogPage />
+        <NovedadesPage />
         <Footer />
       </>
     ),

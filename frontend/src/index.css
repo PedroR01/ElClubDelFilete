@@ -44,12 +44,17 @@ code {
     monospace;
 }
 
-/* FORMA CUSTOM PARA LA MANCHA */
-/* Polygon 2 */
-
-/* --------------------------- */
+.flex-flow-noWrap {
+  flex-flow: nowrap;
+}
+.aspect-7_4 {
+  aspect-ratio: 7/4;
+}
 
 @layer utilities {
+  .h-wb-fill {
+    height: -webkit-fill-available;
+  }
   .text-wb-center {
     text-align: -webkit-center;
   }
