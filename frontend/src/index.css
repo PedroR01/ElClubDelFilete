@@ -2,6 +2,38 @@
 @tailwind components;
 @tailwind utilities;
 
+/* animación elementos navbar */
+.nav-link {
+  position: relative; /* Necesario para posicionar el subrayado */
+  display: inline-block;
+  text-decoration: none; /* Quitar el subrayado por defecto */
+  color: #cda053;
+  transition: transform 0.3s ease-in-out;
+}
+
+.nav-link:hover {
+  transform: scale(1.2, 1.2);
+  transition: transform 0.3s ease-in-out;
+  filter: brightness(1.2);
+}
+
+.nav-link .underline-img {
+  position: absolute;
+  top: 1.5rem; /* Alineado al borde inferior del enlace */
+  left: 50%; /* Centrado horizontalmente */
+  transform: translateX(-50%) scaleX(0); /* Inicialmente invisible */
+  transform-origin: center; /* Ancla de la animación */
+  width: 100%; /* Puede ajustarse según el tamaño deseado */
+  height: 1rem; /* Ajusta según el tamaño de tu imagen */
+  background: url("/src/img/misc/separador.png") no-repeat center; /* Imagen del subrayado */
+  background-size: contain; /* Escala la imagen correctamente */
+  transition: transform 0.3s ease-in-out; /* Animación suave */
+}
+
+.nav-link:hover .underline-img {
+  transform: translateX(-50%) scaleX(1); /* Muestra la imagen al hacer hover */
+}
+
 .rye-regular {
   font-family: "Rye", serif;
   font-weight: 400;

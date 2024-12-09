@@ -42,15 +42,16 @@ export default function Navbar() {
 
   return (
     <>
+      <div className="h-24 -z-10 bg-[#8F272A]"></div>
       {/* Navbar */}
       <nav
-        className={`fixed top-0 w-full max-h-24 z-10 bg-[#3c3228]/50 transition-transform duration-300 ${showNavbar ? "translate-y-0" : "-translate-y-full"
+        className={`fixed top-0 w-full h-24 z-10 bg-[#3c3228]/50 transition-transform duration-300 ${showNavbar ? "translate-y-0" : "-translate-y-full"
           }`}
       >
         <div className="flex items-center justify-between px-4 py-2">
           {/* Logo */}
           <a href="/">
-            <img className="h-16" src={logo} alt="Logo Navbar" />
+            <img className="h-16 transition-transform duration-300 hover:scale-110" src={logo} alt="Logo Navbar" />
           </a>
 
           {/* Botón Hamburguesa (visible solo en mobile) */}
@@ -76,12 +77,46 @@ export default function Navbar() {
 
           {/* Opciones de Navegación (visible en desktop) */}
           <ul className="hidden md:flex items-center gap-5 rye-regular text-xl text-[#CDA053]">
-            <li><a href="/historia">Historía</a></li>
-            <li><a href="#academia" onClick={(e) => handleSmoothScroll(e, "#academia")}>Academia</a></li>
-            <li><a href="/">Tienda</a></li>
-            <li><a href="/novedades">Novedades</a></li>
-            <li><a href="#galería" onClick={(e) => handleSmoothScroll(e, "#galería")}>Galería</a></li>
+            <li>
+              <a href="/historia" className="nav-link">
+                Historía
+                <span className="underline-img"></span>
+              </a>
+            </li>
+            <li>
+              <a
+                href="#academia"
+                className="nav-link"
+                onClick={(e) => handleSmoothScroll(e, "#academia")}
+              >
+                Academia
+                <span className="underline-img"></span>
+              </a>
+            </li>
+            <li>
+              <a href="/" className="nav-link">
+                Tienda
+                <span className="underline-img"></span>
+              </a>
+            </li>
+            <li>
+              <a href="/novedades" className="nav-link">
+                Novedades
+                <span className="underline-img"></span>
+              </a>
+            </li>
+            <li>
+              <a
+                href="#galería"
+                className="nav-link"
+                onClick={(e) => handleSmoothScroll(e, "#galería")}
+              >
+                Galería
+                <span className="underline-img"></span>
+              </a>
+            </li>
           </ul>
+
         </div>
       </nav>
 
