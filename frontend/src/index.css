@@ -2,6 +2,18 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Imagen de fondo Historia */
+.fixed-bg {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+    url("../src/img/portadas/club11.jpg");
+  min-height: 800px;
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-blend-mode: multiply;
+}
+
 /* animación elementos navbar */
 .nav-link {
   position: relative; /* Necesario para posicionar el subrayado */
@@ -36,6 +48,13 @@
 
 .rye-regular {
   font-family: "Rye", serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.montserrat-normal {
+  font-family: "Montserrat", sans-serif;
+  font-optical-sizing: auto;
   font-weight: 400;
   font-style: normal;
 }

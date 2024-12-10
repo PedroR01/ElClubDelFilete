@@ -33,18 +33,18 @@ export default function LandingPage() {
     return (
         <div className="overflow-x-hidden overscroll-x-none pb-8">
             {infoCurso ? <Curso onClick={(navigation) => openCurso(navigation)} /> : <>
-                <div className="absolute bg-black w-full h-[62%] -z-10 md:-top-20 md:h-auto">
+                <div className="absolute bg-black w-full h-[62%] -z-[5] md:-top-20 md:h-auto">
                     <img className="w-full h-full opacity-40 md:h-auto" src={introClubGif} alt="" />
                 </div>
-                <section className="flex  w-full pt-24 justify-center">
+                <section className="flex relative w-full py-24 justify-center md:justify-normal md:left-32 md:-bottom-28">
                     {/* SECCIÓN INICIAL */}
-                    <div className="flex flex-col w-4/5 items-center  justify-center flex-nowrap md:w-3/5 gap-8">
+                    <div className="flex flex-col w-4/5 items-center  justify-center md:justify-normal md:items-start flex-nowrap md:w-3/5 gap-8">
                         <img
                             src={logoIntro}
                             alt="Logo club del filete"
                             className="h-40 w-44 md:h-64 md:w-72 object-cover mb-4"
                         />
-                        <p className="inria-sans-regular text-[#FEFFEB] text-sm tracking-wide leading-normal md:text-justify md:text-xl md:leading-10 md:tracking-wider">Lorem ipsum dolor sit amet consectetur. Amet malesuada quis nunc fermentum. Condimentum a commodo fringilla sit gravida porta. </p>
+                        <p className="inria-sans-regular text-[#FEFFEB] text-sm tracking-wide leading-normal  md:text-xl md:leading-10 md:tracking-wider md:w-2/3">Lorem ipsum dolor sit amet consectetur. Amet malesuada quis nunc fermentum. Condimentum a commodo fringilla sit gravida porta. </p>
                         <Button
                             text="Contactame"
                             bgColor={"bg-[#bd8a33] "}

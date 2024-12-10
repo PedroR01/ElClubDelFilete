@@ -1,93 +1,146 @@
 import React from "react";
-import InfoMancha from "../components/InfoMancha";
+import cristianPintando from "../img/portadas/club14.jpg";
 
 export default function HistoriaPage() {
     return (
-        <div className="flex h-screen w-full bg-[#2f0c0d]">
-            {/*<div className="w-1/3 bg-red-400 p-4">
-                <h1>Historia del filete</h1>
-                <p class="whitespace-pre-line mb-8">
-                    El filete porteño es mucho más que un estilo decorativo; es una tradición que llevo en cada trazo y cada espiral, algo que, de alguna manera, siento que he vivido en carne propia. Esta historia empieza en las calles de Buenos Aires, a fines del Siglo XIX cuando los carros de los inmigrantes comenzaron a llenarse de color y de formas únicas. Con pinceladas audaces y detalles vibrantes, esos primeros fileteadores, en su mayoría trabajadores de origen humilde, lograron que cada carro reflejara algo propio en medio de una ciudad que no paraba de crecer. Así, nacía el filete, un arte popular que se hizo símbolo de identidad en Buenos Aires y más tarde en Latinoamérica.
-                </p>
-                <p class="whitespace-pre-line mb-8">
-                    Con los años, el filete y los fileteadores fuimos evolucionando, buscando siempre nuevos soportes donde plasmar la identidad Argentina y asi pasamos a decorar también los colectivos que atravesaban la ciudad. Pero en 1964, un cambio importante nos obligó a adaptarnos: la tracción a sangre fue prohibida en Buenos Aires. Aquellos trabajadores que dependían de sus carros tuvieron que invertir en camiones, y nosotros, los fileteadores, seguimos acompañándolos, decorando estas nuevas superficies y manteniendo vivo nuestro estilo en los motores que ahora recorrían la ciudad.
-                </p>
-                <p class="whitespace-pre-line mb-8">
-                    Luego, en 1976, vino un golpe aún más duro. El gobierno militar prohibió el fileteado en los transportes públicos. Las autoridades lo consideraban un adorno innecesario y hasta inapropiado para la imagen que querían dar en esos años de represión. Ver cómo nuestros colores y diseños eran borrados de los colectivos fue devastador, pero el filete no murió: comenzó a moverse hacia otras superficies, encontrando espacio en carteles, paredes y objetos decorativos, siempre adaptándose y buscando maneras de seguir presente.
-                </p >
-                        
-                <p class="whitespace-pre-line mb-8">
-                    La década del 90 trajo otro cambio profundo para quienes trabajábamos como fileteadores y letristas. La llegada del plotter y la cartelería impresa dejó a muchos de nosotros sin trabajo, ya que las máquinas reemplazaban nuestras manos en la creación de carteles y letreros. Pero, como siempre, encontramos una manera de reinventarnos. Empezamos a dar clases en nuestras propias casas, democratizando el acceso a la técnica y permitiendo que cualquier persona pudiera aprender a filetear. Fue entonces cuando el fileteado se abrió a todos, y fue en ese momento cuando las mujeres comenzaron a formar parte de este mundo que, hasta entonces, había sido casi exclusivamente masculino.
-                </p>
+        <div className="w-full bg-[#2f0c0d]">
+            <section className="flex w-full justify-between pb-40">
+                {/* Imagen de fondo SVG */}
+                <svg
+                    className="absolute inset-0 object-cover md:-left-5 md:w-[800px] md:h-[900px] md:mt-16 lg:mt-52 scale-110 lg:w-[948px] lg:h-[955px] 2xl:w-[1108px] 2xl:h-[1056px]"
+                    viewBox="0 0 1108 1056"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                >
+                    <g filter="url(#filter0_d_861_17)">
+                        <path
+                            d="M632 62.5004C865.21 6.4911 1195.5 -29.5 1044.5 280C883.916 609.143 656.5 801 504.5 961C334.439 1123.01 6.99992 959.5 6.99992 748.5C-8.81365 515.129 -80.0094 343.554 -45.5917 214.998C-42.6248 203.916 -40.1151 192.318 -38.5943 180.947C2.66724 -127.561 402.993 117.5 632 62.5004Z"
+                            fill="#8F272A"
+                        />
+                    </g>
+                    <defs>
+                        {/* Definimos el área de recorte */}
+                        <filter
+                            id="filter0_d_861_17"
+                            x="-79.8762"
+                            y="0.800781"
+                            width="1187.53"
+                            height="1054.83"
+                            filterUnits="userSpaceOnUse"
+                            colorInterpolationFilters="sRGB"
+                        >
+                            <feFlood floodOpacity="0" result="BackgroundImageFix" />
+                            <feColorMatrix
+                                in="SourceAlpha"
+                                type="matrix"
+                                values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+                                result="hardAlpha"
+                            />
+                            <feOffset dy="4" />
+                            <feGaussianBlur stdDeviation="12.5" />
+                            <feComposite in2="hardAlpha" operator="out" />
+                            <feColorMatrix
+                                type="matrix"
+                                values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
+                            />
+                            <feBlend
+                                mode="normal"
+                                in2="BackgroundImageFix"
+                                result="effect1_dropShadow_861_17"
+                            />
+                            <feBlend
+                                mode="normal"
+                                in="SourceGraphic"
+                                in2="effect1_dropShadow_861_17"
+                                result="shape"
+                            />
+                        </filter>
+                    </defs>
+                </svg>
 
-                <p class="whitespace-pre-line mb-8">
-                    Hoy, el fileteado porteño es reconocido como Patrimonio Cultural Inmaterial de la Humanidad por la UNESCO. Es un arte que representa la historia, la resistencia y la creatividad de Buenos Aires. Me siento orgulloso de formar parte de esta tradición, de cada pincelada que conecta con aquellos primeros días y de compartir el fileteado con nuevas generaciones que encuentran en él una forma de expresar su amor por la ciudad. Cada trazo cuenta una historia; cada detalle es un reflejo de lo que el fileteado sigue significando para todos nosotros."
-                </p>
-            </div>
-            
-            <div className="w-1/3 bg-yellow-400 p-4 h-1/2">
-                <h1>Historia Cris</h1>
+                {/* Contenido del artículo */}
+                <article className="relative flex flex-col z-10 top-20 lg:top-24 h-full items-center text-white pr-48 lg:pr-40 pl-10">
+                    {/* Header */}
 
-                <p class="whitespace-pre-line mb-8">
-                    Que decirte de mi… Nací en el año 1985 un Martes 22 de Octubre bajo el signo de Libra en un hospital público de la Ciudad de La Plata, Provincia de Buenos Aires. Desde que tengo uso de razón uso el arte como mi método de expresión y cuando conocí al Filete Porteño fue amor a primera vista, en una sola técnica pictórica encontré todo lo que me representaba: oficio, identidad cultural, diseños complejos, retratos, letras y trabajo, este último fué de los elementos que más me llamó la atención ya que siempre supe que para que esto funcione me tenia que dar de comer, 
+                    <h3 className="text-2xl lg:text-4xl rye-regular text-[#CDA053] 2xl:text-6xl font-bold mb-6 text-center tracking-wider">
+                        HISTORIA DEL FILETE PORTEÑO
+                    </h3>
 
-                </p>
+                    {/* Main contenido */}
 
-                <p class="whitespace-pre-line mb-8">
-                    Si queres saber más sobre mi historia en la sección de Novedades hablo un poco más profundo, pero creo que con esto ya sabes por donde viene la mano.
-                </p>
+                    <p className="text-lg montserrat-normal text-[#FEFFFB]  lg:pt-14 md:text-xl leading-relaxed max-w-4xl ">
+                        El filete porteño es mucho más que un estilo decorativo; es una
+                        <span className="text-[#CDA053]"> tradición </span> que llevo en cada trazo y cada espiral, algo que, de alguna
+                        manera, siento que he vivido en carne propia. Esta historia empieza en
+                        las calles de <span className="text-[#CDA053]"> Buenos Aires</span>, a fines del Siglo XIX cuando los carros de
+                        los inmigrantes comenzaron a llenarse de color y de formas únicas. Con
+                        los años, el filete y los fileteadores fuimos evolucionando, buscando
+                        siempre nuevos soportes donde plasmar la <span className="text-[#CDA053]"> identidad Argentina</span> y así
+                        pasamos a decorar también los colectivos que atravesaban la ciudad.
+                        Pero en 1964, un cambio importante nos obligó a adaptarnos. Hoy, el
+                        fileteado porteño es reconocido como Patrimonio Cultural Inmaterial de
+                        la Humanidad por la UNESCO. Es un arte que <span className="text-[#CDA053]"> representa la historia, la
+                            resistencia y la creatividad de Buenos Aires. </span>
+                    </p>
+                </article>
+                <img className="w-1/4 object-cover lg:w-1/3 2xl:w-5/12 2xl:mr-4" src={cristianPintando} alt="Cristian diseñando una pieza" />
+            </section>
 
-            </div>
-            
-            <div className="w-1/3 bg-green-300 p-4 h-1/2">
-                <h1>Hisotoria del club</h1>
+            <section className="flex w-full justify-between pb-40">
+                {/* Imagen de fondo SVG */}
+                <img className="ml-52" src={cristianPintando} alt="Cristian diseñando una pieza" />
+                <article className="relative flex flex-col z-10 top-20 lg:top-24 h-full items-center text-white pl-48 lg:pl-40 pr-4">
+                    {/* Header */}
+                    <h3 className="text-4xl rye-regular text-[#CDA053] md:text-6xl font-bold mb-6 text-center tracking-wider z-10">
+                        HISTORIA DE CRIS
+                    </h3>
 
-                <p class="whitespace-pre-line mb-8">
-                    El Club del Filete es una plataforma online de enseñanza que busca democratizar el acceso a la enseñanza del Filete Porteño, aprovechando las ventajas de la virtualidad para llevar la identidad argentina a todos los rincones del mundo, tanto para los argentinos que se encuentran lejos de su tierra como para el resto del mundo que quiere conocer la Cultura Argentina.
+                    {/* Fondo SVG */}
+                    <svg className="absolute inset-0 object-cover  scale-110 md:w-[1000px] md:h-[956px] lg:w-[1108px] lg:h-[1056px]" viewBox="0 0 1188 1056" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <g filter="url(#filter0_d_872_24)">
+                            <path d="M475.656 62.5004C242.446 6.4911 -87.8436 -29.5 63.1564 280C223.74 609.143 451.156 801 603.156 961C773.217 1123.01 1100.66 959.5 1100.66 748.5C1116.47 515.129 1187.67 343.554 1153.25 214.998C1150.28 203.916 1147.77 192.318 1146.25 180.947C1104.99 -127.561 704.664 117.5 475.656 62.5004Z" fill="#8F272A" />
+                        </g>
+                        <defs>
+                            <filter id="filter0_d_872_24" x="0" y="0.800781" width="1187.53" height="1054.83" filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB">
+                                <feFlood floodOpacity="0" result="BackgroundImageFix" />
+                                <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha" />
+                                <feOffset dy="4" />
+                                <feGaussianBlur stdDeviation="12.5" />
+                                <feComposite in2="hardAlpha" operator="out" />
+                                <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0" />
+                                <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_872_24" />
+                                <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_872_24" result="shape" />
+                            </filter>
+                        </defs>
+                    </svg>
 
-                </p>
+                    {/* Main contenido */}
+                    <p className="text-lg montserrat-normal text-[#FEFFFB] pt-14 md:text-xl leading-relaxed max-w-4xl z-10 relative">
+                        Que decirte de mi… Nací en el año 1985 un Martes 22 de Octubre bajo el
+                        signo de Libra en un hospital público de la Ciudad de La Plata,
+                        Provincia de Buenos Aires. Desde que tengo uso de razón uso el arte
+                        como mi método de expresión y <span className="text-[#CDA053]"> cuando conocí al Filete Porteño fue amor a
+                            primera vista,</span> en una sola técnica pictórica encontré todo lo que me
+                        representaba: <span className="text-[#CDA053]"> oficio, identidad cultural, diseños complejos, retratos,
+                            letras y trabajo,</span> este último fué de los elementos que más me llamó la
+                        atención ya que siempre supe que para que esto funcione me tenia que dar
+                        de comer, Si queres saber más sobre mi historia en la sección de
+                        Novedades hablo un poco más profundo, pero creo que con esto ya sabes
+                        por donde viene la mano.
+                    </p>
+                </article>
 
-                <p class="whitespace-pre-line mb-8">
-                    La idea surge de la necesidad del público de aprender este arte, por eso me decidí a crear esta plataforma digital de enseñanza que ahora ya es una COMUNIDAD FILETEADORA
-                </p>
-            </div>*/}
+            </section>
 
-            {/* <div className="grid grid-cols-3 gap-0 h-full w-full">
-                <img src={img1} alt="imagen1" />
-                <img src={img2} alt="imagen2" />
-                <img src={img3} alt="imagen3" />
-                <img src={img4} alt="imagen1" />
-                <img src={img5} alt="imagen2" />
-                <img src={img6} alt="imagen3" />
-                <img src={img7} alt="imagen1" />
-                <img src={img8} alt="imagen2" />
-                <img src={img9} alt="imagen3" />
-                <img src={img10} alt="imagen1" />
-                <img src={img11} alt="imagen2" />
-                <img src={img12} alt="imagen3" />
-                <img src={img13} alt="imagen1" />
-                <img src={img14} alt="imagen2" />
-                <img src={img15} alt="imagen3" />
-                <img src={img16} alt="imagen1" />
-                <img src={img17} alt="imagen2" />
-                <img src={img18} alt="imagen3" />
-            </div> */}
-            <div className="h-screen w-full mt-20">
-                <InfoMancha />
+            <section className="relative fixed-bg">
 
-            </div>
+                <article className="mt-20 pt-40">
+                    <h3 className="text-4xl rye-regular text-[#CDA053] md:text-6xl font-bold mb-6 lg:ml-20 tracking-wider z-10 brightness-100">El Club Del Filete</h3>
+                    <p className="text-lg montserrat-normal text-[#FEFFFB] mt-14 md:text-xl leading-relaxed max-w-7xl  lg:ml-48 bg-[rgba(0,0,0,.7)] p-6 rounded-lg">El Club del Filete es una <span className="text-[#CDA053]">plataforma online de enseñanza que busca democratizar el acceso a la enseñanza del Filete Porteño,</span> aprovechando las ventajas de la virtualidad para llevar la identidad argentina a todos los rincones del mundo, tanto para los argentinos que se encuentran lejos de su tierra como para el resto del mundo que quiere conocer la Cultura Argentina.
+                        La idea surge de la necesidad del público de aprender este arte, por eso me decidí a crear esta plataforma digital de enseñanza que ahora ya es una <span className="text-[#CDA053]">COMUNIDAD FILETEADORA</span></p>
+                </article>
+            </section>
         </div>
-        // Historia Cris
-
-        // Que decirte de mi… Nací en el año 1985 un Martes 22 de Octubre bajo el signo de Libra en un hospital público de la Ciudad de La Plata, Provincia de Buenos Aires. Desde que tengo uso de razón uso el arte como mi método de expresión y cuando conocí al Filete Porteño fue amor a primera vista, en una sola técnica pictórica encontré todo lo que me representaba: oficio, identidad cultural, diseños complejos, retratos, letras y trabajo, este último fué de los elementos que más me llamó la atención ya que siempre supe que para que esto funcione me tenia que dar de comer,
-
-        // Si queres saber más sobre mi historia en la sección de Novedades hablo un poco más profundo, pero creo que con esto ya sabes por donde viene la mano.
-
-        // HIstoria del Club
-
-        // El Club del Filete es una plataforma online de enseñanza que busca democratizar el acceso a la enseñanza del Filete Porteño, aprovechando las ventajas de la virtualidad para llevar la identidad argentina a todos los rincones del mundo, tanto para los argentinos que se encuentran lejos de su tierra como para el resto del mundo que quiere conocer la Cultura Argentina.
-
-        // La idea surge de la necesidad del público de aprender este arte, por eso me decidí a crear esta plataforma digital de enseñanza que ahora ya es una COMUNIDAD FILETEADORA
     );
 }
 
