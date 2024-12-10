@@ -60,11 +60,11 @@ const router = createBrowserRouter([
     //Historia
     path: "/historia",
     element: (
-      <>
+      <div className="overscroll-x-none overflow-x-hidden">
         <Navbar />
         <Historia />
         <Footer />
-      </>
+      </div>
     ),
   },
 ]);
