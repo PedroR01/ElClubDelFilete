@@ -11,6 +11,8 @@ export default function Footer() {
         <div className="w-full md:w-1/3">
           <p>Contáctanos <span className="font-bold">gpVoltio@gmail.com</span></p>
         </div>
+        <p className="mt-6">&copy;2024 El Club del Filete. Todos los derechos reservados.</p>
+
       </div>
     </footer>
   );
