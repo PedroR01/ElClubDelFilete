@@ -1,36 +1,49 @@
-import React, { useState } from 'react';
+
 import alumno1 from "../img/portadas/club1.jpg";
 import alumno2 from "../img/portadas/club6.jpg";
+import alumno3 from "../img/portadas/club3.jpg";
+import alumno4 from "../img/portadas/club4.jpg";
+import alumno5 from "../img/portadas/club7.jpg";
+import alumno6 from "../img/portadas/club8.jpg";
 
-function Galeria() {
-  const obras = [
-    { id: 1, nombre: 'Jaime', titulo: 'bla bla bla', descripcion: 'Descripción del proceso de trabajo, curso u opinión.', pieza: 'Descripción de la pieza.', imagen: alumno1 },
-    { id: 2, nombre: 'Nombre Alumno 2', titulo: 'Título de la Obra 2', descripcion: 'Descripción del proceso de trabajo, curso u opinión.', pieza: 'Descripción de la pieza.', imagen: alumno2 }
-  ];
+import Button from "../components/Button";
 
-  const [currentIndex, setCurrentIndex] = useState(0);
+import React, { useState } from "react";
+
+export default function Galeria (){
+  // Lista de imágenes de ejemplo
+  const [imagenes, setImagenes] = useState([
+    { id: 1, src: alumno1, autor: "Pedro Pascal", titulo: "Recipientes de ánimos" },
+    { id: 2, src: alumno2, autor: "Pedro Pascal", titulo: "Recipientes de ánimos" },
+    { id: 3, src: alumno3, autor: "Pedro Pascal", titulo: "Recipientes de ánimos" },
+    { id: 4, src: alumno4, autor: "Pedro Pascal", titulo: "Recipientes de ánimos" },
+  ]);
+
+  // Función para cargar más imágenes (puedes personalizarla)
+  const cargarMasImagenes = () => {
+    const nuevasImagenes = [
+      { id: 5, src: alumno5, autor: "Pedro Pascal", titulo: "Recipientes de ánimos" },
+      { id: 6, src: alumno6, autor: "Pedro Pascal", titulo: "Recipientes de ánimos" },
+    ];
+    setImagenes([...imagenes, ...nuevasImagenes]);
+  };
 
   return (
-    <div className="relative w-full max-w-3xl mx-auto bg-dark-brown overflow-hidden shadow-lg">
-      <div className="flex">
-        <div className="w-1/3 p-4 bg-yellow-200">
-          <h3 className="text-lg font-bold">{obras[currentIndex].nombre}</h3>
-          <h4 className="text-xl font-semibold">{obras[currentIndex].titulo}</h4>
-          <p className="mt-2">{obras[currentIndex].descripcion}</p>
-          <p className="mt-2 font-semibold">Pieza:</p>
-          <p>{obras[currentIndex].pieza}</p>
-        </div>
-        <img src={obras[currentIndex].imagen} alt={`Obra ${currentIndex + 1}`} className="w-2/3 object-cover pt-4 pb-12" />
+    <section className="bg-gradient-to-b from-gray-200 to-gray-300">
+      <div className="grid grid-cols-2">
+
+        {imagenes.map((img) => (
+          
+          <div key={img.id} className="relative group">
+            <img src={img.src} alt={img.titulo} className="w-full border-solid border-2 border-black" />
+            <div className="absolute inset-0 bg-black bg-opacity-40 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-end/ ">
+              <p className="text-sm text-yellow-300 font-semibold">{img.autor}</p>
+              <p className="text-white text-lg font-bold">{`"${img.titulo}"`}</p>
+            </div>
+          </div>
+        ))}
       </div>
-
-      <button onClick={() => setCurrentIndex((prevIndex) => prevIndex === 0 ? obras.length - 1 : prevIndex - 1)} className="absolute left-2 top-1/2 transform -translate-y-1/2 p-2 bg-gray-800 bg-opacity-50 text-white rounded-full">
-        &#10094;
-      </button>
-      <button onClick={() => setCurrentIndex((prevIndex) => (prevIndex + 1) % obras.length)} className="absolute right-2 top-1/2 transform -translate-y-1/2 p-2 bg-gray-800 bg-opacity-50 text-white rounded-full">
-        &#10095;
-      </button>
-    </div>
+      <Button text={"Ver mas"} btnType={"button"} event={cargarMasImagenes}/> 
+    </section>
   );
-}
-
-export default Galeria;
+};
