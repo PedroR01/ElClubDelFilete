@@ -36,9 +36,9 @@ export default function Galeria (){
           
           <div key={img.id} className="relative group">
             <img src={img.src} alt={img.titulo} className="w-full border-solid border-2 border-black" />
-            <div className="absolute inset-0 bg-black bg-opacity-40 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-end/ ">
-              <p className="text-sm text-yellow-300 font-semibold">{img.autor}</p>
-              <p className="text-white text-lg font-bold">{`"${img.titulo}"`}</p>
+            <div className="absolute inset-0 bg-black bg-opacity-40 transition-opacity flex flex-col justify-end/ ">
+              <p className="rye-regular absolute top-2 left-2 text-[#CDA053] text-xs p-1 rounded">{img.autor}</p>
+              <p className="absolute bottom-1 left-1 text-[#FEFFEB] text-sm p-2 rounded w-3/4 text-op rye-regular">{`"${img.titulo}"`}</p>
             </div>
           </div>
         ))}
