@@ -18,7 +18,7 @@ export default function NovedadesPage() {
     ];
 
     return (
-        <section className="w-full bg-[#8F272A] pb-8 md:py-14">
+        <section className="w-full bg-[#8F272A] py-24 md:py-36">
             {/* Contenedor principal */}
             <div className="grid grid-cols-7 grid-rows-3 gap-4 lg:gap-6 w-full md:w-11/12 md:justify-self-center h-96 lg:h-[80vh]">
                 {/* Noticia principal */}

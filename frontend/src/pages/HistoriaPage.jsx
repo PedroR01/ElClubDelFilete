@@ -23,11 +23,11 @@ export default function HistoriaPage() {
     }, []);
 
     return (
-        <div className="w-full bg-[#2f0c0d]">
+        <div className="w-full bg-[#2f0c0d] pt-24">
             <section className="flex w-full justify-between pb-40 lg:pb-[28rem] bg-[#8F272A] md:bg-transparent">
                 <article className="relative flex flex-col z-10 top-11 md:top-20 lg:top-24 h-full items-center text-white md:pr-48 lg:pr-40 px-6">
                     <svg
-                        className="absolute inset-0 object-cover top-4 -z-10 md:-left-5 md:w-[800px] md:h-[900px] scale-110 lg:w-[948px] lg:h-[955px] 2xl:w-[1108px] 2xl:h-[1056px]"
+                        className="absolute inset-0 object-cover  transition-transform -translate-y-24 ease-in-out duration-300 delay-150 rotate-6 md:rotate-0 md:translate-y-0 md:top-4 -z-10 md:-left-5 md:w-[800px] md:h-[900px] scale-110 lg:w-[948px] lg:h-[955px] 2xl:w-[1108px] 2xl:h-[1056px]"
                         viewBox="0 0 1108 1056"
                         fill="none"
                         xmlns="http://www.w3.org/2000/svg"
