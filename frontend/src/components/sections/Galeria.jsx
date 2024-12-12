@@ -1,16 +1,16 @@
 
-import alumno1 from "../img/portadas/club1.jpg";
-import alumno2 from "../img/portadas/club6.jpg";
-import alumno3 from "../img/portadas/club3.jpg";
-import alumno4 from "../img/portadas/club4.jpg";
-import alumno5 from "../img/portadas/club7.jpg";
-import alumno6 from "../img/portadas/club8.jpg";
+import alumno1 from "../../img/portadas/club1.jpg";
+import alumno2 from "../../img/portadas/club6.jpg";
+import alumno3 from "../../img/portadas/club3.jpg";
+import alumno4 from "../../img/portadas/club4.jpg";
+import alumno5 from "../../img/portadas/club7.jpg";
+import alumno6 from "../../img/portadas/club8.jpg";
 
-import Button from "../components/Button";
+import Button from "../Button";
 
 import React, { useState } from "react";
 
-export default function Galeria (){
+export default function Galeria() {
   // Lista de imágenes de ejemplo
   const [imagenes, setImagenes] = useState([
     { id: 1, src: alumno1, autor: "Pedro Pascal", titulo: "Recipientes de ánimos" },
@@ -33,7 +33,7 @@ export default function Galeria (){
       <div className="grid grid-cols-2">
 
         {imagenes.map((img) => (
-          
+
           <div key={img.id} className="relative group">
             <img src={img.src} alt={img.titulo} className="w-full border-solid border-2 border-black" />
             <div className="absolute inset-0 bg-black bg-opacity-40 transition-opacity flex flex-col justify-end/ ">
@@ -43,7 +43,7 @@ export default function Galeria (){
           </div>
         ))}
       </div>
-      <Button text={"Ver mas"} btnType={"button"} event={cargarMasImagenes}/> 
+      <Button text={"Ver mas"} btnType={"button"} event={cargarMasImagenes} />
     </section>
   );
 };

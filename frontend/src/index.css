@@ -2,6 +2,19 @@
 @tailwind components;
 @tailwind utilities;
 
+.intro-bg {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+    url("../src/img/introClubGif.gif");
+  height: 100%;
+  width: 100%;
+  z-index: -5;
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-blend-mode: multiply;
+}
+
 /* Imagen de fondo Historia */
 .fixed-bg {
   background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),

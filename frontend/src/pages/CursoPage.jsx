@@ -1,5 +1,5 @@
 import React from "react";
-import Slider from "../components/Slider";
+import Slider from "../components/Carousel";
 import returnIcon from "../img/iconos/return.png";
 import manchaFondo from "../img/misc/manchaFondo.png";
 import florFondo from "../img/misc/florFondo.png";
