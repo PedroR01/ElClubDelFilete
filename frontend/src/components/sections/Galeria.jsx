@@ -1,4 +1,3 @@
-
 import alumno1 from "../../img/portadas/club1.jpg";
 import alumno2 from "../../img/portadas/club6.jpg";
 import alumno3 from "../../img/portadas/club3.jpg";
@@ -11,16 +10,19 @@ import Button from "../Button";
 import React, { useState } from "react";
 
 export default function Galeria() {
-  // Lista de imágenes de ejemplo
   const [imagenes, setImagenes] = useState([
     { id: 1, src: alumno1, autor: "Pedro Pascal", titulo: "Recipientes de ánimos" },
     { id: 2, src: alumno2, autor: "Pedro Pascal", titulo: "Recipientes de ánimos" },
     { id: 3, src: alumno3, autor: "Pedro Pascal", titulo: "Recipientes de ánimos" },
     { id: 4, src: alumno4, autor: "Pedro Pascal", titulo: "Recipientes de ánimos" },
+    { id: 5, src: alumno5, autor: "Pedro Pascal", titulo: "Recipientes de ánimos" },
+    { id: 6, src: alumno6, autor: "Pedro Pascal", titulo: "Recipientes de ánimos" },
   ]);
+  const [verMas, setVerMas] = useState(false);
 
-  // Función para cargar más imágenes (puedes personalizarla)
+  // Función para cargar más imágenes
   const cargarMasImagenes = () => {
+    setVerMas(true);
     const nuevasImagenes = [
       { id: 5, src: alumno5, autor: "Pedro Pascal", titulo: "Recipientes de ánimos" },
       { id: 6, src: alumno6, autor: "Pedro Pascal", titulo: "Recipientes de ánimos" },
@@ -29,21 +31,82 @@ export default function Galeria() {
   };
 
   return (
-    <section className="bg-gradient-to-b from-gray-200 to-gray-300">
-      <div className="grid grid-cols-2">
-
-        {imagenes.map((img) => (
-
+    <section className="">
+      {/* Grilla principal */}
+      <div className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 relative h-[40vh] ${verMas ? "mb-4" : ""}`}>
+        {imagenes.slice(0, 4).map((img) => (
           <div key={img.id} className="relative group">
-            <img src={img.src} alt={img.titulo} className="w-full border-solid border-2 border-black" />
-            <div className="absolute inset-0 bg-black bg-opacity-40 transition-opacity flex flex-col justify-end/ ">
-              <p className="rye-regular absolute top-2 left-2 text-[#CDA053] text-xs p-1 rounded">{img.autor}</p>
-              <p className="absolute bottom-1 left-1 text-[#FEFFEB] text-sm p-2 rounded w-3/4 text-op rye-regular">{`"${img.titulo}"`}</p>
+            <img
+              src={img.src}
+              alt={img.titulo}
+              className="w-full border-solid border-2 border-black"
+            />
+            <div className="absolute inset-0 bg-black bg-opacity-55 transition-opacity flex flex-col justify-end">
+              <p className="rye-regular absolute top-2 left-2 text-[#CDA053] text-xs p-1 rounded">
+                {img.autor}
+              </p>
+              <p className="absolute bottom-1 left-1 text-[#FEFFEB] text-sm p-2 rounded w-3/4 rye-regular">
+                {`"${img.titulo}"`}
+              </p>
             </div>
           </div>
         ))}
+        {/* Imágenes parcialmente visibles */}
+        {!verMas &&
+          imagenes.slice(4, 6).map((img, index) => (
+            <div
+              key={img.id}
+              className={`relative group overflow-hidden ${index === 0 ? "col-span-1" : "col-span-1"
+                }`}
+            >
+              <img
+                src={img.src}
+                alt={img.titulo}
+                className="w-full border-solid border-2 border-black"
+              />
+              <div className="absolute inset-0 bg-black bg-opacity-55 transition-opacity flex flex-col justify-end">
+                <p className="rye-regular absolute top-2 left-2 text-[#CDA053] text-xs p-1 rounded">
+                  {img.autor}
+                </p>
+                <p className="absolute bottom-1 left-1 text-[#FEFFEB] text-sm p-2 rounded w-3/4 rye-regular">
+                  {`"${img.titulo}"`}
+                </p>
+              </div>
+            </div>
+          ))}
       </div>
-      <Button text={"Ver mas"} btnType={"button"} event={cargarMasImagenes} />
+
+      {/* Botón Ver más */}
+      {imagenes.length < 20 && (
+        <div className="flex justify-center relative z-20"
+          style={{ transform: `translateY(${2 * imagenes.length}rem)` }}
+        >
+          <Button text={"Ver más"} btnType={"button"} event={cargarMasImagenes} />
+        </div>
+      )}
+
+      {/* Grilla extendida */}
+      {verMas && (
+        <div className="grid grid-cols-2 gap-2">
+          {imagenes.slice(4).map((img) => (
+            <div key={img.id} className="relative group">
+              <img
+                src={img.src}
+                alt={img.titulo}
+                className="w-full border-solid border-2 border-black"
+              />
+              <div className="absolute inset-0 bg-black bg-opacity-55 transition-opacity flex flex-col justify-end">
+                <p className="rye-regular absolute top-2 left-2 text-[#CDA053] text-xs p-1 rounded">
+                  {img.autor}
+                </p>
+                <p className="absolute bottom-1 left-1 text-[#FEFFEB] text-sm p-2 rounded w-3/4 rye-regular">
+                  {`"${img.titulo}"`}
+                </p>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
     </section>
   );
-};
+}

@@ -122,7 +122,7 @@ export default function Navbar() {
 
       {/* Sidebar (visible en mobile cuando se abre el menú hamburguesa) */}
       <div
-        className={`fixed top-0 right-0 h-full w-2/3 max-w-sm bg-[#3c3228] text-[#FEFFEB] z-50 transition-transform duration-300 ease-in-out ${isSidebarOpen ? "translate-x-0" : "translate-x-full"
+        className={`fixed top-0 right-0 h-full w-2/3 max-w-sm bg-[#222121] text-[#FEFFEB] z-50 transition-transform duration-300 ease-in-out ${isSidebarOpen ? "translate-x-0" : "translate-x-full"
           }`}
       >
         {/* Botón para cerrar el Sidebar */}
