@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import slide from "../img/iconos/slide.png";
 
-export default function Slider({ images, clickHandler }) {
+export default function Slider({ images, clickHandler}) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [startX, setStartX] = useState(null); // Utilizado para poder deslizar el slider
   const [smallScreen, setSmallScreen] = useState(false);
@@ -89,7 +89,6 @@ export default function Slider({ images, clickHandler }) {
   return (
     <div
       className="relative w-full max-w-7xl mx-auto overflow-hidden select-none"
-      {...eventHandlers}
     >
       <div
         className="flex transition-transform ease-out duration-300 gap-4"
@@ -98,7 +97,7 @@ export default function Slider({ images, clickHandler }) {
         {images.map((image, index) => (
           <button
             key={index}
-            className="w-[20%] flex-shrink-0  aspect-[3.5/5] rounded-3xl overflow-hidden "
+            className="w-[20%] flex-shrink-0  aspect-[3.5/5] rounded-3xl overflow-hidden transition duration-300 hover:scale-110 hover:z-10"
             style={{
               boxShadow: '0 10px 20px rgba(0, 0, 0, 0.3)' // Personalización de sombra
             }}
@@ -113,45 +112,7 @@ export default function Slider({ images, clickHandler }) {
           </button>
         ))}
       </div>
-
-      {/* Botones de navegación */}
-      {!smallScreen && (
-        <>
-          <button
-            aria-label="Next"
-            className="flex absolute top-1/2 right-0 w-9 h-9 z-10 ml-5 items-center justify-center rounded-full bg-[#FFFBF2]
-             border-2 border-black button-shadow 
-             transition duration-300 ease-in-out hover:-translate-x-2 
-             hover:bg-[#D1C1B4] hover:button-shadow active:bg-[#FFDD6A] 
-             hover:shadow-lg active:shadow-none"
-            onClick={nextSlide}
-          >
-            <img className="w-[25%]" src={slide} alt="right slide" />
-          </button>
-          <button
-            aria-label="Previous"
-            className="flex absolute top-1/2 left-0 w-9 h-9 z-10 ml-5 items-center justify-center rounded-full bg-[#FFFBF2]
-             border-2 border-black
-             transition duration-300 ease-in-out hover:-translate-x-2 
-             hover:bg-[#D1C1B4] hover:button-shadow active:bg-[#FFDD6A] 
-             hover:shadow-lg active:shadow-none"
-            onClick={prevSlide}
-          >
-            <img className="w-[25%] rotate-180" src={slide} alt="left slide" />
-          </button>
-        </>
-      )}
-
-      {/* Indicadores */}
-      <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
-        {images.map((_, index) => (
-          <div
-            key={index}
-            className={`w-2 h-2 rounded-full ${index === currentIndex ? 'bg-blue-500' : 'bg-gray-300'}`}
-            onClick={() => setCurrentIndex(index)}
-          />
-        ))}
-      </div>
+      
     </div>
   );
 }
