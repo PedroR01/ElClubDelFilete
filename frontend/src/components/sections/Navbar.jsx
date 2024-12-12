@@ -45,7 +45,7 @@ export default function Navbar() {
       {/* <div className="relative h-24 -z-10 bg-[#8F272A]"></div> */}
       {/* Navbar */}
       <nav
-        className={`fixed top-0 w-full h-24 z-20 bg-[#3c3228]/50 backdrop-blur-sm transition-transform duration-300 ${showNavbar ? "translate-y-0" : "-translate-y-full"
+        className={`fixed top-0 w-full min-h-[10%] z-20 bg-[#3c3228]/50 backdrop-blur-sm transition-transform duration-300 ${showNavbar ? "translate-y-0" : "-translate-y-full"
           }`}
       >
         <div className="flex items-center justify-between px-4 py-2">

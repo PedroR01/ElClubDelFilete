@@ -24,19 +24,18 @@ export default function LandingPage() {
     return (
         <div className="overflow-x-hidden overscroll-x-none">
             {infoCurso ? <CursoPage onClick={(navigation) => openCurso(navigation)} /> : <>
-                <section className="flex relative intro justify-center md:justify-normal md:h-[110vh]">
-                    <div className="flex flex-col flex-nowrap w-4/5 gap-8 items-center justify-center md:justify-normal md:items-start md:w-3/5 md:mt-auto md:mb-40 md:ml-8">
+                <section className="flex relative intro justify-center md:justify-normal  md:min-h-[40rem]">
+                    <div className="flex flex-col w-4/5 gap-8 items-center justify-center md:justify-normal md:items-start md:w-3/5 md:mt-auto  md:mb-20 lg:mb-40 md:ml-8 lg:pt-28">
                         <img
                             src={logoIntro}
                             alt="Logo club del filete"
-                            className="h-40 w-44 md:h-64 md:w-72 object-cover mb-4"
+                            className="h-40 w-fit md:h-48 lg:h-60 xl:h-64 object-cover mb-4"
                         />
                         <p className="inria-sans-regular text-[#FEFFEB] text-base tracking-wide leading-normal  md:text-xl md:leading-10 md:tracking-wider md:w-2/3">Lorem ipsum dolor sit amet consectetur. Amet malesuada quis nunc fermentum. Condimentum a commodo fringilla sit gravida porta. </p>
                         <Button
-                            text="Contactame"
+                            text={"Contactame"}
                             btnType={"button"}
-                            event={openContactModal}
-                        />
+                            event={() => openContactModal()} />
                     </div>
                     {modal && (<Modal state={(e) => setModal(e)} />)}
                 </section>

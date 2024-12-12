@@ -50,25 +50,28 @@ export default function Academia() {
     return (
         <section
             id="academia"
-            className="flex flex-col relative bg-[#222121] w-full h-[110vh] rounded-3xl py-20  shadow-academia gap-28 md:rounded-[3rem] md:pt-24 transition-transform duration-300 -translate-y-12"
+            className="flex flex-col relative bg-[#222121] w-full h-[110vh] md:min-h-[70rem] rounded-t-3xl py-20 shadow-academia gap-24 md:gap-11 md:rounded-t-[3rem] md:pt-24 transition-transform duration-300 -translate-y-12"
             style={{
                 backgroundImage: `linear-gradient(to bottom, rgba(34, 33, 33, 1) 0%, rgba(34, 33, 33, 0.7) 20%, rgba(34, 33, 33, 0.7) 80%, rgba(34, 33, 33, 1) 100%), url(${currentCurso.imagenes[0]})`,
                 backgroundSize: "cover",
                 backgroundPosition: "center",
             }}>
             {/* <h2 className="rye-regular text-[#CDA053] text-3xl text-center">ACADEMIA</h2> */}
-            <article className="flex flex-col gap-8 w-4/5  ml-auto mr-auto">
+            <article className="flex flex-col min-h-[21.5rem] gap-8 w-4/5  ml-auto mr-auto md:items-start md:gap-5">
 
                 <h2 className="rye-regular text-[#CDA053] text-3xl text-center">{currentCurso.titulo}</h2>
-                <span className="text-base montserrat-normal text-[#fefffba7]">{currentCurso.duracion}</span>
                 <img className="absolute h-40 -z-10 right-[3%] translate-y-4  rounded-full drop-shadow-2xl" src={currentCurso.imagenes[currentCurso.imagenes.length - 1]} alt="Fileteo de Curso Blog" />
-                <p className="text-base montserrat-normal text-[#FEFFFB]">{currentCurso.descripcion}</p>
-                <Button text={"Acceder"} btnType={"button"} event={() => onConfirmRedirect(currentCurso.link)} />
-
+                <div className="w-4/5 md:mt-14">
+                    <span className="text-base montserrat-normal text-[#fefffba7]">{currentCurso.duracion}</span>
+                    <p className="text-base montserrat-normal text-[#FEFFFB] w-full">{currentCurso.descripcion}</p>
+                    <div className="mt-12"></div>
+                    <Button text={"Acceder"} btnType={"button"} event={() => onConfirmRedirect(currentCurso.link)} />
+                </div>
             </article>
-            <div className="flex justify-center gap-4">
+            <div className="md:mt-16">
                 <Carousel images={cursos.map((curso) => curso.imagenes[0])} clickHandler={(index) => handleCursoChange(index)} />
             </div>
+
 
         </section>
     );

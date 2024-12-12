@@ -7,7 +7,7 @@
     url("../src/img/introClubGif.gif");
   height: 100vh;
   width: 100vw;
-  z-index: -5;
+  z-index: 0;
   background-attachment: fixed;
   background-position: center;
   background-repeat: no-repeat;
@@ -96,6 +96,7 @@
 
 body {
   margin: 0;
+  background-color: rgb(34 33 33);
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
