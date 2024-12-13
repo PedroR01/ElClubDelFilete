@@ -4,7 +4,8 @@
 
 - React
 - React Router Dom
-- TailwindCSS (desarrollo)
+- GSAP (Animaciones)
+- TailwindCSS
 
 ## Recomendaciones
 

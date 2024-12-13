@@ -11,6 +11,11 @@ import Curso from "./CursoPage";
 import introClubGif from "../img/introClubGif.gif";
 import CarouselCurvo from "../components/CarouselCurvo";
 
+/* GSAP Animations */
+import { gsap, ScrollTrigger, TextPlugin } from "gsap/all";
+import { useGSAP } from "@gsap/react";
+gsap.registerPlugin(useGSAP, ScrollTrigger, TextPlugin);
+/* ------ */
 
 export default function LandingPage() {
     const [modal, setModal] = useState(false);
@@ -30,13 +35,23 @@ export default function LandingPage() {
         console.log(curso);
     };
 
+    useGSAP(() => {
+        gsap.from(".intro", {
+            x: -200, opacity: 0.3, duration: 1, ease: "power1.inOut"
+        });
+        gsap.from(".cursos", {
+            x: -50, y: 100, scrollTrigger: { trigger: ".cursos", scrub: true }
+        });
+
+    }, []);
+
     return (
         <div className="overflow-x-hidden overscroll-x-none pb-8">
             {infoCurso ? <Curso onClick={(navigation) => openCurso(navigation)} /> : <>
                 <div className="absolute bg-black w-full h-[62%] -z-[5] md:-top-20 md:h-auto">
                     <img className="w-full h-full opacity-40 md:h-auto" src={introClubGif} alt="" />
                 </div>
-                <section className="flex relative w-full py-24 justify-center md:justify-normal md:left-32 md:-bottom-28">
+                <section className="intro flex relative w-full py-24 justify-center md:justify-normal md:left-32 md:-bottom-28">
                     {/* SECCIÓN INICIAL */}
                     <div className="flex flex-col w-4/5 items-center  justify-center md:justify-normal md:items-start flex-nowrap md:w-3/5 gap-8">
                         <img
@@ -51,14 +66,13 @@ export default function LandingPage() {
                             textColor={"text-[#FEFFEB] "}
                             event={openContactModal}
                         />
-
                     </div>
                     {modal && (<Modal state={(e) => setModal(e)} />)}
                 </section>
                 {/* SECCIÓN CURSOS */}
                 <section id="academia" className="flex flex-col bg-[#FEFFEB] rounded-3xl pt-8 mt-8 shadow-academia gap-9 md:rounded-[4rem] md:pt-24 md:mt-44">
                     <h2 className="rye-regular text-[#2B1F12] text-3xl text-center">ACADEMÍA</h2>
-                    <ul className="flex flex-col gap-16">
+                    <ul className="cursos flex flex-col gap-16">
                         <li>
                             <h4 className="rye-regular text-[#2B1F12] text-lg md:text-xl ml-6 md:ml-16">Introducción al Filete</h4>
                             <CarouselCurvo />
