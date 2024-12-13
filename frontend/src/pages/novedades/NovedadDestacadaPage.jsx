@@ -24,7 +24,7 @@ export default function NovedadDestacadaPage() {
     }, []);
 
     return (
-        <div className="w-full bg-[#8F272A]">
+        <div className="w-full bg-[#8F272A] pt-24">
             <img
                 className="absolute w-full h-80 left-0 -top-2 object-cover rounded-lg shadow-md brightness-50 md:scale-110"
                 src={blogImage}
