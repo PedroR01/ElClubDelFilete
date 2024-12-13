@@ -33,7 +33,7 @@ export default function Galeria() {
   return (
     <section className="">
       {/* Grilla principal */}
-      <div className={`grid grid-cols-2 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 relative h-[40vh] ${verMas ? "mb-4" : ""}`}>
+      <div className={`grid grid-cols-2 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4`}>
         {imagenes.slice(0, 4).map((img) => (
           <div key={img.id} className="relative group">
             <img
@@ -73,7 +73,7 @@ export default function Galeria() {
 
       {/* Grilla extendida */}
       {verMas && (
-        <div className={`grid grid-cols-2 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 `}>
+        <div className={`grid grid-cols-2 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 `}>
           {imagenes.slice(4).map((img) => (
             <div key={img.id} className="relative group">
               <img
