@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Button from "./Button";
 import logoIntro from "../img/logos/logoIntro.png";
 import separador from "../img/misc/separador.png";
@@ -11,6 +11,7 @@ export default function Modal({ state }) {
   };
 
   const [contactInfo, setContactInfo] = useState(estadoInicial);
+  const [canSend, setCanSend] = useState(true);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -20,10 +21,44 @@ export default function Modal({ state }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Form sent");
-    state(false); // Cerrar el modal al enviar el formulario
+    if (canSend) {
+      setCanSend(false); // Desactivar el envío temporalmente
+      const valuesForm = contactInfo;
+      const ok = checkData(valuesForm);
+      if (ok) {
+        sendData(valuesForm);
+        state(false); // Cerrar el modal solo si los datos son válidos
+      } else {
+        console.log("Form not sent");
+        setCanSend(true);
+      }
+    } else {
+      console.log("You can't send now");
+    }
   };
 
+  const sendData = ({nombre, email, mensaje}) => {
+    console.log("Form sent");
+  }
+ 
+  const checkData = ({nombre, email, mensaje}) => {
+    console.log(nombre, email, mensaje);
+    const onlyLetters = (str) => /^[A-Za-z]+$/.test(str);
+    const checkEmail = (str) => /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/.test(str);
+    const checkDesc = (str) => str.length <= 200;
+
+    return onlyLetters(nombre) && checkEmail(email) && checkDesc(mensaje);
+  }
+
+  useEffect(() => {
+    // Iniciar el temporizador al montar el componente
+    const interval = setInterval(() => {
+      setCanSend(true);  // Habilitar el envío de correo después de 30 segundos
+    }, 30000);  // 30,000 ms = 30 segundos
+  
+    // Limpiar el intervalo cuando el componente se desmonte
+    return () => clearInterval(interval);
+  }, []);
   return (
     (
       <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
