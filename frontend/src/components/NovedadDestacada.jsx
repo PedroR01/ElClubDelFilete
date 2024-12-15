@@ -1,11 +1,13 @@
 import React from "react";
 import blogImage from "../img/portadas/blog_image.png";
 import { Link } from 'react-router-dom';
-export default function NovedadDestacada({ novedadUrl, novedad}) {
+
+
+export default function NovedadDestacada({ novedadUrl, content }) {
     return (
         <Link
             to={novedadUrl} // Redirige a la página de destino
-            state={{ novedad }}
+            state={{ content }}
             className="col-span-7 lg:col-span-4 row-span-3 md:my-4 bg-[#3c3228] md:rounded-lg overflow-hidden relative group shadow-blog-main"
         >
             <img

@@ -9,7 +9,7 @@ import LandingPage from "./pages/LandingPage";
 import ErrorPage from "./pages/ErrorPage";
 import Historia from "./pages/HistoriaPage";
 import NovedadesPage from "./pages/NovedadesPage";
-import NovedadDestacadaPage from "./pages/novedades/NovedadDestacadaPage";
+import BlogPage from "./pages/novedades/BlogPage";
 
 const error = () => (
   <>
@@ -50,7 +50,43 @@ const router = createBrowserRouter([
     element: (
       <>
         <Navbar />
-        <NovedadDestacadaPage />
+        <BlogPage />
+        <Footer />
+      </>
+    ),
+    errorElement: error(),
+  },
+  {
+    //Noticia 1
+    path: "/novedades/Mate cosmico",
+    element: (
+      <>
+        <Navbar />
+        <BlogPage />
+        <Footer />
+      </>
+    ),
+    errorElement: error(),
+  },
+  {
+    //Noticia 1
+    path: "/novedades/Evolución porteña",
+    element: (
+      <>
+        <Navbar />
+        <BlogPage />
+        <Footer />
+      </>
+    ),
+    errorElement: error(),
+  },
+  {
+    //Noticia 1
+    path: "/novedades/El Tango y El Filete",
+    element: (
+      <>
+        <Navbar />
+        <BlogPage />
         <Footer />
       </>
     ),

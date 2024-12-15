@@ -1,16 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { useLocation } from 'react-router-dom';
-export default function NovedadDestacadaPage() {
+
+
+export default function BlogPage() {
     const [novedadTitle, setNovedadTitle] = useState("");
     const location = useLocation();
-    const { novedad } = location.state || {};
-    const videoUrl = novedad.video; // "https://www.youtube.com/watch?v=PN4xt9RuV-Y"
+    const { content } = location.state || {};
+    const videoUrl = content.video; // "https://www.youtube.com/watch?v=PN4xt9RuV-Y"
 
-// Extraer el video ID de la URL de YouTube
-const videoId = videoUrl.split('v=')[1].split('&')[0];
+    // Extraer el video ID de la URL de YouTube
+    const videoId = videoUrl.split('v=')[1].split('&')[0];
 
-// Crear la URL de embed
-const embedUrl = `https://www.youtube.com/embed/${videoId}`;
+    // Crear la URL de embed
+    const embedUrl = `https://www.youtube.com/embed/${videoId}`;
     function getTitle() {
         const pathname = window.location.pathname;
 
@@ -34,7 +36,7 @@ const embedUrl = `https://www.youtube.com/embed/${videoId}`;
         <div className="w-full bg-[#8F272A] pt-24">
             <img
                 className="absolute w-full h-80 left-0 -top-2 object-cover rounded-lg shadow-md brightness-50 md:scale-110"
-                src={novedad.image}
+                src={content.image}
                 alt="Caratula de noticia destacada"
             />
             <article className="w-full max-w-3xl mx-auto px-4 ">
@@ -51,7 +53,7 @@ const embedUrl = `https://www.youtube.com/embed/${videoId}`;
                         <h2 className="text-2xl font-bold text-[#CDA053] mb-4">Introducción</h2>
                     </header>
                     <p className="text-lg text-[#FEFFEB] mb-6">
-                        {novedad.introduction}
+                        {content.introduction}
                     </p>
 
                     {/* Contenido multimedia, por ejemplo, un video */}
@@ -71,13 +73,13 @@ const embedUrl = `https://www.youtube.com/embed/${videoId}`;
                     {/* Texto complementario */}
                     <div className="text-lg text-[#FEFFEB] mb-6">
                         <p>
-                            {novedad.additionalText}
+                            {content.additionalText}
                         </p>
                     </div>
 
                     {/* Citas o testimonios */}
                     <blockquote className="border-l-4 border-[#CDA053] pl-4 italic text-lg text-[#FEFFEB] mb-6">
-                       {novedad.quote}
+                        {content.quote}
                     </blockquote>
 
                     {/* Enlaces relacionados */}
