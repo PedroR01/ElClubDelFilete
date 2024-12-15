@@ -1,12 +1,12 @@
 import React from "react";
 import blogImage from "../img/portadas/blog_image.png";
-
-export default function NovedadSecundaria({ novedadUrl, mobile }) {
+import { Link } from 'react-router-dom';
+export default function NovedadSecundaria({ novedadUrl, mobile, novedad }) {
     return (
         !mobile ?
-            (<a
-                key={novedadUrl.id}
-                href={novedadUrl.url}
+            (<Link
+                to={novedadUrl} // Redirige a la página de destino
+                state={{ novedad }}
                 className="flex items-center h-1/3 bg-[#3c3228] rounded-lg overflow-hidden shadow-blog-sec group hover:scale-105 transition-transform duration-500"
             >
                 {/* Imagen con tamaño fijo relativo */}
@@ -29,9 +29,9 @@ export default function NovedadSecundaria({ novedadUrl, mobile }) {
                         Lorem ipsum dolor sit amet consectetur. Amet malesuada quis nunc fermentum. Condimentum a commodo.
                     </p>
                 </div>
-            </a>) : (<a
-                key={novedadUrl.id}
-                href={novedadUrl.url}
+            </Link>) : (<Link
+                to={novedadUrl} // Redirige a la página de destino
+                state={{ novedad }}
                 className="flex-shrink-0 w-[80%] bg-[#933033] rounded-3xl overflow-hidden shadow-lg flex flex-col"
             >
                 {/* Contenedor de la imagen */}
@@ -55,6 +55,6 @@ export default function NovedadSecundaria({ novedadUrl, mobile }) {
                         Lorem ipsum dolor sit amet consectetur. Amet malesuada quis nunc fermentum. Condimentum a commodo.
                     </p>
                 </div>
-            </a>)
+            </Link>)
     );
 }
