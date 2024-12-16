@@ -33,7 +33,7 @@ const router = createBrowserRouter([
     errorElement: error(),
   },
   {
-    //Blog
+    // Listado noticias
     path: "/novedades",
     element: (
       <>
@@ -45,44 +45,8 @@ const router = createBrowserRouter([
     errorElement: error(),
   },
   {
-    //Noticia Destacada
-    path: "/novedades/Descomponiendo el Proceso de Diseño: El Estilo Fileteo",
-    element: (
-      <>
-        <Navbar />
-        <BlogPage />
-        <Footer />
-      </>
-    ),
-    errorElement: error(),
-  },
-  {
-    //Noticia 1
-    path: "/novedades/Mate cosmico",
-    element: (
-      <>
-        <Navbar />
-        <BlogPage />
-        <Footer />
-      </>
-    ),
-    errorElement: error(),
-  },
-  {
-    //Noticia 1
-    path: "/novedades/Evolución porteña",
-    element: (
-      <>
-        <Navbar />
-        <BlogPage />
-        <Footer />
-      </>
-    ),
-    errorElement: error(),
-  },
-  {
-    //Noticia 1
-    path: "/novedades/El Tango y El Filete",
+    // Blog -- Abarca cada noticia gracias a :slug
+    path: "/novedades/:slug",
     element: (
       <>
         <Navbar />

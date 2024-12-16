@@ -2,7 +2,10 @@ import React from "react";
 import Button from "../components/Button";
 import NovedadDestacada from "../components/NovedadDestacada";
 import Novedad from "../components/Novedad";
-import blogImage from "../img/portadas/blog_image.png";
+import destacadaImage from "../img/portadas/blog_image.png";
+import novedadImage1 from "../img/portadas/club2.jpg";
+import novedadImage2 from "../img/portadas/club7.jpg";
+import novedadImage3 from "../img/portadas/club9.jpg";
 
 export default function NovedadesPage() {
     const novedadesTitles = {
@@ -12,11 +15,28 @@ export default function NovedadesPage() {
         sec3: "El Tango y El Filete"
     };
 
+    const getBlogImage = (image) => {
+
+        switch (image) {
+            case 0:
+                return destacadaImage
+            case 1:
+                return novedadImage1
+            case 2:
+                return novedadImage2
+            case 3:
+                return novedadImage3
+
+            default:
+                return null
+        }
+    }
+
     const novedadesRef = [
         {
             id: 0,
             title: `${novedadesTitles.destacada}`,
-            image: { blogImage },
+            image: getBlogImage(0),
             introduction: `Viste, 'el que mucho abarca, poco aprieta', 
       y me pasó como el otro día. Quise hacer mil cosas 
       a la vez, pero terminé con más quilombo que un perro con dos colas. 
@@ -31,7 +51,7 @@ export default function NovedadesPage() {
         {
             id: 1,
             title: `${novedadesTitles.sec1}`,
-            image: { blogImage },
+            image: getBlogImage(1),
             introduction: `Viste, 'el que mucho abarca, poco aprieta', 
       y me pasó como el otro día. Quise hacer mil cosas 
       a la vez, pero terminé con más quilombo que un perro con dos colas. 
@@ -46,7 +66,7 @@ export default function NovedadesPage() {
         {
             id: 2,
             title: `${novedadesTitles.sec2}`,
-            image: { blogImage },
+            image: getBlogImage(2),
             introduction: `Viste, 'el que mucho abarca, poco aprieta', 
       y me pasó como el otro día. Quise hacer mil cosas 
       a la vez, pero terminé con más quilombo que un perro con dos colas. 
@@ -61,7 +81,7 @@ export default function NovedadesPage() {
         {
             id: 3,
             title: `${novedadesTitles.sec3}`,
-            image: { blogImage },
+            image: getBlogImage(3),
             introduction: `Viste, 'el que mucho abarca, poco aprieta', 
       y me pasó como el otro día. Quise hacer mil cosas 
       a la vez, pero terminé con más quilombo que un perro con dos colas. 

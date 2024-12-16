@@ -1,6 +1,6 @@
 import React from "react";
-import blogImage from "../img/portadas/blog_image.png"
 import { Link } from 'react-router-dom';
+
 export default function Novedad({ novedadUrl, mobile, content }) {
     return (
         !mobile ?
@@ -11,7 +11,7 @@ export default function Novedad({ novedadUrl, mobile, content }) {
             >
                 <div className="h-full w-fit">
                     <img
-                        src={blogImage}
+                        src={content.image}
                         alt={content.title}
                         className="aspect-3_4 object-cover brightness-75 scale-110"
                     />
@@ -34,7 +34,7 @@ export default function Novedad({ novedadUrl, mobile, content }) {
             >
                 <div className="relative w-full h-48">
                     <img
-                        src={blogImage}
+                        src={content.image}
                         alt={content.title}
                         className="w-full h-full object-cover"
                     />

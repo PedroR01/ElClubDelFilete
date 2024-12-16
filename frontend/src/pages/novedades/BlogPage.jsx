@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useLocation } from 'react-router-dom';
 
-
 export default function BlogPage() {
     const [novedadTitle, setNovedadTitle] = useState("");
     const location = useLocation();
@@ -31,6 +30,8 @@ export default function BlogPage() {
     useEffect(() => {
         setNovedadTitle(getTitle);
     }, []);
+
+    console.log(content);
 
     return (
         <div className="w-full bg-[#8F272A] pt-24">
