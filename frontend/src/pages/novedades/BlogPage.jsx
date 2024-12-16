@@ -35,12 +35,12 @@ export default function BlogPage() {
 
     return (
         <div className="w-full bg-[#8F272A] pt-24">
-            <img
-                className="absolute w-full h-80 left-0 -top-2 object-cover rounded-lg shadow-md brightness-50 md:scale-110"
-                src={content.image}
-                alt="Caratula de noticia destacada"
-            />
             <article className="w-full max-w-3xl mx-auto px-4 ">
+                <img
+                    className="absolute w-full h-72 left-0 -top-2 object-cover rounded-lg shadow-md brightness-50 md:scale-110"
+                    src={content.image}
+                    alt="Caratula de noticia destacada"
+                />
                 {/* Imagen principal de la noticia */}
                 <div className="relative mb-8">
                     <h1 className="flex items-center justify-center rye-regular text-[#CDA053] text-2xl md:text-4xl bg-black bg-opacity-50 py-4 px-6 z-10">
