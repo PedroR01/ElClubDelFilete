@@ -1,0 +1,35 @@
+{
+  "files": {
+    "main.css": "/ElClubDelFilete/static/css/main.2376e384.css",
+    "main.js": "/ElClubDelFilete/static/js/main.e9ed8a18.js",
+    "static/js/453.de7b942f.chunk.js": "/ElClubDelFilete/static/js/453.de7b942f.chunk.js",
+    "static/media/introClub.gif": "/ElClubDelFilete/static/media/introClub.028fa8d1d6d562d7be65.gif",
+    "static/media/blog_image.png": "/ElClubDelFilete/static/media/blog_image.83566257bbdef8e76119.png",
+    "static/media/club11.jpg": "/ElClubDelFilete/static/media/club11.709d765832e3a8ffcaf4.jpg",
+    "static/media/logoIntro.png": "/ElClubDelFilete/static/media/logoIntro.48652af913de5195a6ab.png",
+    "static/media/club7.jpg": "/ElClubDelFilete/static/media/club7.2c806632e81cf42bd5a0.jpg",
+    "static/media/club2.jpg": "/ElClubDelFilete/static/media/club2.feca7aa31feb33976b81.jpg",
+    "static/media/mateCosmico1.png": "/ElClubDelFilete/static/media/mateCosmico1.efa15372b810fec899a4.png",
+    "static/media/club14.jpg": "/ElClubDelFilete/static/media/club14.194a99147ce66ed7aff7.jpg",
+    "static/media/club16.jpg": "/ElClubDelFilete/static/media/club16.d9e382de8ac64ab87365.jpg",
+    "static/media/club9.jpg": "/ElClubDelFilete/static/media/club9.9fe21313ac7bb11a46f2.jpg",
+    "static/media/club3.jpg": "/ElClubDelFilete/static/media/club3.2830a49a95f69c7cccd0.jpg",
+    "static/media/club6.jpg": "/ElClubDelFilete/static/media/club6.a7d08e44255ca671c455.jpg",
+    "static/media/club18.jpg": "/ElClubDelFilete/static/media/club18.8487ad673a02472daaaa.jpg",
+    "static/media/club1.jpg": "/ElClubDelFilete/static/media/club1.4c9ab3de4b0c92c19ec5.jpg",
+    "static/media/club8.jpg": "/ElClubDelFilete/static/media/club8.fab71a3407973f58f397.jpg",
+    "static/media/club4.jpg": "/ElClubDelFilete/static/media/club4.f7a1744ae0a5e92a408e.jpg",
+    "static/media/logoNavbar.png": "/ElClubDelFilete/static/media/logoNavbar.614c1579ba10838e119b.png",
+    "static/media/manchaFondo.png": "/ElClubDelFilete/static/media/manchaFondo.c516b3c6e8c36166a928.png",
+    "static/media/separador.png": "/ElClubDelFilete/static/media/separador.6e821cd233c6d4ec9b8f.png",
+    "static/media/florFondo.png": "/ElClubDelFilete/static/media/florFondo.2414ff938ba9df4758ef.png",
+    "index.html": "/ElClubDelFilete/index.html",
+    "main.2376e384.css.map": "/ElClubDelFilete/static/css/main.2376e384.css.map",
+    "main.e9ed8a18.js.map": "/ElClubDelFilete/static/js/main.e9ed8a18.js.map",
+    "453.de7b942f.chunk.js.map": "/ElClubDelFilete/static/js/453.de7b942f.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.2376e384.css",
+    "static/js/main.e9ed8a18.js"
+  ]
+}
