@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/ElClubDelFilete/static/css/main.8815805f.css",
-    "main.js": "/ElClubDelFilete/static/js/main.924ec574.js",
+    "main.js": "/ElClubDelFilete/static/js/main.85e574ca.js",
     "static/media/introClub.gif": "/ElClubDelFilete/static/media/introClub.028fa8d1d6d562d7be65.gif",
     "static/media/blog_image.png": "/ElClubDelFilete/static/media/blog_image.83566257bbdef8e76119.png",
     "static/media/club11.jpg": "/ElClubDelFilete/static/media/club11.709d765832e3a8ffcaf4.jpg",
@@ -24,10 +24,10 @@
     "static/media/florFondo.png": "/ElClubDelFilete/static/media/florFondo.2414ff938ba9df4758ef.png",
     "index.html": "/ElClubDelFilete/index.html",
     "main.8815805f.css.map": "/ElClubDelFilete/static/css/main.8815805f.css.map",
-    "main.924ec574.js.map": "/ElClubDelFilete/static/js/main.924ec574.js.map"
+    "main.85e574ca.js.map": "/ElClubDelFilete/static/js/main.85e574ca.js.map"
   },
   "entrypoints": [
     "static/css/main.8815805f.css",
-    "static/js/main.924ec574.js"
+    "static/js/main.85e574ca.js"
   ]
 }
