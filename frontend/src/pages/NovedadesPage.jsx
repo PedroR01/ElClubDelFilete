@@ -46,7 +46,7 @@ export default function NovedadesPage() {
             video: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
             additionalText: "Este es un texto adicional para el primer contenido.",
             quote: "El éxito es la suma de pequeños esfuerzos repetidos día tras día. - Robert Collier",
-            url: `/novedades/${novedadesTitles.destacada}`
+            url: `./${novedadesTitles.destacada}`
         },
         {
             id: 1,
@@ -61,7 +61,7 @@ export default function NovedadesPage() {
             video: "https://www.youtube.com/watch?v=JLobOX2zMfM",
             additionalText: "Este es un texto adicional para el primer contenido.",
             quote: "El éxito es la suma de pequeños esfuerzos repetidos día tras día. - Robert Collier",
-            url: `/novedades/${novedadesTitles.sec1}`
+            url: `./${novedadesTitles.sec1}`
         },
         {
             id: 2,
@@ -76,7 +76,7 @@ export default function NovedadesPage() {
             video: "https://www.youtube.com/watch?v=c0bIl_KZwr0",
             additionalText: "Este es un texto adicional para el primer contenido.",
             quote: "El éxito es la suma de pequeños esfuerzos repetidos día tras día. - Robert Collier",
-            url: `/novedades/${novedadesTitles.sec2}`
+            url: `./${novedadesTitles.sec2}`
         },
         {
             id: 3,
@@ -91,7 +91,7 @@ export default function NovedadesPage() {
             video: "https://www.youtube.com/watch?v=U0M3l45-xAw",
             additionalText: "Este es un texto adicional para el primer contenido.",
             quote: "El éxito es la suma de pequeños esfuerzos repetidos día tras día. - Robert Collier",
-            url: `/novedades/${novedadesTitles.sec3}`
+            url: `./${novedadesTitles.sec3}`
         },
     ];
 

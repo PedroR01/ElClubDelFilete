@@ -22,7 +22,7 @@ const error = () => (
 const router = createBrowserRouter([
   {
     //localHost main
-    path: "/",
+    path: "ElClubDelFilete/",
     element: (
       <>
         <Navbar />
@@ -34,7 +34,7 @@ const router = createBrowserRouter([
   },
   {
     // Listado noticias
-    path: "/novedades",
+    path: "ElClubDelFilete/novedades",
     element: (
       <>
         <Navbar />
@@ -46,7 +46,7 @@ const router = createBrowserRouter([
   },
   {
     // Blog -- Abarca cada noticia gracias a :slug
-    path: "/novedades/:slug",
+    path: "ElClubDelFilete/novedades/:slug",
     element: (
       <>
         <Navbar />
@@ -58,7 +58,7 @@ const router = createBrowserRouter([
   },
   {
     //Historia
-    path: "/historia",
+    path: "ElClubDelFilete/historia",
     element: (
       <div className="overscroll-x-none overflow-x-hidden">
         <Navbar />

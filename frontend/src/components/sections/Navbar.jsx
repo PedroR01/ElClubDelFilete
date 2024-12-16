@@ -50,7 +50,7 @@ export default function Navbar() {
       >
         <div className="flex items-center justify-between px-4 py-2">
           {/* Logo */}
-          <a href="/">
+          <a href="/ElClubDelFilete">
             <img className="h-16 transition-transform duration-300 hover:scale-110" src={logo} alt="Logo Navbar" />
           </a>
 
@@ -78,7 +78,7 @@ export default function Navbar() {
           {/* Opciones de Navegación (visible en desktop) */}
           <ul className="hidden md:flex items-center gap-5 rye-regular text-xl text-[#CDA053]">
             <li>
-              <a href="/historia" className="nav-link">
+              <a href="ElClubDelFilete/historia" className="nav-link">
                 Historía
                 <span className="underline-img"></span>
               </a>
@@ -94,13 +94,13 @@ export default function Navbar() {
               </a>
             </li>
             <li>
-              <a href="/" className="nav-link">
+              <a href="/ElClubDelFilete" className="nav-link">
                 Tienda
                 <span className="underline-img"></span>
               </a>
             </li>
             <li>
-              <a href="/novedades" className="nav-link">
+              <a href="ElClubDelFilete/novedades" className="nav-link">
                 Novedades
                 <span className="underline-img"></span>
               </a>
@@ -148,13 +148,13 @@ export default function Navbar() {
 
         {/* Opciones del Sidebar */}
         <ul className="flex flex-col items-start gap-6 mt-16 px-6 text-lg rye-regular">
-          <li><a href="/historia" onClick={toggleSidebar}>Historía</a></li>
+          <li><a href="ElClubDelFilete/historia" onClick={toggleSidebar}>Historía</a></li>
           <li><a href="#academia" onClick={(e) => {
             toggleSidebar();
             handleSmoothScroll(e, "#academia");
           }}>Academia</a></li>
-          <li><a href="/" onClick={toggleSidebar}>Tienda</a></li>
-          <li><a href="/novedades" onClick={toggleSidebar}>Novedades</a></li>
+          <li><a href="/ElClubDelFilete" onClick={toggleSidebar}>Tienda</a></li>
+          <li><a href="ElClubDelFilete/novedades" onClick={toggleSidebar}>Novedades</a></li>
           <li><a href="#galería" onClick={(e) => {
             toggleSidebar();
             handleSmoothScroll(e, "#galería");
