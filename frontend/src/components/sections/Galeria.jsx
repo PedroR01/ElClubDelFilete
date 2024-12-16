@@ -33,7 +33,7 @@ export default function Galeria() {
   return (
     <section className="">
       {/* Grilla principal */}
-      <div className={`grid grid-cols-2 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 relative h-[40vh] ${verMas ? "mb-4" : ""}`}>
+      <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4">
         {imagenes.slice(0, 4).map((img) => (
           <div key={img.id} className="relative group">
             <img
@@ -51,24 +51,27 @@ export default function Galeria() {
             </div>
           </div>
         ))}
-        {/* Imágenes parcialmente visibles */}
-        {!verMas &&
-          imagenes.slice(4, 6).map((img, index) => (
-            <div
-              key={img.id}
-              className={`relative group overflow-hidden ${index === 0 ? "col-span-1" : "col-span-1"
-                }`}
-            >
-              <img
-                src={img.src}
-                alt={img.titulo}
-                className="w-full border-solid border-2 border-black"
-              />
-              <div className="absolute inset-0 bg-black bg-opacity-55 transition-opacity flex flex-col justify-end">
-                
+      </div>
+
+
+      <div className="grid grid-cols-2 max-sm:h-[7vh] md:h-[10vh] lg:h-[12vh] xl:h-[15]">
+          {/* Imágenes parcialmente visibles */}
+          {!verMas &&
+            imagenes.slice(4, 6).map((img) => (
+              <div
+                key={img.id}
+                className="relative group overflow-hidden"
+              >
+                <img
+                  src={img.src}
+                  alt={img.titulo}
+                  className="w-full border-solid border-2 border-black"
+                />
+                <div className="absolute inset-0 bg-black bg-opacity-55 transition-opacity flex flex-col justify-end">
+                  
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
       </div>
 
       {/* Grilla extendida */}
@@ -96,16 +99,16 @@ export default function Galeria() {
       
       {/* Botón Ver más */}
     {imagenes.length < 20 && (
-      <div className="flex justify-center relative z-20 mt-4">
+      <div className="flex justify-center relative">
         <div
-          className={`absolute bottom-[-30px] w-full flex justify-center translate-y-0
-        transition-all duration-500 ease-in-out pt-6 pb-6`}
+          className={`absolute bottom-[30px] w-full flex justify-center translate-y-0
+        transition-all duration-500 ease-in-out`}
         >
           <Button
             text={"Ver más"}
             btnType={"button"}
             event={cargarMasImagenes}
-            className="py-2 px-6 text-sm bg-gray-800 text-white rounded"
+            className="text-sm bg-gray-800 text-white rounded block"
           />
         </div>
       </div>
