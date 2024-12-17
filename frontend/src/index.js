@@ -1,71 +1,16 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import "./index.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import reportWebVitals from "./reportWebVitals";
-import Navbar from "./components/sections/Navbar";
-import Footer from "./components/sections/Footer";
-import LandingPage from "./pages/LandingPage";
-import ErrorPage from "./pages/ErrorPage";
-import Historia from "./pages/HistoriaPage";
-import NovedadesPage from "./pages/NovedadesPage";
-import BlogPage from "./pages/novedades/BlogPage";
+import App from "./App";
+import "./index.css";
 
-const error = () => (
-  <>
-    <Navbar />
-    <ErrorPage />
-    <Footer />
-  </>
-);
+// createHashRouter
 
 const router = createBrowserRouter([
   {
-    //localHost main
-    path: "ElClubDelFilete/",
-    element: (
-      <>
-        <Navbar />
-        <LandingPage />
-        <Footer />
-      </>
-    ),
-    errorElement: error(),
-  },
-  {
-    // Listado noticias
-    path: "ElClubDelFilete/novedades",
-    element: (
-      <>
-        <Navbar />
-        <NovedadesPage />
-        <Footer />
-      </>
-    ),
-    errorElement: error(),
-  },
-  {
-    // Blog -- Abarca cada noticia gracias a :slug
-    path: "ElClubDelFilete/novedades/:slug",
-    element: (
-      <>
-        <Navbar />
-        <BlogPage />
-        <Footer />
-      </>
-    ),
-    errorElement: error(),
-  },
-  {
-    //Historia
-    path: "ElClubDelFilete/historia",
-    element: (
-      <div className="overscroll-x-none overflow-x-hidden">
-        <Navbar />
-        <Historia />
-        <Footer />
-      </div>
-    ),
+    path: "/*",
+    element: <App />,
   },
 ]);
 
