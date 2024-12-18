@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import Modal from "../components/Modal";
 import Button from "../components/Button";
 import Galeria from "../components/sections/Galeria";

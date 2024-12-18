@@ -1,12 +1,11 @@
 /** @type {import('tailwindcss').Config} */
-module.exports = {
-  content: ["./src/**/*.{js,jsx,ts,tsx}"],
+export default {
+  content: [
+    "./index.html", // Incluye el HTML principal
+    "./src/**/*.{js,ts,jsx,tsx}", // Incluye todos los archivos React
+  ],
   theme: {
-    extend: {
-      colors: {
-        'dark-brown': '#47321B', // Define el color marrón oscuro
-      }
-    },
+    extend: {},
   },
   plugins: [],
 };

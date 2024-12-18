@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import cristianPintando from "../img/portadas/club14.jpg";
 
 export default function HistoriaPage() {
@@ -109,7 +109,7 @@ export default function HistoriaPage() {
             </section>
 
             <section className="flex w-full justify-between pb-40 lg:pb-80">
-                <svg className="absolute -translate-y-[77px] md:hidden" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#2f0c0d" fill-opacity="1" d="M0,192L30,181.3C60,171,120,149,180,149.3C240,149,300,171,360,181.3C420,192,480,192,540,186.7C600,181,660,171,720,186.7C780,203,840,245,900,266.7C960,288,1020,288,1080,250.7C1140,213,1200,139,1260,101.3C1320,64,1380,64,1410,64L1440,64L1440,320L1410,320C1380,320,1320,320,1260,320C1200,320,1140,320,1080,320C1020,320,960,320,900,320C840,320,780,320,720,320C660,320,600,320,540,320C480,320,420,320,360,320C300,320,240,320,180,320C120,320,60,320,30,320L0,320Z"></path></svg>
+                <svg className="absolute -translate-y-[77px] md:hidden" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#2f0c0d" fillOpacity="1" d="M0,192L30,181.3C60,171,120,149,180,149.3C240,149,300,171,360,181.3C420,192,480,192,540,186.7C600,181,660,171,720,186.7C780,203,840,245,900,266.7C960,288,1020,288,1080,250.7C1140,213,1200,139,1260,101.3C1320,64,1380,64,1410,64L1440,64L1440,320L1410,320C1380,320,1320,320,1260,320C1200,320,1140,320,1080,320C1020,320,960,320,900,320C840,320,780,320,720,320C660,320,600,320,540,320C480,320,420,320,360,320C300,320,240,320,180,320C120,320,60,320,30,320L0,320Z"></path></svg>
                 <img className="hidden object-cover md:block md:w-1/4 md:ml-52" src={cristianPintando} alt="Cristian diseñando una pieza" />
                 <article className="relative flex flex-col z-10 top-20 lg:top-24 h-full items-center text-white md:pl-48 lg:pl-40 px-6">
 

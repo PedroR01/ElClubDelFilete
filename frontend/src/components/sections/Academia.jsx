@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import logoNavbar from "../../img/portadas/club18.jpg";
 import logoBlog from "../../img/portadas/blog_image.png";
 import logoIntro from "../../img/portadas/club7.jpg";

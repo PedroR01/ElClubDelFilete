@@ -7,7 +7,7 @@ import alumno6 from "../../img/portadas/club8.jpg";
 
 import Button from "../Button";
 
-import React, { useState } from "react";
+import { useState } from "react";
 
 export default function Galeria() {
   const [imagenes, setImagenes] = useState([
@@ -65,7 +65,7 @@ export default function Galeria() {
                 className="w-full border-solid border-2 border-black"
               />
               <div className="absolute inset-0 bg-black bg-opacity-55 transition-opacity flex flex-col justify-end">
-                
+
               </div>
             </div>
           ))}
@@ -93,23 +93,23 @@ export default function Galeria() {
           ))}
         </div>
       )}
-      
+
       {/* Botón Ver más */}
-    {imagenes.length < 20 && (
-      <div className="flex justify-center relative z-20 mt-4">
-        <div
-          className={`absolute bottom-[-30px] w-full flex justify-center translate-y-0
+      {imagenes.length < 20 && (
+        <div className="flex justify-center relative z-20 mt-4">
+          <div
+            className={`absolute bottom-[-30px] w-full flex justify-center translate-y-0
         transition-all duration-500 ease-in-out pt-6 pb-6`}
-        >
-          <Button
-            text={"Ver más"}
-            btnType={"button"}
-            event={cargarMasImagenes}
-            className="py-2 px-6 text-sm bg-gray-800 text-white rounded"
-          />
+          >
+            <Button
+              text={"Ver más"}
+              btnType={"button"}
+              event={cargarMasImagenes}
+              className="py-2 px-6 text-sm bg-gray-800 text-white rounded"
+            />
+          </div>
         </div>
-      </div>
-    )}
+      )}
 
     </section>
   );
