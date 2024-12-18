@@ -6,7 +6,6 @@ import logoIntro from "../img/logos/logoIntro.png";
 import { useState } from "react";
 import CursoPage from "./CursoPage";
 import Academia from "../components/sections/Academia";
-import '../';
 
 export default function LandingPage() {
     const [modal, setModal] = useState(false);
@@ -39,7 +38,7 @@ export default function LandingPage() {
         <div className="overflow-hidden">
             {infoCurso ? <CursoPage onClick={(navigation) => openCurso(navigation)} /> : <>
                 <section className="flex relative intro justify-center md:justify-normal  md:min-h-[40rem]">
-                    <div className="flex flex-col w-4/5 gap-8 items-center justify-center md:justify-normal md:items-start md:w-3/5 md:mt-auto  md:mb-20 lg:mb-40 md:ml-8 lg:pt-28 contenedor-personalizado ">
+                    <div className="flex flex-col w-4/5 gap-8 items-center justify-center md:justify-normal md:items-start md:w-3/5 md:mt-auto  md:mb-20 lg:mb-40 md:ml-8 lg:pt-28">
                         <img
                             src={logoIntro}
                             alt="Logo club del filete"
@@ -50,7 +49,7 @@ export default function LandingPage() {
                             text={"Contactame"}
                             btnType={"button"}
                             event={() => openContactModal()}
-                            atrib="boton-personalizado" />
+                        />
                     </div>
                     {modal && (<Modal state={(e) => setModal(e)} />)}
                 </section>
