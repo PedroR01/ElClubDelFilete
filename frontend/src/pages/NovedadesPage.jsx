@@ -113,7 +113,7 @@ export default function NovedadesPage() {
             {/* Noticias secundarias para mobile (slider) */}
             <div className="flex lg:hidden overflow-x-scroll gap-4 p-4">
                 {novedadesRef.filter((news) => news.id !== 0).map((news) => (
-                    <Novedad novedadUrl={news} content={news} mobile={true} />
+                    <Novedad novedadUrl={news.url} content={news} mobile={true} />
                 ))}
             </div>
 
