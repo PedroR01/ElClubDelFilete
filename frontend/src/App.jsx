@@ -4,6 +4,7 @@ import Landing from "./pages/LandingPage";
 import Historia from "./pages/HistoriaPage";
 import Novedades from "./pages/NovedadesPage";
 import Blog from "./pages/novedades/BlogPage";
+import Footer from "./components/sections/Footer"
 
 export default function App() {
   return (
@@ -15,6 +16,7 @@ export default function App() {
         <Route path="/novedades" element={<Novedades />}></Route>
         <Route path="/novedades/:slug" element={<Blog />}></Route>
       </Routes>
+      <Footer />
     </>
   );
 };
