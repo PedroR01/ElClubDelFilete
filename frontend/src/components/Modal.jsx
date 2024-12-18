@@ -1,69 +1,73 @@
-import React, { useState, useEffect } from "react";
+import { useState } from "react";
 import Button from "./Button";
-import logoIntro from "../img/logos/logoIntro.png";
-import separador from "../img/misc/separador.png";
+import SuccessMessage from "./SuccessMessage";
 
+// Añadir popup avisando que el mail se envio correctamente en caso de cumplir con los requisitos, y al confirmar dicho aviso, se cierra automaticamente el modal (devuelve state = false)
+// Error: Una vez que se introduce un valor válido en el campo, el boton se habilita y nunca se vuelve a deshabilitar
 export default function Modal({ state }) {
-  const estadoInicial = {
+  const defaultState = {
     nombre: "",
     email: "",
-    mensaje: "",
+    descripcion: "",
   };
 
-  const [contactInfo, setContactInfo] = useState(estadoInicial);
-  const [canSend, setCanSend] = useState(true);
+  const [contactInfo, setContactInfo] = useState(defaultState);
+  const [errors, setErrors] = useState(defaultState);
+  const [canSend, setCanSend] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    let newValue = value;
-    setContactInfo({ ...contactInfo, [name]: newValue });
+    setContactInfo({ ...contactInfo, [name]: value });
+
+    const error = validateField(name, value);
+    setErrors({ ...errors, [name]: error });
+
+    // Actualiza el estado del botón según los errores (si los campos del estado error estan vacios y si los valores de los inputs no están vacios)
+    const formIsValid = Object.values(errors).every((err) => err === "") &&
+      Object.values({ ...contactInfo, [name]: value }).every((field) => field.trim() !== "");
+
+    setCanSend(formIsValid);
   };
 
+  // Para poder enviar el formulario, el boton debe estar habilitado, y para esto ya se realiza una comprobación previa de los Inputs
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (canSend) {
-      setCanSend(false); // Desactivar el envío temporalmente
-      const valuesForm = contactInfo;
-      const ok = checkData(valuesForm);
-      if (ok) {
-        sendData(valuesForm);
-        state(false); // Cerrar el modal solo si los datos son válidos
-      } else {
-        console.log("Form not sent");
-        setCanSend(true);
-      }
-    } else {
-      console.log("You can't send now");
-    }
+    sendData(contactInfo);
+    setIsSuccess(true);
+    setCanSend(false);
+    setTimeout(() => {
+      state(false);
+    }, 2500);
   };
 
-  const sendData = ({nombre, email, mensaje}) => {
-    console.log("Form sent");
-  }
- 
-  const checkData = ({nombre, email, mensaje}) => {
-    console.log(nombre, email, mensaje);
-    const onlyLetters = (str) => /^[A-Za-z]+$/.test(str);
-    const checkEmail = (str) => /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/.test(str);
-    const checkDesc = (str) => str.length <= 200;
-
-    return onlyLetters(nombre) && checkEmail(email) && checkDesc(mensaje);
+  const sendData = ({ nombre, email, mensaje }) => {
+    // console.log("Form sent: " + nombre + " email: " + email + " mensaje: " + mensaje);
   }
 
-  useEffect(() => {
-    // Iniciar el temporizador al montar el componente
-    const interval = setInterval(() => {
-      setCanSend(true);  // Habilitar el envío de correo después de 30 segundos
-    }, 30000);  // 30,000 ms = 30 segundos
-  
-    // Limpiar el intervalo cuando el componente se desmonte
-    return () => clearInterval(interval);
-  }, []);
+  const validateField = (name, value) => {
+    let error = "";
+    if (name === "nombre") {
+      if (!/^[A-Za-z\s]+$/.test(value)) {
+        error = "El nombre solo puede contener letras y espacios.";
+      }
+    } else if (name === "email") {
+      if (!/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/.test(value)) {
+        error = "Ingrese un email válido.";
+      }
+    } else if (name === "descripcion") {
+      if (value.length > 200) {
+        error = "El mensaje no puede exceder los 200 caracteres.";
+      }
+    }
+    return error;
+  };
+
   return (
     (
-      <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
-        <div className="bg-[#181818] bg-opacity-55 text-white w-[90%] max-w-lg rounded-lg shadow-lg relative">
-          {/* Icono de cierre */}
+      <div className="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-md flex justify-center items-center z-50">
+        {isSuccess && <SuccessMessage onClose={() => setIsSuccess(false)} />}
+        <div className="bg-[#181818] bg-opacity-55 text-white w-[90%] max-w-lg rounded-lg shadow-lg relative py-10">
           <button
             className="absolute top-4 right-4 text-white hover:text-[#CDA053] focus:outline-none"
             onClick={() => state(false)}
@@ -71,67 +75,74 @@ export default function Modal({ state }) {
             ✖
           </button>
 
-          {/* Contenido del modal */}
           <div className="p-6">
-            {/* Logo y adornos */}
-            <div className="flex justify-center items-center relative mb-4">
-              <img className="absolute translate-y-10" src={separador} alt="Adorno logo" />
-              <img
-                src={logoIntro}
-                alt="El Club del Filete"
-                className="h-16 md:h-40 md:pb-16 object-contain"
-              />
-              <div className="absolute right-0 h-6 w-16 bg-contain bg-no-repeat"></div>
-            </div>
-
-            {/* Formulario */}
             <form onSubmit={handleSubmit} className="">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
-                <div>
+                <div className="relative">
+                  <input
+                    type="text"
+                    id="nombre"
+                    name="nombre"
+                    value={contactInfo.nombre}
+                    className={`peer w-full mt-1 p-2 bg-transparent text-[#FEFFFB] rounded border border-[#cda05377] 
+      placeholder-transparent focus:ring-[#CDA053] focus:outline-none`}
+                    placeholder="Nombre"
+                    onChange={handleChange}
+                  />
                   <label
                     htmlFor="nombre"
-                    className="block text-sm font-medium text-[#FEFFFB]"
+                    className={`absolute px-2 left-2 top-3 text-sm font-medium text-[#fefffbb8] transition-all transform 
+      ${contactInfo.nombre
+                        ? '-translate-y-6 scale-90 text-[#CDA053] bg-[#181818]'
+                        : 'peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100'} 
+      peer-focus:-translate-y-6 peer-focus:scale-90 peer-focus:text-[#CDA053] peer-focus:bg-[#181818]`}
                   >
                     Nombre
                   </label>
-                  <input
-                    type="text"
-                    name="nombre"
-                    className="w-full mt-1 p-2 bg-[#FEFFFB] text-black rounded border border-[#CDA053] focus:ring-[#CDA053] focus:outline-none"
-                    onChange={handleChange}
-                  />
+                  {errors.nombre && <p className="text-xs text-red-500 mt-1">{errors.nombre}</p>}
                 </div>
-                <div>
-                  <label
-                    htmlFor="email"
-                    className="block text-sm font-medium text-[#FEFFFB]"
-                  >
-                    Email
-                  </label>
+
+                <div className="relative">
                   <input
                     type="email"
                     name="email"
-                    className="w-full mt-1 p-2 bg-[#FEFFFB] text-black rounded border border-[#CDA053] focus:ring-[#CDA053] focus:outline-none"
+                    value={contactInfo.email}
+                    className="peer w-full mt-1 p-2 bg-transparent text-[#FEFFFB] rounded border border-[#cda05377] 
+                  placeholder-transparent focus:ring-[#CDA053] focus:outline-none"
                     onChange={handleChange}
                   />
+                  <label
+                    htmlFor="email"
+                    className={`absolute px-2 left-2 top-3 text-sm font-medium text-[#fefffbb8] transition-all transform 
+                  ${contactInfo.email
+                        ? '-translate-y-6 scale-90 text-[#CDA053] bg-[#181818]'
+                        : 'peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100'} 
+      peer-focus:-translate-y-6 peer-focus:scale-90 peer-focus:text-[#CDA053] peer-focus:bg-[#181818]`}
+                  >
+                    Email
+                  </label>
+                  {errors.email && <p className="text-xs text-red-500 mt-1">{errors.email}</p>}
                 </div>
               </div>
               <div className="mb-4">
                 <label
                   htmlFor="descripcion"
-                  className="block text-sm font-medium text-[#FEFFFB]"
+                  className="block text-sm font-medium text-[#fefffbb8]"
                 >
                   Descripción
                 </label>
                 <textarea
                   name="descripcion"
                   rows="4"
-                  className="w-full mt-1 p-2 bg-[#FEFFFB] text-black rounded border border-[#CDA053] focus:ring-[#CDA053] focus:outline-none"
+                  className="w-full mt-1 p-2 bg-transparent text-[#FEFFFB] rounded border border-[#cda05377] focus:ring-[#CDA053] focus:outline-none"
                   onChange={handleChange}
                 ></textarea>
-              </div>
+                {errors.descripcion && <p className="text-xs text-red-500 mt-1">{errors.descripcion}</p>}
 
-              <Button text={"Enviar"} btnType={"submit"} />
+              </div>
+              <div className="justify-self-center">
+                <Button text={"Enviar"} btnType={"submit"} state={!canSend} />
+              </div>
             </form>
           </div>
         </div>

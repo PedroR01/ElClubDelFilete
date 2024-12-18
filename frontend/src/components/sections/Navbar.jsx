@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import logo from "../../img/logos/logoNavbar.png";
 
 export default function Navbar() {

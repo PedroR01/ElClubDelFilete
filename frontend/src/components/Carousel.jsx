@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 
 export default function Carousel({ images, clickHandler }) {
   const [selectedIndex, setSelectedIndex] = useState(0); // Índice del elemento seleccionado
