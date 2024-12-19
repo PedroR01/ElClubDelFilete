@@ -2,7 +2,6 @@ import { useEffect } from "react";
 import Modal from "../components/Modal";
 import Button from "../components/Button";
 import Galeria from "../components/sections/Galeria";
-import logoIntro from "../img/logos/logoIntro.png";
 import { useState } from "react";
 import CursoPage from "./CursoPage";
 import Academia from "../components/sections/Academia";
@@ -61,10 +60,10 @@ export default function LandingPage() {
             </>
             }
 
-            {/*Logo de whapp*/}    
-           
+            {/*Logo de whapp*/}
+
             <a href="https://wa.me/" target="_blank">
-                <img src={logoWP} alt="WhatsApp" className="fixed bottom-7 right-7 w-14 h-14 rounded-full hover:scale-125 hover:shadow-xl transition transform"/>
+                <img src={logoWP} alt="WhatsApp" className="fixed opacity-60 bottom-7 right-7 w-14 h-14 rounded-full hover:scale-125 hover:shadow-xl hover:opacity-100 transition transform duration-700" />
             </a>
 
         </div>

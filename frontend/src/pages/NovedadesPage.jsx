@@ -120,8 +120,10 @@ export default function NovedadesPage() {
             <div className="justify-self-center mt-32">
                 <Button
                     text="Ver Más"
+                    btnType={"button"}
                     bgColor="bg-[#DDAA58]"
                     textColor="text-[#8B2A1F]"
+                    state={true}
                 />
             </div>
         </section>
