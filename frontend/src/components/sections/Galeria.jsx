@@ -53,7 +53,7 @@ export default function Galeria() {
       {/* Grilla principal */}
       <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4">
         {imagenes.slice(0, cantVisible).map((img) => (
-          <div key={img.id} className="relative group overflow-hidden max-sm:h-[15vh] sm:h-[30vh] ">
+          <div key={img.id} className="relative group overflow-hidden max-sm:h-[15vh] sm:h-[30vh] transition transform hover:scale-105">
             <img
               src={img.src}
               alt={img.titulo}
@@ -78,7 +78,7 @@ export default function Galeria() {
         {imagenes.slice(cantVisible, cantVisible + 2).map((img) => (
           <div
             key={img.id}
-            className="relative group overflow-hidden"
+            className="relative group overflow-hidden transition transform hover:scale-105"
           >
             <img
               src={img.src}
