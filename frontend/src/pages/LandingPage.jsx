@@ -6,6 +6,7 @@ import logoIntro from "../img/logos/logoIntro.png";
 import { useState } from "react";
 import CursoPage from "./CursoPage";
 import Academia from "../components/sections/Academia";
+import logoWP from "../img/logos/wp.png"
 
 export default function LandingPage() {
     const [modal, setModal] = useState(false);
@@ -61,6 +62,12 @@ export default function LandingPage() {
                 </section>
             </>
             }
+
+            {/*Logo de whapp*/}    
+           
+            <a href="https://wa.me/" target="_blank">
+                <img src={logoWP} alt="WhatsApp" className="fixed bottom-7 right-7 w-14 h-14 rounded-full hover:scale-125 hover:shadow-xl transition transform"/>
+            </a>
 
         </div>
     );
