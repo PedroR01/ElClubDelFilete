@@ -1,95 +1,151 @@
-import React, { useState } from "react";
+import { useState } from "react";
+import Button from "./Button";
+import SuccessMessage from "./SuccessMessage";
 
+// Añadir popup avisando que el mail se envio correctamente en caso de cumplir con los requisitos, y al confirmar dicho aviso, se cierra automaticamente el modal (devuelve state = false)
+// Error: Una vez que se introduce un valor válido en el campo, el boton se habilita y nunca se vuelve a deshabilitar
 export default function Modal({ state }) {
-  const estadoInicial = {
+  const defaultState = {
     nombre: "",
     email: "",
-    mensaje: "",
+    descripcion: "",
   };
 
-  const [contactInfo, setContactInfo] = useState(estadoInicial);
+  const [contactInfo, setContactInfo] = useState(defaultState);
+  const [errors, setErrors] = useState(defaultState);
+  const [canSend, setCanSend] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    let newValue = value;
-    setContactInfo({ ...contactInfo, [name]: newValue });
+    setContactInfo({ ...contactInfo, [name]: value });
+
+    const error = validateField(name, value);
+    setErrors({ ...errors, [name]: error });
+
+    // Actualiza el estado del botón según los errores (si los campos del estado error estan vacios y si los valores de los inputs no están vacios)
+    const formIsValid = Object.values(errors).every((err) => err === "") &&
+      Object.values({ ...contactInfo, [name]: value }).every((field) => field.trim() !== "");
+
+    setCanSend(formIsValid);
   };
 
+  // Para poder enviar el formulario, el boton debe estar habilitado, y para esto ya se realiza una comprobación previa de los Inputs
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Form sent");
-    state(false); // Cerrar el modal al enviar el formulario
+    sendData(contactInfo);
+    setIsSuccess(true);
+    setCanSend(false);
+    setTimeout(() => {
+      state(false);
+    }, 2500);
+  };
+
+  const sendData = ({ nombre, email, mensaje }) => {
+    // console.log("Form sent: " + nombre + " email: " + email + " mensaje: " + mensaje);
+  }
+
+  const validateField = (name, value) => {
+    let error = "";
+    if (name === "nombre") {
+      if (!/^[A-Za-z\s]+$/.test(value)) {
+        error = "El nombre solo puede contener letras y espacios.";
+      }
+    } else if (name === "email") {
+      if (!/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/.test(value)) {
+        error = "Ingrese un email válido.";
+      }
+    } else if (name === "descripcion") {
+      if (value.length > 200) {
+        error = "El mensaje no puede exceder los 200 caracteres.";
+      }
+    }
+    return error;
   };
 
   return (
     (
-      <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 backdrop-blur-sm z-50">
-        {/* Modal con fondo transparente y sombra gris */}
-        <div className="bg-[#692a23] bg-opacity-60 rounded-2xl shadow-lg p-8 max-w-lg w-full mx-4 relative">
-          {/* Botón de cierre */}
-          <header className="absolute top-2 right-2">
-            <button
-              className="text-slate-200 hover:text-slate-300 text-2xl font-bold"
-              onClick={() => state(false)}
-            >
-              ✕
-            </button>
-          </header>
-  
-          {/* Formulario */}
-          <form onSubmit={handleSubmit} className="space-y-6">
-            {/* Contenedor para los campos de nombre y email */}
-            <div className="flex gap-4">
-              {/* Campo nombre */}
-              <div className="flex-1">
-                <label className="block text-slate-200 font-semibold text-lg">
-                  Nombre
+      <div className="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-md flex justify-center items-center z-50">
+        {isSuccess && <SuccessMessage onClose={() => setIsSuccess(false)} />}
+        <div className="bg-[#181818] bg-opacity-55 text-white w-[90%] max-w-lg rounded-lg shadow-lg relative py-10">
+          <button
+            className="absolute top-4 right-4 text-white hover:text-[#CDA053] focus:outline-none"
+            onClick={() => state(false)}
+          >
+            ✖
+          </button>
+
+          <div className="p-6">
+            <form onSubmit={handleSubmit} className="">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
+                <div className="relative">
                   <input
-                    name="nombre"
                     type="text"
-                    className="mt-1 block w-full p-3 border-2 border-gray-300 rounded-md bg-white text-slate-700 focus:ring-2 focus:ring-[#DDAA58] focus:outline-none"
+                    id="nombre"
+                    name="nombre"
+                    value={contactInfo.nombre}
+                    className={`peer w-full mt-1 p-2 bg-transparent text-[#FEFFFB] rounded border border-[#cda05377] 
+      placeholder-transparent focus:ring-[#CDA053] focus:outline-none`}
+                    placeholder="Nombre"
                     onChange={handleChange}
                   />
-                </label>
-              </div>
-  
-              {/* Campo email */}
-              <div className="flex-1">
-                <label className="block text-slate-200 font-semibold text-lg">
-                  Email
+                  <label
+                    htmlFor="nombre"
+                    className={`absolute px-2 left-2 top-3 text-sm font-medium text-[#fefffbb8] transition-all transform 
+      ${contactInfo.nombre
+                        ? '-translate-y-6 scale-90 text-[#CDA053] bg-[#181818]'
+                        : 'peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100'} 
+      peer-focus:-translate-y-6 peer-focus:scale-90 peer-focus:text-[#CDA053] peer-focus:bg-[#181818]`}
+                  >
+                    Nombre
+                  </label>
+                  {errors.nombre && <p className="text-xs text-red-500 mt-1">{errors.nombre}</p>}
+                </div>
+
+                <div className="relative">
                   <input
-                    name="email"
                     type="email"
-                    className="mt-1 block w-full p-3 border-2 border-gray-300 rounded-md bg-white text-slate-700 focus:ring-2 focus:ring-[#DDAA58] focus:outline-none"
+                    name="email"
+                    value={contactInfo.email}
+                    className="peer w-full mt-1 p-2 bg-transparent text-[#FEFFFB] rounded border border-[#cda05377] 
+                  placeholder-transparent focus:ring-[#CDA053] focus:outline-none"
                     onChange={handleChange}
                   />
-                </label>
+                  <label
+                    htmlFor="email"
+                    className={`absolute px-2 left-2 top-3 text-sm font-medium text-[#fefffbb8] transition-all transform 
+                  ${contactInfo.email
+                        ? '-translate-y-6 scale-90 text-[#CDA053] bg-[#181818]'
+                        : 'peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100'} 
+      peer-focus:-translate-y-6 peer-focus:scale-90 peer-focus:text-[#CDA053] peer-focus:bg-[#181818]`}
+                  >
+                    Email
+                  </label>
+                  {errors.email && <p className="text-xs text-red-500 mt-1">{errors.email}</p>}
+                </div>
               </div>
-            </div>
-  
-            {/* Campo descripción (mensaje) */}
-            <div>
-              <label className="block text-slate-200 font-semibold text-lg">
-                Descripción
+              <div className="mb-4">
+                <label
+                  htmlFor="descripcion"
+                  className="block text-sm font-medium text-[#fefffbb8]"
+                >
+                  Descripción
+                </label>
                 <textarea
-                  name="mensaje"
-                  className="mt-1 block w-full p-4 border-2 border-gray-300 rounded-md bg-white text-slate-700 focus:ring-2 focus:ring-[#DDAA58] focus:outline-none h-32"
+                  name="descripcion"
+                  rows="4"
+                  className="w-full mt-1 p-2 bg-transparent text-[#FEFFFB] rounded border border-[#cda05377] focus:ring-[#CDA053] focus:outline-none"
                   onChange={handleChange}
-                />
-              </label>
-            </div>
-  
-            {/* Botón de enviar */}
-            <div className="flex justify-end">
-              <button
-                type="submit"
-                className="bg-[#DDAA58] text-white px-6 py-3 rounded-md hover:bg-[#af833b] transition-all"
-              >
-                Enviar
-              </button>
-            </div>
-          </form>
+                ></textarea>
+                {errors.descripcion && <p className="text-xs text-red-500 mt-1">{errors.descripcion}</p>}
+
+              </div>
+              <div className="justify-self-center">
+                <Button text={"Enviar"} btnType={"submit"} state={!canSend} />
+              </div>
+            </form>
+          </div>
         </div>
       </div>
-  ));
+    ));
 }
