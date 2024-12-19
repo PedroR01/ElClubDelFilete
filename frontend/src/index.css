@@ -2,6 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
+.magicpattern {
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center center;
+  background-repeat: repeat;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='2000' height='1400'%3E%3Cpath fill='%238F272A' d='M0 0h2000v1400H0z'/%3E%3Cpath fill='%232F0C0D' d='M0 700c85.907 35.492 171.813 70.985 250 60 78.187-10.985 148.654-68.446 234-100 85.346-31.554 185.572-37.201 271-32 85.428 5.201 156.06 21.25 240 49s181.19 67.201 263 87c81.81 19.799 148.18 19.946 228-5s173.092-74.985 261-89c87.908-14.015 170.454 7.992 293 30l-40 700H0Z'/%3E%3C/svg%3E");
+}
+
 .intro {
   background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
     url("../src/img/introClub.gif");

@@ -50,17 +50,13 @@ export default function Academia() {
     return (
         <section
             id="academia"
-            className="flex flex-col relative bg-[#222121] w-full h-[110vh] md:min-h-[70rem] rounded-t-3xl py-20 shadow-academia gap-24 md:gap-11 md:rounded-t-[3rem] md:pt-24 transition-transform duration-300 -translate-y-12"
-            style={{
-                backgroundImage: `linear-gradient(to bottom, rgba(34, 33, 33, 1) 0%, rgba(34, 33, 33, 0.7) 20%, rgba(34, 33, 33, 0.7) 80%, rgba(34, 33, 33, 1) 100%), url(${currentCurso.imagenes[0]})`,
-                backgroundSize: "cover",
-                backgroundPosition: "center",
-            }}>
+            className="flex flex-col relative bg-gradient-to-b from-[#8F272A] to-[#222121] w-full h-[110vh] md:min-h-[70rem] rounded-t-3xl py-20 lg:pt-32 shadow-academia gap-24 md:gap-11 lg:gap-0 md:rounded-t-[3rem] md:pt-24 transition-transform duration-300 -translate-y-12 "
+        >
             {/* <h2 className="rye-regular text-[#CDA053] text-3xl text-center">ACADEMIA</h2> */}
-            <article className="flex flex-col min-h-[21.5rem] gap-8 w-4/5  ml-auto mr-auto md:items-start md:gap-5">
+            <article className="flex flex-col min-h-[21.5rem] gap-8 w-4/5  ml-auto md:ml-20 mr-auto md:items-start md:gap-5">
 
-                <h2 className="rye-regular text-[#CDA053] text-3xl text-center">{currentCurso.titulo}</h2>
-                <img className="absolute h-40 -z-10 right-[3%] translate-y-4  rounded-full drop-shadow-2xl" src={currentCurso.imagenes[currentCurso.imagenes.length - 1]} alt="Fileteo de Curso Blog" />
+                <h2 className="rye-regular text-[#CDA053] text-3xl text-center uppercase">{currentCurso.titulo}</h2>
+                <img className="absolute h-40 -z-10 right-[3%] lg:right-24 translate-y-4  rounded-full drop-shadow-2xl" src={currentCurso.imagenes[currentCurso.imagenes.length - 1]} alt="Fileteo de Curso Blog" />
                 <div className="w-4/5 md:mt-14">
                     <span className="text-base montserrat-normal text-[#fefffba7]">{currentCurso.duracion}</span>
                     <p className="text-base montserrat-normal text-[#FEFFFB] w-full">{currentCurso.descripcion}</p>
