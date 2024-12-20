@@ -59,13 +59,12 @@ export default function Modal({ state }) {
     }, [isSend, errors]);
 
   const sendData = async ({ nombre, email, descripcion }) => {
-     console.log("Form sent: " + nombre + " email: " + email + " mensaje: " + mensaje);
-     
+     console.log("Form sent: " + nombre + " email: " + email + " mensaje: " + descripcion);
     try {
       const response = await fetch('http://localhost:3001/api/submit', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ nombre, email, mensaje: descripcion})
+        body: JSON.stringify({ nombre, email, descripcion})
       });
       const data = await response.json();
       setRespuesta(data.message || 'Error al enviar el mensaje');

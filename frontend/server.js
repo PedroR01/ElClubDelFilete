@@ -15,14 +15,15 @@ app.use(cors());
 app.use(bodyParser.json());  // Para leer el cuerpo de las solicitudes POST
 
 app.post('/api/submit', (req, res) => {
-  const { nombre, email, mensaje } = req.body;
+  const { nombre, email ,descripcion } = req.body;
 
   (async function () {
     const { data, error } = await resend.emails.send({
-      from: `${email}`,
-      to: 'massimoparzanese@gmail.com',
+      from: 'Acme <onboarding@resend.dev>',
+      to: ['massimoparzanese@gmail.com'],
       subject: 'Consulta',
-      html: `<p>Hola,soy ${nombre}, ${mensaje}</p>`
+      html: `<p>Hola mi nombre es ${nombre}, ${descripcion}  </p>
+             <p>Mi email de contacto ${email}</p>`,
     });
   
     if (error) {
