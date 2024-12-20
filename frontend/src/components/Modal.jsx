@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Button from "./Button";
 import SuccessMessage from "./SuccessMessage";
 
@@ -15,6 +15,7 @@ export default function Modal({ state }) {
   const [errors, setErrors] = useState(defaultState);
   const [canSend, setCanSend] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
+  const [isSend, setIsSend] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -33,17 +34,46 @@ export default function Modal({ state }) {
   // Para poder enviar el formulario, el boton debe estar habilitado, y para esto ya se realiza una comprobación previa de los Inputs
   const handleSubmit = (e) => {
     e.preventDefault();
-    sendData(contactInfo);
+    //sendData(contactInfo);
     setIsSuccess(true);
+    setIsSend(true);
     setCanSend(false);
     setTimeout(() => {
       state(false);
     }, 2500);
   };
+    useEffect (() => {
+      if(isSend){
+      const allFieldsValid = 
+      contactInfo.nombre.trim() !== "" &&
+      contactInfo.email.trim() !== "" &&
+      contactInfo.descripcion.trim() !== "" &&
+      Object.values(errors).every((error) => error === "");
 
-  const sendData = ({ nombre, email, mensaje }) => {
-    // console.log("Form sent: " + nombre + " email: " + email + " mensaje: " + mensaje);
-  }
+      if (allFieldsValid ) {
+        sendData(contactInfo);
+        setIsSend(false);
+      } else {
+        console.log("Faltan campos por completar o hay errores");
+      }}
+    }, [isSend, errors]);
+
+  const sendData = async ({ nombre, email, descripcion }) => {
+     console.log("Form sent: " + nombre + " email: " + email + " mensaje: " + mensaje);
+     
+    try {
+      const response = await fetch('http://localhost:3001/api/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ nombre, email, mensaje: descripcion})
+      });
+      const data = await response.json();
+      setRespuesta(data.message || 'Error al enviar el mensaje');
+    } catch (error) {
+      console.error('Error al enviar el mensaje:', error);
+      setRespuesta('Error al enviar el mensaje');
+    }
+  };
 
   const validateField = (name, value) => {
     let error = "";
