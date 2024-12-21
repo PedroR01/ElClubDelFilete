@@ -1,17 +1,17 @@
 import Button from "../components/Button";
 import NovedadDestacada from "../components/NovedadDestacada";
 import Novedad from "../components/Novedad";
-import destacadaImage from "../img/portadas/blog_image.png";
-import novedadImage1 from "../img/portadas/club2.jpg";
-import novedadImage2 from "../img/portadas/club7.jpg";
-import novedadImage3 from "../img/portadas/club9.jpg";
+import destacadaImage from "../img/portadas/club2.jpg";
+import novedadImage1 from "../img/portadas/club3.jpg";
+import novedadImage2 from "../img/portadas/blog_image.png"; // img unesco
+import novedadImage3 from "../img/portadas/club9.jpg"; // falta
 
 export default function NovedadesPage() {
     const novedadesTitles = {
-        destacada: "Descomponiendo el Proceso de Diseño: El Estilo Fileteo",
-        sec1: "Mate cosmico",
-        sec2: "Evolución porteña",
-        sec3: "El Tango y El Filete"
+        destacada: "Generando el Hábito Artístico: Beneficios para el Bienestar",
+        sec1: "Humilde guia para Redes Sociales",
+        sec2: "Filete Patrimonio Cultural Inmaterial de la Humanidad",
+        sec3: "¡Pinceles para filetear!"
     };
 
     const getBlogImage = (image) => {
@@ -35,61 +35,65 @@ export default function NovedadesPage() {
         {
             id: 0,
             title: `${novedadesTitles.destacada}`,
+            description: "Beneficios del Arte en las personas",
             image: getBlogImage(0),
-            introduction: `Viste, 'el que mucho abarca, poco aprieta', 
-      y me pasó como el otro día. Quise hacer mil cosas 
-      a la vez, pero terminé con más quilombo que un perro con dos colas. 
-      Pensé que 'no por mucho madrugar amanece más temprano', 
-      pero mirá, a las 7 de la mañana ya me había dado cuenta de que estaba 
-      más perdido que una vaca en un tambo. `,
-            video: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-            additionalText: "Este es un texto adicional para el primer contenido.",
-            quote: "El éxito es la suma de pequeños esfuerzos repetidos día tras día. - Robert Collier",
+            introduction: `¿Te sientes atrapado en la rutina, con poco tiempo para ti y una montaña de estrés acumulado? A veces, la vida diaria se convierte en una lista interminable de tareas, y esa carga se refleja en nuestro estado de ánimo, energía y bienestar. El estrés y la ansiedad no solo nos agotan, sino que nos alejan de lo que realmente importa: sentirnos bien y disfrutar de cada día. Pero, ¿y si existiera una manera de cambiar eso? ¿Qué pasaría si pudieras encontrar una actividad que te ayude a liberar tensiones, reconectar contigo y llenar tu vida de color y significado? Practicar el arte tiene ese poder. No solo te permite expresarte, sino que activa una serie de cambios químicos en tu cerebro que transforman tu salud mental, física y emocional.
+            El arte no necesita grandes habilidades ni conocimientos para ofrecer sus beneficios. En este PDF, te mostraré cómo la práctica artística puede convertirse en tu refugio diario, ayudándote a reducir el estrés, mejorar tu estado de ánimo y reconectarte con tu creatividad. Con ejercicios simples, crearás un hábito artístico que puede cambiar la forma en la que experimentas la vida, acercándote a una versión de ti más plena, más tranquila y, sobre todo, más feliz.`,
+            sections: [{
+                title: "Los Efectos del Arte en el Cerebro: Cómo el Arte Cambia nuestra Química", content: `Cuando nos sumergimos en una actividad artística, se producen cambios en el cerebro que tienen efectos positivos en nuestra salud mental y emocional.
+
+- Liberación de Dopamina y Serotonina: Estas son conocidas como "las hormonas de la felicidad". La dopamina se libera cuando creamos algo, dándonos una sensación de logro, mientras que la serotonina mejora el estado de ánimo y reduce la ansiedad. Cuando practicamos arte, estas hormonas nos ayudan a sentirnos satisfechos y calmados.
+
+- Aumento de la Neuroplasticidad: El arte activa múltiples áreas del cerebro, promoviendo algo llamado "neuroplasticidad". Esto significa que el cerebro se vuelve más flexible y capaz de aprender cosas nuevas. Así, practicar arte no solo mejora la creatividad, sino que también ayuda a resolver problemas con mayor facilidad.
+
+- Reducción del Estrés: Cuando pintamos o realizamos una actividad artística, se reduce la producción de cortisol, la hormona del estrés. Esta disminución del estrés nos ayuda a sentirnos más tranquilos y a disfrutar del momento presente.
+` }, {
+                title: "Ejercicios Prácticos para Desarrollar el Hábito Artístico", content: `Aquí tienes algunos ejercicios diarios para cultivar el hábito artístico y experimentar sus beneficios en tu bienestar:
+
+- Ejercicio de Inicio de Día (5 minutos): Tómate cinco minutos cada mañana para dibujar o pintar algo sencillo, sin preocuparte por el resultado. Puede ser algo tan simple como líneas, figuras o colores. La idea es comenzar el día de forma creativa y sin presión.
+
+- Refugio de Paz al Final del Día (10 minutos): Al terminar tu jornada, dedica diez minutos a una actividad artística que te relaje, como hacer trazos o pintar de forma libre. Este ejercicio te ayudará a soltar el estrés acumulado y a reconectar contigo mismo.
+
+- Captura un Recuerdo Positivo (5-10 minutos): Cada día, piensa en un momento que te haya hecho sentir bien, por pequeño que sea (una sonrisa, una conversación, una buena comida).
+Dedica unos minutos a dibujar o pintar algo que te recuerde ese momento. Este ejercicio no solo mejora el estado de ánimo, sino que ayuda a valorar las cosas positivas del día a día.
+
+- Dibuja tu Estado de Ánimo (5 minutos): Al final del día, dedica cinco minutos a plasmar en un dibujo o pintura cómo te sientes. No hace falta que sea algo detallado o figurativo; puedes expresar tus emociones con colores, formas o trazos sueltos. Este ejercicio te ayudará a liberar emociones y a ser consciente de tus estados de ánimo.
+
+- Explora Nuevas Formas y Texturas (10 minutos): Dedica diez minutos al día a experimentar con diferentes materiales o técnicas. Puede ser algo tan simple como usar papel de colores, lápices, o hacer trazos con distintos grosores. Este ejercicio estimula la creatividad y te permite descubrir nuevas maneras de expresión.
+
+Cada uno de estos ejercicios es una oportunidad para desconectar del estrés, reconectar contigo mismo y construir un espacio de calma y creatividad en tu día a día.
+`}],
             url: `./${novedadesTitles.destacada}`
         },
         {
             id: 1,
             title: `${novedadesTitles.sec1}`,
+            description: "Material de texto descargable orientado a servir como una humilde guía para potenciar el uso de tus redes como artista",
             image: getBlogImage(1),
-            introduction: `Viste, 'el que mucho abarca, poco aprieta', 
-      y me pasó como el otro día. Quise hacer mil cosas 
-      a la vez, pero terminé con más quilombo que un perro con dos colas. 
-      Pensé que 'no por mucho madrugar amanece más temprano', 
-      pero mirá, a las 7 de la mañana ya me había dado cuenta de que estaba 
-      más perdido que una vaca en un tambo. `,
-            video: "https://www.youtube.com/watch?v=JLobOX2zMfM",
-            additionalText: "Este es un texto adicional para el primer contenido.",
-            quote: "El éxito es la suma de pequeños esfuerzos repetidos día tras día. - Robert Collier",
-            url: `./${novedadesTitles.sec1}`
+            introduction: `Te comparo una guia para que puedas maximizar tus redes como artista ¡Espero esta info te sea tan útil como lo fué para mi!`,
+            url: `./${novedadesTitles.sec1}`,
+            pdf: `https://drive.google.com/file/d/1VnisZowLjsdBdhe4Fdi4GPoUi0QC8_5N/view?usp=sharing`
         },
         {
             id: 2,
             title: `${novedadesTitles.sec2}`,
+            description: "¿Sabías que el Filete Porteño es Patrimonio Cultural Inmaterial de la Humanidad?",
             image: getBlogImage(2),
-            introduction: `Viste, 'el que mucho abarca, poco aprieta', 
-      y me pasó como el otro día. Quise hacer mil cosas 
-      a la vez, pero terminé con más quilombo que un perro con dos colas. 
-      Pensé que 'no por mucho madrugar amanece más temprano', 
-      pero mirá, a las 7 de la mañana ya me había dado cuenta de que estaba 
-      más perdido que una vaca en un tambo. `,
-            video: "https://www.youtube.com/watch?v=c0bIl_KZwr0",
-            additionalText: "Este es un texto adicional para el primer contenido.",
-            quote: "El éxito es la suma de pequeños esfuerzos repetidos día tras día. - Robert Collier",
+            sections: [{ title: "El Fileteado Porteño y la Declaración de la UNESCO", content: `El *1 de diciembre de 2015, el Filete Porteño fue declarado **Patrimonio Cultural Inmaterial de la Humanidad* por la UNESCO. Este reconocimiento puso en valor nuestro arte único nacido en las calles de Buenos Aires, que combina tradición, identidad cultural y una estética inconfundible.` }, { title: "¿Por qué la UNESCO lo reconoció como Patrimonio?", content: "La UNESCO destaca que el Fileteado Porteño: 1. Representa *valores culturales e históricos* únicos. 2. Ha sido transmitido de generación en generación, adaptándose a los cambios sociales y tecnológicos. 3. Fomenta un sentido de *pertenencia e identidad* en la comunidad porteña y argentina. 4. Integra elementos de *arte popular*, vinculando tradición e innovación." }, { title: "El impacto de la declaración", content: "Este reconocimiento internacional tuvo varios efectos positivos para el Fileteado Porteño:- *Mayor visibilidad internacional*, permitiendo que artistas y fileteadores participen en exposiciones y eventos culturales fuera de Argentina. - Un *resurgimiento del interés por aprender la técnica*, tanto en Argentina como en otros países, democratizando el acceso a un arte que históricamente era practicado solo por hombres en contextos laborales específicos. - La protección de su valor cultural, asegurando que futuras generaciones puedan conocer, aprender y practicar esta expresión artística. Con la declaración de la UNESCO se logró mucha mas visibilidad de la técnica y se valorizó su posición en el mundo artistico nacional.En el 2025 vamos a celebrar los 10 años de la declaración todas y todos juntos!! estate atenti a las novedades!!" }],
             url: `./${novedadesTitles.sec2}`
         },
         {
             id: 3,
             title: `${novedadesTitles.sec3}`,
+            description: "La historía e importancia en la elección del pincel para los trazos en el Filete Porteño",
             image: getBlogImage(3),
-            introduction: `Viste, 'el que mucho abarca, poco aprieta', 
-      y me pasó como el otro día. Quise hacer mil cosas 
-      a la vez, pero terminé con más quilombo que un perro con dos colas. 
-      Pensé que 'no por mucho madrugar amanece más temprano', 
-      pero mirá, a las 7 de la mañana ya me había dado cuenta de que estaba 
-      más perdido que una vaca en un tambo. `,
-            video: "https://www.youtube.com/watch?v=U0M3l45-xAw",
-            additionalText: "Este es un texto adicional para el primer contenido.",
-            quote: "El éxito es la suma de pequeños esfuerzos repetidos día tras día. - Robert Collier",
+            sections: [{
+                title: "", content: `El Filete Porteño es una técnica que está fuertemente relacionada a su herramienta principal que es el pincel de pelo largo, debido a que toda la iconografía está desarrollada en base a los trazos del pincel.
+Hay de varios tipos y medidas, pero sin duda los mejores son los CARNEVALE, pinceles realizados por la familia Carnevale desde 1940, están hechos de pelo de oreja de vaca y manufacturados artesanalmente uno por uno!
+
+Te dejo una entrevista a Rolando Carnevale realizada en el marco del encuentro anual de FIelteadores!
+` }],
+            video: "https://www.youtube.com/watch?v=T4HEagQGXwQ",
             url: `./${novedadesTitles.sec3}`
         },
     ];

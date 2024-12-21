@@ -17,10 +17,10 @@ export default function NovedadDestacada({ novedadUrl, content }) {
                     Investigación
                 </span>
                 <h2 className="rye-regular text-[#CDA053] text-2xl lg:text-3xl mt-2">
-                    Descomponiendo el Proceso de Diseño: El Estilo Fileteo
+                    {content.title}
                 </h2>
                 <p className="line-clamp-3 inria-sans-regular text-sm text-[#FEFFEB] mt-2 lg:block">
-                    Lorem ipsum dolor sit amet consectetur. Amet malesuada quis nunc fermentum. Condimentum a commodo.
+                    {content.description}
                 </p>
             </div>
         </Link>
