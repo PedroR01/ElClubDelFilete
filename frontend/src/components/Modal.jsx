@@ -34,7 +34,6 @@ export default function Modal({ state }) {
   // Para poder enviar el formulario, el boton debe estar habilitado, y para esto ya se realiza una comprobación previa de los Inputs
   const handleSubmit = (e) => {
     e.preventDefault();
-    //sendData(contactInfo);
     setIsSuccess(true);
     setIsSend(true);
     setCanSend(false);
@@ -42,35 +41,31 @@ export default function Modal({ state }) {
       state(false);
     }, 2500);
   };
-    useEffect (() => {
-      if(isSend){
-      const allFieldsValid = 
-      contactInfo.nombre.trim() !== "" &&
-      contactInfo.email.trim() !== "" &&
-      contactInfo.descripcion.trim() !== "" &&
-      Object.values(errors).every((error) => error === "");
+  useEffect(() => {
+    if (isSend) {
+      const allFieldsValid =
+        contactInfo.nombre.trim() !== "" &&
+        contactInfo.email.trim() !== "" &&
+        contactInfo.descripcion.trim() !== "" &&
+        Object.values(errors).every((error) => error === "");
 
-      if (allFieldsValid ) {
+      if (allFieldsValid) {
         sendData(contactInfo);
         setIsSend(false);
-      } else {
-        console.log("Faltan campos por completar o hay errores");
-      }}
-    }, [isSend, errors]);
+      }
+    }
+  }, [isSend, errors]);
+
 
   const sendData = async ({ nombre, email, descripcion }) => {
-     console.log("Form sent: " + nombre + " email: " + email + " mensaje: " + descripcion);
     try {
-      const response = await fetch('http://localhost:3001/api/submit', {
+      await fetch('https://mi-backend.vercel.app/api/submit', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ nombre, email, descripcion})
+        body: JSON.stringify({ nombre, email, descripcion })
       });
-      const data = await response.json();
-      setRespuesta(data.message || 'Error al enviar el mensaje');
     } catch (error) {
       console.error('Error al enviar el mensaje:', error);
-      setRespuesta('Error al enviar el mensaje');
     }
   };
 
