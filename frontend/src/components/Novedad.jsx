@@ -47,7 +47,7 @@ export default function Novedad({ novedadUrl, mobile, content }) {
                         {content.title}
                     </h2>
                     <p className="line-clamp-3 inria-sans-regular text-[#FEFFEB] text-sm leading-relaxed">
-                        Lorem ipsum dolor sit amet consectetur. Amet malesuada quis nunc fermentum. Condimentum a commodo.
+                        {content.description}
                     </p>
                 </div>
             </Link>)

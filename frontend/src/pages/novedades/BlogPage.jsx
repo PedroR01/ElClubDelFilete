@@ -44,6 +44,59 @@ export default function BlogPage() {
         }
     };
 
+    /* Funcion encargada de renderizar los campos de contenido y aplicarle estilo por medio de detección de caracteres especiales */
+    const parseContent = (content) => {
+        const boldRegex = /\*\*(.*?)\*\*/g; // Negrita
+        const italicRegex = /\*(.*?)\*/g;   // Cursiva
+
+        // Dividir el contenido en fragmentos según los estilos
+        const parsedContent = content
+            .split(boldRegex) // Divide por negrita primero
+            .map((part, index) => {
+                if (index % 2 === 1) {
+                    // Es un texto entre ** -> aplicar negrita
+                    return <span key={index} className="text-[#CDA053]">{part}</span>;
+                }
+                return part.split(italicRegex).map((subPart, subIndex) => {
+                    if (subIndex % 2 === 1) {
+                        // Es un texto entre * -> aplicar cursiva
+                        return <em key={`${index}-${subIndex}`}>{subPart}</em>;
+                    }
+                    return subPart;
+                });
+            });
+
+        // React.Fragment para combinar todo en un solo nodo
+        return <>{parsedContent.flat()}</>;
+    };
+
+    /* Funcion encargada de renderizar el campo de "list" del contenido como una lista con estilos */
+    const renderList = (list) => {
+        const { type, items } = list;
+
+        // Generar cada ítem con parseContent
+        const renderItems = () =>
+            items.map((item, index) => (
+                <li key={index}>
+                    {parseContent(item)}
+                </li>
+            ));
+
+        if (type === "ordered") {
+            return (
+                <ol className="montserrat-normal text-base text-justify md:text-lg text-[#FEFFFB] list-decimal list-inside mb-4">
+                    {renderItems()}
+                </ol>
+            );
+        }
+
+        return (
+            <ul className="montserrat-normal text-base text-justify md:text-lg text-[#FEFFFB] list-disc list-inside mb-4">
+                {renderItems()}
+            </ul>
+        );
+    };
+
     return (
         <div className="w-full bg-[#8F272A] pt-24 min-h-screen">
             <article className="w-full max-w-3xl mx-auto px-4">
@@ -67,20 +120,25 @@ export default function BlogPage() {
 
                     {content.sections?.map((section, index) => (
                         <div key={index} className="mb-6">
-                            <h3 className="rye-regular text-2xl font-bold tracking-wider text-center text-[#CDA053] mb-4 md:text-left">
-                                {section.title}
-                            </h3>
-                            <p className="montserrat-normal text-base text-justify md:text-lg text-[#FEFFFB]">
-                                {section.content}
-                            </p>
+                            {section.title && (
+                                <h3 className="text-[#CDA053] text-xl font-bold mb-2">
+                                    {section.title}
+                                </h3>
+                            )}
+                            {section.content &&
+                                section.content.split('\n').map((paragraph, i) => (
+                                    <p key={i} className="montserrat-normal text-base text-justify md:text-lg text-[#FEFFFB]">
+                                        {parseContent(paragraph)}
+                                    </p>
+                                ))}
+                            {section.list && renderList(section.list)}
                         </div>
                     ))}
 
                     {/* Renderizar video si está presente */}
                     {content.video && (
                         <div className="mb-8">
-                            <h3 className="text-xl font-bold text-[#CDA053] mb-4">Video de la noticia</h3>
-                            <div className="aspect-w-16 aspect-h-9 mb-4">
+                            <div className="w-full h-44 md:h-80 mb-4">
                                 <iframe
                                     className="w-full h-full rounded-lg shadow-md"
                                     src={getVideoUrl()}

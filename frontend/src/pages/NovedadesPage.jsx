@@ -40,29 +40,34 @@ export default function NovedadesPage() {
             introduction: `¿Te sientes atrapado en la rutina, con poco tiempo para ti y una montaña de estrés acumulado? A veces, la vida diaria se convierte en una lista interminable de tareas, y esa carga se refleja en nuestro estado de ánimo, energía y bienestar. El estrés y la ansiedad no solo nos agotan, sino que nos alejan de lo que realmente importa: sentirnos bien y disfrutar de cada día. Pero, ¿y si existiera una manera de cambiar eso? ¿Qué pasaría si pudieras encontrar una actividad que te ayude a liberar tensiones, reconectar contigo y llenar tu vida de color y significado? Practicar el arte tiene ese poder. No solo te permite expresarte, sino que activa una serie de cambios químicos en tu cerebro que transforman tu salud mental, física y emocional.
             El arte no necesita grandes habilidades ni conocimientos para ofrecer sus beneficios. En este PDF, te mostraré cómo la práctica artística puede convertirse en tu refugio diario, ayudándote a reducir el estrés, mejorar tu estado de ánimo y reconectarte con tu creatividad. Con ejercicios simples, crearás un hábito artístico que puede cambiar la forma en la que experimentas la vida, acercándote a una versión de ti más plena, más tranquila y, sobre todo, más feliz.`,
             sections: [{
-                title: "Los Efectos del Arte en el Cerebro: Cómo el Arte Cambia nuestra Química", content: `Cuando nos sumergimos en una actividad artística, se producen cambios en el cerebro que tienen efectos positivos en nuestra salud mental y emocional.
-
-- Liberación de Dopamina y Serotonina: Estas son conocidas como "las hormonas de la felicidad". La dopamina se libera cuando creamos algo, dándonos una sensación de logro, mientras que la serotonina mejora el estado de ánimo y reduce la ansiedad. Cuando practicamos arte, estas hormonas nos ayudan a sentirnos satisfechos y calmados.
-
-- Aumento de la Neuroplasticidad: El arte activa múltiples áreas del cerebro, promoviendo algo llamado "neuroplasticidad". Esto significa que el cerebro se vuelve más flexible y capaz de aprender cosas nuevas. Así, practicar arte no solo mejora la creatividad, sino que también ayuda a resolver problemas con mayor facilidad.
-
-- Reducción del Estrés: Cuando pintamos o realizamos una actividad artística, se reduce la producción de cortisol, la hormona del estrés. Esta disminución del estrés nos ayuda a sentirnos más tranquilos y a disfrutar del momento presente.
-` }, {
-                title: "Ejercicios Prácticos para Desarrollar el Hábito Artístico", content: `Aquí tienes algunos ejercicios diarios para cultivar el hábito artístico y experimentar sus beneficios en tu bienestar:
-
-- Ejercicio de Inicio de Día (5 minutos): Tómate cinco minutos cada mañana para dibujar o pintar algo sencillo, sin preocuparte por el resultado. Puede ser algo tan simple como líneas, figuras o colores. La idea es comenzar el día de forma creativa y sin presión.
-
-- Refugio de Paz al Final del Día (10 minutos): Al terminar tu jornada, dedica diez minutos a una actividad artística que te relaje, como hacer trazos o pintar de forma libre. Este ejercicio te ayudará a soltar el estrés acumulado y a reconectar contigo mismo.
-
-- Captura un Recuerdo Positivo (5-10 minutos): Cada día, piensa en un momento que te haya hecho sentir bien, por pequeño que sea (una sonrisa, una conversación, una buena comida).
-Dedica unos minutos a dibujar o pintar algo que te recuerde ese momento. Este ejercicio no solo mejora el estado de ánimo, sino que ayuda a valorar las cosas positivas del día a día.
-
-- Dibuja tu Estado de Ánimo (5 minutos): Al final del día, dedica cinco minutos a plasmar en un dibujo o pintura cómo te sientes. No hace falta que sea algo detallado o figurativo; puedes expresar tus emociones con colores, formas o trazos sueltos. Este ejercicio te ayudará a liberar emociones y a ser consciente de tus estados de ánimo.
-
-- Explora Nuevas Formas y Texturas (10 minutos): Dedica diez minutos al día a experimentar con diferentes materiales o técnicas. Puede ser algo tan simple como usar papel de colores, lápices, o hacer trazos con distintos grosores. Este ejercicio estimula la creatividad y te permite descubrir nuevas maneras de expresión.
-
-Cada uno de estos ejercicios es una oportunidad para desconectar del estrés, reconectar contigo mismo y construir un espacio de calma y creatividad en tu día a día.
-`}],
+                title: "Los Efectos del Arte en el Cerebro: Cómo el Arte Cambia nuestra Química",
+                content: "Cuando nos sumergimos en una actividad artística, se producen cambios en el cerebro que tienen efectos positivos en nuestra salud mental y emocional.",
+                list: {
+                    type: "unordered",
+                    items: [
+                        "Liberación de Dopamina y Serotonina: Estas son conocidas como las 'hormonas de la felicidad'. La dopamina se libera cuando creamos algo, dándonos una sensación de logro, mientras que la serotonina mejora el estado de ánimo y reduce la ansiedad. Cuando practicamos arte, estas hormonas nos ayudan a sentirnos satisfechos y calmados.",
+                        "Aumento de la Neuroplasticidad: El arte activa múltiples áreas del cerebro, promoviendo algo llamado 'neuroplasticidad'. Esto significa que el cerebro se vuelve más flexible y capaz de aprender cosas nuevas. Así, practicar arte no solo mejora la creatividad, sino que también ayuda a resolver problemas con mayor facilidad.",
+                        "Reducción del Estrés: Cuando pintamos o realizamos una actividad artística, se reduce la producción de cortisol, la hormona del estrés. Esta disminución del estrés nos ayuda a sentirnos más tranquilos y a disfrutar del momento presente."
+                    ]
+                }
+            }, {
+                title: "Ejercicios Prácticos para Desarrollar el Hábito Artístico",
+                content: "Aquí tienes algunos ejercicios diarios para cultivar el hábito artístico y experimentar sus beneficios en tu bienestar:",
+                list: {
+                    type: "unordered",
+                    items: [
+                        "Ejercicio de Inicio de Día (5 minutos): Tómate cinco minutos cada mañana para dibujar o pintar algo sencillo, sin preocuparte por el resultado. Puede ser algo tan simple como líneas, figuras o colores. La idea es comenzar el día de forma creativa y sin presión.",
+                        "Refugio de Paz al Final del Día (10 minutos): Al terminar tu jornada, dedica diez minutos a una actividad artística que te relaje, como hacer trazos o pintar de forma libre. Este ejercicio te ayudará a soltar el estrés acumulado y a reconectar contigo mismo.",
+                        "Captura un Recuerdo Positivo (5-10 minutos): Cada día, piensa en un momento que te haya hecho sentir bien, por pequeño que sea (una sonrisa, una conversación, una buena comida). Dedica unos minutos a dibujar o pintar algo que te recuerde ese momento. Este ejercicio no solo mejora el estado de ánimo, sino que ayuda a valorar las cosas positivas del día a día.",
+                        "Dibuja tu Estado de Ánimo (5 minutos): Al final del día, dedica cinco minutos a plasmar en un dibujo o pintura cómo te sientes. No hace falta que sea algo detallado o figurativo; puedes expresar tus emociones con colores, formas o trazos sueltos. Este ejercicio te ayudará a liberar emociones y a ser consciente de tus estados de ánimo.",
+                        "Explora Nuevas Formas y Texturas (10 minutos): Dedica diez minutos al día a experimentar con diferentes materiales o técnicas. Puede ser algo tan simple como usar papel de colores, lápices, o hacer trazos con distintos grosores. Este ejercicio estimula la creatividad y te permite descubrir nuevas maneras de expresión."
+                    ]
+                }
+            },
+            {
+                content: "Cada uno de estos ejercicios es una oportunidad para desconectar del estrés, reconectar contigo mismo y construir un espacio de calma y creatividad en tu día a día."
+            }
+            ],
             url: `./${novedadesTitles.destacada}`
         },
         {
@@ -79,7 +84,39 @@ Cada uno de estos ejercicios es una oportunidad para desconectar del estrés, re
             title: `${novedadesTitles.sec2}`,
             description: "¿Sabías que el Filete Porteño es Patrimonio Cultural Inmaterial de la Humanidad?",
             image: getBlogImage(2),
-            sections: [{ title: "El Fileteado Porteño y la Declaración de la UNESCO", content: `El *1 de diciembre de 2015, el Filete Porteño fue declarado **Patrimonio Cultural Inmaterial de la Humanidad* por la UNESCO. Este reconocimiento puso en valor nuestro arte único nacido en las calles de Buenos Aires, que combina tradición, identidad cultural y una estética inconfundible.` }, { title: "¿Por qué la UNESCO lo reconoció como Patrimonio?", content: "La UNESCO destaca que el Fileteado Porteño: 1. Representa *valores culturales e históricos* únicos. 2. Ha sido transmitido de generación en generación, adaptándose a los cambios sociales y tecnológicos. 3. Fomenta un sentido de *pertenencia e identidad* en la comunidad porteña y argentina. 4. Integra elementos de *arte popular*, vinculando tradición e innovación." }, { title: "El impacto de la declaración", content: "Este reconocimiento internacional tuvo varios efectos positivos para el Fileteado Porteño:- *Mayor visibilidad internacional*, permitiendo que artistas y fileteadores participen en exposiciones y eventos culturales fuera de Argentina. - Un *resurgimiento del interés por aprender la técnica*, tanto en Argentina como en otros países, democratizando el acceso a un arte que históricamente era practicado solo por hombres en contextos laborales específicos. - La protección de su valor cultural, asegurando que futuras generaciones puedan conocer, aprender y practicar esta expresión artística. Con la declaración de la UNESCO se logró mucha mas visibilidad de la técnica y se valorizó su posición en el mundo artistico nacional.En el 2025 vamos a celebrar los 10 años de la declaración todas y todos juntos!! estate atenti a las novedades!!" }],
+            sections: [
+                {
+                    title: "El Fileteado Porteño y la Declaración de la UNESCO",
+                    content: "El *1 de diciembre de 2015*, el Filete Porteño fue declarado **Patrimonio Cultural Inmaterial de la Humanidad** por la UNESCO."
+                },
+                {
+                    title: "¿Por qué la UNESCO lo reconoció como Patrimonio?",
+                    list: {
+                        type: "ordered",
+                        items: [
+                            "Representa *valores culturales e históricos* únicos.",
+                            "Ha sido transmitido de generación en generación.",
+                            "Fomenta un sentido de *pertenencia e identidad* en la comunidad porteña y argentina.",
+                            "Integra elementos de *arte popular*."
+                        ]
+                    },
+                },
+                {
+                    title: "El impacto de la declaración",
+                    content: "Este reconocimiento internacional tuvo varios efectos positivos:",
+                    list: {
+                        type: "unordered",
+                        items: [
+                            "*Mayor visibilidad internacional*, permitiendo eventos culturales fuera de Argentina.",
+                            "Un *resurgimiento del interés* por aprender la técnica.",
+                            "Protección de su valor cultural para futuras generaciones."
+                        ]
+                    }
+                },
+                {
+                    content: "¡En el 2025 celebraremos los 10 años de la declaración!"
+                }
+            ],
             url: `./${novedadesTitles.sec2}`
         },
         {
@@ -88,11 +125,8 @@ Cada uno de estos ejercicios es una oportunidad para desconectar del estrés, re
             description: "La historía e importancia en la elección del pincel para los trazos en el Filete Porteño",
             image: getBlogImage(3),
             sections: [{
-                title: "", content: `El Filete Porteño es una técnica que está fuertemente relacionada a su herramienta principal que es el pincel de pelo largo, debido a que toda la iconografía está desarrollada en base a los trazos del pincel.
-Hay de varios tipos y medidas, pero sin duda los mejores son los CARNEVALE, pinceles realizados por la familia Carnevale desde 1940, están hechos de pelo de oreja de vaca y manufacturados artesanalmente uno por uno!
-
-Te dejo una entrevista a Rolando Carnevale realizada en el marco del encuentro anual de FIelteadores!
-` }],
+                content: "El Filete Porteño es una técnica que está fuertemente relacionada a su herramienta principal que es el pincel de pelo largo, debido a que toda la iconografía está desarrollada en base a los trazos del pincel.\nHay de varios tipos y medidas, pero sin duda los mejores son los CARNEVALE, pinceles realizados por la familia Carnevale desde 1940, están hechos de pelo de oreja de vaca y manufacturados artesanalmente uno por uno!\nTe dejo una entrevista a Rolando Carnevale realizada en el marco del encuentro anual de Fileteadores!"
+            }],
             video: "https://www.youtube.com/watch?v=T4HEagQGXwQ",
             url: `./${novedadesTitles.sec3}`
         },
