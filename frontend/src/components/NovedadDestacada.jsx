@@ -1,14 +1,14 @@
-import React from "react";
-import blogImage from "../img/portadas/blog_image.png";
+import { Link } from 'react-router-dom';
 
-export default function NovedadDestacada({ novedadUrl }) {
+export default function NovedadDestacada({ novedadUrl, content }) {
     return (
-        <a
-            href={novedadUrl}
+        <Link
+            to={novedadUrl} // Redirige a la página de destino
+            state={{ content }}
             className="col-span-7 lg:col-span-4 row-span-3 md:my-4 bg-[#3c3228] md:rounded-lg overflow-hidden relative group shadow-blog-main"
         >
             <img
-                src={blogImage}
+                src={content.image}
                 alt="Noticia principal"
                 className="w-full h-full object-cover brightness-50 scale-110 group-hover:scale-100 transition-transform duration-500"
             />
@@ -23,6 +23,6 @@ export default function NovedadDestacada({ novedadUrl }) {
                     Lorem ipsum dolor sit amet consectetur. Amet malesuada quis nunc fermentum. Condimentum a commodo.
                 </p>
             </div>
-        </a>
+        </Link>
     );
 }

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 
 export default function Carousel({ images, clickHandler }) {
   const [selectedIndex, setSelectedIndex] = useState(0); // Índice del elemento seleccionado
@@ -31,9 +31,9 @@ export default function Carousel({ images, clickHandler }) {
       {images.map((image, index) => (
         <button
           key={index}
-          className={`w-[20%] flex-shrink-0 aspect-[3.5/5] transition duration-300 rounded-3xl overflow-hidden ${index === selectedIndex
+          className={`w-[20%] flex-shrink-0 aspect-[3.5/5] md:aspect-[3.5/4] lg:w-[15%] transition duration-300 rounded-3xl overflow-hidden ${index === selectedIndex
             ? "scale-110 z-10"
-            : "scale-90 opacity-80"
+            : "scale-90"
             } ${index !== selectedIndex ? "hover:scale-95" : "hover:scale-x-110"}`}
           style={{
             boxShadow: "0 6px 20px rgba(220, 220, 220, 0.2)", // Personalización de sombra

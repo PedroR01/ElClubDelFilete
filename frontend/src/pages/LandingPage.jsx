@@ -1,16 +1,29 @@
-import React from "react";
+import { useEffect } from "react";
 import Modal from "../components/Modal";
 import Button from "../components/Button";
 import Galeria from "../components/sections/Galeria";
-import logoIntro from "../img/logos/logoIntro.png";
 import { useState } from "react";
 import CursoPage from "./CursoPage";
 import Academia from "../components/sections/Academia";
-
+import logoWP from "../img/logos/wp.png"
 
 export default function LandingPage() {
     const [modal, setModal] = useState(false);
     const [infoCurso, setInfoCurso] = useState(null);
+
+    // Bloquear/desbloquear el scroll al abrir/cerrar el modal
+    useEffect(() => {
+        if (modal) {
+            document.body.style.overflow = "hidden"; // Bloquea el scroll
+        } else {
+            document.body.style.overflow = ""; // Restablece el scroll
+        }
+
+        // Limpieza al desmontar el componente
+        return () => {
+            document.body.style.overflow = "";
+        };
+    }, [modal])
 
     const openContactModal = () => {
         setModal(true);
@@ -22,20 +35,18 @@ export default function LandingPage() {
     };
 
     return (
-        <div className="overflow-x-hidden overscroll-x-none">
+        <div className="overflow-hidden">
             {infoCurso ? <CursoPage onClick={(navigation) => openCurso(navigation)} /> : <>
-                <section className="flex relative intro justify-center md:justify-normal md:h-[110vh]">
-                    <div className="flex flex-col flex-nowrap w-4/5 gap-8 items-center justify-center md:justify-normal md:items-start md:w-3/5 md:mt-auto md:mb-40 md:ml-8">
-                        <img
-                            src={logoIntro}
-                            alt="Logo club del filete"
-                            className="h-40 w-44 md:h-64 md:w-72 object-cover mb-4"
-                        />
-                        <p className="inria-sans-regular text-[#FEFFEB] text-base tracking-wide leading-normal  md:text-xl md:leading-10 md:tracking-wider md:w-2/3">Lorem ipsum dolor sit amet consectetur. Amet malesuada quis nunc fermentum. Condimentum a commodo fringilla sit gravida porta. </p>
+
+                <section className="flex relative intro justify-center md:justify-normal  md:min-h-[40rem]">
+                    <div className="flex flex-col w-4/5 gap-8 items-center justify-center md:justify-normal md:items-start md:w-[70%] lg:w-3/5 md:mt-auto  md:mb-20 lg:mb-40 md:ml-20 lg:pt-28">
+
+                        <h1 className="rye-regular text-[#CDA053] text-5xl text-center lg:mb-8">EL CLUB <span className="text-[#CDA053]">DEL FILETE</span></h1>
+                        <p className="inria-sans-regular text-[#FEFFEB] text-base tracking-wide leading-normal  md:text-xl md:leading-10 md:tracking-wider md:w-3/4 lg:w-2/3">Lorem ipsum dolor sit amet consectetur. Amet malesuada quis nunc fermentum. Condimentum a commodo fringilla sit gravida porta. </p>
                         <Button
-                            text="Contactame"
+                            text={"Contactame"}
                             btnType={"button"}
-                            event={openContactModal}
+                            event={() => openContactModal()}
                         />
                     </div>
                     {modal && (<Modal state={(e) => setModal(e)} />)}
@@ -48,6 +59,12 @@ export default function LandingPage() {
                 </section>
             </>
             }
+
+            {/*Logo de whapp*/}
+
+            <a href="https://wa.me/" target="_blank">
+                <img src={logoWP} alt="WhatsApp" className="fixed opacity-60 bottom-7 right-7 w-14 h-14 rounded-full hover:scale-125 hover:shadow-xl hover:opacity-100 transition transform duration-700" />
+            </a>
 
         </div>
     );

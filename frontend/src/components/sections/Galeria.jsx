@@ -1,3 +1,6 @@
+import { useState } from "react";
+import Button from "../Button";
+
 import alumno1 from "../../img/portadas/club1.jpg";
 import alumno2 from "../../img/portadas/club2.jpg";
 import alumno3 from "../../img/portadas/club3.jpg";
@@ -14,31 +17,27 @@ import alumno13 from "../../img/portadas/club13.jpg";
 import alumno14 from "../../img/portadas/club14.jpg";
 import alumno15 from "../../img/portadas/club15.jpg";
 
-import Button from "../Button";
-
-import React, { useState } from "react";
-
 export default function Galeria() {
-  const imagenes= [{ id: 1, src: alumno1, autor: "Pedro Pascal", titulo: "Recipientes de ánimos" },
-    { id: 2, src: alumno2, autor: "Pedro Pascal", titulo: "Recipientes de ánimos" },
-    { id: 3, src: alumno3, autor: "Pedro Pascal", titulo: "Recipientes de ánimos" },
-    { id: 4, src: alumno4, autor: "Pedro Pascal", titulo: "Recipientes de ánimos" },
-    { id: 5, src: alumno5, autor: "Pedro Pascal", titulo: "Recipientes de ánimos" },
-    { id: 6, src: alumno6, autor: "Pedro Pascal", titulo: "Recipientes de ánimos" },
-    { id: 7, src: alumno7, autor: "Pedro Pascal", titulo: "Recipientes de ánimos" },
-    { id: 8, src: alumno8, autor: "Pedro Pascal", titulo: "Recipientes de ánimos" },
-    { id: 9, src: alumno9, autor: "Pedro Pascal", titulo: "Recipientes de ánimos" },
-    { id: 10, src: alumno10, autor: "Pedro Pascal", titulo: "Recipientes de ánimos" },
-    { id: 11, src: alumno11, autor: "Pedro Pascal", titulo: "Recipientes de ánimos" },
-    { id: 12, src: alumno12, autor: "Pedro Pascal", titulo: "Recipientes de ánimos" },
-    { id: 13, src: alumno13, autor: "Pedro Pascal", titulo: "Recipientes de ánimos" },
-    { id: 14, src: alumno14, autor: "Pedro Pascal", titulo: "Recipientes de ánimos" },
-    { id: 15, src: alumno15, autor: "Pedro Pascal", titulo: "Recipientes de ánimos" },
-    { id: 2, src: alumno2, autor: "Pedro Pascal", titulo: "Recipientes de ánimos" },
-    { id: 3, src: alumno3, autor: "Pedro Pascal", titulo: "Recipientes de ánimos" },
-    { id: 4, src: alumno4, autor: "Pedro Pascal", titulo: "Recipientes de ánimos" },
-    { id: 5, src: alumno5, autor: "Pedro Pascal", titulo: "Recipientes de ánimos" },
-    { id: 6, src: alumno6, autor: "Pedro Pascal", titulo: "Recipientes de ánimos" },
+  const imagenes = [{ id: 1, src: alumno1, autor: "Pedro Pascal", titulo: "Recipientes de ánimos" },
+  { id: 2, src: alumno2, autor: "Pedro Pascal", titulo: "Recipientes de ánimos" },
+  { id: 3, src: alumno3, autor: "Pedro Pascal", titulo: "Recipientes de ánimos" },
+  { id: 4, src: alumno4, autor: "Pedro Pascal", titulo: "Recipientes de ánimos" },
+  { id: 5, src: alumno5, autor: "Pedro Pascal", titulo: "Recipientes de ánimos" },
+  { id: 6, src: alumno6, autor: "Pedro Pascal", titulo: "Recipientes de ánimos" },
+  { id: 7, src: alumno7, autor: "Pedro Pascal", titulo: "Recipientes de ánimos" },
+  { id: 8, src: alumno8, autor: "Pedro Pascal", titulo: "Recipientes de ánimos" },
+  { id: 9, src: alumno9, autor: "Pedro Pascal", titulo: "Recipientes de ánimos" },
+  { id: 10, src: alumno10, autor: "Pedro Pascal", titulo: "Recipientes de ánimos" },
+  { id: 11, src: alumno11, autor: "Pedro Pascal", titulo: "Recipientes de ánimos" },
+  { id: 12, src: alumno12, autor: "Pedro Pascal", titulo: "Recipientes de ánimos" },
+  { id: 13, src: alumno13, autor: "Pedro Pascal", titulo: "Recipientes de ánimos" },
+  { id: 14, src: alumno14, autor: "Pedro Pascal", titulo: "Recipientes de ánimos" },
+  { id: 15, src: alumno15, autor: "Pedro Pascal", titulo: "Recipientes de ánimos" },
+  { id: 2, src: alumno2, autor: "Pedro Pascal", titulo: "Recipientes de ánimos" },
+  { id: 3, src: alumno3, autor: "Pedro Pascal", titulo: "Recipientes de ánimos" },
+  { id: 4, src: alumno4, autor: "Pedro Pascal", titulo: "Recipientes de ánimos" },
+  { id: 5, src: alumno5, autor: "Pedro Pascal", titulo: "Recipientes de ánimos" },
+  { id: 6, src: alumno6, autor: "Pedro Pascal", titulo: "Recipientes de ánimos" },
   ]
   const [cantVisible, setCant] = useState(4);
   const [verMas, setVerMas] = useState(false);
@@ -54,7 +53,7 @@ export default function Galeria() {
       {/* Grilla principal */}
       <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4">
         {imagenes.slice(0, cantVisible).map((img) => (
-          <div key={img.id} className="relative group overflow-hidden max-sm:h-[15vh] sm:h-[30vh] ">
+          <div key={img.id} className="relative group overflow-hidden max-sm:h-[15vh] sm:h-[30vh] transition transform hover:scale-105">
             <img
               src={img.src}
               alt={img.titulo}
@@ -72,14 +71,14 @@ export default function Galeria() {
         ))}
       </div>
 
- 
+
 
       {/* Imágenes parcialmente visibles */}
-        <div className="grid grid-cols-2 max-sm:h-[7vh] sm:h-[7vh] md:h-[10vh] lg:h-[12vh] xl:h-[15]">
-        {imagenes.slice(cantVisible, cantVisible+2).map((img) => (
+      <div className="grid grid-cols-2 max-sm:h-[7vh] sm:h-[7vh] md:h-[10vh] lg:h-[12vh] xl:h-[15]">
+        {imagenes.slice(cantVisible, cantVisible + 2).map((img) => (
           <div
             key={img.id}
-            className="relative group overflow-hidden"
+            className="relative group overflow-hidden transition transform hover:scale-105"
           >
             <img
               src={img.src}
@@ -89,24 +88,24 @@ export default function Galeria() {
             <div className="absolute inset-0 bg-black bg-opacity-55 transition-opacity flex flex-col justify-end"></div>
           </div>
         ))}
-        </div>
+      </div>
 
       {/* Botón Ver más */}
-    {cantVisible < 20 && (
-      <div className="flex justify-center relative">
-        <div
-          className={`absolute bottom-[30px] w-full flex justify-center translate-y-0
+      {cantVisible < 20 && (
+        <div className="flex justify-center relative">
+          <div
+            className={`absolute bottom-[30px] w-full flex justify-center translate-y-0
         transition-all duration-500 ease-in-out`}
-        >
-          <Button
-            text={"Ver más"}
-            btnType={"button"}
-            event={cargarMasImagenes}
-            className="text-sm bg-gray-800 text-white rounded block"
-          />
+          >
+            <Button
+              text={"Ver más"}
+              btnType={"button"}
+              event={cargarMasImagenes}
+              className="text-sm bg-gray-800 text-white rounded block"
+            />
+          </div>
         </div>
-      </div>
-    )}
+      )}
 
     </section>
   );
