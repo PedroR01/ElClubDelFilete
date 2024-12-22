@@ -1,43 +1,49 @@
 import { useState } from "react";
 import Button from "../Button";
 
-import alumno1 from "../../img/portadas/club1.jpg";
-import alumno2 from "../../img/portadas/club2.jpg";
-import alumno3 from "../../img/portadas/club3.jpg";
-import alumno4 from "../../img/portadas/club4.jpg";
-import alumno5 from "../../img/portadas/club5.jpg";
-import alumno6 from "../../img/portadas/club6.jpg";
-import alumno7 from "../../img/portadas/club7.jpg";
-import alumno8 from "../../img/portadas/club8.jpg";
-import alumno9 from "../../img/portadas/club9.jpg";
-import alumno10 from "../../img/portadas/club10.jpg";
-import alumno11 from "../../img/portadas/club11.jpg";
-import alumno12 from "../../img/portadas/club12.jpg";
-import alumno13 from "../../img/portadas/club13.jpg";
-import alumno14 from "../../img/portadas/club14.jpg";
-import alumno15 from "../../img/portadas/club15.jpg";
+import peralta from "../../img/galeria/adriana_peralta.png";
+import arce_sucundun from "../../img/galeria/agustina_arce_sucundun.png";
+import arce_lobo from "../../img/galeria/agustina_arce_lobo.png";
+import astengo_ladronDeMisSueños from "../../img/galeria/astengo_ladronDeMisSueños.png";
+import brenda_lita from "../../img/galeria/brenda_lita.png";
+import candelaria_funes_yoHagoRavioles from "../../img/galeria/candelaria_funes_yoHagoRavioles.png";
+import cecilia_oviedo_laCocaEsPalFernet from "../../img/galeria/cecilia_oviedo_laCocaEsPalFernet.png";
+import clara_sanchez_laPicadita from "../../img/galeria/clara_sanchez_laPicadita.png";
+import cukier_singer from "../../img/galeria/cukier_singer.png";
+import elina_moncada_tango from "../../img/galeria/elina_moncada_tango.png";
+import eugenia_olha_gladis from "../../img/galeria/eugenia_olha_gladis.png";
+import fabian_segovia_indio from "../../img/galeria/fabian_segovia_indio.png";
+import fabio_correa_andaACantarleAGardel from "../../img/galeria/fabio_correa_andaACantarleAGardel.png";
+import graciela_chaile_puente from "../../img/galeria/graciela_chaile_puente.png";
+import hector_villarino_bajoDeTobias from "../../img/galeria/hector_villarino_bajoDeTobias.png";
+import hector_villarino_magicamenteMessi from "../../img/galeria/hector_villarino_magicamenteMessi.png";
+import hidalgo_cambalanche from "../../img/galeria/hidalgo_cambalache.png";
+import janet_mehl_mafalda from "../../img/galeria/janet_mehl_mafalda.png";
+import jimena_silva_pasionArgentina from "../../img/galeria/jimena_silva_pasionArgentina.png";
+import juanjo_miraballes_elFirulete from "../../img/galeria/juanjo_miraballes_elFirulete.png";
+
 
 export default function Galeria() {
-  const imagenes = [{ id: 1, src: alumno1, autor: "Pedro Pascal", titulo: "Recipientes de ánimos" },
-  { id: 2, src: alumno2, autor: "Pedro Pascal", titulo: "Recipientes de ánimos" },
-  { id: 3, src: alumno3, autor: "Pedro Pascal", titulo: "Recipientes de ánimos" },
-  { id: 4, src: alumno4, autor: "Pedro Pascal", titulo: "Recipientes de ánimos" },
-  { id: 5, src: alumno5, autor: "Pedro Pascal", titulo: "Recipientes de ánimos" },
-  { id: 6, src: alumno6, autor: "Pedro Pascal", titulo: "Recipientes de ánimos" },
-  { id: 7, src: alumno7, autor: "Pedro Pascal", titulo: "Recipientes de ánimos" },
-  { id: 8, src: alumno8, autor: "Pedro Pascal", titulo: "Recipientes de ánimos" },
-  { id: 9, src: alumno9, autor: "Pedro Pascal", titulo: "Recipientes de ánimos" },
-  { id: 10, src: alumno10, autor: "Pedro Pascal", titulo: "Recipientes de ánimos" },
-  { id: 11, src: alumno11, autor: "Pedro Pascal", titulo: "Recipientes de ánimos" },
-  { id: 12, src: alumno12, autor: "Pedro Pascal", titulo: "Recipientes de ánimos" },
-  { id: 13, src: alumno13, autor: "Pedro Pascal", titulo: "Recipientes de ánimos" },
-  { id: 14, src: alumno14, autor: "Pedro Pascal", titulo: "Recipientes de ánimos" },
-  { id: 15, src: alumno15, autor: "Pedro Pascal", titulo: "Recipientes de ánimos" },
-  { id: 2, src: alumno2, autor: "Pedro Pascal", titulo: "Recipientes de ánimos" },
-  { id: 3, src: alumno3, autor: "Pedro Pascal", titulo: "Recipientes de ánimos" },
-  { id: 4, src: alumno4, autor: "Pedro Pascal", titulo: "Recipientes de ánimos" },
-  { id: 5, src: alumno5, autor: "Pedro Pascal", titulo: "Recipientes de ánimos" },
-  { id: 6, src: alumno6, autor: "Pedro Pascal", titulo: "Recipientes de ánimos" },
+  const imagenes = [{ id: 1, src: peralta, autor: "Pedro Pascal", titulo: "Recipientes de ánimos" },
+  { id: 2, src: arce_sucundun, autor: "Pedro Pascal", titulo: "Recipientes de ánimos" },
+  { id: 3, src: arce_lobo, autor: "Pedro Pascal", titulo: "Recipientes de ánimos" },
+  { id: 4, src: astengo_ladronDeMisSueños, autor: "Pedro Pascal", titulo: "Recipientes de ánimos" },
+  { id: 5, src: brenda_lita, autor: "Pedro Pascal", titulo: "Recipientes de ánimos" },
+  { id: 6, src: candelaria_funes_yoHagoRavioles, autor: "Pedro Pascal", titulo: "Recipientes de ánimos" },
+  { id: 7, src: cecilia_oviedo_laCocaEsPalFernet, autor: "Pedro Pascal", titulo: "Recipientes de ánimos" },
+  { id: 8, src: clara_sanchez_laPicadita, autor: "Pedro Pascal", titulo: "Recipientes de ánimos" },
+  { id: 9, src: cukier_singer, autor: "Pedro Pascal", titulo: "Recipientes de ánimos" },
+  { id: 10, src: elina_moncada_tango, autor: "Pedro Pascal", titulo: "Recipientes de ánimos" },
+  { id: 11, src: eugenia_olha_gladis, autor: "Pedro Pascal", titulo: "Recipientes de ánimos" },
+  { id: 12, src: fabian_segovia_indio, autor: "Pedro Pascal", titulo: "Recipientes de ánimos" },
+  { id: 13, src: fabio_correa_andaACantarleAGardel, autor: "Pedro Pascal", titulo: "Recipientes de ánimos" },
+  { id: 14, src: graciela_chaile_puente, autor: "Pedro Pascal", titulo: "Recipientes de ánimos" },
+  { id: 15, src: hector_villarino_bajoDeTobias, autor: "Pedro Pascal", titulo: "Recipientes de ánimos" },
+  { id: 2, src: hector_villarino_magicamenteMessi, autor: "Pedro Pascal", titulo: "Recipientes de ánimos" },
+  { id: 3, src: hidalgo_cambalanche, autor: "Pedro Pascal", titulo: "Recipientes de ánimos" },
+  { id: 4, src: janet_mehl_mafalda, autor: "Pedro Pascal", titulo: "Recipientes de ánimos" },
+  { id: 5, src: jimena_silva_pasionArgentina, autor: "Pedro Pascal", titulo: "Recipientes de ánimos" },
+  { id: 6, src: juanjo_miraballes_elFirulete, autor: "Pedro Pascal", titulo: "Recipientes de ánimos" },
   ]
   const [cantVisible, setCant] = useState(4);
   const [verMas, setVerMas] = useState(false);

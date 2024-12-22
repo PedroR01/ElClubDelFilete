@@ -1,5 +1,6 @@
 import { useEffect } from "react";
-import cristianPintando from "../img/portadas/club14.jpg";
+import portadaHistoriaFilete from "../img/portadas/club14.jpg";
+import portadaHistoriaCris from "../img/portadas/club17.jpg";
 
 export default function HistoriaPage() {
 
@@ -106,14 +107,14 @@ export default function HistoriaPage() {
 
                     <img
                         className="hidden object-cover bg-center h-auto md:block md:w-[30vw]  2xl:w-5/12 opacity-0 translate-y-[30px] animate-fade-in transition duration-1000"
-                        src={cristianPintando}
+                        src={portadaHistoriaFilete}
                         alt="Cristian diseñando una pieza"
                     />
                 </section>
 
                 <section className="flex w-full  justify-between pb-60 md:pb-[28rem] md:pt-20">
 
-                    <img className="hidden object-cover md:block md:w-1/4 md:ml-20 z-30" src={cristianPintando} alt="Cristian diseñando una pieza" />
+                    <img className="hidden object-cover md:block md:w-1/4 md:ml-20 z-30" src={portadaHistoriaCris} alt="Cristian diseñando una pieza" />
 
                     <article className="relative flex flex-col z-10 top-20 lg:w-3/5 lg:top-24 h-full items-center text-white md:pl-0 lg:pr-20 px-6">
 

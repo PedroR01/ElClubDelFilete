@@ -1,8 +1,7 @@
 import { useState } from "react";
-import logoNavbar from "../../img/portadas/club18.jpg";
-import logoBlog from "../../img/portadas/blog_image.png";
-import logoIntro from "../../img/portadas/club7.jpg";
-import mateCurso from "../../img/misc/mateCosmico1.png"
+import portadaEsencial from "../../img/portadas/club2.jpg";
+import portadaLetras from "../../img/portadas/club6.jpg";
+import portadaMembresia from "../../img/portadas/membresia.webp";
 import Carousel from "../Carousel";
 import Button from "../Button";
 
@@ -10,25 +9,25 @@ export default function Academia() {
     // Estado inicial con cursos
     const cursos = [
         {
-            titulo: "Curso de Blog",
-            duracion: "4 semanas",
-            descripcion: "Amet malesuada quis nunc fermentum. Condimentum a commodo fringilla sit gravida porta. Proin a bibendum fringilla sed sit cursus mi ac elit. Facilisis sem et potenti lectus augue at.",
-            imagenes: [logoBlog, mateCurso],
-            link: "/novedades",
+            titulo: "Curso esencial",
+            duracion: "8 módulos",
+            descripcion: "Te voy a enseñar paso a paso y desde cero a que pintes tu primer cuadro fileteado listo para colgar en la pared, vamos a recorrer la historia del Filete y te voy a mostrar los materiales, elementos, herramientas y soportes que se usan en la técnica tradicional, te voy a guiar para que puedas componer tus propias obras y pintarlas con el método de los 5 pasos para darle vida a tus diseños!",
+            imagenes: [portadaEsencial],
+            link: "https://elclubdelfilete.tiendup.com/curso/el-club-del-filete",
         },
         {
-            titulo: "Introducción al Diseño",
-            duracion: "6 semanas",
-            descripcion: "Curso básico sobre diseño gráfico e identidad visual.",
-            imagenes: [logoIntro],
-            link: "/novedades",
+            titulo: "Letras Porteñas",
+            duracion: "4 módulos",
+            descripcion: "Aprende paso a paso y desde cero como realizar tus propias letras fileteadas con el método de Los 3 pilares. Te voy a guiar por un proceso paso a paso comprobado donde vas a aprender a manejar la estructura, los recursos y el color, para poder crear tus tipografías y darle la identidad que estás buscando. Además tendrás el bonus para armar palabras y frases!",
+            imagenes: [portadaLetras],
+            link: "https://elclubdelfilete.tiendup.com/curso/3-pilares-de-las-letras-fileteadas",
         },
         {
-            titulo: "Desarrollo Web",
+            titulo: "Membresía",
             duracion: "8 semanas",
             descripcion: "Crea sitios web modernos y funcionales.",
-            imagenes: [logoNavbar],
-            link: "/novedades",
+            imagenes: [portadaMembresia],
+            link: "https://elclubdelfilete.tiendup.com/",
         },
     ];
     const [currentCurso, setCurrentCurso] = useState(cursos[0]);
@@ -53,11 +52,10 @@ export default function Academia() {
             className="flex flex-col relative bg-gradient-to-b from-[#8F272A] to-[#222121] w-full h-[110vh] md:min-h-[70rem] rounded-t-3xl py-20 lg:pt-32 shadow-academia gap-24 md:gap-11 lg:gap-0 md:rounded-t-[3rem] md:pt-24 transition-transform duration-300 -translate-y-12 "
         >
             {/* <h2 className="rye-regular text-[#CDA053] text-3xl text-center">ACADEMIA</h2> */}
-            <article className="flex flex-col min-h-[21.5rem] gap-8 w-4/5  ml-auto md:ml-20 mr-auto md:items-start md:gap-5">
+            <article className="flex flex-col min-h-[21.5rem] gap-8 w-4/5  ml-auto mr-auto md:items-start md:gap-5">
 
                 <h2 className="rye-regular text-[#CDA053] text-3xl text-center uppercase">{currentCurso.titulo}</h2>
-                <img className="absolute h-40 -z-10 right-[3%] lg:right-24 translate-y-4  rounded-full drop-shadow-2xl" src={currentCurso.imagenes[currentCurso.imagenes.length - 1]} alt="Fileteo de Curso Blog" />
-                <div className="w-4/5 md:mt-14">
+                <div className="w-4/5 md:mt-14 md:w-full">
                     <span className="text-base montserrat-normal text-[#fefffba7]">{currentCurso.duracion}</span>
                     <p className="text-base montserrat-normal text-[#FEFFFB] w-full">{currentCurso.descripcion}</p>
                     <div className="mt-12"></div>

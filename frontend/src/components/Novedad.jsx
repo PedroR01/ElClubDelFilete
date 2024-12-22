@@ -23,7 +23,7 @@ export default function Novedad({ novedadUrl, mobile, content }) {
                         {content.title}
                     </h3>
                     <p className="inria-sans-regular text-sm mt-2 line-clamp-3">
-                        Lorem ipsum dolor sit amet consectetur. Amet malesuada quis nunc fermentum. Condimentum a commodo.
+                        {content.description}
                     </p>
                 </div>
             </Link>) : (<Link
