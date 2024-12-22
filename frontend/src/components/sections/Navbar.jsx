@@ -112,7 +112,7 @@ export default function Navbar() {
               </a>
             </li>
             <li>
-              <a href="/" className="nav-link">
+              <a href="/tienda" className="nav-link">
                 Tienda
                 <span className="underline-img"></span>
               </a>
@@ -176,7 +176,7 @@ export default function Navbar() {
             </a>
           </li>
           <li>
-            <a href="/" onClick={toggleSidebar}>
+            <a href="/tienda" onClick={toggleSidebar}>
               Tienda
             </a>
           </li>

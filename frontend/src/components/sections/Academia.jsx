@@ -24,10 +24,10 @@ export default function Academia() {
         },
         {
             titulo: "Membresía",
-            duracion: "8 semanas",
-            descripcion: "Crea sitios web modernos y funcionales.",
+            duracion: "",
+            descripcion: "Bienvenidx a la Membresía del Club del Filete, dentro vas a encontrar el acceso a todos los cursos y las clases gratuitas de instagram! También tendrás acceso a la comunidad de Artistas Latinoamericanos y a la bolsa de trabajo donde podrás ofrecer tus obras al mercado internacional.",
             imagenes: [portadaMembresia],
-            link: "https://elclubdelfilete.tiendup.com/",
+            link: "https://elclubdelfilete.tiendup.com/page/paginapreinscripcion",
         },
     ];
     const [currentCurso, setCurrentCurso] = useState(cursos[0]);

@@ -38,6 +38,7 @@ export default function LandingPage() {
                         text={"Contactame"}
                         btnType={"button"}
                         event={() => openContactModal()}
+                        state={true}
                     />
                 </div>
                 {modal && (<Modal state={(e) => setModal(e)} />)}
@@ -51,7 +52,7 @@ export default function LandingPage() {
 
             {/*Logo de whapp*/}
 
-            <a href="https://wa.me/" target="_blank">
+            <a href="https://wa.me/5492214959043" target="_blank">
                 <img src={logoWP} alt="WhatsApp" className="fixed opacity-60 bottom-7 right-7 w-14 h-14 rounded-full hover:scale-125 hover:shadow-xl hover:opacity-100 transition transform duration-700" />
             </a>
 

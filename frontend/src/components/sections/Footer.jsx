@@ -8,7 +8,7 @@ export default function Footer() {
         <button className="font-bold opacity-65" disabled>Administrador</button>
       </div>
       <div className="w-full md:w-1/3">
-        <p>Contáctanos <span className="font-bold">gpVoltio@gmail.com</span></p>
+        <p>Contáctanos <span className="font-bold">grupovoltio@gmail.com</span></p>
       </div>
       <p className="mt-6">&copy;2024 El Club del Filete. Todos los derechos reservados.</p>
     </footer>
