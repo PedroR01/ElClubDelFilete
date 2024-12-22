@@ -107,7 +107,7 @@ export default function BlogPage() {
                     alt="Caratula de noticia destacada"
                 />
                 <div className="relative mb-8">
-                    <h1 className="flex items-center justify-center rye-regular text-[#CDA053] text-2xl md:text-4xl bg-black bg-opacity-50 py-4 px-6 z-10">
+                    <h1 className="flex items-center justify-center hamston text-[#CDA053] text-2xl md:text-4xl bg-black bg-opacity-50 py-4 px-6 z-10">
                         {novedadTitle}
                     </h1>
                 </div>

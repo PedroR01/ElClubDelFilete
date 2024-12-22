@@ -81,7 +81,7 @@ export default function HistoriaPage() {
                             </defs>
                         </svg>
                         <h3
-                            className="text-3xl md:mt-16  lg:text-4xl lg:mt-5 md:text-nowrap rye-regular text-[#CDA053] 2xl:text-5xl font-bold mb-6 text-center tracking-wider 
+                            className="text-3xl md:mt-16  lg:text-4xl lg:mt-5 md:text-nowrap hamston text-[#CDA053] 2xl:text-5xl font-bold mb-6 text-center tracking-wider 
             opacity-0 animate-fade-in transition duration-700"
                         >
                             HISTORIA DEL FILETE PORTEÑO
@@ -118,7 +118,7 @@ export default function HistoriaPage() {
 
                     <article className="relative flex flex-col z-10 top-20 lg:w-3/5 lg:top-24 h-full items-center text-white md:pl-0 lg:pr-20 px-6">
 
-                        <h3 className="text-3xl md:mt-8 lg:text-4xl lg:mt-5 rye-regular text-[#CDA053] 2xl:text-5xl font-bold mb-6 text-center tracking-wider z-10">
+                        <h3 className="text-3xl md:mt-8 lg:text-4xl lg:mt-5 hamston text-[#CDA053] 2xl:text-5xl font-bold mb-6 text-center tracking-wider z-10">
                             HISTORIA DE CRIS
                         </h3>
 
@@ -159,7 +159,7 @@ export default function HistoriaPage() {
             </div>
             <section className="relative fixed-bg">
                 <article className="pt-20 text-left md:pt-40 md:text-left">
-                    <h3 className="text-4xl justify-self-center rye-regular text-[#CDA053] md:text-6xl font-bold mb-6 lg:ml-20 tracking-wider z-10 brightness-100">El Club Del Filete</h3>
+                    <h3 className="text-4xl justify-self-center hamston text-[#CDA053] md:text-6xl font-bold mb-6 lg:ml-20 tracking-wider z-10 brightness-100">El Club Del Filete</h3>
                     <p className="text-base montserrat-normal text-[#FEFFFB] mt-14 lg:text-lg leading-relaxed max-w-7xl  lg:ml-48 bg-[rgba(0,0,0,.7)] p-6 rounded-lg">El Club del Filete es una <span className="text-[#CDA053]">plataforma online de enseñanza que busca democratizar el acceso a la enseñanza del Filete Porteño,</span> aprovechando las ventajas de la virtualidad para llevar la identidad argentina a todos los rincones del mundo, tanto para los argentinos que se encuentran lejos de su tierra como para el resto del mundo que quiere conocer la Cultura Argentina.
                         La idea surge de la necesidad del público de aprender este arte, por eso me decidí a crear esta plataforma digital de enseñanza que ahora ya es una <span className="text-[#CDA053]">COMUNIDAD FILETEADORA</span></p>
                 </article>

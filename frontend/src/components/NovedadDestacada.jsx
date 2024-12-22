@@ -13,10 +13,10 @@ export default function NovedadDestacada({ novedadUrl, content }) {
                 className="w-full h-full object-cover brightness-50 scale-110 group-hover:scale-100 transition-transform duration-500"
             />
             <div className="absolute bottom-10 left-3 right-3 md:left-9 text-left">
-                <span className="rye-regular text-sm uppercase tracking-wide text-[#af8946]">
+                <span className="hamston text-sm uppercase tracking-wide text-[#af8946]">
                     Investigación
                 </span>
-                <h2 className="rye-regular text-[#CDA053] text-2xl lg:text-3xl mt-2">
+                <h2 className="hamston text-[#CDA053] text-2xl lg:text-3xl mt-2">
                     {content.title}
                 </h2>
                 <p className="line-clamp-3 inria-sans-regular text-sm text-[#FEFFEB] mt-2 lg:block">

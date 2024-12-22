@@ -51,10 +51,10 @@ export default function Academia() {
             id="academia"
             className="flex flex-col relative bg-gradient-to-b from-[#8F272A] to-[#222121] w-full h-[110vh] md:min-h-[70rem] rounded-t-3xl py-20 lg:pt-32 shadow-academia gap-24 md:gap-11 lg:gap-0 md:rounded-t-[3rem] md:pt-24 transition-transform duration-300 -translate-y-12 "
         >
-            {/* <h2 className="rye-regular text-[#CDA053] text-3xl text-center">ACADEMIA</h2> */}
+            {/* <h2 className="hamston text-[#CDA053] text-3xl text-center">ACADEMIA</h2> */}
             <article className="flex flex-col min-h-[21.5rem] gap-8 w-4/5  ml-auto mr-auto md:items-start md:gap-5">
 
-                <h2 className="rye-regular text-[#CDA053] text-3xl text-center uppercase">{currentCurso.titulo}</h2>
+                <h2 className="hamston text-[#CDA053] text-3xl text-center uppercase">{currentCurso.titulo}</h2>
                 <div className="w-4/5 md:mt-14 md:w-full">
                     <span className="text-base montserrat-normal text-[#fefffba7]">{currentCurso.duracion}</span>
                     <p className="text-base montserrat-normal text-[#FEFFFB] w-full">{currentCurso.descripcion}</p>

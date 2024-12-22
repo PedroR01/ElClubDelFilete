@@ -82,7 +82,7 @@ export default function Navbar() {
             </svg>
           </button>
 
-          <ul className="hidden md:flex items-center gap-5 rye-regular text-base text-[#CDA053]">
+          <ul className="hidden md:flex items-center gap-5 hamston text-base text-[#CDA053]">
             <li>
               <a
                 href="#academia"
@@ -112,7 +112,7 @@ export default function Navbar() {
               </a>
             </li>
             <li>
-              <a href="/tienda" className="nav-link">
+              <a href="/tienda" className={`nav-link ${activeRoute === "/tienda" ? "brightness-125 scale-125" : ""}`}>
                 Tienda
                 <span className="underline-img"></span>
               </a>
@@ -151,7 +151,7 @@ export default function Navbar() {
           </svg>
         </button>
 
-        <ul className="flex flex-col items-start gap-6 mt-16 px-6 text-base rye-regular">
+        <ul className="flex flex-col items-start gap-6 mt-16 px-6 text-base hamston">
           <li>
             <a
               href="#academia"

@@ -16,10 +16,10 @@ export default function Novedad({ novedadUrl, mobile, content }) {
                     />
                 </div>
                 <div className="flex flex-col justify-center px-8 my-4 text-left text-[#FEFFEB]">
-                    <span className="rye-regular text-[#af8946] text-sm uppercase tracking-wide mb-4">
+                    <span className="hamston text-[#af8946] text-sm uppercase tracking-wide mb-4">
                         Investigación
                     </span>
-                    <h3 className="rye-regular text-[#CDA053] text-lg lg:text-base mt-2 leading-tight">
+                    <h3 className="hamston text-[#CDA053] text-lg lg:text-base mt-2 leading-tight">
                         {content.title}
                     </h3>
                     <p className="inria-sans-regular text-sm mt-2 line-clamp-3">
@@ -40,10 +40,10 @@ export default function Novedad({ novedadUrl, mobile, content }) {
                 </div>
 
                 <div className="p-4 flex flex-col gap-2">
-                    <span className="rye-regular text-[#af8946] text-sm uppercase tracking-wide">
+                    <span className="hamston text-[#af8946] text-sm uppercase tracking-wide">
                         Investigación
                     </span>
-                    <h2 className="rye-regular text-[#CDA053] text-xl leading-tight">
+                    <h2 className="hamston text-[#CDA053] text-xl leading-tight">
                         {content.title}
                     </h2>
                     <p className="line-clamp-3 inria-sans-regular text-[#FEFFEB] text-sm leading-relaxed">
