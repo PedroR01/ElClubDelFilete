@@ -21,7 +21,7 @@ import hidalgo_cambalanche from "../../img/galeria/hidalgo_cambalache.png";
 import janet_mehl_mafalda from "../../img/galeria/janet_mehl_mafalda.png";
 import jimena_silva_pasionArgentina from "../../img/galeria/jimena_silva_pasionArgentina.png";
 import juanjo_miraballes_elFirulete from "../../img/galeria/juanjo_miraballes_elFirulete.png";
-import karen_alvarado_laParrilla from "../../img/galeria/karen_alvarado_laParrilladeBalto.png";
+import karen_alvarado_laParrilla from "../../img/galeria/karen_alvarado_laParrillaDeBalto.png";
 import laura_caiafa_siempre from "../../img/galeria/laura_caiafa_siempreBuscandoleElPeloAlHuevo.png";
 import lucila_tagliani_esCorta from "../../img/galeria/lucila_tagliani_esCortaLaBocha.png";
 import maria_celia_medeot_oid from "../../img/galeria/maria_celia_medeot_oidMortales.png";
