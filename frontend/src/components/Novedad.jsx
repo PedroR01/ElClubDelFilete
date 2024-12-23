@@ -8,13 +8,16 @@ export default function Novedad({ novedadUrl, mobile, content }) {
                 state={{ content }}
                 className="flex items-center h-1/3 bg-[#3c3228] rounded-lg overflow-hidden shadow-blog-sec group hover:scale-105 transition-transform duration-500"
             >
-                <div className="h-full w-fit">
+                {/* Contenedor de la imagen */}
+                <div className="h-full w-2/5 flex-shrink-0 relative">
                     <img
                         src={content.image}
                         alt={content.title}
-                        className="aspect-3_4 object-cover brightness-75 scale-110"
+                        className="w-full h-full object-cover brightness-75" // Se asegura de llenar el contenedor sin distorsionar
                     />
                 </div>
+
+                {/* Contenido textual */}
                 <div className="flex flex-col justify-center px-8 my-4 text-left text-[#FEFFEB]">
                     <span className="hamston text-[#af8946] text-sm uppercase tracking-wide mb-4">
                         Investigación
@@ -35,7 +38,7 @@ export default function Novedad({ novedadUrl, mobile, content }) {
                     <img
                         src={content.image}
                         alt={content.title}
-                        className="w-full h-full object-cover"
+                        className="w-full h-full object-cover brightness-75"
                     />
                 </div>
 

@@ -1,7 +1,7 @@
 import { useState } from "react";
-import portadaEsencial from "../../img/portadas/club2.jpg";
-import portadaLetras from "../../img/portadas/club6.jpg";
-import portadaMembresia from "../../img/portadas/membresia.webp";
+import portadaEsencial from "../../img/cursos/cursoEsencial.jpg";
+import portadaLetras from "../../img/cursos/letrasPorteñas.jpg";
+import portadaMembresia from "../../img/cursos/membresia.webp";
 import Carousel from "../Carousel";
 import Button from "../Button";
 

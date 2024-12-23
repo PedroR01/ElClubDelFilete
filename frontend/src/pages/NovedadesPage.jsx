@@ -1,10 +1,10 @@
 import Button from "../components/Button";
 import NovedadDestacada from "../components/NovedadDestacada";
 import Novedad from "../components/Novedad";
-import destacadaImage from "../img/portadas/club2.jpg";
-import novedadImage1 from "../img/portadas/club3.jpg";
-import novedadImage2 from "../img/portadas/blog_image.png"; // img unesco
-import novedadImage3 from "../img/portadas/club9.jpg"; // falta
+import destacadaImage from "../img/novedades/generandoHA.jpg";
+import novedadImage1 from "../img/novedades/humildeGuia.jpg";
+import novedadImage2 from "../img/novedades/filetePatrimonioUNESCO.jpg";
+import novedadImage3 from "../img/novedades/pincelesParaFiletear.jpg";
 
 export default function NovedadesPage() {
     const novedadesTitles = {

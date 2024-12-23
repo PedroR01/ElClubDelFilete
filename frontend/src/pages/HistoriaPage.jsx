@@ -1,6 +1,6 @@
 import { useEffect } from "react";
-import portadaHistoriaFilete from "../img/portadas/club14.jpg";
-import portadaHistoriaCris from "../img/portadas/club17.jpg";
+import portadaHistoriaFilete from "../img/historia/historiaFilete.jpg";
+import portadaHistoriaCris from "../img/historia/historiaCris.jpg";
 
 export default function HistoriaPage() {
 
