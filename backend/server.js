@@ -23,7 +23,7 @@ app.post("/api/submit", (req, res) => {
   (async function () {
     const { data, error } = await resend.emails.send({
       from: "Acme <onboarding@resend.dev>",
-      to: ["massimoparzanese@gmail.com"],
+      to: ["peporobinet01@gmail.com"],
       subject: "Consulta",
       html: `<p>Hola mi nombre es ${nombre}, ${descripcion}  </p>
              <p>Mi email de contacto ${email}</p>`,
