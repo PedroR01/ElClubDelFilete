@@ -52,11 +52,6 @@ export default function Galeria() {
   { id: 13, src: fabio_correa_andaACantarleAGardel, autor: "Fabio Rodolfo Correa", titulo: "Anda a cantarle a Gardel" },
   { id: 14, src: graciela_chaile_puente, autor: "Graciela del Carmen Chaile", titulo: "Puente" },
   { id: 15, src: hector_villarino_bajoDeTobias, autor: "Héctor Villarino", titulo: "Bajo de Tobías" },
-  { id: 2, src: hector_villarino_magicamenteMessi, autor: "Héctor Villarino", titulo: "Magicamente Messi" },
-  { id: 3, src: hidalgo_cambalanche, autor: "Luis Alberto Hidalgo", titulo: "Cambalache" },
-  { id: 4, src: janet_mehl_mafalda, autor: "Janet Inés Mehi", titulo: "Mafalda" },
-  { id: 5, src: jimena_silva_pasionArgentina, autor: "Jimena Silva", titulo: "Pasión Argentina" },
-  { id: 6, src: juanjo_miraballes_elFirulete, autor: "Juanjo Miraballes", titulo: "El Firulete..." },
   { id: 16, src: karen_alvarado_laParrilla, autor: "Karen Alvarado Zamora", titulo: "La Parrilla de Balto" },
   { id: 17, src: laura_caiafa_siempre, autor: "Laura Caiafa", titulo: "Siempre buscándole el pelo al huevo" },
   { id: 18, src: lucila_tagliani_esCorta, autor: "Lucila Tagliani", titulo: "Es corta la bocha" },
@@ -72,6 +67,11 @@ export default function Galeria() {
   { id: 28, src: skarek_lograr, autor: "Sandra Paola Skarek", titulo: "Lograr" },
   { id: 29, src: veronica_garcia_descubriendoElArte, autor: "Verónica García", titulo: "Descubriendo el arte cada día" },
   { id: 30, src: zavalla_laAmistad, autor: "Graciela Edith Zavalla", titulo: "La Amistad" },
+  { id: 31, src: hector_villarino_magicamenteMessi, autor: "Héctor Villarino", titulo: "Magicamente Messi" },
+  { id: 32, src: hidalgo_cambalanche, autor: "Luis Alberto Hidalgo", titulo: "Cambalache" },
+  { id: 33, src: janet_mehl_mafalda, autor: "Janet Inés Mehi", titulo: "Mafalda" },
+  { id: 34, src: jimena_silva_pasionArgentina, autor: "Jimena Silva", titulo: "Pasión Argentina" },
+  { id: 35, src: juanjo_miraballes_elFirulete, autor: "Juanjo Miraballes", titulo: "El Firulete..." },
   ]
   const [cantVisible, setCant] = useState(16);
   const [verMas, setVerMas] = useState(false);

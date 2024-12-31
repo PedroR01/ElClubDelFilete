@@ -59,7 +59,7 @@ export default function Modal({ state }) {
 
   const sendData = async ({ nombre, email, descripcion }) => {
     try {
-      await fetch('https://mi-backend.vercel.app/api/submit', {
+      await fetch('https://club-filete-backend.vercel.app/api/submit', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ nombre, email, descripcion })

@@ -10,7 +10,11 @@ dotenv.config();
 
 const resend = new Resend(process.env.VITE_RESEND_API_KEY);
 
-app.use(cors());
+app.use(
+  cors({
+    origin: "https://elclubdelfilete.com.ar",
+  })
+);
 app.use(bodyParser.json()); // Para leer el cuerpo de las solicitudes POST
 
 app.post("/api/submit", (req, res) => {

@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet-async";
 import Button from "../components/Button";
 import NovedadDestacada from "../components/NovedadDestacada";
 import Novedad from "../components/Novedad";
@@ -133,37 +134,47 @@ export default function NovedadesPage() {
     ];
 
     return (
-        <section className="w-full bg-[#8F272A] py-24 md:py-36">
-            {/* Contenedor principal */}
-            <div className="grid grid-cols-7 grid-rows-3 gap-4 lg:gap-6 w-full md:w-11/12 md:justify-self-center h-96 lg:h-[80vh]">
-                {/* Noticia principal */}
-                <NovedadDestacada novedadUrl={novedadesRef[0].url} content={novedadesRef[0]} />
-                {/* Noticias secundarias para desktop */}
-                <div className="hidden lg:flex flex-col col-span-3 row-span-3 gap-6">
+        <>
+            <Helmet>
+                <title>Novedades</title>
+                <meta
+                    name="description"
+                    content="¡Mantenete al tanto de las noticias y recursos del Filete Porteño de la mano de El Club del Filete!"
+                />
+                <link rel="canonical" href="/novedades" />
+            </Helmet>
+            <section className="w-full bg-[#8F272A] py-24 md:py-36">
+                {/* Contenedor principal */}
+                <div className="grid grid-cols-7 grid-rows-3 gap-4 lg:gap-6 w-full md:w-11/12 md:justify-self-center h-96 lg:h-[80vh]">
+                    {/* Noticia principal */}
+                    <NovedadDestacada novedadUrl={novedadesRef[0].url} content={novedadesRef[0]} />
+                    {/* Noticias secundarias para desktop */}
+                    <div className="hidden lg:flex flex-col col-span-3 row-span-3 gap-6">
+                        {novedadesRef.filter((news) => news.id !== 0).map((news) => (
+                            <Novedad novedadUrl={news.url}
+                                content={news}
+                                mobile={false} />
+                        ))}
+                    </div>
+                </div>
+
+                {/* Noticias secundarias para mobile (slider) */}
+                <div className="flex lg:hidden overflow-x-scroll gap-4 p-4">
                     {novedadesRef.filter((news) => news.id !== 0).map((news) => (
-                        <Novedad novedadUrl={news.url}
-                            content={news}
-                            mobile={false} />
+                        <Novedad novedadUrl={news.url} content={news} mobile={true} />
                     ))}
                 </div>
-            </div>
 
-            {/* Noticias secundarias para mobile (slider) */}
-            <div className="flex lg:hidden overflow-x-scroll gap-4 p-4">
-                {novedadesRef.filter((news) => news.id !== 0).map((news) => (
-                    <Novedad novedadUrl={news.url} content={news} mobile={true} />
-                ))}
-            </div>
-
-            <div className="justify-self-center mt-32">
-                <Button
-                    text="Ver Más"
-                    btnType={"button"}
-                    bgColor="bg-[#DDAA58]"
-                    textColor="text-[#8B2A1F]"
-                    state={true}
-                />
-            </div>
-        </section>
+                <div className="justify-self-center mt-32">
+                    <Button
+                        text="Ver Más"
+                        btnType={"button"}
+                        bgColor="bg-[#DDAA58]"
+                        textColor="text-[#8B2A1F]"
+                        state={true}
+                    />
+                </div>
+            </section>
+        </>
     );
 }

@@ -3,23 +3,8 @@
 @tailwind utilities;
 
 @font-face {
-  font-family: "Free_Pen";
-  src: url("./assets/fonts/Free_Pen.otf") format("otf"),
-    url("./assets/fonts/Free_Pen.ttf") format("truetype");
-  font-weight: normal;
-  font-style: normal;
-}
-
-@font-face {
   font-family: "Hamston";
   src: url("./assets/fonts/Hamston.ttf") format("truetype");
-  font-weight: bold;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: "LOVES";
-  src: url("./assets/fonts/LOVES.ttf") format("truetype");
   font-weight: bold;
   font-style: normal;
 }
@@ -88,24 +73,6 @@
 
 .nav-link:hover .underline-img {
   transform: translateX(-50%) scaleX(1); /* Muestra la imagen al hacer hover */
-}
-
-.rye-regular {
-  font-family: "Rye", serif;
-  font-weight: 400;
-  font-style: normal;
-}
-
-.free-pen {
-  font-family: "Free_Pen", normal;
-  font-weight: 400;
-  font-style: normal;
-}
-
-.loves {
-  font-family: "LOVES", normal;
-  font-weight: 400;
-  font-style: normal;
 }
 
 .hamston {
