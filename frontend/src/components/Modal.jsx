@@ -59,11 +59,14 @@ export default function Modal({ state }) {
 
   const sendData = async ({ nombre, email, descripcion }) => {
     try {
-      await fetch('https://club-filete-backend.vercel.app/api/submit', {
+      const response = await fetch('https://club-filete-backend.vercel.app/api/submit', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ nombre, email, descripcion })
       });
+      if (!response.ok) {
+        throw new Error('Error al enviar el formulario');
+      }
     } catch (error) {
       console.error('Error al enviar el mensaje:', error);
     }
