@@ -3,38 +3,72 @@ import express from "express";
 import cors from "cors";
 import bodyParser from "body-parser";
 import { Resend } from "resend";
+
 const app = express();
 const PORT = process.env.PORT || 3001;
 
 dotenv.config();
-
-const resend = new Resend(process.env.VITE_RESEND_API_KEY);
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 app.use(
   cors({
     origin: "https://elclubdelfilete.com.ar",
+    methods: ["POST"],
   })
 );
-app.use(bodyParser.json()); // Para leer el cuerpo de las solicitudes POST
+app.use(bodyParser.json());
 
-app.post("/api/submit", (req, res) => {
-  const { nombre, email, descripcion } = req.body;
+app.post("/api/submit", async (req, res) => {
+  try {
+    const { nombre, email, descripcion } = req.body;
 
-  (async function () {
+    if (!nombre || !email || !descripcion) {
+      return res
+        .status(400)
+        .json({ error: "Todos los campos son obligatorios" });
+    }
+
+    if (!/^[A-Za-z\s]+$/.test(nombre)) {
+      return res.status(400).json({ error: "Nombre inválido" });
+    }
+
+    if (!/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/.test(email)) {
+      return res.status(400).json({ error: "Email inválido" });
+    }
+
+    if (descripcion.length > 200) {
+      return res
+        .status(400)
+        .json({ error: "La descripción es demasiado larga" });
+    }
+
     const { data, error } = await resend.emails.send({
-      from: "Acme <onboarding@resend.dev>",
-      to: ["peporobinet01@gmail.com"],
+      from: `${nombre} <contacto@elclubdelfilete.com.ar>`,
+      to: "peporobinet01@gmail.com",
       subject: "Consulta",
-      html: `<p>Hola mi nombre es ${nombre}, ${descripcion}  </p>
-             <p>Mi email de contacto ${email}</p>`,
+      html: `<p>Hola, mi nombre es ${nombre}. ${descripcion}</p>
+                 <p>Mi email de contacto es: ${email}</p>`,
     });
 
     if (error) {
-      return console.error({ error });
+      console.error(error);
+      return res.status(500).json({ error: "Error enviando el correo" });
     }
 
-    console.log({ data });
-  })();
+    return res
+      .status(200)
+      .json({ message: "Correo enviado exitosamente", data });
+  } catch (e) {
+    console.error(e);
+    return res
+      .status(500)
+      .json({ error: "Error en el servidor", details: e.message });
+  }
+});
+
+// Ruta para manejar cualquier otra solicitud (404)
+app.use((req, res) => {
+  res.status(404).send("<h1>Recurso no encontrado</h1>");
 });
 
 app.listen(PORT, () => {
