@@ -13,10 +13,34 @@ const resend = new Resend(process.env.RESEND_API_KEY);
 app.use(
   cors({
     origin: "https://elclubdelfilete.com.ar",
-    methods: ["POST"],
   })
 );
 app.use(bodyParser.json());
+
+app.get("/", (req, res) => {
+  const htmlResponse = `
+    <html>
+      <head>
+        <title>NodeJs y Express en Vercel</title>
+      </head>
+      <body>
+        <h1>Soy un proyecto Back end en vercel</h1>
+      </body>
+    </html>
+  `;
+  res.send(htmlResponse);
+});
+
+app.get("/api/submit", (req, res) => {
+  const htmlResponse = `
+    <html>
+      <body>
+        <h1>Esta es la dirección donde se comúnica con la API Resend.</h1>
+      </body>
+    </html>
+  `;
+  res.send(htmlResponse);
+});
 
 app.post("/api/submit", async (req, res) => {
   try {
@@ -41,7 +65,7 @@ app.post("/api/submit", async (req, res) => {
         .status(400)
         .json({ error: "La descripción es demasiado larga" });
     }
-
+    // contacto@elclubdelfilete.com.ar
     const { data, error } = await resend.emails.send({
       from: `${nombre} <contacto@elclubdelfilete.com.ar>`,
       to: "peporobinet01@gmail.com",
