@@ -1,4 +1,6 @@
 import dotenv from "dotenv";
+import { fileURLToPath } from "url";
+import path from "path";
 import express from "express";
 import cors from "cors";
 import bodyParser from "body-parser";
@@ -7,12 +9,17 @@ import { Resend } from "resend";
 const app = express();
 const PORT = process.env.PORT || 3001;
 
-dotenv.config();
+// Simula la variable global de dirección dinámica `__dirname` de CommonJS en módulos ES
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+dotenv.config({ path: path.resolve(__dirname, ".env") });
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 app.use(
   cors({
     origin: "https://elclubdelfilete.com.ar",
+    methods: ["POST", "GET"],
   })
 );
 app.use(bodyParser.json());
