@@ -51,7 +51,6 @@ export default function LandingPage() {
                             state={false}
                         />
                     </div>
-                    {modal && (<Modal state={(e) => setModal(e)} />)}
                 </section>
                 <Academia />
                 <section id="galería" className="pt-20 bg-[#222121]">
@@ -60,12 +59,12 @@ export default function LandingPage() {
                     <Galeria />
                 </section>
 
-                {/*Logo de whapp*/}
-
                 <a href="https://wa.me/5492214959043" target="_blank">
                     <img src={logoWP} alt="WhatsApp" className="fixed opacity-60 bottom-7 right-7 w-14 h-14 rounded-full hover:scale-125 hover:shadow-xl hover:opacity-100 transition transform duration-700" />
                 </a>
 
+                {/* Formulario de contacto */}
+                {modal && (<Modal state={(e) => setModal(e)} />)}
             </div>
         </>
     );
