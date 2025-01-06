@@ -137,7 +137,7 @@ export default function HistoriaPage() {
                             HISTORIA DE CRIS
                         </h3>
                         {/* md -36 lg - 40 xk */}
-                        <svg className="hidden absolute  md:block inset-0 object-cover h-auto scale-110 md:w-[800px] md:-translate-x-36  lg:w-[880px] lg:-translate-x-40  xl:w-[1030px] xl:-translate-x-20 2xl:w-[1070px] lg:-top-2" viewBox="0 0 1188 1056" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <svg className="hidden absolute  md:block inset-0 object-cover h-auto scale-110 md:w-[800px] md:-translate-x-36  lg:w-[880px] lg:-translate-x-40  xl:w-[1010px] xl:-translate-x-24 2xl:w-[1170px] 2xl:-translate-x-8 lg:-top-2" viewBox="0 0 1188 1056" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <g filter="url(#filter0_d_872_24)">
                                 <path d="M475.656 62.5004C242.446 6.4911 -87.8436 -29.5 63.1564 280C223.74 609.143 451.156 801 603.156 961C773.217 1123.01 1100.66 959.5 1100.66 748.5C1116.47 515.129 1187.67 343.554 1153.25 214.998C1150.28 203.916 1147.77 192.318 1146.25 180.947C1104.99 -127.561 704.664 117.5 475.656 62.5004Z" fill="#8F272A" />
                             </g>
