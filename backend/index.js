@@ -72,10 +72,10 @@ app.post("/api/submit", async (req, res) => {
         .status(400)
         .json({ error: "La descripción es demasiado larga" });
     }
-    // contacto@elclubdelfilete.com.ar
+
     const { data, error } = await resend.emails.send({
       from: `${nombre} <contacto@elclubdelfilete.com.ar>`,
-      to: "peporobinet01@gmail.com",
+      to: "elclubdelfilete@gmail.com",
       subject: "Consulta",
       html: `<p>Hola, mi nombre es ${nombre}. ${descripcion}</p>
                  <p>Mi email de contacto es: ${email}</p>`,
@@ -83,7 +83,11 @@ app.post("/api/submit", async (req, res) => {
 
     if (error) {
       console.error(error);
-      return res.status(500).json({ error: "Error enviando el correo" });
+      return res.status(error.code).json({
+        title: "Error con API al intentar enviar el mail",
+        error: error.name,
+        description: error.message,
+      });
     }
 
     return res
@@ -93,7 +97,7 @@ app.post("/api/submit", async (req, res) => {
     console.error(e);
     return res
       .status(500)
-      .json({ error: "Error en el servidor", details: e.message });
+      .json({ error: "Error en el servidor", description: e.message });
   }
 });
 
