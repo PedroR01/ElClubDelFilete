@@ -102,7 +102,7 @@ export default function BlogPage() {
             <article className="w-full max-w-3xl mx-auto px-4">
                 {/* Imagen principal */}
                 <img
-                    className="absolute w-full h-72 left-0 -top-2 object-cover rounded-lg shadow-md brightness-50 md:scale-110"
+                    className="absolute w-full h-72 left-0 -top-2 object-cover rounded-lg shadow-md brightness-50"
                     src={content.image}
                     alt="Caratula de noticia destacada"
                 />

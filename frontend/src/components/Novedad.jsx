@@ -19,8 +19,8 @@ export default function Novedad({ novedadUrl, mobile, content }) {
 
                 {/* Contenido textual */}
                 <div className="flex flex-col justify-center px-8 my-4 text-left text-[#FEFFEB]">
-                    <span className="hamston text-[#af8946] text-sm uppercase tracking-wide mb-4">
-                        Investigación
+                    <span className="hamston text-sm w-fit uppercase tracking-wide text-[#CDA053] p-1 border-2 rounded-lg border-[#CDA053] brightness-90 mb-4">
+                        {content.tag}
                     </span>
                     <h3 className="hamston text-[#CDA053] text-lg lg:text-base mt-2 leading-tight">
                         {content.title}
@@ -43,8 +43,8 @@ export default function Novedad({ novedadUrl, mobile, content }) {
                 </div>
 
                 <div className="p-4 flex flex-col gap-2">
-                    <span className="hamston text-[#af8946] text-sm uppercase tracking-wide">
-                        Investigación
+                    <span className="hamston text-sm uppercase tracking-wide text-[#CDA053] p-1 border-2 rounded-lg border-[#CDA053] brightness-90">
+                        {content.tag}
                     </span>
                     <h2 className="hamston text-[#CDA053] text-xl leading-tight">
                         {content.title}

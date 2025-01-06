@@ -43,7 +43,7 @@ export default function LandingPage() {
                     <div className="flex flex-col w-4/5 gap-8 items-center justify-center md:justify-normal md:items-start md:w-[70%] lg:w-3/5 md:mt-auto  md:mb-20 lg:mb-40 md:ml-20 lg:pt-28">
 
                         <h1 className="hamston text-[#CDA053] text-5xl text-center lg:mb-8">EL CLUB <span className="text-[#CDA053]">DEL FILETE</span></h1>
-                        <p className="inria-sans-regular text-[#FEFFEB] text-base tracking-wide leading-normal  md:text-xl md:leading-10 md:tracking-wider md:w-3/4 lg:w-2/3">Bienvenidxs a la Comunidad más grande del mundo dedicada al Filete Porteño y al arte Latinoamericano, dentro van a encontrar la Primer Academia Virtual de Filete Porteño y acceder a obras originales hechas para ustedes totalmente personalizadas.</p>
+                        <p className="inria-sans-regular text-[#FEFFEB] text-base tracking-wide leading-normal  md:text-xl md:leading-10 md:tracking-wider md:w-3/4 lg:w-2/3">Bienvenidxs a la Primera Comunidad Online dedicada al Filete Porteño y al Arte Latinoamericano, donde nace la Primera Academia Virtual de Filete, llevando esta poderosa técnica a todos los rincones del Mundo.</p>
                         <Button
                             text={"Contactame"}
                             btnType={"button"}

@@ -35,6 +35,7 @@ export default function NovedadesPage() {
     const novedadesRef = [
         {
             id: 0,
+            tag: "Mentalidad",
             title: `${novedadesTitles.destacada}`,
             description: "Beneficios del Arte en las personas",
             image: getBlogImage(0),
@@ -73,6 +74,7 @@ export default function NovedadesPage() {
         },
         {
             id: 1,
+            tag: "Mentalidad",
             title: `${novedadesTitles.sec1}`,
             description: "Material de texto descargable orientado a servir como una humilde guía para potenciar el uso de tus redes como artista",
             image: getBlogImage(1),
@@ -82,6 +84,7 @@ export default function NovedadesPage() {
         },
         {
             id: 2,
+            tag: "Investigacion",
             title: `${novedadesTitles.sec2}`,
             description: "¿Sabías que el Filete Porteño es Patrimonio Cultural Inmaterial de la Humanidad?",
             image: getBlogImage(2),
@@ -122,6 +125,7 @@ export default function NovedadesPage() {
         },
         {
             id: 3,
+            tag: "Investigacion",
             title: `${novedadesTitles.sec3}`,
             description: "La historía e importancia en la elección del pincel para los trazos en el Filete Porteño",
             image: getBlogImage(3),
