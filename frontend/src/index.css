@@ -2,6 +2,22 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: "Hamston";
+  src: url("./assets/fonts/Hamston.ttf") format("truetype");
+  font-weight: bold;
+  font-style: normal;
+}
+
+.magicpattern {
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center center;
+  background-repeat: repeat;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='2000' height='1400'%3E%3Cpath fill='%238F272A' d='M0 0h2000v1400H0z'/%3E%3Cpath fill='%232F0C0D' d='M0 700c85.907 35.492 171.813 70.985 250 60 78.187-10.985 148.654-68.446 234-100 85.346-31.554 185.572-37.201 271-32 85.428 5.201 156.06 21.25 240 49s181.19 67.201 263 87c81.81 19.799 148.18 19.946 228-5s173.092-74.985 261-89c87.908-14.015 170.454 7.992 293 30l-40 700H0Z'/%3E%3C/svg%3E");
+}
+
 .intro {
   background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
     url("../src/img/introClub.gif");
@@ -18,7 +34,7 @@
 /* Imagen de fondo Historia */
 .fixed-bg {
   background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
-    url("../src/img/portadas/club11.jpg");
+    url("../src/img/historia/historiaClub.jpg");
   min-height: 800px;
   background-attachment: fixed;
   background-position: center;
@@ -59,8 +75,8 @@
   transform: translateX(-50%) scaleX(1); /* Muestra la imagen al hacer hover */
 }
 
-.rye-regular {
-  font-family: "Rye", serif;
+.hamston {
+  font-family: "Hamston", normal;
   font-weight: 400;
   font-style: normal;
 }
@@ -94,7 +110,17 @@
   font-style: normal;
 }
 
+html {
+  height: 100%;
+  box-sizing: border-box;
+}
+
 body {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  box-sizing: inherit;
+  min-height: 100%;
   margin: 0;
   background-color: rgb(34 33 33);
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",

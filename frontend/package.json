@@ -2,7 +2,7 @@
   "homepage": "./",
   "name": "el_club_del_filete",
   "private": true,
-  "version": "0.1.0",
+  "version": "1.0.0",
   "type": "module",
   "dependencies": {
     "@gsap/react": "^2.1.1",
@@ -26,8 +26,9 @@
   "dependencies": {
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
+    "react-helmet-async": "^2.0.5",
     "react-router-dom": "^6.27.0",
-    "react-scripts": "5.0.1"
+    "react-scripts": "^5.0.1"
   },
   "devDependencies": {
     "@eslint/js": "^9.15.0",

@@ -8,22 +8,25 @@ export default function Novedad({ novedadUrl, mobile, content }) {
                 state={{ content }}
                 className="flex items-center h-1/3 bg-[#3c3228] rounded-lg overflow-hidden shadow-blog-sec group hover:scale-105 transition-transform duration-500"
             >
-                <div className="h-full w-fit">
+                {/* Contenedor de la imagen */}
+                <div className="h-full w-2/5 flex-shrink-0 relative">
                     <img
                         src={content.image}
                         alt={content.title}
-                        className="aspect-3_4 object-cover brightness-75 scale-110"
+                        className="w-full h-full object-cover brightness-75" // Se asegura de llenar el contenedor sin distorsionar
                     />
                 </div>
+
+                {/* Contenido textual */}
                 <div className="flex flex-col justify-center px-8 my-4 text-left text-[#FEFFEB]">
-                    <span className="rye-regular text-[#af8946] text-sm uppercase tracking-wide mb-4">
-                        Investigación
+                    <span className="hamston text-sm w-fit uppercase tracking-wide text-[#CDA053] p-1 border-2 rounded-lg border-[#CDA053] brightness-90 mb-4">
+                        {content.tag}
                     </span>
-                    <h3 className="rye-regular text-[#CDA053] text-lg lg:text-base mt-2 leading-tight">
+                    <h3 className="hamston text-[#CDA053] text-lg lg:text-base mt-2 leading-tight">
                         {content.title}
                     </h3>
                     <p className="inria-sans-regular text-sm mt-2 line-clamp-3">
-                        Lorem ipsum dolor sit amet consectetur. Amet malesuada quis nunc fermentum. Condimentum a commodo.
+                        {content.description}
                     </p>
                 </div>
             </Link>) : (<Link
@@ -35,19 +38,19 @@ export default function Novedad({ novedadUrl, mobile, content }) {
                     <img
                         src={content.image}
                         alt={content.title}
-                        className="w-full h-full object-cover"
+                        className="w-full h-full object-cover brightness-75"
                     />
                 </div>
 
                 <div className="p-4 flex flex-col gap-2">
-                    <span className="rye-regular text-[#af8946] text-sm uppercase tracking-wide">
-                        Investigación
+                    <span className="hamston text-sm uppercase tracking-wide text-[#CDA053] p-1 border-2 rounded-lg border-[#CDA053] brightness-90">
+                        {content.tag}
                     </span>
-                    <h2 className="rye-regular text-[#CDA053] text-xl leading-tight">
+                    <h2 className="hamston text-[#CDA053] text-xl leading-tight">
                         {content.title}
                     </h2>
                     <p className="line-clamp-3 inria-sans-regular text-[#FEFFEB] text-sm leading-relaxed">
-                        Lorem ipsum dolor sit amet consectetur. Amet malesuada quis nunc fermentum. Condimentum a commodo.
+                        {content.description}
                     </p>
                 </div>
             </Link>)
