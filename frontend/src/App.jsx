@@ -6,7 +6,7 @@ import Tienda from "./pages/TiendaPage"
 import Novedades from "./pages/NovedadesPage";
 import Blog from "./pages/novedades/BlogPage";
 import Footer from "./components/sections/Footer"
-
+import Registro from "./pages/Registro";
 export default function App() {
   return (
     <>
@@ -17,6 +17,7 @@ export default function App() {
         <Route path="/tienda" element={<Tienda />}></Route>
         <Route path="/novedades" element={<Novedades />}></Route>
         <Route path="/novedades/:slug" element={<Blog />}></Route>
+        <Route path="/registro" element={<Registro />} />
       </Routes>
       <Footer />
     </>

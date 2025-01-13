@@ -5,7 +5,7 @@ import express from "express";
 import cors from "cors";
 import bodyParser from "body-parser";
 import { Resend } from "resend";
-
+import { UserRepository } from './user-repository.js' 
 const app = express();
 const PORT = process.env.PORT || 3001;
 
@@ -18,7 +18,7 @@ const resend = new Resend(process.env.RESEND_API_KEY);
 
 app.use(
   cors({
-    origin: "https://elclubdelfilete.com.ar",
+    origin: ["https://elclubdelfilete.com.ar", "http://localhost:5173", "http://localhost:3001"],
     methods: ["POST", "GET"],
   })
 );
@@ -98,6 +98,34 @@ app.post("/api/submit", async (req, res) => {
     return res
       .status(500)
       .json({ error: "Error en el servidor", description: e.message });
+  }
+});
+
+
+app.post("/api/login", async (req,res) => {
+  try{
+    const { username, password } = req.body;
+    console.log(username, password);
+    const user = await UserRepository.login({ username, password} );
+    res.send({user});
+  }
+  catch (e){
+    res.status(400).send(e.message);
+  }
+});
+
+app.post("/api/register", async (req,res) => {
+  
+  try{
+   const { username, password } = req.body;
+   console.log(username, password);
+   // utilizo el repository para modularizar y facilitar la legibilidad
+   const id = await UserRepository.create({ username, password} );
+   console.log("Usuario creado con ID:", id);
+   res.send({ id });
+  }
+  catch (e) {
+    res.status(400).send(e.message);
   }
 });
 
