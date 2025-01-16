@@ -154,18 +154,19 @@ export default function NovedadesPage() {
                     <NovedadDestacada novedadUrl={novedadesRef[0].url} content={novedadesRef[0]} />
                     {/* Noticias secundarias para desktop */}
                     <div className="hidden lg:flex flex-col col-span-3 row-span-3 gap-6">
-                        {novedadesRef.filter((news) => news.id !== 0).map((news) => (
+                        {novedadesRef.filter((news) => news.id !== 0).map((news, index) => (
                             <Novedad novedadUrl={news.url}
                                 content={news}
-                                mobile={false} />
+                                mobile={false}
+                                key={index} />
                         ))}
                     </div>
                 </div>
 
                 {/* Noticias secundarias para mobile (slider) */}
                 <div className="flex lg:hidden overflow-x-scroll gap-4 p-4">
-                    {novedadesRef.filter((news) => news.id !== 0).map((news) => (
-                        <Novedad novedadUrl={news.url} content={news} mobile={true} />
+                    {novedadesRef.filter((news) => news.id !== 0).map((news, index) => (
+                        <Novedad novedadUrl={news.url} content={news} mobile={true} key={index} />
                     ))}
                 </div>
 

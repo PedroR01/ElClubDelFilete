@@ -112,9 +112,9 @@ export default function HistoriaPage() {
                                     resistencia y la creatividad de Buenos Aires. </span>
                             </p>
                         </article>
-
+                        {/* c8953c */}
                         <img
-                            className="hidden object-cover bg-center h-auto md:block md:w-[30vw]  2xl:w-5/12 opacity-0 translate-y-[30px] animate-fade-in transition duration-1000"
+                            className="hidden object-cover bg-center h-auto border-2 rounded-xl border-[#2f0c0d] md:block md:w-[30vw]  2xl:w-5/12 opacity-0 translate-y-[30px] animate-fade-in transition duration-1000"
                             src={portadaHistoriaFilete}
                             alt="Cristian diseñando una pieza"
                         />
@@ -129,7 +129,7 @@ export default function HistoriaPage() {
                 </div>
                 <section className="flex w-full justify-between pb-60 md:pb-[28rem] md:pt-20">
 
-                    <img className="hidden object-cover md:block md:w-1/4 md:ml-20 z-30" src={portadaHistoriaCris} alt="Cristian diseñando una pieza" />
+                    <img className="hidden object-cover border-2 rounded-xl border-[#8F272A] md:block md:w-1/4 md:ml-20 z-30" src={portadaHistoriaCris} alt="Cristian diseñando una pieza" />
 
                     <article className="relative flex flex-col z-10 top-20 lg:w-3/5 lg:top-24 h-full items-center text-white md:pl-0 lg:pr-20 px-6">
 

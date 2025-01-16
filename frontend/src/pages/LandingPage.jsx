@@ -5,10 +5,16 @@ import Button from "../components/Button";
 import Galeria from "../components/sections/Galeria";
 import { useState } from "react";
 import Academia from "../components/sections/Academia";
-import logoWP from "../img/logos/wp.png"
+import logoWP from "../img/logos/wp.png";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(useGSAP, ScrollTrigger);
 
 export default function LandingPage() {
     const [modal, setModal] = useState(false);
+    const [galerySections, setGalerySections] = useState(1);
 
     // Bloquear/desbloquear el scroll al abrir/cerrar el modal
     useEffect(() => {
@@ -28,14 +34,58 @@ export default function LandingPage() {
         setModal(true);
     };
 
-    useGSAP(() => {
-        gsap.from(".intro", {
-            x: -200, opacity: 0.3, duration: 1, ease: "power1.inOut"
-        });
-        gsap.from(".cursos", {
-            x: -50, y: 100, scrollTrigger: { trigger: ".cursos", scrub: true }
-        });
+    // helper function for causing the sections to always snap in the direction of the scroll (next section) rather than whichever section is "closest" when scrolling stops.
+    const directionalSnap = (increment) => {
+        let snapFunc = gsap.utils.snap(increment);
+        return (raw, self) => {
+            let n = snapFunc(raw);
+            return Math.abs(n - raw) < 1e-4 || (n < raw) === self.direction < 0 ? n : self.direction < 0 ? n - increment : n + increment;
+        };
+    }
 
+    useGSAP(() => {
+        gsap.from(".animate-intro", {
+            x: -200, opacity: 0, duration: 1.5, ease: "power1.inOut",
+            scrollTrigger: { trigger: ".title-intro", toggleActions: "play reverse restart none" }
+        });
+        gsap.to("#academia", {
+            y: -250,
+            scrollTrigger: { trigger: "#academia", scrub: true }
+        });
+        gsap.from(".course-animation", {
+            y: 200, opacity: 0, duration: .5, ease: "power1.inOut",
+            scrollTrigger: { trigger: ".title", toggleActions: "play reverse restart reverse" }
+        })
+        gsap.from(".carousel-animation", {
+            scaleY: 0,
+            ease: "power1.inOut",
+            duration: .75,
+            scrollTrigger: { trigger: ".title", toggleActions: "play reverse restart reverse" }
+        })
+        // Scroll horizontal galeria
+        // let scrollTween = gsap.to("#galería", {
+        //     xPercent: -100 * (galerySections),
+        //     ease: "none",
+        //     scrollTrigger: {
+        //         trigger: "#galería",
+        //         pin: true,
+        //         scrub: 0.1,
+        //         // snap: directionalSnap(1 / galerySections),
+        //         snap: .2,
+        //         end: "+=3000"
+        //     }
+        // });
+        // gsap.to(".gallery-section", {
+        //     duration: 4,
+        //     ease: "elastic",
+        //     scrollTrigger: {
+        //         trigger: ".gallery-section",
+        //         containerAnimation: scrollTween,
+        //         start: "left center",
+        //         toggleActions: "play none none reset",
+        //         id: "1",
+        //     }
+        // });
     }, []);
 
     return (
@@ -49,10 +99,10 @@ export default function LandingPage() {
                 <link rel="canonical" href="/" />
             </Helmet>
             <div className="overflow-hidden">
-                <section className="flex relative intro justify-center md:justify-normal  md:min-h-[40rem]">
-                    <div className="flex flex-col w-4/5 gap-8 items-center justify-center md:justify-normal md:items-start md:w-[70%] lg:w-3/5 md:mt-auto  md:mb-20 lg:mb-40 md:ml-20 lg:pt-28">
+                <section className="intro flex relative justify-center md:justify-normal  md:min-h-[40rem]">
+                    <div className="animate-intro flex flex-col w-4/5 gap-8 items-center justify-center md:justify-normal md:items-start md:w-[70%] lg:w-3/5 md:mt-auto  md:mb-20 lg:mb-40 md:ml-20 lg:pt-28">
 
-                        <h1 className="hamston text-[#CDA053] text-5xl text-center lg:mb-8">EL CLUB <span className="text-[#CDA053]">DEL FILETE</span></h1>
+                        <h1 className="title-intro hamston text-[#CDA053] text-5xl text-center lg:mb-8">EL CLUB <span className="text-[#CDA053]">DEL FILETE</span></h1>
                         <p className="inria-sans-regular text-[#FEFFEB] text-base tracking-wide leading-normal  md:text-xl md:leading-10 md:tracking-wider md:w-3/4 lg:w-2/3">Bienvenidxs a la Primera Comunidad Online dedicada al Filete Porteño y al Arte Latinoamericano, donde nace la Primera Academia Virtual de Filete, llevando esta poderosa técnica a todos los rincones del Mundo.</p>
                         <Button
                             text={"Contactame"}
@@ -63,11 +113,7 @@ export default function LandingPage() {
                     </div>
                 </section>
                 <Academia />
-                <section id="galería" className="pt-20 bg-[#222121]">
-                    <h2 className="hamston text-[#CDA053] text-3xl text-center mb-8">GALERÍA</h2>
-                    {/* SECCIÓN GALERIA */}
-                    <Galeria />
-                </section>
+                <Galeria />
 
                 <a href="https://wa.me/5492214959043" target="_blank">
                     <img src={logoWP} alt="WhatsApp" className="fixed opacity-60 bottom-7 right-7 w-14 h-14 rounded-full hover:scale-125 hover:shadow-xl hover:opacity-100 transition transform duration-700" />

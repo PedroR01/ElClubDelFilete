@@ -49,20 +49,70 @@ export default function Academia() {
     return (
         <section
             id="academia"
-            className="flex flex-col relative bg-gradient-to-b from-[#8F272A] to-[#222121] w-full h-[110vh] md:min-h-[70rem] rounded-t-3xl py-20 lg:pt-32 shadow-academia gap-24 md:gap-11 lg:gap-0 md:rounded-t-[3rem] md:pt-24 transition-transform duration-300 -translate-y-12 "
+            className="flex flex-col relative bg-gradient-to-b from-[#8F272A] to-[#2f0c0d] w-full h-[110vh] md:min-h-[70rem] rounded-t-3xl pt-20 lg:pt-32 shadow-academia gap-24 md:gap-11 lg:gap-0 md:rounded-t-[3rem] md:pt-24 transition-transform  -translate-y-5 "
         >
+            <svg
+                className="hidden absolute md:block inset-0 object-cover  transition-transform -translate-y-24 ease-in-out duration-300 delay-150 rotate-6 h-auto md:rotate-0 md:translate-y-0 md:top-4 -z-10 md:-left-5 md:w-[800px]  scale-110 lg:w-[840px] lg:translate-x-10 xl:w-[905px] 2xl:w-[1108px] "
+                viewBox="0 0 1108 1056"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+            >
+                <g filter="url(#filter0_d_861_17)">
+                    <path
+                        d="M632 62.5004C865.21 6.4911 1195.5 -29.5 1044.5 280C883.916 609.143 656.5 801 504.5 961C334.439 1123.01 6.99992 959.5 6.99992 748.5C-8.81365 515.129 -80.0094 343.554 -45.5917 214.998C-42.6248 203.916 -40.1151 192.318 -38.5943 180.947C2.66724 -127.561 402.993 117.5 632 62.5004Z"
+                        fill="#2f0c0d"
+                    />
+                </g>
+                <defs>
+                    <filter
+                        id="filter0_d_861_17"
+                        x="-79.8762"
+                        y="0.800781"
+                        width="1187.53"
+                        height="1054.83"
+                        filterUnits="userSpaceOnUse"
+                        colorInterpolationFilters="sRGB"
+                    >
+                        <feFlood floodOpacity="0" result="BackgroundImageFix" />
+                        <feColorMatrix
+                            in="SourceAlpha"
+                            type="matrix"
+                            values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+                            result="hardAlpha"
+                        />
+                        <feOffset dy="4" />
+                        <feGaussianBlur stdDeviation="12.5" />
+                        <feComposite in2="hardAlpha" operator="out" />
+                        <feColorMatrix
+                            type="matrix"
+                            values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
+                        />
+                        <feBlend
+                            mode="normal"
+                            in2="BackgroundImageFix"
+                            result="effect1_dropShadow_861_17"
+                        />
+                        <feBlend
+                            mode="normal"
+                            in="SourceGraphic"
+                            in2="effect1_dropShadow_861_17"
+                            result="shape"
+                        />
+                    </filter>
+                </defs>
+            </svg>
             {/* <h2 className="hamston text-[#CDA053] text-3xl text-center">ACADEMIA</h2> */}
-            <article className="flex flex-col min-h-[21.5rem] gap-8 w-4/5  ml-auto mr-auto md:items-start md:gap-5">
+            <article className="course-animation flex flex-col min-h-[21.5rem] gap-8 w-4/5  ml-auto mr-auto md:items-start md:gap-5">
 
-                <h2 className="hamston text-[#CDA053] text-3xl text-center uppercase">{currentCurso.titulo}</h2>
+                <h2 className="title hamston text-[#CDA053] text-3xl text-center uppercase">{currentCurso.titulo}</h2>
                 <div className="w-4/5 md:mt-14 md:w-full">
                     <span className="text-base montserrat-normal text-[#fefffba7]">{currentCurso.duracion}</span>
-                    <p className="text-base montserrat-normal text-[#FEFFFB] w-full">{currentCurso.descripcion}</p>
+                    <p className="course-desription text-base montserrat-normal text-[#FEFFFB] w-full">{currentCurso.descripcion}</p>
                     <div className="mt-12"></div>
                     <Button text={"Acceder"} btnType={"button"} event={() => onConfirmRedirect(currentCurso.link)} />
                 </div>
             </article>
-            <div className="md:mt-16">
+            <div className="carousel-animation md:mt-16">
                 <Carousel images={cursos.map((curso) => curso.imagenes[0])} clickHandler={(index) => handleCursoChange(index)} />
             </div>
 

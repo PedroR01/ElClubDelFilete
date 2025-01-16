@@ -5,7 +5,7 @@ export default function NovedadDestacada({ novedadUrl, content }) {
         <Link
             to={novedadUrl} // Redirige a la página de destino
             state={{ content }}
-            className="col-span-7 lg:col-span-4 row-span-3 md:my-4 bg-[#3c3228] md:rounded-lg overflow-hidden relative group shadow-blog-main"
+            className="col-span-7 lg:col-span-4 row-span-3 md:my-4 bg-[#3c3228] md:rounded-lg overflow-hidden relative group custom-shadow"
         >
             <img
                 src={content.image}

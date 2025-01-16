@@ -83,17 +83,18 @@ export default function Galeria() {
   };
 
   return (
-    <section className="">
+    <section id="galería" className="bg-[#2f0c0d]">
+      <h2 className="hamston text-[#CDA053] text-3xl text-center mb-8  animate-bounce">GALERÍA</h2>
       {/* Grilla principal */}
       <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4">
         {imagenes.slice(0, cantVisible).map((img) => (
-          <div key={img.id} className="relative group overflow-hidden max-sm:h-[20vh] sm:h-[40vh] transition transform hover:scale-105">
+          <div key={img.id} className="relative group overflow-hidden max-sm:h-[20vh] sm:h-[40vh] transition duration-300 transform hover:scale-110 hover:h-auto hover:shadow-2xl  hover:z-50 group">
             <img
               src={img.src}
               alt={img.titulo}
-              className="w-full border-solid border-2 border-black object-fill h-full"
+              className="w-full border-solid border-2 border-black object-cover h-full"
             />
-            <div className="absolute inset-0 bg-black bg-opacity-55 transition-opacity flex flex-col justify-end">
+            <div className="absolute inset-0 group bg-black bg-opacity-55 group-hover:bg-opacity-25 transition-opacity flex flex-col justify-end">
               <p className="hamston absolute top-2 left-2 text-[#CDA053] text-xs p-1 rounded">
                 {img.autor}
               </p>

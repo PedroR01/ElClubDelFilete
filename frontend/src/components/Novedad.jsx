@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 
-export default function Novedad({ novedadUrl, mobile, content }) {
+export default function Novedad({ novedadUrl, mobile, content, contentKey }) {
     return (
         !mobile ?
             (<Link
