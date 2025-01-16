@@ -9,6 +9,13 @@ export default function Academia() {
     // Estado inicial con cursos
     const cursos = [
         {
+            titulo: "Membresía - ¡Inscribite ya!",
+            duracion: "TIEMPO LIMITADO HASTA EL VIERNES 15-1-2025",
+            descripcion: "Bienvenidx a la Membresía del Club del Filete ¡aprovechá ahora que estas a tiempo para inscribirte y ser parte de este único Club de fileteadores! Dentro vas a encontrar el acceso a todos los cursos y las clases gratuitas de instagram. También tendrás acceso a la comunidad de Artistas Latinoamericanos y a la bolsa de trabajo donde podrás ofrecer tus obras al mercado internacional.",
+            imagenes: [portadaMembresia],
+            link: "https://elclubdelfilete.tiendup.com/page/ingreso-al-club",
+        },
+        {
             titulo: "Curso esencial",
             duracion: "8 módulos",
             descripcion: "Te voy a enseñar paso a paso y desde cero a que pintes tu primer cuadro fileteado listo para colgar en la pared, vamos a recorrer la historia del Filete y te voy a mostrar los materiales, elementos, herramientas y soportes que se usan en la técnica tradicional, te voy a guiar para que puedas componer tus propias obras y pintarlas con el método de los 5 pasos para darle vida a tus diseños!",
@@ -22,13 +29,7 @@ export default function Academia() {
             imagenes: [portadaLetras],
             link: "https://elclubdelfilete.tiendup.com/curso/3-pilares-de-las-letras-fileteadas",
         },
-        {
-            titulo: "Membresía",
-            duracion: "",
-            descripcion: "Bienvenidx a la Membresía del Club del Filete, dentro vas a encontrar el acceso a todos los cursos y las clases gratuitas de instagram! También tendrás acceso a la comunidad de Artistas Latinoamericanos y a la bolsa de trabajo donde podrás ofrecer tus obras al mercado internacional.",
-            imagenes: [portadaMembresia],
-            link: "https://elclubdelfilete.tiendup.com/page/paginapreinscripcion",
-        },
+
     ];
     const [currentCurso, setCurrentCurso] = useState(cursos[0]);
 
@@ -38,7 +39,7 @@ export default function Academia() {
 
     // Advertencia de que lo va a redirigir a la tienda.
     const onConfirmRedirect = (url) => {
-        const userConfirmed = window.confirm(`Será redirigido a la página: ${url}. ¿Desea continuar?`);
+        const userConfirmed = window.confirm(`Querido fileteador, será redirigido a la página: ${url}. ¿Desea continuar?`);
         if (userConfirmed) {
             window.location.href = url;
         }
