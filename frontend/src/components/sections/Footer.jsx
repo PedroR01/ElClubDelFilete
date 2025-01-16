@@ -5,7 +5,7 @@ export default function Footer() {
         <p>Realizado por <span className="font-bold">Voltio⚡</span></p>
       </div>
       <div className="w-full md:w-1/3 mb-4 md:mb-0 disabled">
-        <button className="font-bold opacity-65" disabled>Administrador</button>
+        <a className="font-bold opacity-65" href="/signUp">Administrador</a>
       </div>
       <div className="w-full md:w-1/3">
         <p>Contáctanos <span className="font-bold">grupovoltio@gmail.com</span></p>
