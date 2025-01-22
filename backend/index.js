@@ -250,7 +250,8 @@ app.get("/api/blogs", async (req, res) =>{
     }
 })
 // Consulta sobre las imágenes del storage
-
+// Dato no menor: Los storage que se desean consultar deben ser PUBLICOS
+// Prueba recuperando storage en prueba_storage
 app.get("/api/storage", async (req, res) => {
   try {
     // Listar las subcarpetas dentro de "novedades"
@@ -324,6 +325,54 @@ app.get("/api/storage", async (req, res) => {
   }
 });
 
+// Prueba recuperando un storage reestructurado llamado novedades
+app.get("/api/storage2", async (req, res) => {
+  try{
+  const { data: subcarpetas, error: errorSubcarpetas } = await supabase
+      .storage
+      .from('Novedades')  // Bucket 'prueba_storage'
+      .list('')
+      const urlImg = []
+      const obtenerUrlsPublicas = async (subcarpetas) => {
+        for (const carpeta of subcarpetas) {
+          try {
+            // Listar archivos dentro de la carpeta
+            const { data: archivos, error: errorArchivos } = await supabase
+              .storage
+              .from('Novedades')
+              .list(carpeta.name);
+  
+            if (errorArchivos) {
+              console.error(`Error obteniendo archivos de ${carpeta.name}:`, errorArchivos);
+              continue;
+            }
+  
+            if (archivos.length > 0) {
+              // Obtener la URL del primer archivo de la carpeta
+              const { data: urlImage } = supabase.storage
+                .from('Novedades')
+                .getPublicUrl(`${carpeta.name}/${archivos[0].name}`);
+  
+              urlImg.push({
+                carpeta: carpeta.name,
+                url: urlImage
+              });
+            }
+          } catch (err) {
+            console.error('Error en la solicitud:', err);
+          }
+        }
+      };
+  
+      await obtenerUrlsPublicas(subcarpetas);
+
+      res.status(200).send({ urlImg });
+
+    }
+  catch (err){
+    res.send({err})
+  }
+})
 
 // Ruta para manejar cualquier otra solicitud (404)
 app.use((req, res) => {
