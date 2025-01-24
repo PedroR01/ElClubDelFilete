@@ -10,11 +10,11 @@ export default function AuthContextProvider ({ children }) {
     const TOKEN_EXPIRATION_TIME = 50 * 60 * 1000; // 50 minutos en ms
     const REFRESH_BEFORE_EXPIRATION = 5 * 60 * 1000; // Refrescar 5 minutos antes de que expire
     
-    const verifyOrRefreshSession = async (refresh = false) => {
+    const verifyOrRefreshSession = async () => {
       console.log('Verificando sesión o refrescando token...');
       try {
-        const response = await fetch('http://localhost:3001/api/verify', {
-          method: 'POST',
+        const response = await fetch('http://localhost:3001/api/verifySecond', {
+          method: 'GET',
           credentials: "include", 
         });
   
@@ -22,13 +22,9 @@ export default function AuthContextProvider ({ children }) {
           setIsAuthenticated(false);
           throw new Error('Error al verificar o refrescar sesión');
         }
-  
+        const data = await response.json()
+        console.log(data);
         setIsAuthenticated(true);
-        if (refresh) {
-          console.log("Token refrescado");
-        } else {
-          console.log("Sesión verificada");
-        }
       } catch (err) {
         console.log('Error al verificar/refrescar sesión:', err);
       } finally {
@@ -37,7 +33,7 @@ export default function AuthContextProvider ({ children }) {
     };
   
     // Llamada inicial para refrescar el token al montar el componente
-    verifyOrRefreshSession(true);
+    verifyOrRefreshSession();
   
     // Guardar el tiempo de la primera verificación (inicio de la sesión)
     const sessionStartTime = Date.now();
