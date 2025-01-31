@@ -1,16 +1,18 @@
 import { Routes, Route } from "react-router-dom";
 import Navbar from "./components/sections/Navbar";
+import Footer from "./components/sections/Footer";
 import Landing from "./pages/LandingPage";
 import Historia from "./pages/HistoriaPage";
 import Tienda from "./pages/TiendaPage"
 import Novedades from "./pages/NovedadesPage";
 import Blog from "./pages/novedades/BlogPage";
-import Footer from "./components/sections/Footer"
-import Login from "./pages/Login"
-import AuthContextProvider  from './context/Authcontext'
+import Login from "./pages/Login";
+import AuthContextProvider from './context/Authcontext';
+import SignUp from "./pages/authPages/SignUpPage";
+
 export default function App() {
   return (
-    
+
     <AuthContextProvider>
       <Navbar />
       <Routes>
@@ -20,9 +22,10 @@ export default function App() {
         <Route path="/novedades" element={<Novedades />}></Route>
         <Route path="/novedades/:slug" element={<Blog />}></Route>
         <Route path="/login" element={<Login />}></Route>
+        <Route path="/signUp" element={<SignUp />}></Route>
       </Routes>
       <Footer />
     </AuthContextProvider>
-    
+
   );
 };
