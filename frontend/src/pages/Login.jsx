@@ -17,7 +17,7 @@ export default function Login () {
     sendData({username, password} );
   };
   const [imagenesUrls, setImagenesUrls] = useState([]);
-
+  /*
   useEffect(() => {
     // Llamada al backend para obtener las URLs de las imágenes
     const buscarImagenes = async () =>{
@@ -32,11 +32,11 @@ export default function Login () {
     setImagenesUrls(data.imagenesUrls)
   }
   buscarImagenes()
-  }, []);
+  }, []);*/
 
   const sendData = async ({ username, password }) => {
     try {
-      const response = await fetch('http://localhost:3001/api/login', {
+      const response = await fetch('http://localhost:3001/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ username, password }),
@@ -63,31 +63,23 @@ export default function Login () {
         <div className="max-w-sm bg-gradient-to-t from-white to-[#f4f7fb] rounded-3xl p-8 pt-20 border-4 border-white shadow-[0_30px_30px_-20px_rgba(133,189,215,.87)] m-5  mx-auto">
           <div className="text-center font-extrabold text-3xl text-[#1089D3]">Sign In</div>
           
-          <form onSubmit={handleSubmit} class="mt-5 mx-auto">
-            <input required class="w-full bg-white border-none p-4 rounded-2xl mt-4 shadow-[0_10px_10px_-5px_#cff0ff] border-transparent focus:outline-none focus:border-[#12B1D1]" type="email" name="email" id="email" onChange={(e) => setUsername(e.target.value)} placeholder="E-mail"/>
-            <input required class="w-full bg-white border-none p-4 rounded-2xl mt-4 shadow-[0_10px_10px_-5px_#cff0ff] border-transparent focus:outline-none focus:border-[#12B1D1]" type="password" name="password" id="password" onChange={(e) => setPassword(e.target.value)} placeholder="Password"/>
+          <form onSubmit={handleSubmit} className="mt-5 mx-auto">
+            <input required className="w-full bg-white border-none p-4 rounded-2xl mt-4 shadow-[0_10px_10px_-5px_#cff0ff] border-transparent focus:outline-none focus:border-[#12B1D1]" type="email" name="email" id="email" onChange={(e) => setUsername(e.target.value)} placeholder="E-mail"/>
+            <input required className="w-full bg-white border-none p-4 rounded-2xl mt-4 shadow-[0_10px_10px_-5px_#cff0ff] border-transparent focus:outline-none focus:border-[#12B1D1]" type="password" name="password" id="password" onChange={(e) => setPassword(e.target.value)} placeholder="Password"/>
             
-            <span class="block mt-2 ml-2 text-xs text-[#0099FF]">
+            <span className="block mt-2 ml-2 text-xs text-[#0099FF]">
               <a href="#">Forgot Password ?</a>
             </span>
             
-            <button class="w-full bg-gradient-to-r from-[#1089D3] to-[#12B1D1] text-white p-4 mt-5 rounded-2xl cursor-pointer shadow-[0_20px_10px_-15px_rgba(133,189,215,.87)] transition-all duration-200 ease-in-out hover:scale-105 active:scale-95" type="submit" >
+            <button className="w-full bg-gradient-to-r from-[#1089D3] to-[#12B1D1] text-white p-4 mt-5 rounded-2xl cursor-pointer shadow-[0_20px_10px_-15px_rgba(133,189,215,.87)] transition-all duration-200 ease-in-out hover:scale-105 active:scale-95" type="submit" >
               Sign in
             </button>
           </form>
-          <span class="block text-center mt-4 text-xs">
+          <span className="block text-center mt-4 text-xs">
             <a href="#" class="text-[#0099ff]">Learn user licence agreement</a>
           </span>
         </div>
         <div className="imagenes-container grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-       {imagenesUrls.map((imagen, index) => (
-        <img
-          key={index}
-          src={imagen.publicUrl} // Utilizamos la URL pública obtenida
-          alt={`Imagen ${index + 1}`} // Texto alternativo para accesibilidad
-          className="w-full h-auto object-cover rounded-md" // Estilos de Tailwind CSS
-        />
-        ))}
         </div>
         </div>
       )

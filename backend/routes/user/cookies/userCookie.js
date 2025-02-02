@@ -3,14 +3,19 @@ import { UserRepository } from "../userRepository.js";
 
 const logedUserCookiesRouter = Router();
 
-logedUserCookiesRouter.post("", async (req, res) => {
+logedUserCookiesRouter.post("/", async (req, res) => {
   try {
-    const token = req.cookies["access_token"];
-    const refToken = req.cookies["refresh_token"];
-    if (!token) {
-      return res.status(401).json({ error: "No token found" });
+    const accessToken = req.cookies["access_token"];
+    const refreshToken = req.cookies["refresh_token"];
+  
+    // Verificar si existen cookies
+    if (!accessToken && !refreshToken) {
+      console.log("NO hay tokens pa")
+      return res
+        .status(401)
+        .json({ message: "No hay sesión activa, inicie sesión nuevamente" });
     }
-    const data = await UserRepository.refreshUserCookie(token, refToken, res);
+    const data = await UserRepository.refreshUserCookie(accessToken, refreshToken, res);
     res.send(data);
   } catch (e) {
     return res.status(500).json(e);

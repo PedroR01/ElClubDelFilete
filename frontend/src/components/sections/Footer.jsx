@@ -11,7 +11,7 @@ export default function Footer() {
   const logOut = async () => {
     try {
       console.log('Cerrando sesión')
-      const response = await fetch('http://localhost:3001/api/logout', {
+      const response = await fetch('http://localhost:3001/logout', {
         method: 'POST',
         credentials: "include", // Esto asegura que las cookies se envíen
       });

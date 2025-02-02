@@ -5,6 +5,24 @@ const supabase = createClient(
   process.env.SUPABASE_KEY
 );
 
+// La duración de las cookies en JavaScript se establece en milisegundos (ms).
+// Calculamos el equivalente a 1 hora
+// - 1 hora tiene 60 minutos
+  // - Cada minuto tiene 60 segundos
+  // - Cada segundo tiene 1000 milisegundos
+
+const DURATION_ACCESS_COOKIE = 60 * 60 * 1000;
+
+// Calculamos el tiempo equivalente a 1 semana:
+  // - 7 días
+  // - Cada día tiene 24 horas
+  // - Cada hora tiene 60 minutos
+  // - Cada minuto tiene 60 segundos
+  // - Cada segundo tiene 1000 milisegundos
+
+const DURATION_REFRESH_COOKIE = 7 * 24 *60 * 60 *1000; 
+
+// ambas constantes representan las duraciones en ms de las cookies utilizadas
 export class UserRepository {
   static async createAuthenticatedUser({ username, email, password }) {
     // Validaciones para nombre de usuario (ver librerias para validaciones completas (como zod, aunque este es con TS))
@@ -109,21 +127,25 @@ export class UserRepository {
         email: username,
         password: password,
       });
-
+      /*
+        const access_token = data.session.access_token;
+        const refresh_token = data.session.refresh_token;
+        */
+      
       res.cookie("access_token", data.session.access_token, {
         httpOnly: true,
         secure: false, // cambiar a true en producción
-        maxAge: 60 * 60 * 1000,
-        sameSite: "strict",
+        maxAge: DURATION_ACCESS_COOKIE,
+        sameSite: "Strict",
       });
       res.cookie("refresh_token", data.session.refresh_token, {
         httpOnly: true,
         secure: false, // cambiar a true en producción
-        maxAge: 1700000000000,
-        sameSite: "strict",
+        maxAge: DURATION_REFRESH_COOKIE,
+        sameSite: "Strict",
       });
-
       return { status: 200, message: "Log In correcto" };
+      //return { access_token, refresh_token};
     } catch (e) {
       return {
         status: 400,
@@ -153,15 +175,19 @@ export class UserRepository {
 
   static async refreshUserCookie(token, refToken, res) {
     // Verifica el acceso del usuario con el access_token
+    console.log("verifique los tokens pibe")
     const {
       data: { user },
       error,
     } = await supabase.auth.getUser(token);
 
-    if (!user && error) {
+    if (!token || error) {
       try {
         console.log("Token inválido, intentando refrescar...");
-
+        
+        if (!refToken) {
+          return { status: 401, message: "Inicie sesión nuevamente" }
+        }
         // Intenta refrescar la sesión usando el refresh_token
         const { data, error } = await supabase.auth.refreshSession({
           refresh_token: refToken,
@@ -181,14 +207,14 @@ export class UserRepository {
         res.cookie("access_token", session.access_token, {
           httpOnly: true,
           secure: false, // Cambiar a true en producción
-          maxAge: 60 * 60 * 1000, // 20 minutos para la cookie de access_token
+          maxAge: DURATION_ACCESS_COOKIE, // 20 minutos para la cookie de access_token
           sameSite: "strict",
         });
 
         res.cookie("refresh_token", session.refresh_token, {
           httpOnly: true,
           secure: false, // Cambiar a true en producción
-          maxAge: 1700000000000, // Largo para refresh token
+          maxAge: DURATION_REFRESH_COOKIE, // Largo para refresh token
           sameSite: "strict",
         });
 

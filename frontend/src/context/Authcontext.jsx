@@ -4,8 +4,7 @@ export const AuthContext = createContext();
 export default function AuthContextProvider ({ children }) {
   const [lastRefreshed, setLastRefreshed] = useState(Date.now());
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [loading, setLoading] = useState(true);
-
+  
   useEffect(() => {
     const TOKEN_EXPIRATION_TIME = 50 * 60 * 1000; // 50 minutos en ms
     const REFRESH_BEFORE_EXPIRATION = 5 * 60 * 1000; // Refrescar 5 minutos antes de que expire
@@ -13,8 +12,8 @@ export default function AuthContextProvider ({ children }) {
     const verifyOrRefreshSession = async () => {
       console.log('Verificando sesión o refrescando token...');
       try {
-        const response = await fetch('http://localhost:3001/api/verifySecond', {
-          method: 'GET',
+        const response = await fetch('http://localhost:3001/api/verify', {
+          method: 'POST',
           credentials: "include", 
         });
   
@@ -22,14 +21,12 @@ export default function AuthContextProvider ({ children }) {
           setIsAuthenticated(false);
           throw new Error('Error al verificar o refrescar sesión');
         }
-        const data = await response.json()
+        const data = await response.json();
         console.log(data);
         setIsAuthenticated(true);
       } catch (err) {
         console.log('Error al verificar/refrescar sesión:', err);
-      } finally {
-        setLoading(false);
-      }
+      } 
     };
   
     // Llamada inicial para refrescar el token al montar el componente
@@ -60,7 +57,7 @@ export default function AuthContextProvider ({ children }) {
   
 
     return(
-        <AuthContext.Provider value={{ isAuthenticated, setIsAuthenticated, loading }}>
+        <AuthContext.Provider value={{ isAuthenticated, setIsAuthenticated }}>
             {children}
         </AuthContext.Provider>
     );

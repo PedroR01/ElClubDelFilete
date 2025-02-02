@@ -11,6 +11,7 @@ import confirmAuthUserRouter from "./routes/user/webhooks/confirmAuthUser.js";
 import blogInfoRouter from "./routes/db/blogs/blog.js";
 import blogImgRouter from "./routes/storage/blogs/blog.js";
 import logedUserCookiesRouter from "./routes/user/cookies/userCookie.js";
+import cookieParser from 'cookie-parser';
 
 dotenv.config();
 const app = express();
