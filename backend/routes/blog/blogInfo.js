@@ -1,15 +1,14 @@
 import { Router } from "express";
+import { BlogRepository } from "./blogRepository.js";
 
 const blogInfoRouter = Router();
 
 blogInfoRouter.get("/", async (req, res) => {
   try {
-    let { data: blogs, error } = await supabase.from("blogs").select("*");
-
-    console.log(profiles, error);
-    res.send({ profiles, error });
+    const data = await BlogRepository.getAllBlogsInfo();
+    res.send(data);
   } catch (e) {
-    res.send({ e });
+    res.status(500).json(e);
   }
 });
 

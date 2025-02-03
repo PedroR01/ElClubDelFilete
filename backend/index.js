@@ -8,10 +8,10 @@ import loginRouter from "./routes/user/auth/login.js";
 import logoutRouter from "./routes/user/auth/logout.js";
 import registerRouter from "./routes/user/auth/signUp.js";
 import confirmAuthUserRouter from "./routes/user/webhooks/confirmAuthUser.js";
-import blogInfoRouter from "./routes/db/blogs/blog.js";
-import blogImgRouter from "./routes/storage/blogs/blog.js";
+import blogInfoRouter from "./routes/blog/blogInfo.js";
+import blogImgRouter from "./routes/blog/blogBucket.js";
 import logedUserCookiesRouter from "./routes/user/cookies/userCookie.js";
-import cookieParser from 'cookie-parser';
+import cookieParser from "cookie-parser";
 
 dotenv.config();
 const app = express();

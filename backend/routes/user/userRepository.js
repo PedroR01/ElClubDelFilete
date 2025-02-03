@@ -1,26 +1,21 @@
-import { createClient } from "@supabase/supabase-js";
-
-const supabase = createClient(
-  process.env.SUPABASE_URL,
-  process.env.SUPABASE_KEY
-);
+import supabase from "../supabaseClient.js";
 
 // La duración de las cookies en JavaScript se establece en milisegundos (ms).
 // Calculamos el equivalente a 1 hora
 // - 1 hora tiene 60 minutos
-  // - Cada minuto tiene 60 segundos
-  // - Cada segundo tiene 1000 milisegundos
+// - Cada minuto tiene 60 segundos
+// - Cada segundo tiene 1000 milisegundos
 
 const DURATION_ACCESS_COOKIE = 60 * 60 * 1000;
 
 // Calculamos el tiempo equivalente a 1 semana:
-  // - 7 días
-  // - Cada día tiene 24 horas
-  // - Cada hora tiene 60 minutos
-  // - Cada minuto tiene 60 segundos
-  // - Cada segundo tiene 1000 milisegundos
+// - 7 días
+// - Cada día tiene 24 horas
+// - Cada hora tiene 60 minutos
+// - Cada minuto tiene 60 segundos
+// - Cada segundo tiene 1000 milisegundos
 
-const DURATION_REFRESH_COOKIE = 7 * 24 *60 * 60 *1000; 
+const DURATION_REFRESH_COOKIE = 7 * 24 * 60 * 60 * 1000;
 
 // ambas constantes representan las duraciones en ms de las cookies utilizadas
 export class UserRepository {
@@ -131,7 +126,7 @@ export class UserRepository {
         const access_token = data.session.access_token;
         const refresh_token = data.session.refresh_token;
         */
-      
+
       res.cookie("access_token", data.session.access_token, {
         httpOnly: true,
         secure: false, // cambiar a true en producción
@@ -175,7 +170,7 @@ export class UserRepository {
 
   static async refreshUserCookie(token, refToken, res) {
     // Verifica el acceso del usuario con el access_token
-    console.log("verifique los tokens pibe")
+    console.log("verifique los tokens pibe");
     const {
       data: { user },
       error,
@@ -184,9 +179,9 @@ export class UserRepository {
     if (!token || error) {
       try {
         console.log("Token inválido, intentando refrescar...");
-        
+
         if (!refToken) {
-          return { status: 401, message: "Inicie sesión nuevamente" }
+          return { status: 401, message: "Inicie sesión nuevamente" };
         }
         // Intenta refrescar la sesión usando el refresh_token
         const { data, error } = await supabase.auth.refreshSession({
