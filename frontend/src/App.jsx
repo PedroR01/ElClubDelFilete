@@ -9,6 +9,7 @@ import Blog from "./pages/novedades/BlogPage";
 import Login from "./pages/Login";
 import AuthContextProvider from './context/Authcontext';
 import SignUp from "./pages/authPages/SignUpPage";
+import Admin from "./pages/Admin"
 
 export default function App() {
   return (
@@ -23,6 +24,7 @@ export default function App() {
         <Route path="/novedades/:slug" element={<Blog />}></Route>
         <Route path="/login" element={<Login />}></Route>
         <Route path="/signUp" element={<SignUp />}></Route>
+        <Route path="/administrador" element={<Admin/>}></Route> 
       </Routes>
       <Footer />
     </AuthContextProvider>
