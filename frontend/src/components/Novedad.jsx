@@ -1,17 +1,17 @@
 import { Link } from 'react-router-dom';
 
-export default function Novedad({ novedadUrl, mobile, content }) {
+export default function Novedad({ content, mobile }) {
     return (
         !mobile ?
             (<Link
-                to={novedadUrl} // Redirige a la página de destino
+                to={`./${content.title}`} // Redirige a la página de destino
                 state={{ content }}
                 className="flex items-center h-1/3 bg-[#3c3228] rounded-lg overflow-hidden shadow-blog-sec group hover:scale-105 transition-transform duration-500"
             >
                 {/* Contenedor de la imagen */}
                 <div className="h-full w-2/5 flex-shrink-0 relative">
                     <img
-                        src={content.image}
+                        src={content.bucket_folder_url + "/portrait.jpg"}
                         alt={content.title}
                         className="w-full h-full object-cover brightness-75" // Se asegura de llenar el contenedor sin distorsionar
                     />
@@ -30,13 +30,13 @@ export default function Novedad({ novedadUrl, mobile, content }) {
                     </p>
                 </div>
             </Link>) : (<Link
-                to={novedadUrl} // Redirige a la página de destino
+                to={`./${content.title}`} // Redirige a la página de destino
                 state={{ content }}
                 className="flex-shrink-0 w-[80%] bg-[#933033] rounded-3xl overflow-hidden shadow-lg flex flex-col"
             >
                 <div className="relative w-full h-48">
                     <img
-                        src={content.image}
+                        src={content.bucket_folder_url + "/portrait.jpg"}
                         alt={content.title}
                         className="w-full h-full object-cover brightness-75"
                     />

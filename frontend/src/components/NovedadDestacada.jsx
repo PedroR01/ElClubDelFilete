@@ -1,15 +1,15 @@
 import { Link } from 'react-router-dom';
 
-export default function NovedadDestacada({ novedadUrl, content }) {
+export default function NovedadDestacada({ content }) {
     return (
         <Link
-            to={novedadUrl} // Redirige a la página de destino
+            to={`./${content.title}`} // Redirige a la página de destino
             state={{ content }}
             className="col-span-7 lg:col-span-4 row-span-3 md:my-4 bg-[#3c3228] md:rounded-lg overflow-hidden relative group shadow-blog-main"
         >
             <img
-                src={content.image}
-                alt="Noticia principal"
+                src={content.bucket_folder_url + "/portrait.jpg"}
+                alt={content.title}
                 className="w-full h-full object-cover brightness-50 scale-110 group-hover:scale-100 transition-transform duration-500"
             />
             <div className="absolute bottom-10 left-3 right-3 md:left-9 text-left">

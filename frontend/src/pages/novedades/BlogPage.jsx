@@ -1,38 +1,22 @@
-import { useEffect, useState } from "react";
 import { useLocation } from 'react-router-dom';
 import Button from "../../components/Button";
 
 export default function BlogPage() {
-    const [novedadTitle, setNovedadTitle] = useState("");
     const location = useLocation();
     const { content } = location.state || {};
 
-    useEffect(() => {
-        setNovedadTitle(getTitle());
-    }, []);
-
-    const getVideoUrl = () => {
-        if (!content?.video) return null; // Si no hay video, retorna null.
-        const videoId = content.video.split('v=')[1]?.split('&')[0];
+    const getVideoUrl = (video) => {
+        const videoId = video.split('v=')[1]?.split('&')[0];
         return videoId ? `https://www.youtube.com/embed/${videoId}` : null;
     };
 
-    const getTitle = () => {
-        const pathname = window.location.pathname;
-        const segments = pathname.split('/');
-        const lastSegment = segments[segments.length - 1];
-        const decodedId = decodeURIComponent(lastSegment);
-        return decodedId.replace(/%20/g, ' ');
-    };
-
-    const downloadPDF = () => {
-        if (!content?.pdf) return; // Si no hay PDF, no hacer nada.
+    const downloadPDF = (pdf) => {
         const extractDriveFileId = (driveLink) => {
             const regex = /\/d\/([a-zA-Z0-9_-]+)\//;
             const match = driveLink.match(regex);
             return match ? match[1] : null;
         };
-        const pdfId = extractDriveFileId(content.pdf);
+        const pdfId = extractDriveFileId(pdf);
         if (pdfId) {
             const downloadUrl = `https://drive.google.com/uc?export=download&id=${pdfId}`;
             const link = document.createElement("a");
@@ -103,12 +87,12 @@ export default function BlogPage() {
                 {/* Imagen principal */}
                 <img
                     className="absolute w-full h-72 left-0 -top-2 object-cover rounded-lg shadow-md brightness-50"
-                    src={content.image}
+                    src={content.bucket_folder_url + "/portrait.jpg"}
                     alt="Caratula de noticia destacada"
                 />
                 <div className="relative mb-8">
                     <h1 className="flex items-center justify-center hamston text-[#CDA053] text-2xl md:text-4xl bg-black bg-opacity-50 py-4 px-6 z-10">
-                        {novedadTitle}
+                        {content.title}
                     </h1>
                 </div>
 
@@ -118,7 +102,7 @@ export default function BlogPage() {
                         {content.introduction}
                     </p>
 
-                    {content.sections?.map((section, index) => (
+                    {content.content_sections?.map((section, index) => (
                         <div key={index} className="mb-6">
                             {section.title && (
                                 <h3 className="text-[#CDA053] text-xl font-bold mb-2">
@@ -132,23 +116,24 @@ export default function BlogPage() {
                                     </p>
                                 ))}
                             {section.list && renderList(section.list)}
+                            {section.video && (
+                                <div className="mb-8">
+                                    <div className="w-full h-44 md:h-80 mb-4">
+                                        <iframe
+                                            className="w-full h-full rounded-lg shadow-md"
+                                            src={getVideoUrl(section.video)}
+                                            title="Video de la noticia"
+                                            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                                            allowFullScreen
+                                        />
+                                    </div>
+                                </div>
+                            )}
+                            {section.pdf && (
+                                <Button text={"PDF"} btnType={"button"} event={downloadPDF(section.pdf)} disabled={false} />
+                            )}
                         </div>
                     ))}
-
-                    {/* Renderizar video si está presente */}
-                    {content.video && (
-                        <div className="mb-8">
-                            <div className="w-full h-44 md:h-80 mb-4">
-                                <iframe
-                                    className="w-full h-full rounded-lg shadow-md"
-                                    src={getVideoUrl()}
-                                    title="Video de la noticia"
-                                    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                                    allowFullScreen
-                                />
-                            </div>
-                        </div>
-                    )}
 
                     {/* Texto adicional si está presente */}
                     {content.additionalText && (
@@ -180,10 +165,6 @@ export default function BlogPage() {
                         </div>
                     )}
 
-                    {/* Botón para descargar PDF si está presente */}
-                    {content.pdf && (
-                        <Button text={"PDF"} btnType={"button"} event={downloadPDF} disabled={false} />
-                    )}
                 </section>
             </article>
         </div>

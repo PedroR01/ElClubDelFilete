@@ -6,6 +6,7 @@ const blogInfoRouter = Router();
 blogInfoRouter.get("/", async (req, res) => {
   try {
     const data = await BlogRepository.getAllBlogsInfo();
+    console.log(data);
     res.send(data);
   } catch (e) {
     res.status(500).json(e);
