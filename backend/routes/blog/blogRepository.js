@@ -80,4 +80,88 @@ export class BlogRepository {
 
     return data;
   }
+  static async addImage (image, folderName, imgName, mimeType){
+    
+    const { data, error } = await supabase
+      .storage
+      .from('Novedades')
+      .upload(`${folderName}/${imgName}`, image, {
+        cacheControl: '3600',
+        contentType: mimeType,
+        upsert: false
+      })
+    if (error) {
+        return {
+          status: 400,
+          message: "Ya existe una imagen con ese nombre" };
+    }
+      return {
+        status: 200,
+        message: 'Operación exitosa'
+      };
+  }
+
+  static async addImageV2(imgName, folderName, fileBuffer, fileType){
+    const { data, error } = await supabase
+      .storage
+      .from('Novedades')
+      .upload(`${folderName}/${imgName}`, fileBuffer, {
+        contentType: fileType, // Usamos el tipo MIME
+        upsert: false,  // Permite reemplazar el archivo si ya existe
+      });
+      if (error) {
+        return error;
+    }
+      return {
+        status: 200,
+        message: 'Operación exitosa'
+      };
+  }
+
+  static async addBlog(newTag, newTitle, newDescription, newIntroduction, newContent, newFeatured){
+    
+    const { error } = await supabase
+    .from('blogs')
+    .insert([
+      {
+        tag: newTag,
+        title: newTitle,
+        description: newDescription,
+        introduction: newIntroduction,
+        content_sections: newContent,
+        featured_pos: newFeatured
+      }
+    ]);
+  
+    return error;
+  
+  }
+  static async deleteBlog(title){
+    const { error } = await supabase
+    .from('blogs')
+    .delete()
+    .eq('title', title)
+    return error;
+  }
+  static async deleteImage(folderName){
+    const { data, error } = await supabase
+    .storage
+    .from('Novedades')
+    .list(folderName); // Obtiene la lista de archivos en 'folder'
+    if(data){
+      const filesToDelete = data.map(file => `${folderName}/${file.name}`);
+      if(filesToDelete.length > 0){
+        const { data: deleteData, error: deleteError } = await supabase
+        .storage
+        .from('Novedades')
+        .remove(filesToDelete);
+        if (deleteError) {
+          return deleteError
+        }
+        return deleteData;
+      }
+    }
+   
+  }
+
 }
