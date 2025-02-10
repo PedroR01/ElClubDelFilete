@@ -1,3 +1,4 @@
+import { AppError } from "../../errors/appError.js";
 import supabase from "../supabaseClient.js";
 
 const getBucketImgUrl = async (subcarpetas, urlImg) => {
@@ -27,16 +28,9 @@ const getBucketImgUrl = async (subcarpetas, urlImg) => {
           url: urlImage,
         });
       } else
-        return {
-          status: 400,
-          message:
-            `Error obteniendo archivos de ${carpeta.name}:` + errorArchivos,
-        };
+          throw new AppError("Error obteniendo archivos",500,`Error al obtener las imagenes de la carpeta ${carpeta.name}`)
     } catch (e) {
-      return {
-        status: 500,
-        message: "Error al comunicarse con Supabase. " + e,
-      };
+        throw e
     }
   }
   return {
@@ -51,21 +45,14 @@ export class BlogRepository {
     try {
       let { data: blogs, error } = await supabase.from("blogs").select("*");
       if (error)
-        return {
-          status: 500,
-          message:
-            "Error al intentar obtener información de los blogs. " + error,
-        };
+        throw new AppError(error.code,500, "Error al intentar obtener información de los blogs.");
       return {
         status: 200,
         message: "Información de los blogs recuperada con éxito.",
         metaData: blogs,
       };
     } catch (e) {
-      return {
-        status: 500,
-        message: "Error al comunicarse con Supabase. " + e,
-      };
+      throw e
     }
   }
 
@@ -74,7 +61,8 @@ export class BlogRepository {
       await supabase.storage
         .from("Novedades") // Bucket 'Novedades'
         .list("");
-
+    if(errorSubcarpetas)
+      throw new AppError(errorSubcarpetas.code, 500, "Error al obtener las imagenes de los blogs")
     const urlImg = [];
     const data = await getBucketImgUrl(subcarpetas, urlImg);
 
@@ -90,14 +78,17 @@ export class BlogRepository {
         contentType: mimeType,
         upsert: false
       })
-    if (error) {
-        return {
-          status: 400,
-          message: "Ya existe una imagen con ese nombre" };
-    }
+      if (error) {
+        throw new AppError("BadRequestError",400, "La imagen con dicho nombre ya existe");
+      }
+    const { url } = await supabase
+    .storage
+    .from('Novedades')
+    .getPublicUrl(`${folderName}/${imgName}`)
       return {
         status: 200,
-        message: 'Operación exitosa'
+        message: 'Operación exitosa',
+        url: url
       };
   }
 
@@ -118,9 +109,9 @@ export class BlogRepository {
       };
   }
 
-  static async addBlog(newTag, newTitle, newDescription, newIntroduction, newContent, newFeatured){
+  static async addBlog(newTag, newTitle, newDescription, newIntroduction, newContent, newFeatured, newUrl){
     
-    const { error } = await supabase
+    const {data, error } = await supabase
     .from('blogs')
     .insert([
       {
@@ -129,25 +120,37 @@ export class BlogRepository {
         description: newDescription,
         introduction: newIntroduction,
         content_sections: newContent,
-        featured_pos: newFeatured
+        featured_pos: newFeatured,
+        bucket_folder_url: newUrl
       }
-    ]);
+    ])
+    .select();
   
-    return error;
+    return {data, error};
   
   }
   static async deleteBlog(title){
-    const { error } = await supabase
+    const { data, error } = await supabase
     .from('blogs')
     .delete()
     .eq('title', title)
-    return error;
+    .select()
+    if(error)
+      throw new AppError(error.code, error.status,"Error al eliminar el blog")
+    else if(data.length === 0)
+      throw new AppError("Not found",404,"No se encontro el blog solicitado")
+    return data;
   }
   static async deleteImage(folderName){
     const { data, error } = await supabase
     .storage
     .from('Novedades')
     .list(folderName); // Obtiene la lista de archivos en 'folder'
+    
+    if(error)
+      throw new AppError(error.code, error.status,"Error al eliminar el blog")
+    else if (data.length === 0)
+      throw new AppError("Carpeta/imagen inexistente",404,"No se encontro la imagen solicitada")
     if(data){
       const filesToDelete = data.map(file => `${folderName}/${file.name}`);
       if(filesToDelete.length > 0){
@@ -161,6 +164,7 @@ export class BlogRepository {
         return deleteData;
       }
     }
+    
    
   }
 

@@ -3,12 +3,13 @@ import { UserRepository } from "../userRepository.js";
 
 const logoutRouter = Router();
 
-logoutRouter.post("/", async (req, res) => {
+logoutRouter.post("/", async (req, res,next) => {
   try {
-    const data = await UserRepository.logOut(res);
+    const accessToken = req.cookies["access_token"];
+    const data = await UserRepository.logOut(accessToken,res);
     res.send(data);
   } catch (e) {
-    return res.status(500).json(e);
+    next(e)
   }
 });
 

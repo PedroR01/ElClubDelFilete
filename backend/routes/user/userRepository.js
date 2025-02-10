@@ -1,3 +1,4 @@
+import { AppError } from "../../errors/appError.js";
 import supabase from "../supabaseClient.js";
 
 // La duración de las cookies en JavaScript se establece en milisegundos (ms).
@@ -126,7 +127,9 @@ export class UserRepository {
         const access_token = data.session.access_token;
         const refresh_token = data.session.refresh_token;
         */
-
+      if(error){
+        throw new AppError(error.code, error.status, "Sus credenciales son inválidas");
+      }
       res.cookie("access_token", data.session.access_token, {
         httpOnly: true,
         secure: false, // cambiar a true en producción
@@ -142,35 +145,33 @@ export class UserRepository {
       return { status: 200, message: "Log In correcto" };
       //return { access_token, refresh_token};
     } catch (e) {
-      return {
-        status: 400,
-        message: "No se pudo realizar la autenticación de inicio",
-        error: e,
-      };
+      throw e;
     }
   }
 
-  static async logOut(res) {
+  static async logOut(access_token,res) {
     try {
-      const { error } = await supabase.auth.signOut();
-      if (error) return error;
+      const { data: { user } } = await supabase.auth.getUser(access_token)
+      if(user){
+        const { error } = await supabase.auth.signOut();
+        if (error) throw new AppError(error.code, error.status, error.code);
+        else {
+          res.clearCookie("access_token");
+          res.clearCookie("refresh_token");
+          return { status: 200, message: "Sesión cerrada con éxito" };
+      }}
       else {
-        res.clearCookie("access_token");
-        res.clearCookie("refresh_token");
-        return { status: 200, message: "Sesión cerrada con éxito" };
+        throw new AppError("NoSessionError",400,'No hay una sesión activa')
       }
+    
     } catch (e) {
-      return {
-        status: 400,
-        message: "No se pudo realizar el cierre de sesión",
-        error: e,
-      };
+      throw e;
     }
   }
 
   static async refreshUserCookie(token, refToken, res) {
     // Verifica el acceso del usuario con el access_token
-    console.log("verifique los tokens pibe");
+    
     const {
       data: { user },
       error,
@@ -178,10 +179,8 @@ export class UserRepository {
 
     if (!token || error) {
       try {
-        console.log("Token inválido, intentando refrescar...");
-
         if (!refToken) {
-          return { status: 401, message: "Inicie sesión nuevamente" };
+          throw new AppError("unauthorized", 401, "Inicie sesión nuevamente");
         }
         // Intenta refrescar la sesión usando el refresh_token
         const { data, error } = await supabase.auth.refreshSession({
@@ -189,10 +188,9 @@ export class UserRepository {
         });
 
         if (error) {
-          console.log("Error al refrescar sesión:", error.message);
           res.clearCookie("access_token");
           res.clearCookie("refresh_token");
-          return res.status(401).json({ error: "Usuario no autorizado" });
+          throw new AppError("unauthorized", 401, "Usuario no autorizado");
         }
 
         const { session, user } = data;
@@ -215,10 +213,9 @@ export class UserRepository {
 
         res.send({ message: "Refresco exitoso" });
       } catch (err) {
-        console.log("Error al intentar refrescar sesión:", err);
         res.clearCookie("access_token");
         res.clearCookie("refresh_token");
-        return res.status(401).json({ error: "Usuario no autorizado" });
+        throw err;
       }
     }
 

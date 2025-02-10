@@ -3,7 +3,7 @@ import { UserRepository } from "../userRepository.js";
 
 const loginRouter = Router();
 
-loginRouter.post("/", async (req, res) => {
+loginRouter.post("/", async (req, res, next) => {
   const { username, password } = req.body;
   try {
     const data = await UserRepository.logIn({
@@ -12,8 +12,8 @@ loginRouter.post("/", async (req, res) => {
       res,
     });
     res.send(data);
-  } catch (e) {
-    return res.status(500).json(e);
+  } catch (err) {
+     next(err);
   }
 });
 export default loginRouter;

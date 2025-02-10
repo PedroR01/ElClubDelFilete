@@ -1,37 +1,39 @@
 import { Router } from "express";
 import { BlogRepository } from "./blogRepository.js";
+import { AppError } from "../../errors/appError.js";
 
 const blogInfoRouter = Router();
 
-blogInfoRouter.get("/", async (req, res) => {
+blogInfoRouter.get("/", async (req, res,next) => {
   try {
     const data = await BlogRepository.getAllBlogsInfo();
-    console.log(data);
     res.send(data);
   } catch (e) {
-    res.status(500).json(e);
+    next(e)
   }
 });
 
-blogInfoRouter.post("/", async (req, res) => {
+blogInfoRouter.post("/", async (req, res, next) => {
   try{
-    const {tag, title, description, introduction, content_sections, featured_pos } = req.body;
-    const data = await BlogRepository.addBlog(tag, title, description, introduction, content_sections, featured_pos);
-    res.send(data)
+    const {tag, title, description, introduction, content_sections, featured_pos, bucket_folder_url } = req.body;
+    const {data, error} = await BlogRepository.addBlog(tag, title, description, introduction, content_sections, featured_pos, bucket_folder_url);
+    if(error)
+      throw new AppError(error.code, error.status,"No se añadió el blog correctamente. Revise las credenciales")
+    res.send(data);
   }
   catch (err){
-    res.status(500).json(err);
+    next(e)
   }
 })
 
-blogInfoRouter.delete("/", async (req,res) => {
+blogInfoRouter.delete("/", async (req,res, next) => {
   try{
     const {title} = req.body;
     const data = await BlogRepository.deleteBlog(title);
     res.send(data)
   }
   catch (err){
-    res.status(500).json(err);
+    next(err);
   }
         
   }

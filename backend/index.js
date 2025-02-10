@@ -12,6 +12,7 @@ import blogInfoRouter from "./routes/blog/blogInfo.js";
 import blogImgRouter from "./routes/blog/blogBucket.js";
 import logedUserCookiesRouter from "./routes/user/cookies/userCookie.js";
 import cookieParser from "cookie-parser";
+import errorHandler from "./middlewares/errorHandler.js";
 
 dotenv.config();
 const app = express();
@@ -59,6 +60,8 @@ app.use("/api/storage", blogImgRouter);
 app.use((req, res) => {
   res.status(404).send("<h1>Recurso no encontrado</h1>");
 });
+
+app.use(errorHandler); // Esto debe ir al final para manejar cualquier error no capturado
 
 app.listen(PORT, () => {
   console.log(`Servidor corriendo en ${PORT}`);
