@@ -9,11 +9,11 @@ import Blog from "./pages/novedades/BlogPage";
 import Login from "./pages/Login";
 import AuthContextProvider from './context/Authcontext';
 import SignUp from "./pages/authPages/SignUpPage";
-import Admin from "./pages/Admin"
+import Admin from "./pages/Admin";
+import BlogUploadForm from "./pages/BlogUploadForm";
 
 export default function App() {
   return (
-
     <AuthContextProvider>
       <Navbar />
       <Routes>
@@ -24,10 +24,9 @@ export default function App() {
         <Route path="/novedades/:slug" element={<Blog />}></Route>
         <Route path="/login" element={<Login />}></Route>
         <Route path="/signUp" element={<SignUp />}></Route>
-        <Route path="/administrador" element={<Admin/>}></Route> 
+        <Route path="/administrador" element={<BlogUploadForm />}></Route>
       </Routes>
       <Footer />
     </AuthContextProvider>
-
   );
 };
