@@ -5,21 +5,32 @@ import StarterKit from "@tiptap/starter-kit";
 import TextStyle from '@tiptap/extension-text-style';
 import Color from '@tiptap/extension-color';
 import Underline from '@tiptap/extension-underline';
-import { BoldIcon, ItalicIcon, UnderlineIcon, EraserIcon, Heading2Icon, Heading4Icon, ListIcon, ListOrderedIcon, QuoteIcon, MinusIcon, UndoIcon, RedoIcon, PaletteIcon, LetterTextIcon } from 'lucide-react';
+import { BoldIcon, ItalicIcon, UnderlineIcon, EraserIcon, Heading2Icon, Heading4Icon, ListIcon, ListOrderedIcon, QuoteIcon, MinusIcon, UndoIcon, RedoIcon, PaletteIcon, LetterTextIcon, FileTextIcon } from 'lucide-react';
 
-import ReactComponent from './text-editor/Extension.js';
+import { pdfDownloadExtension } from './text-editor/pdfDownloadExtension.js';
 
 const MenuBar = ({ editor }) => {
     const [tooltip, setTooltip] = useState({ visible: false, text: "", x: 0, y: 0 });
 
     if (!editor) return null;
 
+    // Listeners para mostrar un tooltip de la herramienta con :hover
     const showTooltip = (event, text) => {
         const { clientX, clientY } = event;
         setTooltip({ visible: true, text, x: clientX, y: clientY + 20 });
     };
-
     const hideTooltip = () => setTooltip({ visible: false, text: "", x: 0, y: 0 });
+
+    // Metodo para la herramienta de añadir btn de pdf
+    const addPdfDownload = () => {
+        const url = prompt("Ingrese la URL del PDF:");
+        if (!url) return;
+        else {
+            const title = prompt("Ingrese el título del PDF:");
+            editor.chain().focus().insertContent(`<pdf-download url="${url}" title="${title}"/>`).run();
+        }
+
+    };
 
     return (
         <div className="relative">
@@ -65,6 +76,9 @@ const MenuBar = ({ editor }) => {
                     </button>
                     <button type="button" onClick={() => editor.chain().focus().toggleBlockquote().run()} className={editor.isActive('blockquote') ? 'is-active' : ''}>
                         <QuoteIcon size={20} />
+                    </button>
+                    <button type="button" onClick={addPdfDownload}>
+                        <FileTextIcon size={20} />
                     </button>
                 </div>
 
@@ -113,7 +127,7 @@ export default function TextEditor({ blogContent, onChange }) {
     const editor = useEditor({
         extensions: [
             StarterKit,
-            ReactComponent,
+            pdfDownloadExtension,
             TextStyle,
             Color,
             Underline.configure({

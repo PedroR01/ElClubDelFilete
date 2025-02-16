@@ -17,13 +17,11 @@ export default function BlogUploadForm() {
       title: "",
       tag: "",
       description: "",
-      coverImage: null,
-      content: "<react-component count='0'></react-component>",
-      pdfLink: "",
-      videoLink: "",
-      contentImages: [],
+      content: "",
       featured_pos: null,
-      bucket_folder_url: ""
+      bucket_folder_url: "",
+      coverImage: null,
+      contentImages: [],
     },
   });
 
@@ -34,20 +32,22 @@ export default function BlogUploadForm() {
 
   const onSubmit = async (data) => {
 
-    const formData = new FormData();
-    formData.append("title", data.title);
-    formData.append("tag", data.tag);
-    formData.append("description", data.description);
-    formData.append("content_sections", data.content);
-    formData.append("pdfLink", data.pdfLink);
-    formData.append("videoLink", data.videoLink);
-
+    const blogData = {
+      title: data.title,
+      tag: data.tag,
+      description: data.description,
+      content_sections: data.content,
+      featured_pos: null
+    }
     if (isFeatured)
-      formData.append("featured_pos", data.featured_pos);
+      blogData.featured_pos = data.featured_pos;
 
+    const formData = new FormData();
     //  Agregar la imagen de portada
     if (data.coverImage) {
-      formData.append("coverImage", data.coverImage);
+      formData.append("image", data.coverImage);
+      formData.append("imgName", "portrait." + data.coverImage.name.split('.').pop().toLowerCase());
+      formData.append("folderName", data.title);
     }
 
     //  Agregar imágenes adicionales (si se permite múltiples imágenes)
@@ -55,60 +55,46 @@ export default function BlogUploadForm() {
       formData.append(`contentImages[${index}]`, img);
     });
 
-    const testData = {
-      content_sections: data.content
+    if (data.contentImages) {
+      // Renombramiento de las imagenes en orden de subida para mostrarlas en el mismo orden
+      data.contentImages.forEach((img, index) => {
+        const format = img.name.split('.').pop().toLowerCase();
+        const renamedFile = new File([img], `blogImg${index}.${format}`, { type: img.type });
+
+        formData.append("images", renamedFile); // El nombre debe ser el mismo que espera el backend
+      });
+      formData.append("folderName", data.title);
+      console.log(Array.from(formData.entries()));
     }
 
-    // const testFormData = new FormData();
-    // // const renamedCoverImg = data.coverImage;
-    // // renamedCoverImg.name = "portrait." + data.coverImage.name.split('.').pop().toLowerCase();
-    // testFormData.append("image", data.coverImage);
-    // testFormData.append("imgName", "portrait." + data.coverImage.name.split('.').pop().toLowerCase());
-    // testFormData.append("folderName", data.title);
-
-    const testArrayImgFormData = new FormData();
-    // Renombramiento de las imagenes en orden de subida para mostrarlas en el mismo orden
-    data.contentImages.forEach((img, index) => {
-      const format = img.name.split('.').pop().toLowerCase();
-      const renamedFile = new File([img], `blogImg${index}.${format}`, { type: img.type });
-
-      testArrayImgFormData.append("images", renamedFile); // El nombre debe ser el mismo que espera el backend
-    });
-    testArrayImgFormData.append("folderName", data.title);
-    console.log(Array.from(testArrayImgFormData.entries()));
-
     try {
-      const responseTestBlogImgUpload = await fetch("http://localhost:3001/api/storage/testArray", {
+      // const responseTestArrayBlogImgUpload = await fetch("http://localhost:3001/api/storage/testArray", {
+      //   method: "POST",
+      //   body: testArrayImgFormData
+      // });
+      const responseTestBlogImgUpload = await fetch("http://localhost:3001/api/storage/test", {
         method: "POST",
-        body: testArrayImgFormData
+        body: formData
       });
-      // const responseTestBlogImgUpload = await fetch("http://localhost:3001/api/storage/test", {
-      //   method: "POST",
-      //   body: testFormData
-      // });
-      // const responseTestBlogDataUpload = await fetch("http://localhost:3001/api/blogs/test", {
-      //   method: "POST",
-      //   headers: { 'Content-Type': 'application/json' },
-      //   body: JSON.stringify(testData)
-      // });
-      // if (!responseTestBlogDataUpload.ok)
-      //   throw new Error("Error al enviar el formulario.");
+      const responseTestBlogDataUpload = await fetch("http://localhost:3001/api/blogs/test", {
+        method: "POST",
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(blogData)
+      });
+      if (!responseTestBlogDataUpload.ok)
+        throw new Error("Error al enviar el formulario.");
 
-      // if (!responseTestBlogImgUpload.ok)
-      //   throw new Error("Error al subir la imagen.");
-      const result = await responseTestBlogImgUpload.json(); // Intentar obtener mensaje detallado del backend
       if (!responseTestBlogImgUpload.ok)
-        throw new Error(`Error ${responseTestBlogImgUpload.status}: ${result.message || "Error desconocido"}`);
-
-      // console.log(await responseTestBlogImgUpload.json());
-      // console.log(await responseTestBlogDataUpload.json());
+        throw new Error("Error al subir la imagen.");
+      // const result = await responseTestBlogImgUpload.json(); // Intentar obtener mensaje detallado del backend
+      // if (!responseTestArrayBlogImgUpload.ok)
+      //   throw new Error(`Error ${responseTestBlogImgUpload.status}: ${result.message || "Error desconocido"}`);
 
     } catch (e) {
       console.error("Error:", e);
     }
-    console.log("Datos del formulario (crudo):", testData);
+    console.log("Datos del formulario (crudo):", blogData);
   };
-
 
   const handleChange = (htmlContent) => {
     setValue("content", htmlContent);
@@ -202,12 +188,6 @@ export default function BlogUploadForm() {
           defaultValue=""
         />
         {errors.content && <p className="text-red-500 text-sm">{errors.content.message}</p>}
-
-        <label className="block mt-4 font-semibold text-[#CDA053]">PDF - Link Google Drive:</label>
-        <input type="url" {...register("pdfLink")} className="p-2 w-full bg-transparent text-[#FEFFFB] rounded border border-[#cda05377] placeholder-transparent focus:ring-[#CDA053] focus:outline-none" />
-
-        <label className="block mt-4 font-semibold text-[#CDA053]">Video/s - Link (YouTube):</label>
-        <input type="url" {...register("videoLink")} className="p-2 w-full bg-transparent text-[#FEFFFB] rounded border border-[#cda05377] placeholder-transparent focus:ring-[#CDA053] focus:outline-none" />
 
         <label className="block mt-4 font-semibold text-[#CDA053]">Imágenes del contenido (.jpg, máx. 500KB total):</label>
         <ImageUploader
