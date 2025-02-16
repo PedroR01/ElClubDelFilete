@@ -89,14 +89,14 @@ export default function HistoriaPage() {
                                 </defs>
                             </svg>
                             <h3
-                                className="text-3xl md:mt-16  lg:text-4xl lg:mt-5 md:text-nowrap hamston text-[#CDA053] 2xl:text-5xl font-bold mb-6 text-center tracking-wider 
+                                className="md:mt-16 lg:mt-5 md:text-nowrap  mb-6 text-center tracking-wider 
             opacity-0 animate-fade-in transition duration-700"
                             >
                                 HISTORIA DEL FILETE PORTEÑO
                             </h3>
 
                             <p
-                                className="text-base lg:text-lg xl:text-xl montserrat-normal text-[#FEFFFB] xl:pt-14  leading-relaxed max-w-4xl opacity-0 md:translate-x-[50px] animate-fade-in transition duration-700"
+                                className="xl:pt-14  leading-relaxed max-w-4xl opacity-0 md:translate-x-[50px] animate-fade-in transition duration-700"
                             >
                                 El filete porteño es mucho más que un estilo decorativo; es una
                                 <span className="text-[#CDA053]"> tradición </span> que llevo en cada trazo y cada espiral, algo que, de alguna
@@ -121,8 +121,8 @@ export default function HistoriaPage() {
                     </section>
                     <section className="relative fixed-bg">
                         <article className="pt-20 text-left md:pt-40 md:text-left">
-                            <h3 className="text-4xl justify-self-center hamston text-[#CDA053] md:text-6xl font-bold mb-6 lg:ml-20 tracking-wider z-10 brightness-100">El Club Del Filete</h3>
-                            <p className="text-base montserrat-normal text-[#FEFFFB] mt-14 lg:text-lg leading-relaxed max-w-7xl  lg:ml-48 bg-[rgba(0,0,0,.7)] p-6 rounded-lg">El Club del Filete es una <span className="text-[#CDA053]">plataforma online de enseñanza que busca democratizar el acceso a la enseñanza del Filete Porteño,</span> aprovechando las ventajas de la virtualidad para llevar la identidad argentina a todos los rincones del mundo, tanto para los argentinos que se encuentran lejos de su tierra como para el resto del mundo que quiere conocer la Cultura Argentina.
+                            <h3 className="justify-self-center md:text-6xl mb-6 lg:ml-20 tracking-wider z-10 brightness-100">El Club Del Filete</h3>
+                            <p className="mt-14 leading-relaxed max-w-7xl  lg:ml-48 bg-[rgba(0,0,0,.7)] p-6 rounded-lg">El Club del Filete es una <span className="text-[#CDA053]">plataforma online de enseñanza que busca democratizar el acceso a la enseñanza del Filete Porteño,</span> aprovechando las ventajas de la virtualidad para llevar la identidad argentina a todos los rincones del mundo, tanto para los argentinos que se encuentran lejos de su tierra como para el resto del mundo que quiere conocer la Cultura Argentina.
                                 La idea surge de la necesidad del público de aprender este arte, por eso me decidí a crear esta plataforma digital de enseñanza que ahora ya es una <span className="text-[#CDA053]">COMUNIDAD FILETEADORA</span></p>
                         </article>
                     </section>
@@ -133,7 +133,7 @@ export default function HistoriaPage() {
 
                     <article className="relative flex flex-col z-10 top-20 lg:w-3/5 lg:top-24 h-full items-center text-white md:pl-0 lg:pr-20 px-6">
 
-                        <h3 className="text-3xl md:mt-8 lg:text-4xl lg:mt-0 lg:-translate-y-5 hamston text-[#CDA053] 2xl:text-5xl font-bold md:mb-6 text-center tracking-wider z-10">
+                        <h3 className="md:mt-8 lg:mt-0 lg:-translate-y-5  md:mb-6 text-center tracking-wider z-10">
                             HISTORIA DE CRIS
                         </h3>
                         {/* md -36 lg - 40 xk */}
@@ -155,7 +155,7 @@ export default function HistoriaPage() {
                             </defs>
                         </svg>
 
-                        <p className="text-base lg:text-lg xl:text-xl montserrat-normal text-[#FEFFFB] pt-14 md:ml-8 md:pt-0 md:text-base leading-relaxed max-w-4xl z-10 relative">
+                        <p className="pt-14 md:ml-8 md:pt-0 leading-relaxed max-w-4xl z-10 relative">
                             Que decirte de mi… Nací en el año 1985 un Martes 22 de Octubre bajo el
                             signo de Libra en un hospital público de la Ciudad de La Plata,
                             Provincia de Buenos Aires. Desde que tengo uso de razón uso el arte

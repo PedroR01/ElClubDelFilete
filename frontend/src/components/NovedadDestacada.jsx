@@ -16,7 +16,7 @@ export default function NovedadDestacada({ content }) {
                 <span className="hamston text-sm uppercase tracking-wide text-[#CDA053] p-1 border-2 rounded-lg border-[#CDA053] brightness-90">
                     {content.tag}
                 </span>
-                <h2 className="hamston text-[#CDA053] text-2xl lg:text-3xl mt-3">
+                <h2 className="mt-3">
                     {content.title}
                 </h2>
                 <p className="line-clamp-3 inria-sans-regular text-sm text-[#FEFFEB] mt-2 lg:block">

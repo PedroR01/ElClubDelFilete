@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import { useState } from "react";
 export default function Admin() {
-    const [imgName, setImgName] = useState("");
+  const [imgName, setImgName] = useState("");
   const [folderName, setFolderName] = useState("");
   const [image, setImage] = useState(null);
   const [tag, setTag] = useState("");
@@ -41,19 +41,19 @@ export default function Admin() {
       alert("Please fill in all fields and select an image.");
       return;
     }
-    
+
     // Crear un objeto JSON para enviar los datos
     const formData = new FormData();
     formData.append("image", image);
     formData.append("imgName", imgName);
     formData.append("folderName", folderName);
     console.log('Form Data:', formData);
-  
+
     try {
-        const response = await fetch("http://localhost:3001/api/storage", {
-          method: "POST",
-          body: formData
-        });
+      const response = await fetch("http://localhost:3001/api/storage", {
+        method: "POST",
+        body: formData
+      });
       const result = await response.json();
       if (response.ok) {
         console.log("Image uploaded successfully:", result);

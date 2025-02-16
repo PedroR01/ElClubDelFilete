@@ -18,14 +18,14 @@ export default function Novedad({ content, mobile }) {
                 </div>
 
                 {/* Contenido textual */}
-                <div className="flex flex-col justify-center px-8 my-4 text-left text-[#FEFFEB]">
+                <div className="flex flex-col justify-center px-8 my-4 text-left">
                     <span className="hamston text-sm w-fit uppercase tracking-wide text-[#CDA053] p-1 border-2 rounded-lg border-[#CDA053] brightness-90 mb-4">
                         {content.tag}
                     </span>
-                    <h3 className="hamston text-[#CDA053] text-lg lg:text-base mt-2 leading-tight">
+                    <h5 className="mt-2 leading-tight">
                         {content.title}
-                    </h3>
-                    <p className="inria-sans-regular text-sm mt-2 line-clamp-3">
+                    </h5>
+                    <p className="mt-2 text-sm line-clamp-3">
                         {content.description}
                     </p>
                 </div>
@@ -46,10 +46,10 @@ export default function Novedad({ content, mobile }) {
                     <span className="hamston text-sm uppercase tracking-wide text-[#CDA053] p-1 border-2 rounded-lg border-[#CDA053] brightness-90">
                         {content.tag}
                     </span>
-                    <h2 className="hamston text-[#CDA053] text-xl leading-tight">
+                    <h5 className="leading-tight">
                         {content.title}
-                    </h2>
-                    <p className="line-clamp-3 inria-sans-regular text-[#FEFFEB] text-sm leading-relaxed">
+                    </h5>
+                    <p className="line-clamp-3 text-sm leading-relaxed">
                         {content.description}
                     </p>
                 </div>
