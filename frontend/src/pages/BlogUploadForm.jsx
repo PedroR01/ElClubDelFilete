@@ -198,7 +198,8 @@ export default function BlogUploadForm() {
           name="description"
           control={control}
           rules={{ required: "La descripción es obligatoria" }}
-          render={() => (<TextEditor blogContent={watch("content")} onChange={(htmlContent) => handleChange(htmlContent)} />)}
+          render={() => (<TextEditor blogContent={watch("content")} onChange={(htmlContent) => handleChange(htmlContent)}
+          images={watch("contentImages")} />)}
           defaultValue=""
         />
         {errors.content && <p className="text-red-500 text-sm">{errors.content.message}</p>}
