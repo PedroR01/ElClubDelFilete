@@ -18,7 +18,7 @@ export default function BlogUploadForm() {
       tag: "",
       description: "",
       coverImage: null,
-      content: "",
+      content: "<react-component count='0'></react-component>",
       pdfLink: "",
       videoLink: "",
       contentImages: [],
@@ -33,44 +33,80 @@ export default function BlogUploadForm() {
   const maxChar = 200;
 
   const onSubmit = async (data) => {
+
     const formData = new FormData();
     formData.append("title", data.title);
     formData.append("tag", data.tag);
     formData.append("description", data.description);
-    formData.append("content", data.content);
+    formData.append("content_sections", data.content);
     formData.append("pdfLink", data.pdfLink);
     formData.append("videoLink", data.videoLink);
 
     if (isFeatured)
       formData.append("featured_pos", data.featured_pos);
 
-    // 📌 Agregar la imagen de portada
+    //  Agregar la imagen de portada
     if (data.coverImage) {
       formData.append("coverImage", data.coverImage);
     }
 
-    // 📌 Agregar imágenes adicionales (si se permite múltiples imágenes)
+    //  Agregar imágenes adicionales (si se permite múltiples imágenes)
     data.contentImages.forEach((img, index) => {
       formData.append(`contentImages[${index}]`, img);
     });
 
-    try {
-      const response = await fetch("http://localhost:3001/api/blogs", {
-        method: "POST",
-        body: formData,
-      });
-      console.log(response);
-
-      if (!response.ok) {
-        throw new Error("Error al enviar el formulario");
-      }
-
-    } catch (error) {
-      console.error("Error:", error);
+    const testData = {
+      content_sections: data.content
     }
 
-    console.log("Datos del formulario (formData):", formData);
-    console.log("Datos del formulario (crudo):", data);
+    // const testFormData = new FormData();
+    // // const renamedCoverImg = data.coverImage;
+    // // renamedCoverImg.name = "portrait." + data.coverImage.name.split('.').pop().toLowerCase();
+    // testFormData.append("image", data.coverImage);
+    // testFormData.append("imgName", "portrait." + data.coverImage.name.split('.').pop().toLowerCase());
+    // testFormData.append("folderName", data.title);
+
+    const testArrayImgFormData = new FormData();
+    // Renombramiento de las imagenes en orden de subida para mostrarlas en el mismo orden
+    data.contentImages.forEach((img, index) => {
+      const format = img.name.split('.').pop().toLowerCase();
+      const renamedFile = new File([img], `blogImg${index}.${format}`, { type: img.type });
+
+      testArrayImgFormData.append("images", renamedFile); // El nombre debe ser el mismo que espera el backend
+    });
+    testArrayImgFormData.append("folderName", data.title);
+    console.log(Array.from(testArrayImgFormData.entries()));
+
+    try {
+      const responseTestBlogImgUpload = await fetch("http://localhost:3001/api/storage/testArray", {
+        method: "POST",
+        body: testArrayImgFormData
+      });
+      // const responseTestBlogImgUpload = await fetch("http://localhost:3001/api/storage/test", {
+      //   method: "POST",
+      //   body: testFormData
+      // });
+      // const responseTestBlogDataUpload = await fetch("http://localhost:3001/api/blogs/test", {
+      //   method: "POST",
+      //   headers: { 'Content-Type': 'application/json' },
+      //   body: JSON.stringify(testData)
+      // });
+      // if (!responseTestBlogDataUpload.ok)
+      //   throw new Error("Error al enviar el formulario.");
+
+      // if (!responseTestBlogImgUpload.ok)
+      //   throw new Error("Error al subir la imagen.");
+      const result = await responseTestBlogImgUpload.json(); // Intentar obtener mensaje detallado del backend
+      if (!responseTestBlogImgUpload.ok)
+        throw new Error(`Error ${responseTestBlogImgUpload.status}: ${result.message || "Error desconocido"}`);
+
+      // console.log(await responseTestBlogImgUpload.json());
+      // console.log(await responseTestBlogDataUpload.json());
+
+    } catch (e) {
+      console.error("Error:", e);
+    }
+    console.log("Datos del formulario (crudo):", testData);
   };
 
 
@@ -162,7 +198,7 @@ export default function BlogUploadForm() {
           name="description"
           control={control}
           rules={{ required: "La descripción es obligatoria" }}
-          render={(field) => (<TextEditor blogContent={field} onChange={(htmlContent) => handleChange(htmlContent)} />)}
+          render={() => (<TextEditor blogContent={watch("content")} onChange={(htmlContent) => handleChange(htmlContent)} />)}
           defaultValue=""
         />
         {errors.content && <p className="text-red-500 text-sm">{errors.content.message}</p>}
@@ -175,7 +211,7 @@ export default function BlogUploadForm() {
 
         <label className="block mt-4 font-semibold text-[#CDA053]">Imágenes del contenido (.jpg, máx. 500KB total):</label>
         <ImageUploader
-          onChange={(image) => setValue("coverImage", image)}
+          onChange={(image) => setValue("contentImages", image)}
           multiple={true}
         />
 

@@ -37,7 +37,7 @@ export default function ImageUploader({ onChange, multiple = false }) {
 
     return (
         <div>
-            <Dropzone onDrop={onDrop} multiple={multiple} accept={{ "image/*": [".jpg", ".png"] }}>
+            <Dropzone onDrop={onDrop} multiple={multiple} accept={{ "image/*": [".jpg", ".jpeg", ".png"] }}>
                 {({ getRootProps, getInputProps }) => (
                     <div
                         {...getRootProps()}

@@ -7,6 +7,8 @@ import Color from '@tiptap/extension-color';
 import Underline from '@tiptap/extension-underline';
 import { BoldIcon, ItalicIcon, UnderlineIcon, EraserIcon, Heading2Icon, Heading4Icon, ListIcon, ListOrderedIcon, QuoteIcon, MinusIcon, UndoIcon, RedoIcon, PaletteIcon, LetterTextIcon } from 'lucide-react';
 
+import ReactComponent from './text-editor/Extension.js';
+
 const MenuBar = ({ editor }) => {
     const [tooltip, setTooltip] = useState({ visible: false, text: "", x: 0, y: 0 });
 
@@ -48,7 +50,7 @@ const MenuBar = ({ editor }) => {
                     <button type="button" onClick={() => editor.chain().focus().toggleHeading({ level: 4 }).run()} className={editor.isActive('heading', { level: 4 }) ? 'is-active' : ''}>
                         <Heading4Icon size={20} />
                     </button>
-                    <button type="button" onClick={() => editor.chain().focus().setColor('#CDA053').run()} className={editor.isActive('textStyle', { color: '#CDA053' }) ? 'is-active' : ''}>
+                    <button type="button" onClick={() => editor.chain().focus().setColor('#CDA053').run()} className={editor.isActive('textStyle', { color: '#CDA053' }) ? 'is-active' : 'text-[#FEFFFB]'}>
                         <PaletteIcon size={20} />
                     </button>
                 </div>
@@ -111,6 +113,7 @@ export default function TextEditor({ blogContent, onChange }) {
     const editor = useEditor({
         extensions: [
             StarterKit,
+            ReactComponent,
             TextStyle,
             Color,
             Underline.configure({
