@@ -6,8 +6,6 @@ import TextStyle from '@tiptap/extension-text-style';
 import Color from '@tiptap/extension-color';
 import Underline from '@tiptap/extension-underline';
 import { BoldIcon, ItalicIcon, UnderlineIcon, EraserIcon, Heading2Icon, Heading4Icon, ListIcon, ListOrderedIcon, QuoteIcon, MinusIcon, UndoIcon, RedoIcon, PaletteIcon, LetterTextIcon, YoutubeIcon } from 'lucide-react';
-
-
 import { DraggableImage } from "./text-editor/DraggableImage.js";
 
 import { YoutubeVideo } from "./text-editor/YoutubeVideo.js";
@@ -181,19 +179,31 @@ export default function TextEditor({ blogContent, onChange, images }) {
       };
       
       
-
       useEffect(() => {
-        if (editor && images?.length > 0) {
-          images.forEach((img) => {
-            const reader = new FileReader();
-            reader.readAsDataURL(img);
-            reader.onload = () => {
-              editor.chain().focus().insertContent(`<img src="${reader.result}" draggable="true" />`).run();
-            };
+        if (editor) {
+          const currentContent = editor.getJSON(); // Obtener el contenido actual del editor
+      
+          // Filtrar las imágenes que deben estar en el editor (las que están en el estado de images)
+          const imagesContent = images
+            .map((image) => ({ type: 'image', attrs: { src: URL.createObjectURL(image) } }))
+            .map((image) => ({ type: 'node', ...image }));
+      
+          // Filtramos el contenido del editor actual para eliminar imágenes que ya no están en images
+          const filteredContent = currentContent.content.filter((node) => {
+            // Si el nodo es de tipo 'image' y su src no está en las imágenes actuales, lo eliminamos
+            return !(node.type === 'image' && !images.some((image) => node.attrs.src === URL.createObjectURL(image)));
+          });
+      
+          // Combina el contenido actual filtrado con las nuevas imágenes (si las hay)
+          editor.commands.setContent({
+            type: 'doc',
+            content: [
+              ...filteredContent,  // Mantener el contenido existente sin las imágenes eliminadas
+              ...imagesContent,  // Agregar las imágenes restantes
+            ],
           });
         }
-      }, [images, editor]);
-      
+      }, [images, editor]); // Se dispara cuando cambian las imágenes o el 
     return (
         <>
             <MenuBar editor={editor} insertVideo={addYoutubeVideo} />
