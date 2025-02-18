@@ -1,25 +1,37 @@
 import { useState, useEffect } from "react";
 import { useEditor, EditorContent } from "@tiptap/react";
-// import { Node } from '@tiptap/core';
 import StarterKit from "@tiptap/starter-kit";
 import TextStyle from '@tiptap/extension-text-style';
 import Color from '@tiptap/extension-color';
 import Underline from '@tiptap/extension-underline';
-import { BoldIcon, ItalicIcon, UnderlineIcon, EraserIcon, Heading2Icon, Heading4Icon, ListIcon, ListOrderedIcon, QuoteIcon, MinusIcon, UndoIcon, RedoIcon, PaletteIcon, LetterTextIcon, YoutubeIcon } from 'lucide-react';
-import { DraggableImage } from "./text-editor/DraggableImage.js";
+import { BoldIcon, ItalicIcon, UnderlineIcon, EraserIcon, Heading2Icon, Heading4Icon, ListIcon, ListOrderedIcon, QuoteIcon, MinusIcon, UndoIcon, RedoIcon, PaletteIcon, LetterTextIcon, YoutubeIcon, FileTextIcon } from 'lucide-react';
 
+import { pdfDownloadExtension } from './text-editor/pdfDownloadExtension.js';
+import { DraggableImage } from "./text-editor/DraggableImage.js";
 import { YoutubeVideo } from "./text-editor/YoutubeVideo.js";
+
 const MenuBar = ({ editor, insertVideo }) => {
     const [tooltip, setTooltip] = useState({ visible: false, text: "", x: 0, y: 0 });
 
     if (!editor) return null;
 
+    // Listeners para mostrar un tooltip de la herramienta con :hover
     const showTooltip = (event, text) => {
         const { clientX, clientY } = event;
         setTooltip({ visible: true, text, x: clientX, y: clientY + 20 });
     };
-
     const hideTooltip = () => setTooltip({ visible: false, text: "", x: 0, y: 0 });
+
+    // Metodo para la herramienta de añadir btn de pdf
+    const addPdfDownload = () => {
+        const url = prompt("Ingrese la URL del PDF:");
+        if (!url) return;
+        else {
+            const title = prompt("Ingrese el título del PDF:");
+            editor.chain().focus().insertContent(`<pdf-download url="${url}" title="${title}"/>`).run();
+        }
+
+    };
 
     return (
         <div className="relative">
@@ -66,6 +78,9 @@ const MenuBar = ({ editor, insertVideo }) => {
                     <button type="button" onClick={() => editor.chain().focus().toggleBlockquote().run()} className={editor.isActive('blockquote') ? 'is-active' : ''}>
                         <QuoteIcon size={20} />
                     </button>
+                    <button type="button" onClick={addPdfDownload}>
+                        <FileTextIcon size={20} />
+                    </button>
                 </div>
 
                 {/* Grupo de Elementos y Formato */}
@@ -106,20 +121,12 @@ const MenuBar = ({ editor, insertVideo }) => {
     );
 };
 
-// Configurar el editor de TipTap
-// talvez le haga falta el campo element: document.querySelector('.element'), para que tome los cambios del contenido
-// const onChange = (prop) => {
-//     console.log(prop);
-// }
-
 export default function TextEditor({ blogContent, onChange, images }) {
-    // const whiteSpace = Node.create({
-    //     whitespace: 'pre',
-    //   })
 
     const editor = useEditor({
         extensions: [
             StarterKit,
+            pdfDownloadExtension,
             TextStyle,
             Color,
             Underline.configure({
@@ -140,41 +147,24 @@ export default function TextEditor({ blogContent, onChange, images }) {
             onChange(editor.getHTML());
         },
         immediatelyRender: true,
-        // onContentError({ editor, error, disableCollaboration }) {
-        //     console.log("onContentError TipTap: " + editor + " || " + error);
-        // },
     });
-    /*
-    const addYoutubeVideo = () => {
-        const url = prompt('Enter YouTube URL');
-        if (url) {
-          // Asegúrate de que la URL sea en el formato de embed
-          const embedUrl = url.replace('https://www.youtube.com/watch?v=', 'https://www.youtube.com/embed/');
-          editor.commands.setYoutubeVideo({
-            src: embedUrl,
-            width: 640,
-            height: 480,
-            attrs: { draggable: true }
-          });
-        }
-      };
-      */
-      const getEmbedUrl = (url) => {
+
+    const getEmbedUrl = (url) => {
         const match = url.match(/(?:youtube\.com\/(?:watch\?v=|embed\/)|youtu\.be\/)([^&?/]+)/);
         return match ? `https://www.youtube.com/embed/${match[1]}` : null;
-      };
-      
-      const addYoutubeVideo = () => {
+    };
+
+    const addYoutubeVideo = () => {
         const url = prompt("Ingrese la URL de YouTube");
         const embedUrl = getEmbedUrl(url);
-      
+
         if (embedUrl) {
-          editor.chain().focus().insertContent({
-            type: "youtube",
-            attrs: { src: embedUrl, width: 200, height: 200 },
-          }).run();
+            editor.chain().focus().insertContent({
+                type: "youtube",
+                attrs: { src: embedUrl, width: 200, height: 200 },
+            }).run();
         } else {
-          alert("URL no válida, por favor ingrese un enlace de YouTube.");
+            alert("URL no válida, por favor ingrese un enlace de YouTube.");
         }
       };
       
@@ -202,8 +192,9 @@ export default function TextEditor({ blogContent, onChange, images }) {
               ...imagesContent,  // Agregar las imágenes restantes
             ],
           });
-        }
-      }, [images, editor]); // Se dispara cuando cambian las imágenes o el 
+    };
+    }, [images, editor]);
+
     return (
         <>
             <MenuBar editor={editor} insertVideo={addYoutubeVideo} />

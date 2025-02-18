@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 
 export function useNovedadesFetch() {
     const [novedades, setNovedades] = useState([]);
+    const [novedadesTest, setNovedadesTest] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
@@ -24,5 +25,23 @@ export function useNovedadesFetch() {
         fetchNovedades();
     }, []);
 
-    return { novedades, loading, error };
+    useEffect(() => {
+        const fetchNovedadesTest = async () => {
+            try {
+                const response = await fetch("http://localhost:3001/api/blogs/test");
+                if (!response.ok) throw new Error(`HTTP error! Res status: ${response.status}`);
+
+                const data = await response.json();
+                setNovedadesTest(data.metaData);
+            } catch (e) {
+                setError(e);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchNovedadesTest();
+    }, []);
+
+    return { novedades, novedadesTest, loading, error };
 }
