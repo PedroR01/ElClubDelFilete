@@ -3,9 +3,10 @@ import { useNovedadesFetch } from "../hooks/useNovedadesFetch";
 import Button from "../components/Button";
 import NovedadDestacada from "../components/NovedadDestacada";
 import Novedad from "../components/Novedad";
+import BlogPortrait from "../components/BlogPortrait";
 
 export default function NovedadesPage() {
-    const { novedades, loading, error } = useNovedadesFetch();
+    const { novedades, novedadesTest, loading, error } = useNovedadesFetch();
 
     if (loading) return <p>Cargando novedades...</p>; // mostrar skeleton loading.
     if (error) return <p>Error al cargar novedades: {error}</p>;
@@ -28,21 +29,65 @@ export default function NovedadesPage() {
                 />
                 <link rel="canonical" href="/novedades" />
             </Helmet>
-            <section className="w-full bg-[#8F272A] py-24 md:py-36">
-                {/* Contenedor principal */}
+            <section className="w-full bg-[#8F272A] py-24 md:py-36 grid gap-28">
+                {/* <div className="grid grid-cols-7 grid-rows-3 gap-4 lg:gap-6 w-full md:w-11/12 md:justify-self-center h-96 lg:h-[80vh]"> */}
+                {/* Noticia principal */}
+                {/* <NovedadDestacada content={destacadaPrincipal} /> */}
+                {/* Noticias secundarias para desktop */}
+                {/* <div className="hidden lg:flex flex-col col-span-3 row-span-3 gap-6">
+                        {novedades.filter((news) => news.featured_pos !== 1).map((news, newsKey) => (
+                            <Novedad
+                                content={news}
+                                mobile={false}
+                                key={newsKey} />
+                        ))}
+                    </div>
+                </div> */}
                 <div className="grid grid-cols-7 grid-rows-3 gap-4 lg:gap-6 w-full md:w-11/12 md:justify-self-center h-96 lg:h-[80vh]">
-                    {/* Noticia principal */}
-                    <NovedadDestacada content={destacadaPrincipal} />
-                    {/* Noticias secundarias para desktop */}
+                    <BlogPortrait content={novedades[0]} orientation="main" />
                     <div className="hidden lg:flex flex-col col-span-3 row-span-3 gap-6">
-                        {novedades.filter((news) => news.featured_pos !== 1).map((news, _) => (
+                        {novedades.filter((news) => news.featured_pos !== 1).map((news, newsKey) => (
+                            <article className="grid h-1/3" key={newsKey} >
+                                <BlogPortrait
+                                    content={news}
+                                    orientation="horizontal"
+                                />
+                            </article>
+
+                        ))}
+                    </div>
+                </div>
+                <section className="w-11/12 mx-auto">
+                    <h2>Más vistas</h2>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                        {novedadesTest.filter((news) => news.featured_pos !== 1).map((news, newsKey) => (
+                            <article className="grid" key={newsKey} >
+                                <BlogPortrait
+                                    content={news}
+                                    orientation="vertical"
+                                />
+                            </article>
+
+                        ))}
+                    </div>
+                </section>
+
+
+                {/* Contenedor principal */}
+                {/* <div className="grid grid-cols-7 grid-rows-3 gap-4 lg:gap-6 w-full md:w-11/12 md:justify-self-center h-96 lg:h-[80vh]"> */}
+                {/* Noticia principal */}
+                {/* <NovedadDestacada content={novedadesTest[0]} /> */}
+                {/* Noticias secundarias para desktop */}
+                {/* <div className="hidden lg:flex flex-col col-span-3 row-span-3 gap-6">
+                        {novedadesTest.filter((news) => news.featured_pos !== 1).map((news, _) => (
                             <Novedad
                                 content={news}
                                 mobile={false}
                                 key={_} />
                         ))}
                     </div>
-                </div>
+                </div> */}
+
 
                 {/* Noticias secundarias para mobile (slider) */}
                 <div className="flex lg:hidden overflow-x-hide gap-4 p-4">

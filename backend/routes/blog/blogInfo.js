@@ -13,6 +13,15 @@ blogInfoRouter.get("/", async (req, res, next) => {
   }
 });
 
+blogInfoRouter.get("/test", async (req, res, next) => {
+  try {
+    const data = await BlogRepository.getAllBlogsInfoTest();
+    res.send(data);
+  } catch (e) {
+    next(e);
+  }
+});
+
 blogInfoRouter.post("/", async (req, res, next) => {
   try {
     const {
@@ -47,8 +56,22 @@ blogInfoRouter.post("/", async (req, res, next) => {
 
 blogInfoRouter.post("/test", async (req, res, next) => {
   try {
-    const { content_sections } = req.body;
-    const { data, error } = await BlogRepository.addTestBlog(content_sections);
+    const {
+      content_sections,
+      tag,
+      title,
+      description,
+      featured_pos,
+      bucket_folder_url,
+    } = req.body;
+    const { data, error } = await BlogRepository.addTestBlog(
+      content_sections,
+      tag,
+      title,
+      description,
+      featured_pos,
+      bucket_folder_url
+    );
     if (error)
       throw new AppError(
         error.code,

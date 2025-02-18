@@ -64,6 +64,27 @@ export class BlogRepository {
     }
   }
 
+  static async getAllBlogsInfoTest() {
+    try {
+      let { data: test_blog, error } = await supabase
+        .from("test_blog")
+        .select("*");
+      if (error)
+        throw new AppError(
+          error.code,
+          500,
+          "Error al intentar obtener información de los blogs."
+        );
+      return {
+        status: 200,
+        message: "Información de los blogs de prueba recuperada con éxito.",
+        metaData: test_blog,
+      };
+    } catch (e) {
+      throw e;
+    }
+  }
+
   static async getAllBlogsImages() {
     const { data: subcarpetas, error: errorSubcarpetas } =
       await supabase.storage
@@ -186,18 +207,30 @@ export class BlogRepository {
     }
   }
 
-  static async addTestBlog(newContent) {
+  static async addTestBlog(
+    content,
+    tag,
+    title,
+    description,
+    featuredPos,
+    bucketFolderUrl
+  ) {
     const { data, error } = await supabase
       .from("test_blog")
       .insert({
-        content_sections: newContent,
+        content_sections: content,
+        tag: tag,
+        title: title,
+        description: description,
+        featured_pos: featuredPos,
+        bucket_folder_url: bucketFolderUrl,
       })
       .select();
     if (error) console.log("Error: " + error.message);
     return { data, error };
   }
 
-  static async addImageTest(image, folderName, imgName, mimeType) {
+  static async addImageTest(image, imgName, folderName, mimeType) {
     const { data, error } = await supabase.storage
       .from("Novedades")
       .upload(`${folderName}/${imgName}`, image, {
@@ -213,9 +246,27 @@ export class BlogRepository {
         "La imagen con dicho nombre ya existe"
       );
     }
-    const { url } = await supabase.storage
-      .from("Novedades")
-      .getPublicUrl(`${folderName}/${imgName}`);
+
+    // Metodo para devolver la URL sin pisar el campo DATA al llamar a supabase
+    const getFileUrl = async (folderName) => {
+      const { data, error } = await supabase.storage
+        .from("Novedades")
+        .getPublicUrl(`${folderName}`);
+
+      if (error) {
+        console.log("Public file URL Error: " + error.message);
+        throw new AppError(
+          "BadRequestError",
+          400,
+          "No se que poner aca, pero fallo al conseguir la URL de la carpeta del blog."
+        );
+      }
+      return { url: data.publicUrl };
+    };
+
+    const { url } = await getFileUrl(folderName);
+
+    console.log(url);
     return { data, error, url };
   }
 
@@ -240,51 +291,32 @@ export class BlogRepository {
           );
         }
 
-        return {
-          data,
-          url: supabase.storage
-            .from("Novedades")
-            .getPublicUrl(`${folderName}/${file.originalname}`),
-        };
+        return data;
       })
     );
 
-    return { data: uploads };
-  }
+    // Metodo para devolver la URL sin pisar el campo DATA al llamar a supabase
+    const getFileUrl = async (folderName) => {
+      const { data, error } = await supabase.storage
+        .from("Novedades")
+        .getPublicUrl(`${folderName}`);
 
-  static async addMultipleImageTestFail(files, folderName) {
-    const uploads = files.map((file) => ({
-      path: `${folderName}/${file.originalname}`,
-      file: file.buffer,
-      options: {
-        cacheControl: "3600",
-        contentType: file.mimetype,
-        upsert: false,
-      },
-    }));
+      if (error) {
+        console.log("Public file URL Error: " + error.message);
+        throw new AppError(
+          "BadRequestError",
+          400,
+          "No se que poner aca, pero fallo al conseguir la URL de la carpeta del blog."
+        );
+      }
+      return { url: data.publicUrl };
+    };
 
-    // Subimos todas las imágenes en una sola llamada
-    const { data, error } = await supabase.storage
-      .from("Novedades")
-      .upload(uploads);
-
-    if (error) {
-      console.error("Error al subir imágenes:", error.message);
-      throw new AppError(
-        "BadRequestError",
-        400,
-        "Hubo un problema al subir las imágenes"
-      );
-    }
-
-    // La devolución de las URLS aca creo que no hacen falta, porque ya la genero y guardo desde la img de la portada, que además es un campo obligatorio.
-    // Obtener URLs en un solo paso
-    // const urls = files.map((file) =>
-    //   supabase.storage
-    //     .from("Novedades")
-    //     .getPublicUrl(`${folderName}/${file.originalname}`)
-    // );
-
-    return { data, error, urls };
+    const { url } = await getFileUrl(folderName);
+    console.log(url);
+    return {
+      data: uploads,
+      url,
+    };
   }
 }

@@ -34,7 +34,8 @@ blogImgRouter.post("/", upload.single("image"), async (req, res, next) => {
 
 blogImgRouter.post("/test", upload.single("image"), async (req, res, next) => {
   try {
-    const { imgName, folderName } = req.body;
+    // Si le saco el imgName y la const image queda ighual al del array.
+    const { imgName, folderName } = req.body; // Hace falta el imgName?
     const image = req.file.buffer; // El archivo cargado
     const { data, error, url } = await BlogRepository.addImageTest(
       image,
@@ -48,7 +49,7 @@ blogImgRouter.post("/test", upload.single("image"), async (req, res, next) => {
         error.status,
         "No se subio la imagen correctamente. Revise las credenciales"
       );
-    res.send(data);
+    res.status(200).send({ data, url });
   } catch (e) {
     // next(e);
     console.log(e);
@@ -56,13 +57,13 @@ blogImgRouter.post("/test", upload.single("image"), async (req, res, next) => {
 });
 
 blogImgRouter.post(
-  "/testArray",
+  "/test/array",
   upload.array("images"),
   async (req, res, next) => {
     try {
       const { folderName } = req.body;
 
-      const { data, error, urls } = await BlogRepository.addMultipleImageTest(
+      const { data, error, url } = await BlogRepository.addMultipleImageTest(
         req.files,
         folderName
       );
@@ -74,8 +75,7 @@ blogImgRouter.post(
           "No se subieron las imágenes correctamente. Revise las credenciales"
         );
       }
-
-      res.send({ data, urls });
+      res.status(200).send({ data, url });
     } catch (e) {
       console.error("Catch del endpoint: " + e);
       // res.status(500).json({ error: "Error al subir imágenes" });
