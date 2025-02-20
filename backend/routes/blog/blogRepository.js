@@ -236,7 +236,7 @@ export class BlogRepository {
       .upload(`${folderName}/${imgName}`, image, {
         cacheControl: "3600",
         contentType: mimeType,
-        upsert: false,
+        upsert: true,
       });
     if (error) {
       console.log("Img Error: " + error.message);
@@ -318,5 +318,21 @@ export class BlogRepository {
       data: uploads,
       url,
     };
+  }
+  static async getSpecifyBlog(title){
+    const { data, error } = await supabase
+    .from('test_blog')
+    .select('tag, title, description, content_sections, featured_pos, bucket_folder_url')
+    .eq('title', title)    // Correct
+    return {data, error};
+  }
+
+  static async modifyBlog(oldTitle, validFields){
+    const { data, error } = await supabase
+    .from('test_blog')
+    .update(validFields)
+    .eq('title', oldTitle)
+    .select()
+    return {data, error}
   }
 }

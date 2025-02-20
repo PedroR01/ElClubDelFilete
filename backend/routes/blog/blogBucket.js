@@ -99,4 +99,31 @@ blogImgRouter.delete("/", async (req, res, next) => {
   }
 });
 
+blogImgRouter.put("/test/:oldFolderName", upload.single("image"), async (req, res, next) =>{
+  try{
+    const { oldFolderName } = req.params;// El título del blog a actualiza
+    const { imgName, folderName } = req.body; // Hace falta el imgName?
+    const image = req.file.buffer; // El archivo cargado
+    if(oldFolderName !== folderName){
+      const {deleteData} = await BlogRepository.deleteImage(oldFolderName)}
+    const { data, error, url } = await BlogRepository.addImageTest(
+        image,
+        imgName,
+        folderName,
+        req.file.mimetype
+      );
+      if (error)
+        throw new AppError(
+          error.code,
+          error.status,
+          error.code
+        );
+    res.send({data, url})
+
+  }
+  catch (err){
+    next(err);
+  }
+});
+
 export default blogImgRouter;

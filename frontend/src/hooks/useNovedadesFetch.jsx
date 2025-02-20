@@ -6,41 +6,34 @@ export function useNovedadesFetch() {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
-    // Deberia a su vez hacer el fetch de las imagenes en el bucket, y añadir la imágen a su noticia asociada.
     useEffect(() => {
-        const fetchNovedades = async () => {
+        const fetchData = async () => {
+            setLoading(true);
             try {
-                const response = await fetch("http://localhost:3001/api/blogs");
-                if (!response.ok) throw new Error(`HTTP error! Res status: ${response.status}`);
+                const [response1, response2] = await Promise.all([
+                    fetch("http://localhost:3001/api/blogs"),
+                    fetch("http://localhost:3001/api/blogs/test")
+                ]);
 
-                const data = await response.json();
-                setNovedades(data.metaData);
+                if (!response1.ok || !response2.ok) {
+                    throw new Error(`Error HTTP: ${response1.status} / ${response2.status}`);
+                }
+
+                const [data1, data2] = await Promise.all([
+                    response1.json(),
+                    response2.json()
+                ]);
+
+                setNovedades(data1.metaData);
+                setNovedadesTest(data2.metaData);
             } catch (e) {
-                setError(e);
+                setError(e.message);
             } finally {
                 setLoading(false);
             }
         };
 
-        fetchNovedades();
-    }, []);
-
-    useEffect(() => {
-        const fetchNovedadesTest = async () => {
-            try {
-                const response = await fetch("http://localhost:3001/api/blogs/test");
-                if (!response.ok) throw new Error(`HTTP error! Res status: ${response.status}`);
-
-                const data = await response.json();
-                setNovedadesTest(data.metaData);
-            } catch (e) {
-                setError(e);
-            } finally {
-                setLoading(false);
-            }
-        };
-
-        fetchNovedadesTest();
+        fetchData();
     }, []);
 
     return { novedades, novedadesTest, loading, error };

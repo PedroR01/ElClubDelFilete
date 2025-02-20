@@ -11,6 +11,7 @@ import AuthContextProvider from './context/Authcontext';
 import SignUp from "./pages/authPages/SignUpPage";
 import Admin from "./pages/Admin";
 import BlogUploadForm from "./pages/BlogUploadForm";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 export default function App() {
   return (
@@ -24,7 +25,11 @@ export default function App() {
         <Route path="/novedades/:slug" element={<Blog />}></Route>
         <Route path="/login" element={<Login />}></Route>
         <Route path="/signUp" element={<SignUp />}></Route>
-        <Route path="/administrador" element={<BlogUploadForm />}></Route>
+        <Route path="/añadirBlog/:title?" element={
+          <ProtectedRoute >
+            <BlogUploadForm />
+          </ProtectedRoute>
+          }></Route>
       </Routes>
       <Footer />
     </AuthContextProvider>

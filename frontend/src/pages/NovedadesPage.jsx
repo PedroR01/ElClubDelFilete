@@ -4,10 +4,20 @@ import Button from "../components/Button";
 import NovedadDestacada from "../components/NovedadDestacada";
 import Novedad from "../components/Novedad";
 import BlogPortrait from "../components/BlogPortrait";
-
+import { useNavigate } from 'react-router-dom';
+import { useContext } from "react";
+import { AuthContext } from '../context/Authcontext'; // Importamos el contexto de autenticación
 export default function NovedadesPage() {
-    const { novedades, novedadesTest, loading, error } = useNovedadesFetch();
-
+    
+     const { novedades, novedadesTest, loading, error } = useNovedadesFetch();
+     console.log(novedadesTest)
+    //const { novedades, novedadesTest, loading, error } = useContext(AuthContext); // Accedes al valor de isAuthenticated
+    // Función que maneja la redirección al presionar el botón
+    const { isAuthenticated } = useContext(AuthContext); // Obtenemos el estado de autenticación
+    const navigate = useNavigate(); // Usamos el hook para navegación
+    const handleRedirect = () => {
+        navigate('/añadirBlog'); // Redirige a la página del "administrador"
+    };
     if (loading) return <p>Cargando novedades...</p>; // mostrar skeleton loading.
     if (error) return <p>Error al cargar novedades: {error}</p>;
 
@@ -104,6 +114,20 @@ export default function NovedadesPage() {
                         textColor="text-[#8B2A1F]"
                         state={true}
                     />
+                </div>
+                <div className="justify-self-center mt-32">
+                {isAuthenticated ? (
+                    <Button
+                    text="Subir una novedad"
+                    btnType={"button"}
+                    bgColor="bg-[#DDAA58]"
+                    textColor="text-[#8B2A1F]"
+                    event={handleRedirect}
+                    state={false}
+                />
+                ) : (
+                    <p></p>
+                )}
                 </div>
             </section>
         </>

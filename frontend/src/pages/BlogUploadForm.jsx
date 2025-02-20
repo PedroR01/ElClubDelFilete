@@ -1,17 +1,20 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import { useForm, Controller } from "react-hook-form";
 import TextEditor from "../components/TextEditor";
 import Button from "../components/Button";
 import ImageUploader from "../components/ImageUploader";
 
 export default function BlogUploadForm() {
+  const { title } = useParams(); // Obtiene el ID de la URL
   const {
     register,
     handleSubmit,
     control,
     setValue,
     watch,
-    formState: { errors }
+    formState: { errors },
+    getValues
   } = useForm({
     defaultValues: {
       title: "",
@@ -28,6 +31,41 @@ export default function BlogUploadForm() {
   const [isFeatured, setIsFeatured] = useState(false);
   const [charCount, setCharCount] = useState(0);
   const maxChar = 200;
+  // Lógica para cargar datos si estamos en modo edición
+  useEffect(() => {
+    if (title) {
+      // Aquí puedes hacer la llamada al backend para obtener los datos del blog
+      fetchBlogData(title); // Suponiendo que fetchBlogData es una función para obtener los datos
+    }
+  }, [title]);
+  const fetchBlogData = async (title) => {
+    try {
+      const response = await fetch(`http://localhost:3001/api/blogs/${title}`, {
+        method: 'GET', // Especificamos explícitamente que la solicitud es de tipo GET
+      });
+      
+      const data = await response.json();
+      
+      if (response.ok && data) {
+        const blogData = data[0]; // Obtenemos el primer objeto del array
+        setValue("title", blogData.title);
+        setValue("tag", blogData.tag);
+        setValue("description", blogData.description);
+        setValue("content", blogData.content);
+        setValue("featured_pos", blogData.featured_pos);
+        setValue("coverImage", blogData.coverImage);
+        setValue("contentImages", blogData.contentImages || [])
+        setIsFeatured(blogData.featured_pos > 0); // Si es true, es destacado
+        console.log(getValues())
+      } else {
+        console.error('Error al obtener los datos:', data?.message || 'Error desconocido');
+      }
+      
+    } catch (error) {
+      console.error("Error al obtener los datos del blog:", error);
+    }
+  };
+
 
   const handleChange = (htmlContent) => {
     setValue("content", htmlContent);
@@ -69,14 +107,17 @@ export default function BlogUploadForm() {
       }
 
       formData.append("folderName", data.title);
-
+      console.log("FormData:", Array.from(formData.entries()));
       // console.log("FormData: ", Array.from(formData.entries()));
-
+      const oldTitle = title;
+      const oldFolderName = title;
       const imgEndpoint = data.contentImages.length > 0 ? "storage/test/array" : "storage/test";
-
+      const imgCompleteEndpoint = title ? `${imgEndpoint}/${oldFolderName}` : imgEndpoint;
       console.log(imgEndpoint);
-      const responseImgUpload = await fetch(`http://localhost:3001/api/${imgEndpoint}`, {
-        method: "POST",
+      const method = title ? "PUT" : "POST";
+      const url = title ? `http://localhost:3001/api/blogs/test/${oldTitle}` : "http://localhost:3001/api/blogs/test";
+      const responseImgUpload = await fetch(`http://localhost:3001/api/${imgCompleteEndpoint}`, {
+        method: method,
         body: formData
       });
       const resultImg = await responseImgUpload.json();
@@ -86,8 +127,8 @@ export default function BlogUploadForm() {
       } else {
         console.log(resultImg);
         blogData.bucket_folder_url = resultImg.url;
-        const responseDataUpload = await fetch("http://localhost:3001/api/blogs/test", {
-          method: "POST",
+        const responseDataUpload = await fetch(url, {
+          method: method,
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(blogData)
         });
@@ -171,7 +212,7 @@ export default function BlogUploadForm() {
         <label className="flex items-center gap-2 mt-4 font-semibold text-[#CDA053]">
           Prioridad:
           <select
-            defaultValue={1}
+            value={watch("featured_pos") || 1} // Usamos el valor del formulario, por defecto 1 si no tiene valor
             onChange={(e) => setValue("featured_pos", Number(e.target.value))}
             disabled={!isFeatured}
             className={`p-2 bg-[#2D2B35] ${!isFeatured ? 'text-[#fefffb87] cursor-not-allowed' : ' text-[#FEFFFB] border'}`}
