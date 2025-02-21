@@ -4,11 +4,12 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { HelmetProvider } from "react-helmet-async";
 import './index.css'
 import App from './App.jsx'
+import OnStartAnimate from './components/OnStartAnimate.jsx';
 
 const router = createBrowserRouter([
   {
     path: "/*",
-    element: <App />,
+    element: <OnStartAnimate Component={App} />,
   },
 ]);
 

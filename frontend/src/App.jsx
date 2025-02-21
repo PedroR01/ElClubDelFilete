@@ -9,7 +9,6 @@ import Blog from "./pages/novedades/BlogPage";
 import Login from "./pages/Login";
 import AuthContextProvider from './context/Authcontext';
 import SignUp from "./pages/authPages/SignUpPage";
-import Admin from "./pages/Admin";
 import BlogUploadForm from "./pages/BlogUploadForm";
 
 export default function App() {
