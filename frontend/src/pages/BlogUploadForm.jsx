@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import { useForm, Controller } from "react-hook-form";
 import TextEditor from "../components/TextEditor";
 import Button from "../components/Button";
@@ -7,6 +7,8 @@ import ImageUploader from "../components/ImageUploader";
 
 export default function BlogUploadForm() {
   const { title } = useParams(); // Obtiene el ID de la URL
+  const { state } = useLocation(); // Accede a los datos pasados a través del 'state'
+  const { novedad } = state || {};  // Extrae los datos de la novedad
   const {
     register,
     handleSubmit,
@@ -35,31 +37,21 @@ export default function BlogUploadForm() {
   useEffect(() => {
     if (title) {
       // Aquí puedes hacer la llamada al backend para obtener los datos del blog
-      fetchBlogData(title); // Suponiendo que fetchBlogData es una función para obtener los datos
+      fetchBlogData(); // Suponiendo que fetchBlogData es una función para obtener los datos
     }
-  }, [title]);
-  const fetchBlogData = async (title) => {
+  }, [novedad,title]);
+  const fetchBlogData = async () => {
     try {
-      const response = await fetch(`http://localhost:3001/api/blogs/${title}`, {
-        method: 'GET', // Especificamos explícitamente que la solicitud es de tipo GET
-      });
-      
-      const data = await response.json();
-      
-      if (response.ok && data) {
-        const blogData = data[0]; // Obtenemos el primer objeto del array
-        setValue("title", blogData.title);
-        setValue("tag", blogData.tag);
-        setValue("description", blogData.description);
-        setValue("content", blogData.content);
-        setValue("featured_pos", blogData.featured_pos);
-        setValue("coverImage", blogData.coverImage);
-        setValue("contentImages", blogData.contentImages || [])
-        setIsFeatured(blogData.featured_pos > 0); // Si es true, es destacado
-        console.log(getValues())
-      } else {
-        console.error('Error al obtener los datos:', data?.message || 'Error desconocido');
-      }
+      if (novedad) {
+        setValue("title", novedad.title);
+        setValue("tag", novedad.tag);
+        setValue("description", novedad.description);
+        setValue("content", novedad.content_sections); // O novedad.content_sections si corresponde
+        setValue("featured_pos", novedad.featured_pos);
+        setValue("coverImage", novedad.bucket_folder_url + "/portrait"); // Usar la URL de la imagen de portada
+        setValue("contentImages", novedad.contentImages || []); // Si no hay imágenes, asigna un arreglo vacío
+        setIsFeatured(novedad.featured_pos > 0); // Si la posición es mayor que 0, se considera como destacada
+    }
       
     } catch (error) {
       console.error("Error al obtener los datos del blog:", error);
@@ -225,7 +217,7 @@ export default function BlogUploadForm() {
       </div>
 
       <label className="block mt-4 font-semibold text-[#CDA053]">Imagen de portada:</label>
-      <ImageUploader onChange={(image) => setValue("coverImage", image)} multiple={false} />
+      <ImageUploader onChange={(image) => setValue("coverImage", image)} multiple={false} defaultImage={watch("coverImage")} />
 
       <label className="block mt-4 font-semibold text-[#CDA053]">Contenido:</label>
       <Controller

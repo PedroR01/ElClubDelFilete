@@ -23,7 +23,9 @@ export default function BlogPortrait({ content, orientation = "vertical" }) {
             className={`${orientation === "vertical" ? "" : "flex"} col-span-7 lg:col-span-4 row-span-3 md:my-4 bg-[#3c3228] md:rounded-lg overflow-hidden relative group shadow-blog-main`}
         >
             {isAuthenticated && (
-                <Link to={`/añadirBlog/${content.title}`} className={`
+                <Link to={`/añadirBlog/${content.title}`} 
+                state={{ novedad: content }}  // Pasa el objeto 'content' completo
+                className={`
                 absolute z-10 ${orientation === "main" ? "top-4 right-4" : "top-3 right-3"} 
                 px-3 py-1 bg-blue-600 text-white rounded-lg border-2 border-red-500 
                 text-sm shadow-md hover:bg-blue-700 transition

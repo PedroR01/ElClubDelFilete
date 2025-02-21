@@ -279,7 +279,7 @@ export class BlogRepository {
           .upload(`${folderName}/${file.originalname}`, file.buffer, {
             cacheControl: "3600",
             contentType: file.mimetype,
-            upsert: false,
+            upsert: true,
           });
 
         if (error) {

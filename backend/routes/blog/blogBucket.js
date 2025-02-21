@@ -126,4 +126,33 @@ blogImgRouter.put("/test/:oldFolderName", upload.single("image"), async (req, re
   }
 });
 
+blogImgRouter.put(
+  "/test/array/:oldFolderName",
+  upload.array("images"),
+  async (req, res, next) => {
+    try {
+      const { oldFolderName } = req.params;// El título del blog a actualiza
+      const { folderName } = req.body;
+      if(oldFolderName !== folderName){
+        const {deleteData} = await BlogRepository.deleteImage(oldFolderName)}
+      const { data, error, url } = await BlogRepository.addMultipleImageTest(
+        req.files,
+        folderName
+      );
+
+      if (error) {
+        throw new AppError(
+          error.code,
+          error.status,
+          "No se subieron las imágenes correctamente. Revise las credenciales"
+        );
+      }
+      res.status(200).send({ data, url });
+    } catch (e) {
+      console.error("Catch del endpoint: " + e);
+      // res.status(500).json({ error: "Error al subir imágenes" });
+    }
+  }
+);
+
 export default blogImgRouter;

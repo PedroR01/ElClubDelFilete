@@ -194,7 +194,11 @@ export default function TextEditor({ blogContent, onChange, images }) {
           });
     };
     }, [images, editor]);
-
+    useEffect(() => {
+        if (editor && blogContent) {
+            editor.commands.setContent(blogContent);
+        }
+        }, [blogContent, editor]);
     return (
         <>
             <MenuBar editor={editor} insertVideo={addYoutubeVideo} />
