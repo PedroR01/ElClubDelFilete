@@ -4,7 +4,7 @@ export const AuthContext = createContext();
 export default function AuthContextProvider ({ children }) {
   const [lastRefreshed, setLastRefreshed] = useState(Date.now());
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  
+  const [isLoading, setIsLoading] = useState(true); // Nuevo estado de carga
   useEffect(() => {
     const TOKEN_EXPIRATION_TIME = 60 * 60 * 1000; // 50 minutos en ms
     const TIME_FOR_VERIFY = 10 * 60 * 1000;
@@ -23,6 +23,9 @@ export default function AuthContextProvider ({ children }) {
         setIsAuthenticated(true);
       } catch (err) {
         console.log('Error al comunicarse con el servidor');
+      }
+      finally {
+        setIsLoading(false); // Termina la carga
       } 
     };
   
@@ -54,7 +57,7 @@ export default function AuthContextProvider ({ children }) {
   
 
     return(
-        <AuthContext.Provider value={{ isAuthenticated, setIsAuthenticated }}>
+        <AuthContext.Provider value={{ isAuthenticated, setIsAuthenticated, isLoading}}>
             {children}
         </AuthContext.Provider>
     );

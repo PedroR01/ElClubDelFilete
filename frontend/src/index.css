@@ -76,6 +76,13 @@ body {
   font-style: normal;
 }
 
+.afacad-bold {
+  font-family: "Afacad", serif;
+  font-optical-sizing: auto;
+  font-weight: 700;
+  font-style: normal;
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
@@ -84,27 +91,27 @@ code {
 /* --- TEXT TAGS --- */
 
 h1 {
-  @apply hamston text-[#CDA053] text-3xl lg:text-4xl xl:text-5xl;
+  @apply afacad-bold text-[#CDA053] text-3xl lg:text-4xl xl:text-5xl;
 }
 
 h2 {
-  @apply hamston text-[#CDA053] text-2xl lg:text-3xl uppercase;
+  @apply afacad-bold text-[#CDA053] text-2xl lg:text-3xl;
 }
 
 h3 {
-  @apply hamston font-bold text-[#CDA053] text-3xl lg:text-4xl 2xl:text-5xl;
+  @apply afacad-bold font-bold text-[#CDA053] text-3xl lg:text-4xl 2xl:text-5xl;
 }
 
 h4 {
-  @apply hamston text-[#CDA053] text-lg lg:text-xl xl:text-2xl;
+  @apply afacad-bold text-[#CDA053] text-lg lg:text-xl xl:text-2xl;
 }
 
 h5 {
-  @apply hamston text-[#CDA053] text-lg lg:text-base;
+  @apply afacad-bold text-[#CDA053] text-lg lg:text-xl;
 }
 
 p {
-  @apply inria-sans-regular text-[#FEFFFB] text-base lg:text-lg xl:text-xl;
+  @apply afacad-normal text-[#FEFFFB] text-base lg:text-lg xl:text-xl;
 
   /* font-family: "Montserrat", sans-serif;
   font-optical-sizing: auto;
@@ -202,6 +209,10 @@ p {
 
   .flex-flow-noWrap {
     flex-flow: nowrap;
+  }
+
+  .place-self-anchor-center {
+    place-self: anchor-center;
   }
 
   .aspect-3_4 {

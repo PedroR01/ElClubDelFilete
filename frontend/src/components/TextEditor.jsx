@@ -4,13 +4,13 @@ import StarterKit from "@tiptap/starter-kit";
 import TextStyle from '@tiptap/extension-text-style';
 import Color from '@tiptap/extension-color';
 import Underline from '@tiptap/extension-underline';
-import { BoldIcon, ItalicIcon, UnderlineIcon, EraserIcon, Heading2Icon, Heading4Icon, ListIcon, ListOrderedIcon, QuoteIcon, MinusIcon, UndoIcon, RedoIcon, PaletteIcon, LetterTextIcon, YoutubeIcon, FileTextIcon } from 'lucide-react';
+import { BoldIcon, ItalicIcon, UnderlineIcon, EraserIcon, Heading2Icon, Heading4Icon, ListIcon, ListOrderedIcon, QuoteIcon, MinusIcon, UndoIcon, RedoIcon, PaletteIcon, LetterTextIcon, YoutubeIcon, FileTextIcon, ImageIcon } from 'lucide-react';
 
 import { pdfDownloadExtension } from './text-editor/pdfDownloadExtension.js';
 import { DraggableImage } from "./text-editor/DraggableImage.js";
 import { YoutubeVideo } from "./text-editor/YoutubeVideo.js";
 
-const MenuBar = ({ editor, insertVideo }) => {
+const MenuBar = ({ editor, insertVideo, onAddImage }) => {
     const [tooltip, setTooltip] = useState({ visible: false, text: "", x: 0, y: 0 });
 
     if (!editor) return null;
@@ -32,7 +32,28 @@ const MenuBar = ({ editor, insertVideo }) => {
         }
 
     };
+    const addImage = () => {
+        const input = document.createElement('input');
+        input.type = 'file';
+        input.accept = 'image/*';
+        input.multiple = true;
+        input.onchange = (event) => {
+            const files = event.target.files;
+            if (files.length > 0) {
+                const content = Array.from(files).map((file) => {
+                    if (onAddImage) {
+                        onAddImage(file);
+                    }
+                    const imageUrl = URL.createObjectURL(file);
+                    return `<img src="${imageUrl}" alt="${file.name}" />`;
+                }).join(''); // Une todas las imágenes en un solo string
 
+                editor.chain().focus().insertContent(content).run();
+            }
+        };
+
+        input.click();
+    };
     return (
         <div className="relative">
             <div className="flex flex-wrap py-2 px-4 gap-10 bg-[#2D2B35] border-b-2 border-[#24222B] rounded-t-xl text-[#FEFFFB]">
@@ -106,6 +127,9 @@ const MenuBar = ({ editor, insertVideo }) => {
                 >
                     <YoutubeIcon size={20} /> {/* Ícono de YouTube */}
                 </button>
+                <button type="button" onClick={addImage}>
+                    <ImageIcon size={20} />
+                </button>
 
             </div>
 
@@ -121,7 +145,7 @@ const MenuBar = ({ editor, insertVideo }) => {
     );
 };
 
-export default function TextEditor({ blogContent, onChange, images }) {
+export default function TextEditor({ blogContent, onChange, images, onAddImage }) {
 
     const editor = useEditor({
         extensions: [
@@ -166,39 +190,133 @@ export default function TextEditor({ blogContent, onChange, images }) {
         } else {
             alert("URL no válida, por favor ingrese un enlace de YouTube.");
         }
-      };
-      
-      
-      useEffect(() => {
-        if (editor) {
-          const currentContent = editor.getJSON(); // Obtener el contenido actual del editor
-      
-          // Filtrar las imágenes que deben estar en el editor (las que están en el estado de images)
-          const imagesContent = images
-            .map((image) => ({ type: 'image', attrs: { src: URL.createObjectURL(image) } }))
-            .map((image) => ({ type: 'node', ...image }));
-      
-          // Filtramos el contenido del editor actual para eliminar imágenes que ya no están en images
-          const filteredContent = currentContent.content.filter((node) => {
-            // Si el nodo es de tipo 'image' y su src no está en las imágenes actuales, lo eliminamos
-            return !(node.type === 'image' && !images.some((image) => node.attrs.src === URL.createObjectURL(image)));
-          });
-      
-          // Combina el contenido actual filtrado con las nuevas imágenes (si las hay)
-          editor.commands.setContent({
-            type: 'doc',
-            content: [
-              ...filteredContent,  // Mantener el contenido existente sin las imágenes eliminadas
-              ...imagesContent,  // Agregar las imágenes restantes
-            ],
-          });
     };
-    }, [images, editor]);
+    /*
+        useEffect(() => {
+            if (editor) {
+                const currentContent = editor.getJSON(); // Get the current content of the editor
+    
+                // Map images to their corresponding editor nodes
+                const imagesContent = images.map((image) => {
+                    if (!image) return null;
+    
+                    // Check if the image is a public URL or a Blob/File
+                    const isPublicUrl = image && image.src;
+    
+                    if (isPublicUrl) {
+                        // If it's a public URL, use the URL directly
+                        return {
+                            type: 'image',
+                            attrs: {
+                                src: image.src,
+                                data: image, // Store the original image object for comparison
+                            },
+                        };
+                    } else if (image instanceof Blob || image instanceof File) {
+                        // If it's a Blob or File, use URL.createObjectURL
+                        return {
+                            type: 'image',
+                            attrs: {
+                                src: URL.createObjectURL(image),
+                                data: image, // Store the original Blob/File for comparison
+                            },
+                        };
+                    } else {
+                        console.error("La imagen no es un Blob, File o URL vÃ¡lida:", image);
+                        return null; // Handle invalid images
+                    }
+                }).filter(image => image !== null); // Filter out any invalid images
+    
+                // Filter the new images that are not already in the editor content
+                const existingImageSources = currentContent.content
+                    .filter(node => node.type === 'image')
+                    .map(node => node.attrs.data); // Compare using the original data (URL or Blob/File)
+    
+                const newImagesContent = imagesContent.filter(imageContent =>
+                    !existingImageSources.some(existingImage =>
+                        existingImage === imageContent.attrs.data // Compare using the original data
+                    )
+                );
+    
+                // Insert only the new images that are not already in the content
+                if (newImagesContent.length > 0) {
+                    editor.commands.insertContent({
+                        type: 'doc',
+                        content: [
+                            ...newImagesContent, // Only add new images
+                        ],
+                    });
+                }
+    
+                // Remove images that are no longer in the `images` state
+                const updatedContent = currentContent.content.filter((node) => {
+                    if (node.type === 'image') {
+                        // Check if the image exists in the `images` state
+                        const imageExistsInState = images.some(image => {
+                            if (image && image.src) {
+                                // Compare public URLs directly
+                                return image.src === node.attrs.data.src;
+                            } else if (image instanceof Blob || image instanceof File) {
+                                // For Blob/File, compare the original Blob/File object
+                                return image === node.attrs.data;
+                            }
+                            return false;
+                        });
+    
+                        // Only keep images that still exist in the `images` state
+                        return imageExistsInState;
+                    }
+                    return true; // Keep non-image nodes
+                });
+    
+                // Replace the content with the correctly updated images
+                editor.commands.setContent({
+                    type: 'doc',
+                    content: updatedContent,
+                });
+            }
+        }, [images, editor]);
+    */
+    useEffect(() => {
+        if (editor && blogContent) {
+            editor.commands.setContent(blogContent);
+        }
+    }, [blogContent, editor]);
+    const handleDrop = (e) => {
+        e.preventDefault();
+        if (!editor) return;
+
+        const files = e.dataTransfer.files;
+        const allowedTypes = ['image/jpeg', 'image/png']; // jpg y jpeg tienen el mismo MIME type
+
+        // Se filtran y mapean las imágenes válidas
+        const imagesHTML = Array.from(files)
+            .filter((file) => allowedTypes.includes(file.type))
+            .map((file) => {
+                if (onAddImage) {
+                    onAddImage(file);
+                }
+                const imageUrl = URL.createObjectURL(file);
+                return `<img src="${imageUrl}" alt="${file.name}" />`;
+            })
+            .join('');
+
+        if (imagesHTML) {
+            editor.chain().focus().insertContent(imagesHTML).run();
+        }
+    };
+
+    // Función para evitar el comportamiento por defecto del dragover
+    const handleDragOver = (e) => {
+        e.preventDefault();
+    };
 
     return (
         <>
-            <MenuBar editor={editor} insertVideo={addYoutubeVideo} />
-            <EditorContent editor={editor} />
+            <MenuBar editor={editor} insertVideo={addYoutubeVideo} onAddImage={onAddImage} />
+            <div onDragOver={handleDragOver} onDrop={handleDrop}>
+                <EditorContent editor={editor} />
+            </div>
         </>
 
     );

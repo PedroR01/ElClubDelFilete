@@ -1,11 +1,18 @@
-import { useState, useCallback } from "react";
+import { useState, useEffect, useCallback } from "react";
 import Dropzone from "react-dropzone";
 import { XCircle } from "lucide-react"; // Ícono de cruz para eliminar la imagen
 
 const MAX_IMAGE_SIZE = 500 * 1024; // 500KB
 
-export default function ImageUploader({ onChange, multiple = false }) {
+export default function ImageUploader({ onChange, multiple = false, initialImages = [] }) {
     const [images, setImages] = useState([]);
+
+    useEffect(() => {
+        // Establecer imágenes iniciales si el array está vacío
+        if (initialImages.length > 0 && images.length === 0) {
+            setImages(initialImages.map((img) => ({ preview: img })));
+        }
+    }, [initialImages, images]);
 
     const onDrop = useCallback(
         (acceptedFiles) => {
@@ -31,8 +38,12 @@ export default function ImageUploader({ onChange, multiple = false }) {
 
     const removeImage = (index) => {
         const updatedImages = images.filter((_, i) => i !== index);
+
+        // Asegúrate de que 'updatedImages' nunca sea 'null' o 'undefined'
         setImages(updatedImages);
-        onChange(multiple ? updatedImages.map((img) => img.file) : null);
+
+        // Si 'multiple' es falso, pasamos un array vacío en lugar de 'null'
+        onChange(multiple ? updatedImages.map((img) => img.file) : []);
     };
 
     return (

@@ -35,7 +35,6 @@ export default function SignUpPage() {
             if (!response.ok) {
                 throw new Error('Error al enviar el formulario');
             }
-            console.log(response);
         } catch (error) {
             console.error('Error al enviar el mensaje:', error);
         }

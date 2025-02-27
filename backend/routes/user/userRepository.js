@@ -127,43 +127,50 @@ export class UserRepository {
         const access_token = data.session.access_token;
         const refresh_token = data.session.refresh_token;
         */
-      if(error){
-        throw new AppError(error.code, error.status, "Sus credenciales son inválidas");
+      let resMessage = "Log In correcto";
+      let resCode = 200;
+      if (error) {
+        throw new AppError(401, error.status, "Sus credenciales son inválidas");
+        // resCode = 401;
+        // resMessage = "Sus credenciales son inválidas";
+      } else {
+        res.cookie("access_token", data.session.access_token, {
+          httpOnly: true,
+          secure: false, // cambiar a true en producción
+          maxAge: DURATION_ACCESS_COOKIE,
+          sameSite: "Strict",
+        });
+        res.cookie("refresh_token", data.session.refresh_token, {
+          httpOnly: true,
+          secure: false, // cambiar a true en producción
+          maxAge: DURATION_REFRESH_COOKIE,
+          sameSite: "Strict",
+        });
       }
-      res.cookie("access_token", data.session.access_token, {
-        httpOnly: true,
-        secure: false, // cambiar a true en producción
-        maxAge: DURATION_ACCESS_COOKIE,
-        sameSite: "Strict",
-      });
-      res.cookie("refresh_token", data.session.refresh_token, {
-        httpOnly: true,
-        secure: false, // cambiar a true en producción
-        maxAge: DURATION_REFRESH_COOKIE,
-        sameSite: "Strict",
-      });
-      return { status: 200, message: "Log In correcto" };
+      // Aca se retorna tanto para los casos de credenciales correctas, como incorrectas, puesto que lo importante es si el servidor funciona correctamente?.
+      return { status: resCode, message: resMessage };
       //return { access_token, refresh_token};
     } catch (e) {
       throw e;
     }
   }
 
-  static async logOut(access_token,res) {
+  static async logOut(access_token, res) {
     try {
-      const { data: { user } } = await supabase.auth.getUser(access_token)
-      if(user){
+      const {
+        data: { user },
+      } = await supabase.auth.getUser(access_token);
+      if (user) {
         const { error } = await supabase.auth.signOut();
         if (error) throw new AppError(error.code, error.status, error.code);
         else {
           res.clearCookie("access_token");
           res.clearCookie("refresh_token");
           return { status: 200, message: "Sesión cerrada con éxito" };
-      }}
-      else {
-        throw new AppError("NoSessionError",400,'No hay una sesión activa')
+        }
+      } else {
+        throw new AppError("NoSessionError", 400, "No hay una sesión activa");
       }
-    
     } catch (e) {
       throw e;
     }
@@ -171,7 +178,7 @@ export class UserRepository {
 
   static async refreshUserCookie(token, refToken, res) {
     // Verifica el acceso del usuario con el access_token
-    
+
     const {
       data: { user },
       error,
@@ -194,7 +201,6 @@ export class UserRepository {
         }
 
         const { session, user } = data;
-        console.log("Sesión refrescada:", session);
 
         // Establece las cookies con los nuevos tokens
         res.cookie("access_token", session.access_token, {

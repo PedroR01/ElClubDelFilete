@@ -41,7 +41,7 @@ export default function LandingPage() {
                         <h1 className="allura-regular text-[#CDA053] text-6xl leading-[1.10] tracking-wide">
                             Filete <br />para el Mundo
                         </h1>
-                        <p className="afacad-normal text-[#FEFFEB] text-base tracking-wide leading-7 md:tracking-wider md:w-3/4 lg:w-2/3 mt-3">
+                        <p className="afacad-normal text-[#FEFFEB] text-base lg:text-lg tracking-wide leading-7 md:tracking-wider md:w-3/4 lg:w-2/3 mt-3">
                             ¡Bienvenidxs a <span className="text-[#CDA053]">El Club del Filete!</span> La Primera Comunidad Online dedicada al Filete Porteño y al Arte Latinoamericano, donde nace la Primera Academia Virtual de Filete, llevando esta poderosa técnica a todos los rincones del Mundo.
                         </p>
                         <div className="mt-10">
@@ -70,7 +70,7 @@ export default function LandingPage() {
                     viewport={{ once: true }}
                     transition={{ duration: 1.2 }}
                 >
-                    <h2 className="hamston text-[#CDA053] text-3xl text-center mb-8">GALERÍA</h2>
+                    <h2 className="allura-regular text-[#CDA053] text-6xl text-center mb-8 capitalize">Galería</h2>
 
                     {/* Carga diferida de Galería */}
                     <Suspense fallback={<div className="text-white text-center p-10">Cargando...</div>}>

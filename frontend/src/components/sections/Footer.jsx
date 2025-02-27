@@ -1,16 +1,12 @@
-import { useContext, useEffect } from 'react';
+import { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../context/Authcontext'
 export default function Footer() {
   const { isAuthenticated, setIsAuthenticated } = useContext(AuthContext);
   const navigate = useNavigate();
 
-  useEffect(() => {
-    console.log('Se actualizo')
-  }, [isAuthenticated]);
   const logOut = async () => {
     try {
-      console.log('Cerrando sesión')
       const response = await fetch('http://localhost:3001/logout', {
         method: 'POST',
         credentials: "include", // Esto asegura que las cookies se envíen
@@ -44,7 +40,7 @@ export default function Footer() {
       <div className="w-full md:w-1/3">
         <p className='text-[#2B1F12]'>Contáctanos <span className="font-bold">grupovoltio@gmail.com</span></p>
       </div>
-      <p className="text-[#2B1F12] mt-6">&copy;2024 El Club del Filete. Todos los derechos reservados.</p>
+      <p className="text-[#2B1F12] mt-6">&copy;2025 El Club del Filete. Todos los derechos reservados.</p>
     </footer>
   );
 }

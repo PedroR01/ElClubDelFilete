@@ -58,7 +58,7 @@ app.use("/api/storage", blogImgRouter);
 
 // Ruta para manejar cualquier otra solicitud (404)
 app.use((req, res) => {
-  res.status(404).send("<h1>Recurso no encontrado</h1>");
+  res.status(404).send("Recurso no encontrado");
 });
 
 app.use(errorHandler); // Esto debe ir al final para manejar cualquier error no capturado

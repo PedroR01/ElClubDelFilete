@@ -5,9 +5,6 @@ const confirmAuthUserRouter = Router();
 
 // Este endpoint solamente es llamado por el Webhook de Supabase solo cuando se crea o modifica la info de un usuario autenticado
 confirmAuthUserRouter.post("/", async (req, res) => {
-  console.log("Headers:", req.headers);
-  console.log("Payload recibido:", req.body);
-
   try {
     const { type, record, old_record } = req.body; // No hace falta hacer un AWAIT, ya que la funcion express.json() ya se encarga de ello.
 
@@ -19,7 +16,6 @@ confirmAuthUserRouter.post("/", async (req, res) => {
         newEmail,
         old_record,
       });
-      console.log(data);
       //return res.status(data.status).json({ message: data.message });
       /*
         if(data.status === 200)
