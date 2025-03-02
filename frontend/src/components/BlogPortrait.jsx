@@ -46,7 +46,7 @@ export default function BlogPortrait({ content, orientation }) {
         const { id, created_at, ...filteredData } = blogContent;
 
         try {
-            const responseDelete = await fetch('http://localhost:3001/api/blogs', {
+            const responseDeleteBlog = await fetch('http://localhost:3001/api/blogs', {
                 method: 'DELETE', // Método DELETE para eliminar
                 headers: {
                     'Content-Type': 'application/json'
@@ -54,29 +54,31 @@ export default function BlogPortrait({ content, orientation }) {
                 body: JSON.stringify({ title: blogContent.title }) // Enviar el título en JSON
             });
 
-            if (!responseDelete.ok) {
+            if (!responseDeleteBlog.ok) {
                 throw new Error('Error en la eliminación del blog');
             }
             else {
                 console.log("Contenido del blog eliminado");
-                const responseDelete2 = await fetch('http://localhost:3001/api/storage', {
+                const responseDeleteImg = await fetch('http://localhost:3001/api/storage', {
                     method: 'DELETE', // Método DELETE para eliminar
                     headers: {
                         'Content-Type': 'application/json'
                     },
                     body: JSON.stringify({ folderName: blogContent.title }) // Enviar el título en JSON
                 });
-                if (!responseDelete2.ok) {
+                if (!responseDeleteImg.ok) {
                     const responseDataUpload = await fetch('http://localhost:3001/api/blogs', {
-                        method: "POST",
+                        method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify(filteredData)
                     });
                     if (responseDataUpload.ok) {
                         console.log("Hubo un error al eliminar las imagenes, se revirtió la eliminacion")
                     }
+
                 }
-                navigate(0)
+                // Hago reset de la page
+                navigate(0);
             }
         }
         catch (err) {

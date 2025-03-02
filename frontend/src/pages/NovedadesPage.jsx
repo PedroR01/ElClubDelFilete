@@ -118,7 +118,7 @@ grid grid-cols-6
 */}
                         <section className="w-11/12 mx-auto">
                             <h2 className="allura-regular text-[#CDA053] text-6xl leading-[1.10] tracking-wide capitalize">Recientes</h2>
-                            <div className="flex justify-between mt-8 gap-x-12">
+                            <div className="flex mt-8 gap-x-12">
                                 {novedades.filter((news) => news.featured_pos === null).map((news, newsKey) => (
                                     <article className="flex flex-row md:flex-col flex-auto max-w-[25%] max-h-[28rem]" style={{ justifyContent: "flex-start" }} key={newsKey} >
                                         <BlogPortrait
@@ -130,6 +130,24 @@ grid grid-cols-6
                                 ))}
                             </div>
                         </section>
+
+                        {/* 
+                        <section className="w-11/12 mx-auto">
+                            <h2 className="allura-regular text-[#CDA053] text-6xl leading-[1.10] tracking-wide capitalize">
+                                Recientes
+                            </h2>
+                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-12 mt-8">
+                                {novedades
+                                    .filter((news) => news.featured_pos === null)
+                                    .map((news, newsKey) => (
+                                        <article key={newsKey}>
+                                            <BlogPortrait content={news} orientation="vertical" />
+                                        </article>
+                                    ))}
+                            </div>
+                        </section>
+                        
+                        */}
                     </>)}
             </section>
         </>
