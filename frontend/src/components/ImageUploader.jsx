@@ -6,13 +6,13 @@ const MAX_IMAGE_SIZE = 500 * 1024; // 500KB
 
 export default function ImageUploader({ onChange, multiple = false, initialImages = [] }) {
     const [images, setImages] = useState([]);
-
+    const [isInitialLoaded, setIsInitialLoaded] = useState(false);
     useEffect(() => {
-        // Establecer imágenes iniciales si el array está vacío
-        if (initialImages.length > 0 && images.length === 0) {
-            setImages(initialImages.map((img) => ({ preview: img })));
+        if (!isInitialLoaded && initialImages.length > 0) {
+          setImages(initialImages.map((img) => ({ preview: img })));
+          setIsInitialLoaded(true);
         }
-    }, [initialImages, images]);
+      }, [initialImages, isInitialLoaded]);
 
     const onDrop = useCallback(
         (acceptedFiles) => {
@@ -38,10 +38,10 @@ export default function ImageUploader({ onChange, multiple = false, initialImage
 
     const removeImage = (index) => {
         const updatedImages = images.filter((_, i) => i !== index);
-
+    
         // Asegúrate de que 'updatedImages' nunca sea 'null' o 'undefined'
         setImages(updatedImages);
-
+    
         // Si 'multiple' es falso, pasamos un array vacío en lugar de 'null'
         onChange(multiple ? updatedImages.map((img) => img.file) : []);
     };

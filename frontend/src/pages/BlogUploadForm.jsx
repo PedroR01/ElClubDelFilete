@@ -216,10 +216,21 @@ export default function BlogUploadForm() {
 
       // Creacion dinamica del endpoint para subir las imagenes al storage
       const getImgEndpoint = () => {
-        const handleEndpoint = data.contentImages.length > 0 ? "storage/update/array" : "storage/update";
+        /*const handleEndpoint = data.contentImages.length > 0 ? "storage/update/array" : "storage/update";
         const imgEndpoint = title ? `${handleEndpoint}/${oldFolderName}` : handleEndpoint;
         return imgEndpoint;
-      }
+      }*/
+      if (title) {
+        const baseEndpoint = data.contentImages.length > 0 
+          ? "storage/update/array" 
+          : "storage/update";
+        return `${baseEndpoint}/${oldFolderName}`;
+      } else {
+        // Si 'title' no existe o es vacío, se utiliza "storage" sin el "update".
+        return data.contentImages.length > 0 
+          ? "storage/array" 
+          : "storage";
+      }}
 
       const method = title ? "PUT" : "POST";
       const url = title ? `http://localhost:3001/api/blogs/update/${oldTitle}` : "http://localhost:3001/api/blogs";

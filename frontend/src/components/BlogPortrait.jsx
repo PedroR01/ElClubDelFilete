@@ -1,11 +1,11 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate} from 'react-router-dom';
 import { useContext } from "react";
 import { AuthContext } from '../context/Authcontext'; // Importamos el contexto de autenticación
 import { PencilIcon, Trash2Icon } from 'lucide-react';
 
 export default function BlogPortrait({ content, orientation }) {
     const { isAuthenticated } = useContext(AuthContext); // Obtenemos el estado de autenticación
-
+    const navigate = useNavigate();
     // Estilado por defecto para el caso del main
     let descriptionContainerStyle = "absolute bottom-10 left-3 right-3 md:left-9";
     let containerStyle = "w-full";
@@ -21,11 +21,55 @@ export default function BlogPortrait({ content, orientation }) {
         featuredStyle = "flex bg-[#3c3228] hover:-translate-y-2 transition-transform duration-500 shadow-blog-main mx-6";
     }
 
-    const handleDelete = (blogTitle) => {
+    const handleDelete = async (blogContent) => {
         // Abrir modal de confirmación para eliminar la novedad
-        console.log(blogTitle);
-        // Request para eliminar la novedad
-        // {`/eliminarBlog/${content.title}`}
+        /*
+        Me quedo con el contenido filtrado del blog por si falla la eliminación
+        de imágenes, en el cual yo reinserto la tupla si no se pueden eliminar sus imagenes
+        */ 
+        const { id, created_at, ...filteredData } = blogContent;
+
+        
+        
+        try{
+        const responseDelete = await fetch('http://localhost:3001/api/blogs', {
+            method: 'DELETE', // Método DELETE para eliminar
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ title: blogContent.title }) // Enviar el título en JSON
+          });
+      
+          if (!responseDelete.ok) {
+            throw new Error('Error en la eliminación del blog');
+          }
+          else{
+            console.log("Contenido del blog eliminado");
+            const responseDelete2 = await fetch('http://localhost:3001/api/storage', {
+                method: 'DELETE', // Método DELETE para eliminar
+                headers: {
+                  'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ folderName: blogContent.title }) // Enviar el título en JSON
+              });
+              if (!responseDelete2.ok) {
+                const responseDataUpload = await fetch('http://localhost:3001/api/blogs', {
+                    method: method,
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(filteredData)
+                  });
+                  if(responseDataUpload.ok){
+                    console.log("Hubo un error al eliminar las imagenes, se revirtió la eliminacion")
+                  }
+                  
+              }
+              navigate(0)
+          }
+        }
+        catch(err){
+            console.log(err)
+        } 
+            
     }
 
     {/* <div className="relative right-0 w-full z-10 grid col-span-4">
@@ -44,7 +88,7 @@ export default function BlogPortrait({ content, orientation }) {
                             className={`px-3 py-3 text-[#CDA053] bg-[#232129] rounded-full text-sm shadow-md transition hover:bg-[#CDA053] hover:text-[#232129] hover:scale-110 duration-300`}>
                             <PencilIcon />
                         </Link>
-                        <div className={`px-3 py-3 text-[#CDA053] bg-[#232129] rounded-full text-sm shadow-md transition hover:cursor-pointer hover:bg-[#CDA053] hover:text-[#232129] hover:scale-110 duration-300`} onClick={() => handleDelete(content.title)}>
+                        <div className={`px-3 py-3 text-[#CDA053] bg-[#232129] rounded-full text-sm shadow-md transition hover:cursor-pointer hover:bg-[#CDA053] hover:text-[#232129] hover:scale-110 duration-300`} onClick={() => handleDelete(content)}>
                             <Trash2Icon />
                         </div>
                     </div>
