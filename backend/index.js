@@ -13,7 +13,7 @@ import blogImgRouter from "./routes/blog/blogBucket.js";
 import logedUserCookiesRouter from "./routes/user/cookies/userCookie.js";
 import cookieParser from "cookie-parser";
 import errorHandler from "./middlewares/errorHandler.js";
-import corsMiddleware from "./middlewares/corsMiddleware.js";
+// import corsMiddleware from "./middlewares/corsMiddleware.js";
 
 dotenv.config();
 const app = express();
@@ -26,18 +26,18 @@ const __dirname = path.dirname(__filename);
 dotenv.config({ path: path.resolve(__dirname, ".env") });
 
 // CORS middleware
-// app.use(
-//   cors({
-//     origin: [
-//       "https://elclubdelfilete.com.ar",
-//       "http://localhost:5173",
-//       "http://localhost:3001",
-//     ],
-//     credentials: true,
-//   })
-// );
+app.use(
+  cors({
+    origin: [
+      "https://elclubdelfilete.com.ar",
+      "http://localhost:5173",
+      "http://localhost:3001",
+    ],
+    credentials: true,
+  })
+);
 
-app.use(corsMiddleware);
+// app.use(corsMiddleware);
 app.use(express.json());
 app.use(cookieParser());
 

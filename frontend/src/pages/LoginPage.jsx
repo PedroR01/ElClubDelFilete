@@ -32,7 +32,6 @@ export default function LoginPage() {
 
       const response = await fetch('https://club-filete-backend-3kklxje47-pedros-projects-3596de7b.vercel.app/login', {
         method: 'POST',
-        mode: 'cors',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ username, password }),
         credentials: 'include'
