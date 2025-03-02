@@ -191,97 +191,16 @@ export default function TextEditor({ blogContent, onChange, images, onAddImage }
             alert("URL no válida, por favor ingrese un enlace de YouTube.");
         }
     };
-    /*
-        useEffect(() => {
-            if (editor) {
-                const currentContent = editor.getJSON(); // Get the current content of the editor
     
-                // Map images to their corresponding editor nodes
-                const imagesContent = images.map((image) => {
-                    if (!image) return null;
-    
-                    // Check if the image is a public URL or a Blob/File
-                    const isPublicUrl = image && image.src;
-    
-                    if (isPublicUrl) {
-                        // If it's a public URL, use the URL directly
-                        return {
-                            type: 'image',
-                            attrs: {
-                                src: image.src,
-                                data: image, // Store the original image object for comparison
-                            },
-                        };
-                    } else if (image instanceof Blob || image instanceof File) {
-                        // If it's a Blob or File, use URL.createObjectURL
-                        return {
-                            type: 'image',
-                            attrs: {
-                                src: URL.createObjectURL(image),
-                                data: image, // Store the original Blob/File for comparison
-                            },
-                        };
-                    } else {
-                        console.error("La imagen no es un Blob, File o URL vÃ¡lida:", image);
-                        return null; // Handle invalid images
-                    }
-                }).filter(image => image !== null); // Filter out any invalid images
-    
-                // Filter the new images that are not already in the editor content
-                const existingImageSources = currentContent.content
-                    .filter(node => node.type === 'image')
-                    .map(node => node.attrs.data); // Compare using the original data (URL or Blob/File)
-    
-                const newImagesContent = imagesContent.filter(imageContent =>
-                    !existingImageSources.some(existingImage =>
-                        existingImage === imageContent.attrs.data // Compare using the original data
-                    )
-                );
-    
-                // Insert only the new images that are not already in the content
-                if (newImagesContent.length > 0) {
-                    editor.commands.insertContent({
-                        type: 'doc',
-                        content: [
-                            ...newImagesContent, // Only add new images
-                        ],
-                    });
-                }
-    
-                // Remove images that are no longer in the `images` state
-                const updatedContent = currentContent.content.filter((node) => {
-                    if (node.type === 'image') {
-                        // Check if the image exists in the `images` state
-                        const imageExistsInState = images.some(image => {
-                            if (image && image.src) {
-                                // Compare public URLs directly
-                                return image.src === node.attrs.data.src;
-                            } else if (image instanceof Blob || image instanceof File) {
-                                // For Blob/File, compare the original Blob/File object
-                                return image === node.attrs.data;
-                            }
-                            return false;
-                        });
-    
-                        // Only keep images that still exist in the `images` state
-                        return imageExistsInState;
-                    }
-                    return true; // Keep non-image nodes
-                });
-    
-                // Replace the content with the correctly updated images
-                editor.commands.setContent({
-                    type: 'doc',
-                    content: updatedContent,
-                });
-            }
-        }, [images, editor]);
-    */
     useEffect(() => {
         if (editor && blogContent) {
+            // Compare current content with blogContent
+            if (editor.getHTML() !== blogContent) {
             editor.commands.setContent(blogContent);
+            }
         }
     }, [blogContent, editor]);
+          
     const handleDrop = (e) => {
         e.preventDefault();
         if (!editor) return;
