@@ -14,7 +14,7 @@ import ProtectedRoute from "./components/ProtectedRoute";
 
 export default function App() {
   return (
-    <>
+    <div className="overflow-x-auto">
       <AuthContextProvider>
 
         <Navbar />
@@ -36,6 +36,6 @@ export default function App() {
         <Footer />
 
       </AuthContextProvider>
-    </>
+    </div>
   );
 };

@@ -8,6 +8,7 @@ import BlogSkeletonLoader from "../components/skeleton-loaders/BlogSkeletonLoade
 import Button from "../components/Button";
 import { BellRingIcon } from "lucide-react";
 import { motion } from "framer-motion";
+import ErrorPage from "./ErrorPage";
 
 
 
@@ -49,15 +50,15 @@ export default function NovedadesPage() {
                     </div>
                 </div>)
                     :
-                    (error ? (<><h1>Error al cargar novedades:</h1><h4>{error}</h4></>) : <>
-                        <section>
+                    (error ? (<ErrorPage />) : <>
+                        <section className="w-screen">
                             <motion.div
                                 initial={{ x: -200, opacity: 0 }}
                                 animate={{ x: 0, opacity: 1 }}
                                 transition={{ duration: 1 }}
-                                className="flex flex-row w-11/12 justify-self-center gap-12 mb-10"
+                                className="flex flex-row w-11/12 justify-self-center gap-12 my-10 md:mb-10"
                             >
-                                <h1 className="allura-regular text-[#CDA053] text-6xl leading-[1.10] tracking-wide">Destacadas</h1>
+                                <h1 className="allura-regular text-[#CDA053] text-5xl sm:text-6xl leading-[1.10] tracking-wide">Destacadas</h1>
                                 <div className="content-center">
                                     {isAuthenticated ? (
                                         <Button
@@ -67,6 +68,7 @@ export default function NovedadesPage() {
                                             textColor="text-[#8B2A1F]"
                                             event={handleRedirect}
                                             state={false}
+                                            contentSizeMobile={"py-1 px-0 text-base"}
                                         />
                                     ) : <Button
                                         icon={<BellRingIcon />}

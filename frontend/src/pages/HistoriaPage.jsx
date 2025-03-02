@@ -71,7 +71,8 @@ export default function HistoriaPage() {
                             </svg>
                             <motion.h3
                                 initial={{ x: -200, opacity: 0 }}
-                                whileInView={{ x: 0, opacity: 1 }}
+                                animate={{ x: 0, opacity: 1 }}
+                                // whileInView={{ x: 0, opacity: 1 }}
                                 viewport={{ once: true, amount: 0.5 }}
                                 transition={{ duration: 0.7, ease: "easeOut" }}
                                 className="allura-regular md:mt-16 lg:mt-5 md:text-nowrap mb-6 text-center tracking-wider"

@@ -1,15 +1,18 @@
 import { Link } from 'react-router-dom';
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { AuthContext } from '../context/Authcontext'; // Importamos el contexto de autenticación
 import { PencilIcon, Trash2Icon } from 'lucide-react';
 
 export default function BlogPortrait({ content, orientation }) {
     const { isAuthenticated } = useContext(AuthContext); // Obtenemos el estado de autenticación
+    const [confirmationModal, setConfirmationModal] = useState(false);
+    const [confirmDelete, setConfirmDelete] = useState(false);
+    const [targetBlog, setTargetBlog] = useState("");
 
     // Estilado por defecto para el caso del main
     let descriptionContainerStyle = "absolute bottom-10 left-3 right-3 md:left-9";
     let containerStyle = "w-full";
-    let featuredStyle = "flex bg-[#3c3228] hover:-translate-y-2 transition-transform duration-500 col-span-7 lg:col-span-4 row-span-2 lg:row-span-3 shadow-blog-main pb-6";
+    let featuredStyle = "flex bg-[#3c3228] hover:-translate-y-2 transition-transform duration-500 col-span-7 lg:col-span-4 row-span-2 lg:row-span-3 shadow-blog-main pb-6 md:rounded-3xl";
 
     if (orientation === "vertical") {
         descriptionContainerStyle = "flex flex-col justify-center px-[2.2rem] my-8 inline-flex";
@@ -18,14 +21,20 @@ export default function BlogPortrait({ content, orientation }) {
     else if (orientation === "horizontal") {
         descriptionContainerStyle = "flex flex-col justify-center px-8 my-2";
         containerStyle = "h-full w-2/5 flex-shrink-0 relative";
-        featuredStyle = "flex bg-[#3c3228] hover:-translate-y-2 transition-transform duration-500 shadow-blog-main mx-6";
+        featuredStyle = "flex bg-[#3c3228] hover:-translate-y-2 transition-transform duration-500 shadow-blog-main mx-6 rounded-3xl";
     }
+
+    useEffect(() => {
+        // Request para eliminar la novedad
+        // {`/eliminarBlog/${content.title}`}
+    }, [confirmDelete])
 
     const handleDelete = (blogTitle) => {
         // Abrir modal de confirmación para eliminar la novedad
         console.log(blogTitle);
-        // Request para eliminar la novedad
-        // {`/eliminarBlog/${content.title}`}
+        setTargetBlog(blogTitle);
+        setConfirmationModal(true);
+
     }
 
     {/* <div className="relative right-0 w-full z-10 grid col-span-4">
@@ -35,6 +44,32 @@ export default function BlogPortrait({ content, orientation }) {
 
     return (
         <>
+            {confirmationModal && (
+                <div className="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-md flex justify-center items-center z-50">
+                    <div className="bg-[#181818] bg-opacity-55 text-white w-[90%] max-w-lg rounded-3xl shadow-lg relative py-4 border-2 border-[#181818]/75">
+                        <div className='flex flex-row justify-between relative pb-6 border-b-2 border-[#181818]/75'>
+                            <h4 className='ml-8'>¿Eliminar la novedad <span className='italic'>{'"' + targetBlog + '"'}</span> ?</h4>
+                            <button
+                                className="mr-8 text-white hover:text-[#CDA053] focus:outline-none"
+                                onClick={() => setConfirmationModal(false)}
+                            >
+                                ✖
+                            </button>
+                        </div>
+                        <div className='pt-3 pb-6 border-b-2 border-[#181818]/75'>
+                            <p className='opacity-75 ml-8'>Esto no puede deshacerse</p>
+                        </div>
+                        <div className='flex flex-row justify-self-end pt-3 gap-4 mr-8'>
+                            <button className="w-full border-2 backdrop-blur-sm border-[#CDA053] text-[#CDA053] py-2 px-3 rounded-lg shadow-xl transition-all duration-300 ease-in-out brightness-100 enabled:hover:scale-105 enabled:hover:brightness-125 enabled:active:scale-95" type="button" onClick={() => setConfirmationModal(false)}>Cancelar</button>
+                            <button className="w-full bg-[#CDA053] text-[#FEFFFB] px-3  afacad-normal rounded-lg text-lg transition-all duration-300 ease-in-out brightness-100 enabled:hover:scale-105  enabled:active:scale-95" type="button" onClick={() => {
+                                setConfirmDelete(true);
+                                setConfirmationModal(false);
+                            }}>Eliminar</button>
+                        </div>
+
+                    </div>
+                </div>
+            )}
             {/* Botones de acción para el administrador */}
             {isAuthenticated && (
                 <div className={`${orientation === "main" ? "absolute w-1/2" : "relative w-full right-0 grid col-span-4"} z-10`}>
@@ -54,7 +89,7 @@ export default function BlogPortrait({ content, orientation }) {
             <Link
                 to={`./${content.title}`} // Redirige a la página de destino
                 state={{ content }}
-                className={`${orientation === "vertical" ? "border-2 border-[#802326]" : `${featuredStyle}`} h-full lg:my-4 overflow-hidden relative group rounded-3xl`}
+                className={`${orientation === "vertical" ? "border-2 border-[#802326] rounded-3xl" : `${featuredStyle}`} h-full lg:my-4 overflow-hidden relative group`}
             >
 
                 {
@@ -62,7 +97,7 @@ export default function BlogPortrait({ content, orientation }) {
                         <img
                             src={content.bucket_folder_url + "/portrait"}
                             alt={content.title}
-                            className={`${orientation === "main" ? "group-hover:scale-100 scale-110 transition-transform duration-500" : ""} w-full h-full object-cover brightness-50 rounded-3xl shadow-blog-main`}
+                            className={`${orientation === "main" ? "group-hover:scale-100 scale-110 transition-transform duration-500 md:rounded-3xl" : "rounded-3xl"} w-full h-full object-cover brightness-50  shadow-blog-main`}
                         />
                         {/* top-6 left-8 */}
                         <span className={`${orientation === "main" ? "text-base" : "text-sm"} top-0 left-0 absolute afacad-bold  w-fit uppercase tracking-wide text-[#CDA053] pb-1 pt-3 pr-4 pl-6 rounded-br-3xl bg-[#8F272A] brightness-90`}>

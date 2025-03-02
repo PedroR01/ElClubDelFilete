@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import logoIntro from "../../img/logos/logoIntro.png";
 import { ChevronDown } from "lucide-react";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 
 export default function Navbar() {
   const [activeRoute, setActiveRoute] = useState("");
@@ -50,6 +50,26 @@ export default function Navbar() {
   // Condicionar si las rutas deben estar habilitadas o no
   const isHomePage = location.pathname === "/";
 
+  // Constantes para las animaciones del menu desplegable desde el logo.
+  const animateVariants = {
+    show: {
+      x: -40,
+      y: -10,
+      height: 150,
+      opacity: 1,
+      visibility: "visible",
+      transition: { type: "spring", bounce: 0.6, duration: 1.3, ease: "easeInOut" },
+    },
+    hide: {
+      x: -40,
+      y: -10,
+      height: 0,
+      opacity: 0,
+      visibility: "hidden",
+      transition: { type: "spring", bounce: 0.6, duration: 1.3, ease: "easeInOut" },
+    },
+  };
+
   return (
     <>
       <nav
@@ -70,61 +90,67 @@ export default function Navbar() {
                 <span className="underline-img"></span>
               </a>
             </li>
-            <li className="group relative" onMouseEnter={() => setIsDropdownOpen(true)} onMouseLeave={() => setIsDropdownOpen(false)}>
+            <li className="group relative" onMouseEnter={() => setIsDropdownOpen(true)} onMouseLeave={() => setIsDropdownOpen(false)} onClick={() => setIsDropdownOpen(!isDropdownOpen)}>
               <button className="group-hover:scale-110 transition-transform duration-300">
                 <img className="h-16" src={logoIntro} alt="Logo Navbar" />
                 <ChevronDown className="absolute translate-x-7" />
               </button>
 
               {/* Menú desplegable de la imagen*/}
-              {isDropdownOpen && (
-                <motion.ul
-                  initial={{ x: -40, y: -10, scaleY: 0 }}
-                  animate={{ scaleY: 1 }}
-                  transition={{ type: "spring", bounce: .6, duration: 1.3, ease: "easeInOut" }}
-                  className="absolute justify-items-center py-2 -translate-y-1 mt-2 w-40 bg-[#24222B] text-white rounded-lg shadow-lg opacity-100 transition-opacity duration-300">
-                  <li>
-                    <a
-                      href="/"
-                      className="block px-4 py-2 transition nav-link"
-                      onClick={() => isHomePage && setIsDropdownOpen(false)}
-                    >
-                      Inicio
-                      <span className="underline-img"></span>
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      href="/#academia"
-                      className="block px-4 py-2 transition nav-link"
-                      onClick={(e) => {
-                        if (isHomePage) {
-                          handleSmoothScroll(e, "#academia");
-                          setIsDropdownOpen(false);
-                        }
-                      }}
-                    >
-                      Academia
-                      <span className="underline-img"></span>
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      href="/#galería"
-                      className="block px-4 py-2 transition nav-link"
-                      onClick={(e) => {
-                        if (isHomePage) {
-                          handleSmoothScroll(e, "#galería");
-                          setIsDropdownOpen(false);
-                        }
-                      }}
-                    >
-                      Galería
-                      <span className="underline-img"></span>
-                    </a>
-                  </li>
-                </motion.ul>
-              )}
+              <AnimatePresence>
+                {isDropdownOpen && (
+                  <motion.ul
+                    variants={animateVariants}
+                    initial="hide"
+                    animate="show"
+                    exit="hide"
+                    transition={{ type: "spring", bounce: 0.6, duration: 1.3, ease: "easeInOut" }}
+                    className="absolute justify-items-center py-2 -translate-y-1 mt-2 w-40 bg-[#24222B] text-white rounded-lg shadow-lg transition-opacity duration-300"
+                  >
+                    {/* Opciones del menú */}
+                    <li>
+                      <a
+                        href="/"
+                        className="block px-4 py-2 transition nav-link"
+                        onClick={() => isHomePage && setIsDropdownOpen(false)}
+                      >
+                        Inicio
+                        <span className="underline-img"></span>
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                        href="/#academia"
+                        className="block px-4 py-2 transition nav-link"
+                        onClick={(e) => {
+                          if (isHomePage) {
+                            handleSmoothScroll(e, "#academia");
+                            setIsDropdownOpen(false);
+                          }
+                        }}
+                      >
+                        Academia
+                        <span className="underline-img"></span>
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                        href="/#galería"
+                        className="block px-4 py-2 transition nav-link"
+                        onClick={(e) => {
+                          if (isHomePage) {
+                            handleSmoothScroll(e, "#galería");
+                            setIsDropdownOpen(false);
+                          }
+                        }}
+                      >
+                        Galería
+                        <span className="underline-img"></span>
+                      </a>
+                    </li>
+                  </motion.ul>
+                )}
+              </AnimatePresence>
             </li>
 
             <li className="hidden md:block">
@@ -189,24 +215,6 @@ export default function Navbar() {
         </button>
 
         <ul className="flex flex-col items-start gap-6 mt-16 px-6 text-base hamston">
-          <li>
-            <a
-              href="#academia"
-              className={`${isHomePage ? "" : "pointer-events-none brightness-75"}`}
-              onClick={(e) => isHomePage && handleSmoothScroll(e, "#academia")}
-            >
-              Academia
-            </a>
-          </li>
-          <li>
-            <a
-              href="#galería"
-              className={`${isHomePage ? "" : "pointer-events-none brightness-75"}`}
-              onClick={(e) => isHomePage && handleSmoothScroll(e, "#galería")}
-            >
-              Galería
-            </a>
-          </li>
           <li>
             <a href="/historia" onClick={toggleSidebar}>
               Historía
