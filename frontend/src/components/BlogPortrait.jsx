@@ -54,7 +54,7 @@ export default function BlogPortrait({ content, orientation }) {
               });
               if (!responseDelete2.ok) {
                 const responseDataUpload = await fetch('http://localhost:3001/api/blogs', {
-                    method: method,
+                    method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(filteredData)
                   });
@@ -63,7 +63,8 @@ export default function BlogPortrait({ content, orientation }) {
                   }
                   
               }
-              navigate(0)
+              // Hago reset de la page
+              navigate(0);
           }
         }
         catch(err){

@@ -248,7 +248,17 @@ export default function BlogUploadForm() {
       } else {
 
         console.log(resultImg);
-        blogData.bucket_folder_url = resultImg.url;
+        /* Si la imagen no fue cambiada, la URL ya contiene el nombre de la carpeta.
+          En el frontend, se agrega "/portrait" automáticamente, por lo que aquí lo eliminamos 
+          para evitar que la URL termine con "/portrait/portrait".
+          Y en caso de que estemos en edición y haya cambiado la img, como no contiene ni portrait
+          ni nada, no habrá inconvenientes con la inserción 
+        */
+        if (title) {
+          blogData.bucket_folder_url = resultImg.url.replace(/\/?(portrait|blogImg\d+)$/, '');
+        } else {
+          blogData.bucket_folder_url = resultImg.url;
+        }
 
         if (getValues("contentImages").length > 0) {
           const newHtml = await replaceImageUrlsInContent(blogData.content_sections, resultImg.url)
