@@ -16,7 +16,6 @@ export default function App() {
   return (
     <div className="overflow-x-auto">
       <AuthContextProvider>
-
         <Navbar />
         <Routes>
           <Route path="/" element={<Landing />}></Route>
