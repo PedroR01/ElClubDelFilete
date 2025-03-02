@@ -1,7 +1,7 @@
 import { createContext, useState, useEffect } from 'react';
 export const AuthContext = createContext();
 
-export default function AuthContextProvider ({ children }) {
+export default function AuthContextProvider({ children }) {
   const [lastRefreshed, setLastRefreshed] = useState(Date.now());
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [isLoading, setIsLoading] = useState(true); // Nuevo estado de carga
@@ -10,11 +10,11 @@ export default function AuthContextProvider ({ children }) {
     const TIME_FOR_VERIFY = 10 * 60 * 1000;
     const verifyOrRefreshSession = async () => {
       try {
-        const response = await fetch('http://localhost:3001/api/verify', {
+        const response = await fetch('https://club-filete-backend-3kklxje47-pedros-projects-3596de7b.vercel.app/api/verify', {
           method: 'POST',
-          credentials: "include", 
+          credentials: "include",
         });
-  
+
         if (!response.ok) {
           setIsAuthenticated(false);
           throw new Error('Error al verificar o refrescar sesión');
@@ -26,39 +26,39 @@ export default function AuthContextProvider ({ children }) {
       }
       finally {
         setIsLoading(false); // Termina la carga
-      } 
+      }
     };
-  
+
     // Llamada inicial para refrescar el token al montar el componente
-     verifyOrRefreshSession();
-  
+    verifyOrRefreshSession();
+
     // Guardar el tiempo de la primera verificación (inicio de la sesión)
     const sessionStartTime = Date.now();
-  
+
     // Solo se ejecuta si el usuario está autenticado
     if (isAuthenticated) {
       // Verificar el tiempo restante antes de que expire el token
       const checkTokenExpiration = () => {
         const timeRemaining = Date.now() - sessionStartTime;
-        if (timeRemaining >= (TOKEN_EXPIRATION_TIME )) {
+        if (timeRemaining >= (TOKEN_EXPIRATION_TIME)) {
           verifyOrRefreshSession(true); // Refrescar el token si está por expirar
         }
       };
-  
+
       // Intervalo para verificar el tiempo restante y refrescar el token
       const intervalId = setInterval(checkTokenExpiration, TIME_FOR_VERIFY); // Verificación cada minuto
-      
+
       return () => {
         clearInterval(intervalId); // Limpiar intervalo al desmontar el componente
       };
     }
-  
-  }, [isAuthenticated]); // Dependencias mínimas
-  
 
-    return(
-        <AuthContext.Provider value={{ isAuthenticated, setIsAuthenticated, isLoading}}>
-            {children}
-        </AuthContext.Provider>
-    );
+  }, [isAuthenticated]); // Dependencias mínimas
+
+
+  return (
+    <AuthContext.Provider value={{ isAuthenticated, setIsAuthenticated, isLoading }}>
+      {children}
+    </AuthContext.Provider>
+  );
 };

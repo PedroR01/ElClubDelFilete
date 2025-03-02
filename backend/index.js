@@ -41,6 +41,14 @@ app.use(corsMiddleware);
 app.use(express.json());
 app.use(cookieParser());
 
+app.options("*", (req, res) => {
+  res.header("Access-Control-Allow-Origin", req.headers.origin);
+  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+  res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
+  res.header("Access-Control-Allow-Credentials", "true");
+  res.sendStatus(204); // Responde sin contenido
+});
+
 // Email API (RESEND)
 app.use("/api/submitResend", resendRouter);
 
