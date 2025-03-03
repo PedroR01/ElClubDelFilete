@@ -1,5 +1,6 @@
-import { createContext, useState, useEffect } from 'react';
-export const AuthContext = createContext();
+import { useState, useEffect } from 'react';
+import { AuthContext } from './AuthContextFunct';
+import serverUrl from '../components/utils/serverUrl';
 
 export default function AuthContextProvider({ children }) {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -9,9 +10,8 @@ export default function AuthContextProvider({ children }) {
     const TIME_FOR_VERIFY = 10 * 60 * 1000;
     const verifyOrRefreshSession = async () => {
       try {
-        const response = await fetch('https://club-filete-backend-3kklxje47-pedros-projects-3596de7b.vercel.app/api/verify', {
+        const response = await fetch(`${serverUrl.produccion}/api/verify`, {
           method: 'POST',
-          mode: 'cors',
           credentials: "include",
         });
 
@@ -19,7 +19,7 @@ export default function AuthContextProvider({ children }) {
           setIsAuthenticated(false);
           throw new Error('Error al verificar o refrescar sesión');
         }
-        await response.json();
+        const data = await response.json();
         setIsAuthenticated(true);
       } catch (e) {
         console.log('Error al comunicarse con el servidor', e);

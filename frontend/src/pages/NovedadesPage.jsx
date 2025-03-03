@@ -2,7 +2,7 @@ import { Helmet } from "react-helmet-async";
 import { useNovedadesFetch } from "../hooks/useNovedadesFetch";
 import { useNavigate } from 'react-router-dom';
 import { useContext } from "react";
-import { AuthContext } from '../context/Authcontext'; // Importamos el contexto de autenticación
+import { AuthContext } from '../context/AuthContextFunct';
 import BlogPortrait from "../components/BlogPortrait";
 import BlogSkeletonLoader from "../components/skeleton-loaders/BlogSkeletonLoader";
 import Button from "../components/Button";

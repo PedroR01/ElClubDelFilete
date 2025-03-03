@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import serverUrl from "../components/utils/serverUrl";
 
 export function useNovedadesFetch() {
     const [novedades, setNovedades] = useState([]);
@@ -9,7 +10,7 @@ export function useNovedadesFetch() {
         const fetchData = async () => {
             setLoading(true);
             try {
-                const response = await fetch("http://localhost:3001/api/blogs", {
+                const response = await fetch(`${serverUrl.produccion}/api/blogs`, {
                     method: 'GET',
                 })
                 if (!response.ok)

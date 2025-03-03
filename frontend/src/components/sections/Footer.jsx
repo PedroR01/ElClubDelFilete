@@ -1,20 +1,21 @@
 import { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { AuthContext } from '../../context/Authcontext'
+import { AuthContext } from '../../context/AuthContextFunct';
+import serverUrl from '../utils/serverUrl';
 export default function Footer() {
   const { isAuthenticated, setIsAuthenticated } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const logOut = async () => {
     try {
-      const response = await fetch('http://localhost:3001/logout', {
+      const response = await fetch(`${serverUrl.produccion}/logout`, {
         method: 'POST',
         credentials: "include", // Esto asegura que las cookies se envíen
       });
       if (!response.ok)
         throw new Error('Error al cerrar sesión');
       setIsAuthenticated(false);
-      navigate("/")
+      navigate("/");
     }
     catch (err) {
       console.log(err);
