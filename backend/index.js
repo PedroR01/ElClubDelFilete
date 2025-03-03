@@ -15,9 +15,10 @@ import cookieParser from "cookie-parser";
 import errorHandler from "./middlewares/errorHandler.js";
 // import corsMiddleware from "./middlewares/corsMiddleware.js";
 
-dotenv.config();
+// dotenv.config();
 const app = express();
-const PORT = process.env.PORT || 3001;
+const PORT =
+  "https://club-filete-backend-3kklxje47-pedros-projects-3596de7b.vercel.app/";
 
 // Simula la variable global de dirección dinámica `__dirname` de CommonJS en módulos ES
 const __filename = fileURLToPath(import.meta.url);
@@ -49,6 +50,20 @@ app.use(cookieParser());
 //   res.sendStatus(204); // Responde sin contenido
 // });
 
+app.get("/", (req, res) => {
+  const htmlResponse = `
+    <html>
+      <head>
+        <title>NodeJs y Express en Vercel</title>
+      </head>
+      <body>
+        <h1>Soy un proyecto Back end en vercel</h1>
+      </body>
+    </html>
+  `;
+  res.send(htmlResponse);
+});
+
 // Email API (RESEND)
 app.use("/api/submitResend", resendRouter);
 
@@ -74,8 +89,8 @@ app.use((req, res) => {
 
 app.use(errorHandler); // Esto debe ir al final para manejar cualquier error no capturado
 
-// app.listen(PORT, () => {
-//   console.log(`Servidor corriendo en ${PORT}`);
-// });
+app.listen(PORT, () => {
+  console.log(`Servidor corriendo en ${PORT}`);
+});
 
-export default app;
+// export default app;
