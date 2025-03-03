@@ -74,6 +74,8 @@ app.use((req, res) => {
 
 app.use(errorHandler); // Esto debe ir al final para manejar cualquier error no capturado
 
-app.listen(PORT, () => {
-  console.log(`Servidor corriendo en ${PORT}`);
-});
+// app.listen(PORT, () => {
+//   console.log(`Servidor corriendo en ${PORT}`);
+// });
+
+export default app;
