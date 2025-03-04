@@ -15,8 +15,19 @@ export const YoutubeVideo = Node.create({
   },
 
   parseHTML() {
-    return [{ tag: "div[data-youtube-video]" }];
+    return [{
+      tag: 'div[data-youtube-video]',
+      getAttrs: (dom) => {
+        const iframe = dom.querySelector('iframe');
+        return {
+          src: iframe ? iframe.getAttribute('src') : null,
+          width: iframe ? iframe.getAttribute('width') : 640,
+          height: iframe ? iframe.getAttribute('height') : 480,
+        };
+      },
+    }];
   },
+  
 
   renderHTML({ node }) {
     return [

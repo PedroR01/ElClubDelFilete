@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import TextEditor from "../components/TextEditor";
 import Button from "../components/Button";
 import ImageUploader from "../components/ImageUploader";
-
+import serverUrl from '../components/utils/serverUrl';
 export default function BlogUploadForm() {
   const { title } = useParams(); // Obtiene el ID de la URL
   const { state } = useLocation(); // Accede a los datos pasados a través del 'state'
@@ -233,9 +233,9 @@ export default function BlogUploadForm() {
       }}
 
       const method = title ? "PUT" : "POST";
-      const url = title ? `http://localhost:3001/api/blogs/update/${oldTitle}` : "http://localhost:3001/api/blogs";
-
-      const responseImgUpload = await fetch(`http://localhost:3001/api/${getImgEndpoint()}`, {
+      const url = title ? `${serverUrl.produccion}/api/blogs/update/${oldTitle}` : `${serverUrl.produccion}/api/blogs`;
+      console.log(url)
+      const responseImgUpload = await fetch(`${serverUrl.produccion}/api/${getImgEndpoint()}`, {
         method: method,
         body: imgData
       });
@@ -277,7 +277,7 @@ export default function BlogUploadForm() {
           const imagenEliminar = {
             folderName: data.title
           }
-          const responseImgDelete = await fetch("http://localhost:3001/api/storage", {
+          const responseImgDelete = await fetch(`${serverUrl.produccion}/api/storage`, {
             method: "DELETE",
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(imagenEliminar)

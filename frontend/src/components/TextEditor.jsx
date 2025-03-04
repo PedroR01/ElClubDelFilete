@@ -194,13 +194,12 @@ export default function TextEditor({ blogContent, onChange, images, onAddImage }
     
     useEffect(() => {
         if (editor && blogContent) {
-            // Compare current content with blogContent
-            if (editor.getHTML() !== blogContent) {
+        if (editor.getHTML() !== blogContent) {
             editor.commands.setContent(blogContent);
-            }
+            console.log(blogContent)
         }
-    }, [blogContent, editor]);
-          
+    }
+      }, [blogContent, editor]);  
     const handleDrop = (e) => {
         e.preventDefault();
         if (!editor) return;
