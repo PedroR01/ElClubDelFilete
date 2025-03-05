@@ -192,7 +192,7 @@ export default function BlogUploadForm() {
   // Los datos del formulario a enviar se dividen en 2 partes: Blog (texto y numero de prioridad) e Imagen (información completa de la imagen y codificada para guardarla correctamente en la BD).
   const onSubmit = async (data) => {
     try {
-
+      // Desactiva el boton de submit, por lo menos hasta que se complete la solicitud o se produzca un error.
       setIsSubmit(true);
 
       const blogData = {
@@ -294,6 +294,8 @@ export default function BlogUploadForm() {
     } catch (error) {
       console.error("Error:", error.message);
     }
+    setIsSubmit(false);
+
   };
   const handleAddImage = (newImage) => {
     const currentImages = getValues("contentImages") || [];

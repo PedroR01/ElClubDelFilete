@@ -264,6 +264,60 @@ export class BlogRepository {
     featuredPos,
     bucketFolderUrl
   ) {
+    // Si el blog se quiere destacar, se debe verificar el corrimiento
+    if (featuredPos != null) {
+      // Obtener los blogs con featured_pos mayor o igual al que se quiere insertar
+      let { data: blogs, error } = await supabase
+        .from("blogs")
+        .select("*")
+        .filter("featured_pos", "gte", featuredPos);
+
+      if (error) {
+        console.error("Error al obtener blogs:", error.message);
+        throw error;
+      }
+
+      // Ordenar los blogs en orden descendente por featured_pos
+      blogs.sort((a, b) => b.featured_pos - a.featured_pos);
+
+      const lastFeaturedPos = 4;
+
+      // Iterar sobre los blogs y actualizar su posición
+      for (const blog of blogs) {
+        if (blog.featured_pos === lastFeaturedPos) {
+          // Si ya está en la última posición, se desasigna la posición destacada
+          const { data, error } = await supabase
+            .from("blogs")
+            .update({ featured_pos: null })
+            .eq("id", blog.id)
+            .select();
+          if (error) {
+            console.error(
+              "Error al actualizar blog (set null):",
+              error.message
+            );
+            throw error;
+          }
+        } else {
+          // Incrementar la posición
+          const newPos = blog.featured_pos + 1;
+          const { data, error } = await supabase
+            .from("blogs")
+            .update({ featured_pos: newPos })
+            .eq("id", blog.id)
+            .select();
+          if (error) {
+            console.error(
+              "Error al actualizar blog (incremento):",
+              error.message
+            );
+            throw error;
+          }
+        }
+      }
+    }
+
+    // Insertar el nuevo blog
     const { data, error } = await supabase
       .from("blogs")
       .insert({
@@ -275,7 +329,10 @@ export class BlogRepository {
         bucket_folder_url: bucketFolderUrl,
       })
       .select();
-    if (error) console.log("Error: " + error.message);
+
+    if (error) {
+      console.log("Error al insertar blog:", error.message);
+    }
     return { data, error };
   }
 

@@ -1,6 +1,9 @@
 import cors from "cors";
 
-const allowedOrigins = ["https://elclubdelfilete.com.ar"];
+const allowedOrigins = [
+  "https://elclubdelfilete.com.ar",
+  "http://localhost:5173",
+];
 
 const corsMiddleware = cors({
   origin: (origin, callback) => {
