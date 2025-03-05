@@ -13,14 +13,14 @@ import ErrorPage from "./ErrorPage";
 
 
 export default function NovedadesPage() {
-    const { novedades, loading, error } = useNovedadesFetch();
+    const { novedades, loading, error, tags } = useNovedadesFetch();
     //const { novedades, loading, error } = useContext(AuthContext); // Accedes al valor de isAuthenticated
 
     // Función que maneja la redirección al presionar el botón
     const { isAuthenticated } = useContext(AuthContext); // Obtenemos el estado de autenticación
     const navigate = useNavigate(); // Usamos el hook para navegación
     const handleRedirect = () => {
-        navigate('/añadirBlog'); // Redirige a la página del "administrador"
+        navigate('/añadirBlog', { state: {tags: tags} }); // Redirige a la página del "administrador"
     };
 
     const encontrarDestacadaPrincipal = () => (
@@ -87,7 +87,7 @@ export default function NovedadesPage() {
                             >
                                 {/* Novedad principal (main) */}
                                 <div className="lg:col-span-4 lg:row-span-3">
-                                    <BlogPortrait content={destacadaPrincipal} orientation="main" />
+                                    <BlogPortrait content={destacadaPrincipal} orientation="main" tags={tags} />
                                 </div>
 
                                 {/* Contenedor de las novedades secundarias */}
@@ -101,7 +101,7 @@ export default function NovedadesPage() {
                                                 key={newsKey}
                                                 className="shrink-0 w-64 lg:w-auto"
                                             >
-                                                <BlogPortrait content={news} orientation="horizontal" />
+                                                <BlogPortrait content={news} orientation="horizontal" tags={tags} />
                                             </article>
                                         ))}
                                 </div>
@@ -117,7 +117,7 @@ export default function NovedadesPage() {
                                     .filter((news) => news.featured_pos === null)
                                     .map((news, newsKey) => (
                                         <article className="border-2 border-[#802326] rounded-3xl" key={newsKey}>
-                                            <BlogPortrait content={news} orientation="vertical" />
+                                            <BlogPortrait content={news} orientation="vertical" tags={tags}/>
                                         </article>
                                     ))}
                             </div>

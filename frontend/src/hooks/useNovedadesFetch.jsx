@@ -5,7 +5,7 @@ export function useNovedadesFetch() {
     const [novedades, setNovedades] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-
+    const [tags, setTags] = useState([]);
     useEffect(() => {
         const fetchData = async () => {
             setLoading(true);
@@ -18,6 +18,8 @@ export function useNovedadesFetch() {
 
                 const data = await response.json();
                 setNovedades(data.metaData);
+                const uniqueTags = [...new Set(data.metaData.map(nov => nov.tag))];
+                setTags(uniqueTags);
             } catch (e) {
                 setError(e.message);
             } finally {
@@ -28,5 +30,5 @@ export function useNovedadesFetch() {
         fetchData();
     }, []);
 
-    return { novedades, loading, error };
+    return { novedades, loading, error, tags };
 }

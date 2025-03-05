@@ -10,7 +10,7 @@ import serverUrl from '../components/utils/serverUrl';
 export default function BlogUploadForm() {
   const { title } = useParams(); // Obtiene el ID de la URL
   const { state } = useLocation(); // Accede a los datos pasados a través del 'state'
-  const { novedad } = state || {};  // Extrae los datos de la novedad
+  const { novedad, tags } = state || {};  // Extrae los datos de la novedad
   const navigate = useNavigate();
   const [isSubmit, setIsSubmit] = useState(false);
   const {
@@ -197,7 +197,7 @@ export default function BlogUploadForm() {
 
       const blogData = {
         title: data.title,
-        tag: data.tag,
+        tag: data.tag === "Otro" && customCategory !== "" ? customCategory : data.tag,
         description: data.description,
         content_sections: data.content,
         featured_pos: isFeatured ? data.featured_pos : null,
@@ -312,10 +312,20 @@ export default function BlogUploadForm() {
       {errors.title && <p className="text-red-500 text-sm">{errors.title.message}</p>}
 
       <label className="block mt-4 font-semibold text-[#CDA053]">Categoría:</label>
-      <select {...register("tag", { required: "Selecciona una categoría" })} className="p-2 w-full bg-transparent text-[#FEFFFB] rounded border border-[#cda05377] placeholder-transparent focus:ring-[#CDA053] focus:outline-none">
+      <select 
+      {...register("tag", { required: "Selecciona una categoría" })} 
+      className="p-2 w-full bg-transparent text-[#FEFFFB] rounded border border-[#cda05377] placeholder-transparent focus:ring-[#CDA053] focus:outline-none"
+      >
         <option value="" className="bg-[#2D2B35] text-[#FEFFFB]">Selecciona una categoría</option>
-        <option value="Investigacion" className="bg-[#2D2B35] text-[#FEFFFB]">Investigación</option>
-        <option value="Mentalidad" className="bg-[#2D2B35] text-[#FEFFFB]">Mentalidad</option>
+        
+        {/* Verificación para evitar error si tags es undefined */}
+        {(tags && Array.isArray(tags)) ? (
+            tags.map(tag => (
+                <option key={tag} value={tag} className="bg-[#2D2B35] text-[#FEFFFB]">{tag}</option>
+            ))
+        ) : (
+            <option className="bg-[#2D2B35] text-[#FEFFFB]">No hay categorías disponibles</option>
+        )}
         <option value="Otro" className="bg-[#2D2B35] text-[#FEFFFB]">Agregar otra</option>
       </select>
       {watch("tag") === "Otro" && (
