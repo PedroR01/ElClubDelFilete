@@ -207,10 +207,10 @@ export default function BlogUploadForm() {
       const imgData = wrapImgData(data.title, data.content, data.coverImage, data.contentImages);
 
       // Distinción entre si el formulario es para subir uno nuevo o actualizar uno existente
-      const oldTitle = title;
-
+      const oldTitle = encodeURIComponent(title || '');
+      // En ambos casos se codifican en formato para URL ya que si poseen espacios, la URL no lo toma
       // Esta variable es necesaria para enviar la solicitud al endpoint y que reciba la query con el mismo nombre esperado. Revisar linea 82/83 del put en blogBucket.js "update/:oldFolderName".
-      const oldFolderName = oldTitle;
+      const oldFolderName = encodeURIComponent(oldTitle || '');
 
       // Creacion dinamica del endpoint para subir las imagenes al storage
       const getImgEndpoint = () => {
