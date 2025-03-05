@@ -13,14 +13,14 @@ import ErrorPage from "./ErrorPage";
 
 
 export default function NovedadesPage() {
-    const { novedades, loading, error } = useNovedadesFetch();
+    const { novedades, loading, error, tags } = useNovedadesFetch();
     //const { novedades, loading, error } = useContext(AuthContext); // Accedes al valor de isAuthenticated
 
     // Función que maneja la redirección al presionar el botón
     const { isAuthenticated } = useContext(AuthContext); // Obtenemos el estado de autenticación
     const navigate = useNavigate(); // Usamos el hook para navegación
     const handleRedirect = () => {
-        navigate('/añadirBlog'); // Redirige a la página del "administrador"
+        navigate('/añadirBlog', { state: {tags: tags} }); // Redirige a la página del "administrador"
     };
 
     const encontrarDestacadaPrincipal = () => (
@@ -82,13 +82,14 @@ export default function NovedadesPage() {
                                 </div>
                             </motion.div>
                             <div className="grid grid-cols-7 grid-rows-3 gap-4 lg:gap-6 w-full md:w-11/12 md:justify-self-center h-[62vh] lg:h-[80vh]">
-                                <BlogPortrait content={destacadaPrincipal} orientation="main" />
+                                <BlogPortrait content={destacadaPrincipal} orientation="main" tags={tags}/>
                                 <div className="flex flex-row lg:flex-col col-span-7 lg:col-span-3 row-span-1 lg:row-span-3 gap-6 justify-between overflow-x-scroll md:overflow-x-hidden py-10 lg:py-14">
                                     {novedades.filter((news) => news.featured_pos > 1).map((news, newsKey) => (
                                         <article className="grid md:inline-block w-1/3 h-auto lg:w-auto lg:mb-0 lg:h-1/4" key={newsKey} >
                                             <BlogPortrait
                                                 content={news}
                                                 orientation="horizontal"
+                                                tags={tags}
                                             />
                                         </article>
 
@@ -124,6 +125,7 @@ grid grid-cols-6
                                         <BlogPortrait
                                             content={news}
                                             orientation="vertical"
+                                            tags={tags}
                                         />
                                     </article>
 
