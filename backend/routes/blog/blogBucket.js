@@ -21,10 +21,12 @@ blogImgRouter.post("/", upload.single("image"), async (req, res, next) => {
     // Si le saco el imgName y la const image queda ighual al del array.
     const { imgName, folderName } = req.body; // Hace falta el imgName?
     const image = req.file.buffer; // El archivo cargado
+    const folderNameWithoutSpecialChar = folderName.replace(/[^\p{L}\s]/gu, '');
+    const folderNameStandarized = folderNameWithoutSpecialChar.replace(/\s+/g, ' ').trim();
     const { data, error, url } = await BlogRepository.addImage(
       image,
       imgName,
-      folderName,
+      folderNameStandarized,
       req.file.mimetype
     );
     if (error)
@@ -43,10 +45,11 @@ blogImgRouter.post("/", upload.single("image"), async (req, res, next) => {
 blogImgRouter.post("/array", upload.array("images"), async (req, res, next) => {
   try {
     const { folderName } = req.body;
-
+    const folderNameWithoutSpecialChar = folderName.replace(/[^\p{L}\s]/gu, '');
+    const folderNameStandarized = folderNameWithoutSpecialChar.replace(/\s+/g, ' ').trim();
     const { data, error, url } = await BlogRepository.addMultipleImage(
       req.files,
-      folderName
+      folderNameStandarized
     );
 
     if (error) {
@@ -72,7 +75,9 @@ blogImgRouter.delete("/", async (req, res, next) => {
         400,
         "No se enviaron los datos solicitados"
       );
-    const data = await BlogRepository.deleteImage(folderName);
+    const folderNameWithoutSpecialChar = folderName.replace(/[^\p{L}\s]/gu, '');
+    const folderNameStandarized = folderNameWithoutSpecialChar.replace(/\s+/g, ' ').trim();
+    const data = await BlogRepository.deleteImage(folderNameStandarized);
     res.send(data);
   } catch (err) {
     next(err);
@@ -87,7 +92,12 @@ blogImgRouter.put(
       const { oldFolderName } = req.params; // El título del blog a actualiza
       // Decodifico el titulo porque lo paso codificado en un formato válido para URL
       const decodifiedOldFolderName = decodeURIComponent(oldFolderName);
+      const oldFolderNameWithoutSpecialChar = decodifiedOldFolderName.replace(/[^\p{L}\s]/gu, '');
+      // Quito los espacios extra, por ejemplo, en palabras que quedan:"Hola  como estas", queda: "Hola como estas"
+      const oldFolderNameStandarized = oldFolderNameWithoutSpecialChar.replace(/\s+/g, ' ').trim();
       const { imgName, folderName } = req.body; // Hace falta el imgName?
+      const folderNameWithoutSpecialChar = folderName.replace(/[^\p{L}\s]/gu, '');
+      const folderNameStandarized = folderNameWithoutSpecialChar.replace(/\s+/g, ' ').trim();
       let image = null;
       let mimeType = null;
       if (req.file) {
@@ -96,13 +106,13 @@ blogImgRouter.put(
       } else {
         image = req.body.image;
       }
-      if (decodifiedOldFolderName !== folderName) {
-        const { deleteData } = await BlogRepository.deleteImage(decodifiedOldFolderName); // Variable sin uso
+      if (oldFolderNameStandarized!== folderNameStandarized) {
+        const { deleteData } = await BlogRepository.deleteImage(oldFolderNameStandarized); // Variable sin uso
       }
       const { data, error, url } = await BlogRepository.addImage(
         image,
         imgName,
-        folderName,
+        folderNameStandarized,
         mimeType
       );
       if (error) throw new AppError(error.code, error.status, error.code);
@@ -121,10 +131,18 @@ blogImgRouter.put(
       const { oldFolderName } = req.params; // El título del blog a actualiza
       // Decodifico el titulo porque lo paso codificado en un formato válido para URL
       const decodifiedOldFolderName = decodeURIComponent(oldFolderName);
+      // Estandarizo los nombres de las novedades en formato sin caracteres especiales
+      const oldFolderNameWithoutSpecialChar = decodifiedOldFolderName.replace(/[^\p{L}\s]/gu, '');
+      // Quito los espacios extra
+      const oldFolderNameStandarized = oldFolderNameWithoutSpecialChar.replace(/\s+/g, ' ').trim();
+
       const { folderName } = req.body;
+      const folderNameWithoutSpecialChar = folderName.replace(/[^\p{L}\s]/gu, '');
+      const folderNameStandarized = folderNameWithoutSpecialChar.replace(/\s+/g, ' ').trim();
+
       let urlImages = urls;
-      if (decodifiedOldFolderName !== folderName) {
-        const { deleteData } = await BlogRepository.deleteImage(decodifiedOldFolderName);
+      if (oldFolderNameStandarized !== folderNameStandarized) {
+        const { deleteData } = await BlogRepository.deleteImage(oldFolderNameStandarized);
       }
       // Si urlImages existe y no es un array, lo convertimos en uno
       if (urlImages && !Array.isArray(urlImages)) {
@@ -134,7 +152,7 @@ blogImgRouter.put(
       const images = [...(urlImages || []), ...(req.files || [])];
       const { data, error, url } = await BlogRepository.addMultipleImage(
         images,
-        folderName
+        folderNameStandarized
       );
 
       if (error) {
