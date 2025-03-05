@@ -85,6 +85,8 @@ blogImgRouter.put(
   async (req, res, next) => {
     try {
       const { oldFolderName } = req.params; // El título del blog a actualiza
+      // Decodifico el titulo porque lo paso codificado en un formato válido para URL
+      const decodifiedOldFolderName = decodeURIComponent(oldFolderName);
       const { imgName, folderName } = req.body; // Hace falta el imgName?
       let image = null;
       let mimeType = null;
@@ -94,8 +96,8 @@ blogImgRouter.put(
       } else {
         image = req.body.image;
       }
-      if (oldFolderName !== folderName) {
-        const { deleteData } = await BlogRepository.deleteImage(oldFolderName); // Variable sin uso
+      if (decodifiedOldFolderName !== folderName) {
+        const { deleteData } = await BlogRepository.deleteImage(decodifiedOldFolderName); // Variable sin uso
       }
       const { data, error, url } = await BlogRepository.addImage(
         image,
@@ -117,10 +119,12 @@ blogImgRouter.put(
   async (req, res, next) => {
     try {
       const { oldFolderName } = req.params; // El título del blog a actualiza
+      // Decodifico el titulo porque lo paso codificado en un formato válido para URL
+      const decodifiedOldFolderName = decodeURIComponent(oldFolderName);
       const { folderName } = req.body;
       let urlImages = urls;
-      if (oldFolderName !== folderName) {
-        const { deleteData } = await BlogRepository.deleteImage(oldFolderName);
+      if (decodifiedOldFolderName !== folderName) {
+        const { deleteData } = await BlogRepository.deleteImage(decodifiedOldFolderName);
       }
       // Si urlImages existe y no es un array, lo convertimos en uno
       if (urlImages && !Array.isArray(urlImages)) {

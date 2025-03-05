@@ -87,9 +87,9 @@ blogInfoRouter.put("/update/:oldTitle", async (req, res, next) => {
         bucket_folder_url,
       }).filter(([_, value]) => value !== null && value !== undefined)
     );
-
+    const decodifiedOldTitle = decodeURIComponent(oldTitle);
     const { data, error } = await BlogRepository.modifyBlog(
-      oldTitle,
+      decodifiedOldTitle,
       validFields
     );
     if (error) throw new AppError(error.code, error.status, error.code);
