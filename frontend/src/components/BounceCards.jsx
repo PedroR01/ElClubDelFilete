@@ -42,7 +42,7 @@ export default function BounceCards({
     handleSelectedCardInfo
 }) {
     const [hoveredIndex, setHoveredIndex] = useState(null);
-    const [selectedIndex, setSelectedIndex] = useState(0);
+    const [selectedIndex, setSelectedIndex] = useState(1);
 
     // Parseamos las transformaciones a objetos numéricos
     const parsedTransforms = transformStyles.map((str) => parseTransform(str));
@@ -89,10 +89,10 @@ export default function BounceCards({
                 return (
                     <motion.div
                         key={i}
-                        className={`card card-${i} absolute w-[200px] aspect-square border-8 rounded-[30px] overflow-hidden cursor-pointer`}
+                        className={`absolute w-[200px] aspect-square border-8 rounded-[30px] overflow-hidden cursor-pointer ${!isSelected ? "animate-pulse-custom hover:animate-none" : ""}`}
                         style={{
                             boxShadow: isSelected
-                                ? "0 10px 20px rgba(0,0,0,0.5)"
+                                ? "shadow-blog-main"
                                 : "0 4px 10px rgba(0,0,0,0.2)",
                             borderColor: isSelected ? "#e9b253" : "#8F272A",
                             zIndex: isSelected ? 100 : (selectedIndex === 0 ? (totalCards - i) : (baseIndexZ + i)),

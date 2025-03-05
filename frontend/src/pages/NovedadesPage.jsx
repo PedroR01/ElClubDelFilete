@@ -81,59 +81,33 @@ export default function NovedadesPage() {
                                     />}
                                 </div>
                             </motion.div>
-                            <div className="grid grid-cols-7 grid-rows-3 gap-4 lg:gap-6 w-full md:w-11/12 md:justify-self-center h-[62vh] lg:h-[80vh]">
-                                <BlogPortrait content={destacadaPrincipal} orientation="main" tags={tags}/>
-                                <div className="flex flex-row lg:flex-col col-span-7 lg:col-span-3 row-span-1 lg:row-span-3 gap-6 justify-between overflow-x-scroll md:overflow-x-hidden py-10 lg:py-14">
-                                    {novedades.filter((news) => news.featured_pos > 1).map((news, newsKey) => (
-                                        <article className="grid md:inline-block w-1/3 h-auto lg:w-auto lg:mb-0 lg:h-1/4" key={newsKey} >
-                                            <BlogPortrait
-                                                content={news}
-                                                orientation="horizontal"
-                                                tags={tags}
-                                            />
-                                        </article>
 
-                                    ))}
+                            <div
+                                className="grid gap-4 w-full md:w-11/12 md:justify-self-center grid-cols-1 lg:grid-cols-7 lg:grid-rows-3 h-auto"
+                            >
+                                {/* Novedad principal (main) */}
+                                <div className="lg:col-span-4 lg:row-span-3">
+                                    <BlogPortrait content={destacadaPrincipal} orientation="main" tags={tags} />
+                                </div>
+
+                                {/* Contenedor de las novedades secundarias */}
+                                <div
+                                    className="flex flex-row gap-8 overflow-x-auto lg:flex-col lg:overflow-y-auto lg:col-span-3 lg:row-span-3 pt-4 pb-12"
+                                >
+                                    {novedades
+                                        .filter((news) => news.featured_pos > 1)
+                                        .map((news, newsKey) => (
+                                            <article
+                                                key={newsKey}
+                                                className="shrink-0 w-64 lg:w-auto"
+                                            >
+                                                <BlogPortrait content={news} orientation="horizontal" tags={tags} />
+                                            </article>
+                                        ))}
                                 </div>
                             </div>
                         </section>
 
-                        {/* div: grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 */}
-                        {/* article: grid */}
-                        {/* // Contenedor de sector de Blogs Verticales
-                            // display:flex;
-                            // el direction es row por defecto, pero en mobile deberia ser column.
-                        
-                            // Blogs verticales
-                            // display: flex;
-                            // flex-direction: column;
-                            // justify-content: flex-start;
-                            // align-items: stretch;
-                            // flex: 1 1 auto;
-                         */}
-
-                        {/* 
-flex justify-between
-grid grid-cols-6 
-    col-span-2
-*/}
-                        <section className="w-11/12 mx-auto">
-                            <h2 className="allura-regular text-[#CDA053] text-6xl leading-[1.10] tracking-wide capitalize">Recientes</h2>
-                            <div className="flex mt-8 gap-x-12">
-                                {novedades.filter((news) => news.featured_pos === null).map((news, newsKey) => (
-                                    <article className="flex flex-row md:flex-col flex-auto max-w-[25%] max-h-[28rem]" style={{ justifyContent: "flex-start" }} key={newsKey} >
-                                        <BlogPortrait
-                                            content={news}
-                                            orientation="vertical"
-                                            tags={tags}
-                                        />
-                                    </article>
-
-                                ))}
-                            </div>
-                        </section>
-
-                        {/* 
                         <section className="w-11/12 mx-auto">
                             <h2 className="allura-regular text-[#CDA053] text-6xl leading-[1.10] tracking-wide capitalize">
                                 Recientes
@@ -142,14 +116,14 @@ grid grid-cols-6
                                 {novedades
                                     .filter((news) => news.featured_pos === null)
                                     .map((news, newsKey) => (
-                                        <article key={newsKey}>
-                                            <BlogPortrait content={news} orientation="vertical" />
+                                        <article className="border-2 border-[#802326] rounded-3xl" key={newsKey}>
+                                            <BlogPortrait content={news} orientation="vertical" tags={tags}/>
                                         </article>
                                     ))}
                             </div>
                         </section>
-                        
-                        */}
+
+
                     </>)}
             </section>
         </>

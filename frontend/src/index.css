@@ -202,6 +202,16 @@ p {
   @apply montserrat-normal text-base text-justify md:text-lg text-[#FEFFFB] list-disc my-2 ml-4;
 }
 
+@keyframes pulse {
+  50% {
+    opacity: 0.8;
+    scale: 0.97;
+  }
+}
+.animate-pulse-custom {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
 @layer utilities {
   .forma-imagen {
     clip-path: polygon(0 0, 36% 0, 100% 100%, 0% 100%);

@@ -77,7 +77,7 @@ export default function Navbar() {
           }`}
       >
         <div className="flex items-center justify-between md:justify-center px-4 lg:px-24 py-2 lg:py-4">
-          <ul className="contents md:flex items-center gap-5 hamston text-base text-[#CDA053]">
+          <ul className="contents md:flex items-center gap-5 afacad-bold text-base text-[#CDA053]">
             <li className="hidden md:block">
               <a href="/historia" className={`nav-link ${activeRoute === "/historia" ? "brightness-125 scale-125" : ""}`}>
                 Historía

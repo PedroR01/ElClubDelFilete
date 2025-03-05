@@ -28,9 +28,8 @@ const MenuBar = ({ editor, insertVideo, onAddImage }) => {
         if (!url) return;
         else {
             const title = prompt("Ingrese el título del PDF:");
-            editor.chain().focus().insertContent(`<pdf-download url="${url}" title="${title}"/>`).run();
+            editor.chain().focus().insertContent(`<render-pdf url="${url}" title="${title}"/>`).run();
         }
-
     };
     const addImage = () => {
         const input = document.createElement('input');
@@ -145,7 +144,7 @@ const MenuBar = ({ editor, insertVideo, onAddImage }) => {
     );
 };
 
-export default function TextEditor({ blogContent, onChange, images, onAddImage }) {
+export default function TextEditor({ blogContent, onChange, onAddImage }) {
 
     const editor = useEditor({
         extensions: [
@@ -191,15 +190,15 @@ export default function TextEditor({ blogContent, onChange, images, onAddImage }
             alert("URL no válida, por favor ingrese un enlace de YouTube.");
         }
     };
-    
+
     useEffect(() => {
         if (editor && blogContent) {
-        if (editor.getHTML() !== blogContent) {
-            editor.commands.setContent(blogContent);
-            console.log(blogContent)
+            if (editor.getHTML() !== blogContent) {
+                editor.commands.setContent(blogContent);
+                console.log(blogContent)
+            }
         }
-    }
-      }, [blogContent, editor]);  
+    }, [blogContent, editor]);
     const handleDrop = (e) => {
         e.preventDefault();
         if (!editor) return;
