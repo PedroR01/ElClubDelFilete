@@ -21,7 +21,7 @@ const PdfDownloadComponent = (props) => {
 
     return (
         <NodeViewWrapper
-            className="pdf-download"
+            className="react-buttonPdf"
             contentEditable={false} // Deshabilita edición para que sea arrastrable
             draggable // Habilita el arrastre
             onDragStart={handleDragStart}

@@ -6,11 +6,13 @@ import TextEditor from "../components/TextEditor";
 import Button from "../components/Button";
 import ImageUploader from "../components/ImageUploader";
 import serverUrl from '../components/utils/serverUrl';
+
 export default function BlogUploadForm() {
   const { title } = useParams(); // Obtiene el ID de la URL
   const { state } = useLocation(); // Accede a los datos pasados a través del 'state'
   const { novedad } = state || {};  // Extrae los datos de la novedad
   const navigate = useNavigate();
+  const [isSubmit, setIsSubmit] = useState(false);
   const {
     register,
     handleSubmit,
@@ -190,12 +192,8 @@ export default function BlogUploadForm() {
   // Los datos del formulario a enviar se dividen en 2 partes: Blog (texto y numero de prioridad) e Imagen (información completa de la imagen y codificada para guardarla correctamente en la BD).
   const onSubmit = async (data) => {
     try {
-      // Buscar el componente del boton y reemplazarlo por un tag a con un button normal (estilado personalizado) con la dirección del archivo a descargar. POR RESOLVER!!
-      {/* <pdf-download .... /> */ }
-      // className o class, no se cual va.
-      // <a href=`${link}`><button className="estilo">{icon + title}</button></a>
-      // O
-      // <button className="estilo" onClick={()=> pdfDownloader(pdf.link, pdf.title)}>{icon + title}</button>
+
+      setIsSubmit(true);
 
       const blogData = {
         title: data.title,
@@ -220,17 +218,18 @@ export default function BlogUploadForm() {
         const imgEndpoint = title ? `${handleEndpoint}/${oldFolderName}` : handleEndpoint;
         return imgEndpoint;
       }*/
-      if (title) {
-        const baseEndpoint = data.contentImages.length > 0 
-          ? "storage/update/array" 
-          : "storage/update";
-        return `${baseEndpoint}/${oldFolderName}`;
-      } else {
-        // Si 'title' no existe o es vacío, se utiliza "storage" sin el "update".
-        return data.contentImages.length > 0 
-          ? "storage/array" 
-          : "storage";
-      }}
+        if (title) {
+          const baseEndpoint = data.contentImages.length > 0
+            ? "storage/update/array"
+            : "storage/update";
+          return `${baseEndpoint}/${oldFolderName}`;
+        } else {
+          // Si 'title' no existe o es vacío, se utiliza "storage" sin el "update".
+          return data.contentImages.length > 0
+            ? "storage/array"
+            : "storage";
+        }
+      }
 
       const method = title ? "PUT" : "POST";
       const url = title ? `${serverUrl.produccion}/api/blogs/update/${oldTitle}` : `${serverUrl.produccion}/api/blogs`;
@@ -380,8 +379,8 @@ export default function BlogUploadForm() {
       />
       {errors.content && <p className="text-red-500 text-sm">{errors.content.message}</p>}
 
-      <div className="my-10">
-        <Button text={"Enviar"} btnType={"submit"} state={false} />
+      <div className={`my-10 ${isSubmit ? "animate-pulse" : ""}`}>
+        <Button text={"Enviar"} btnType={"submit"} state={isSubmit} />
       </div>
     </form>
   );

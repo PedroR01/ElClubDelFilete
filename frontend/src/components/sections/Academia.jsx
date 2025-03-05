@@ -34,7 +34,7 @@ export default function Academia() {
             link: "https://elclubdelfilete.tiendup.com/page/paginapreinscripcion",
         },
     ];
-    const [currentCurso, setCurrentCurso] = useState(cursos[0]);
+    const [currentCurso, setCurrentCurso] = useState(cursos[1]);
 
     const handleCursoChange = (index) => {
         setCurrentCurso(cursos[index]);

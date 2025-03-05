@@ -23,7 +23,7 @@ export default function BlogPortrait({ content, orientation }) {
     else if (orientation === "horizontal") {
         descriptionContainerStyle = "flex flex-col justify-center px-8 my-2";
         containerStyle = "h-full w-2/5 flex-shrink-0 relative";
-        featuredStyle = "flex bg-[#3c3228] hover:-translate-y-2 transition-transform duration-500 shadow-blog-main mx-6 rounded-3xl";
+        featuredStyle = "flex bg-[#3c3228] w-[17rem] md:w-auto hover:-translate-y-2 transition-transform duration-500 shadow-blog-main mx-6 rounded-3xl";
     }
 
     /* Manejo del delete de la novedad */
@@ -98,7 +98,7 @@ export default function BlogPortrait({ content, orientation }) {
                 <div className="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-md flex justify-center items-center z-50">
                     <div className="bg-[#181818] bg-opacity-55 text-white w-[90%] max-w-lg rounded-3xl shadow-lg relative py-4 border-2 border-[#181818]/75">
                         <div className='flex flex-row justify-between relative pb-6 border-b-2 border-[#181818]/75'>
-                            <h4 className='ml-8'>¿Eliminar la novedad <span className='italic'>{'"' + targetBlog + '"'}</span> ?</h4>
+                            <h4 className='ml-8'>¿Eliminar la novedad <span className='italic'>{'"' + targetBlog.title + '"'}</span> ?</h4>
                             <button
                                 className="mr-8 text-white hover:text-[#CDA053] focus:outline-none"
                                 onClick={() => setConfirmationModal(false)}
@@ -139,7 +139,7 @@ export default function BlogPortrait({ content, orientation }) {
             <Link
                 to={`./${content.title}`} // Redirige a la página de destino
                 state={{ content }}
-                className={`${orientation === "vertical" ? "border-2 border-[#802326] rounded-3xl" : `${featuredStyle}`} h-full lg:my-4 overflow-hidden relative group`}
+                className={`${orientation === "vertical" ? "rounded-3xl" : `${featuredStyle}`} h-full lg:my-4 overflow-hidden relative group`}
             >
 
                 {
