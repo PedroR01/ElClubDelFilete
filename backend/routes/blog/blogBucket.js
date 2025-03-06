@@ -37,8 +37,8 @@ blogImgRouter.post("/", upload.single("image"), async (req, res, next) => {
       );
     res.status(200).send({ data, url });
   } catch (e) {
-    // next(e);
-    console.log(e);
+     next(e);
+    
   }
 });
 
@@ -60,8 +60,7 @@ blogImgRouter.post("/array", upload.array("images"), async (req, res, next) => {
     }
     res.status(200).send({ data, url });
   } catch (e) {
-    console.error("Catch del endpoint: " + e);
-    // res.status(500).json({ error: "Error al subir imágenes" });
+      next(e)
   }
 });
 
@@ -101,6 +100,10 @@ blogImgRouter.put(
       } else {
         image = req.body.image;
       }
+      const isBusy = await BlogRepository.isTitleBusy(folderNameStandarized);
+      const isDifferent = oldFolderNameStandarized !== folderNameStandarized;
+      if(isBusy && isDifferent){
+        throw new AppError("Ya existe novedad con ese título", 409, "Ya existe novedad con ese título")}
       if (oldFolderNameStandarized!== folderNameStandarized) {
         const { deleteData } = await BlogRepository.deleteImage(oldFolderNameStandarized); // Variable sin uso
       }
@@ -108,7 +111,8 @@ blogImgRouter.put(
         image,
         imgName,
         folderNameStandarized,
-        mimeType
+        mimeType,
+        true
       );
       if (error) throw new AppError(error.code, error.status, error.code);
       res.send({ data, url });
@@ -127,9 +131,14 @@ blogImgRouter.put(
       // Decodifico el titulo porque lo paso codificado en un formato válido para URL
       const decodifiedOldFolderName = decodeURIComponent(oldFolderName);
       const oldFolderNameStandarized = nameStandarized(decodifiedOldFolderName);
-      const { folderName } = req.body;
+      const { folderName, images: urls } = req.body;
+      console.log(urls)
       const folderNameStandarized = nameStandarized(folderName);
-
+      const isBusy = await BlogRepository.isTitleBusy(folderNameStandarized);
+      const isDifferent = oldFolderNameStandarized !== folderNameStandarized;
+      if(isBusy && isDifferent){
+        console.log("ME fui en el put");
+        throw new AppError("Ya existe novedad con ese título", 409, "Ya existe novedad con ese título")}
       let urlImages = urls;
       if (oldFolderNameStandarized !== folderNameStandarized) {
         const { deleteData } = await BlogRepository.deleteImage(oldFolderNameStandarized);
@@ -142,7 +151,8 @@ blogImgRouter.put(
       const images = [...(urlImages || []), ...(req.files || [])];
       const { data, error, url } = await BlogRepository.addMultipleImage(
         images,
-        folderNameStandarized
+        folderNameStandarized,
+        true
       );
 
       if (error) {
@@ -154,8 +164,8 @@ blogImgRouter.put(
       }
       res.status(200).send({ data, url });
     } catch (e) {
-      console.error("Catch del endpoint: " + e);
-      // res.status(500).json({ error: "Error al subir imágenes" });
+      console.log(e)
+      next(e);
     }
   }
 );

@@ -32,6 +32,7 @@ export default function ImageUploader({ onChange, multiple = false, initialImage
 
             setImages(multiple ? [...images, ...previewImages] : previewImages);
             onChange(multiple ? [...images.map((img) => img.file), ...newImages] : newImages[0]);
+            setIsInitialLoaded(true);
         },
         [images, onChange, multiple]
     );

@@ -243,6 +243,9 @@ export default function BlogUploadForm() {
 
       // Solo si la imagen se sube correctamente se procede a subir la info del blog
       if (!responseImgUpload.ok) {
+        if (responseImgUpload.status === 409) 
+          throw new Error(`${resultImg.message}: ${resultImg.description}`)
+        
         throw new Error(`Error en la subida de imágenes: ${resultImg.message || "Error desconocido"}`);
       } else {
 
@@ -273,6 +276,8 @@ export default function BlogUploadForm() {
 
         // Si falla el ingreso del blog, se elimina la imagen previamente subida.
         if (!responseDataUpload.ok) {
+          if (resultData.status === 409) 
+            throw new Error(`${resultData.message}: ${resultData.description}`)
           const imagenEliminar = {
             folderName: data.title
           }
@@ -283,6 +288,7 @@ export default function BlogUploadForm() {
           });
           if (responseImgDelete.ok)
             console.log("Imagen eliminada con exito");
+          
           throw new Error(`Error en la subida de imágenes: ${responseDataUpload.message || "Error desconocido"}`);
         } else {
           console.log("Img Result: ", resultImg);

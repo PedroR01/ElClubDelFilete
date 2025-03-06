@@ -85,7 +85,7 @@ blogInfoRouter.put("/update/:oldTitle", async (req, res, next) => {
         description,
         featured_pos,
         bucket_folder_url,
-      }).filter(([_, value]) => value !== null && value !== undefined)
+      })
     );
     // Decodifico el titulo porque lo paso codificado en un formato válido para URL
     const decodifiedOldTitle = decodeURIComponent(oldTitle);
@@ -97,6 +97,7 @@ blogInfoRouter.put("/update/:oldTitle", async (req, res, next) => {
     return res.json(data);
   } catch (err) {
     // Correct
+    console.log(err)
     next(err);
   }
 });
