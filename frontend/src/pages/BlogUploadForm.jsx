@@ -232,9 +232,9 @@ export default function BlogUploadForm() {
       }
 
       const method = title ? "PUT" : "POST";
-      const url = title ? `${serverUrl.produccion}/api/blogs/update/${oldTitle}` : `${serverUrl.produccion}/api/blogs`;
+      const url = title ? `${serverUrl.testLocal}/api/blogs/update/${oldTitle}` : `${serverUrl.testLocal}/api/blogs`;
       console.log(url)
-      const responseImgUpload = await fetch(`${serverUrl.produccion}/api/${getImgEndpoint()}`, {
+      const responseImgUpload = await fetch(`${serverUrl.testLocal}/api/${getImgEndpoint()}`, {
         method: method,
         body: imgData
       });
@@ -276,7 +276,7 @@ export default function BlogUploadForm() {
           const imagenEliminar = {
             folderName: data.title
           }
-          const responseImgDelete = await fetch(`${serverUrl.produccion}/api/storage`, {
+          const responseImgDelete = await fetch(`${serverUrl.testLocal}/api/storage`, {
             method: "DELETE",
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(imagenEliminar)
@@ -312,19 +312,19 @@ export default function BlogUploadForm() {
       {errors.title && <p className="text-red-500 text-sm">{errors.title.message}</p>}
 
       <label className="block mt-4 font-semibold text-[#CDA053]">Categoría:</label>
-      <select 
-      {...register("tag", { required: "Selecciona una categoría" })} 
-      className="p-2 w-full bg-transparent text-[#FEFFFB] rounded border border-[#cda05377] placeholder-transparent focus:ring-[#CDA053] focus:outline-none"
+      <select
+        {...register("tag", { required: "Selecciona una categoría" })}
+        className="p-2 w-full bg-transparent text-[#FEFFFB] rounded border border-[#cda05377] placeholder-transparent focus:ring-[#CDA053] focus:outline-none"
       >
         <option value="" className="bg-[#2D2B35] text-[#FEFFFB]">Selecciona una categoría</option>
-        
+
         {/* Verificación para evitar error si tags es undefined */}
         {(tags && Array.isArray(tags)) ? (
-            tags.map(tag => (
-                <option key={tag} value={tag} className="bg-[#2D2B35] text-[#FEFFFB]">{tag}</option>
-            ))
+          tags.map(tag => (
+            <option key={tag} value={tag} className="bg-[#2D2B35] text-[#FEFFFB]">{tag}</option>
+          ))
         ) : (
-            <option className="bg-[#2D2B35] text-[#FEFFFB]">No hay categorías disponibles</option>
+          <option className="bg-[#2D2B35] text-[#FEFFFB]">No hay categorías disponibles</option>
         )}
         <option value="Otro" className="bg-[#2D2B35] text-[#FEFFFB]">Agregar otra</option>
       </select>

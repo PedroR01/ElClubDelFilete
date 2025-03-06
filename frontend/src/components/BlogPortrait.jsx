@@ -125,7 +125,7 @@ export default function BlogPortrait({ content, orientation, tags }) {
                 <div className={`${orientation === "main" ? "absolute w-1/2" : "relative w-full right-0 grid col-span-4"} z-10`}>
                     <div className={`absolute right-0 flex gap-2 -translate-y-2`}>
                         <Link to={`/añadirBlog/${content.title}`}
-                             state={{ novedad: content, tags }}  // Pasa el objeto 'content' completo
+                            state={{ novedad: content, tags }}  // Pasa el objeto 'content' completo
                             className={`px-3 py-3 text-[#CDA053] bg-[#232129] rounded-full text-sm shadow-md transition hover:bg-[#CDA053] hover:text-[#232129] hover:scale-110 duration-300`}>
                             <PencilIcon />
                         </Link>

@@ -20,7 +20,7 @@ export default function NovedadesPage() {
     const { isAuthenticated } = useContext(AuthContext); // Obtenemos el estado de autenticación
     const navigate = useNavigate(); // Usamos el hook para navegación
     const handleRedirect = () => {
-        navigate('/añadirBlog', { state: {tags: tags} }); // Redirige a la página del "administrador"
+        navigate('/añadirBlog', { state: { tags: tags } }); // Redirige a la página del "administrador"
     };
 
     const encontrarDestacadaPrincipal = () => (
@@ -83,7 +83,7 @@ export default function NovedadesPage() {
                             </motion.div>
 
                             <div
-                                className="grid gap-4 w-full md:w-11/12 md:justify-self-center grid-cols-1 lg:grid-cols-7 lg:grid-rows-3 h-auto"
+                                className="grid gap-4 w-full md:w-11/12 md:justify-self-center grid-cols-1 lg:grid-cols-7 lg:grid-rows-3 h-auto lg:h-[73vh]"
                             >
                                 {/* Novedad principal (main) */}
                                 <div className="lg:col-span-4 lg:row-span-3">
@@ -92,14 +92,14 @@ export default function NovedadesPage() {
 
                                 {/* Contenedor de las novedades secundarias */}
                                 <div
-                                    className="flex flex-row gap-8 overflow-x-auto lg:flex-col lg:overflow-y-auto lg:col-span-3 lg:row-span-3 pt-4 pb-12"
+                                    className="flex flex-row gap-8 md:gap-4 overflow-x-auto lg:flex-col lg:overflow-y-auto lg:col-span-3 lg:row-span-3 py-12 lg:pt-4 lg:pb-12"
                                 >
                                     {novedades
                                         .filter((news) => news.featured_pos > 1)
                                         .map((news, newsKey) => (
                                             <article
                                                 key={newsKey}
-                                                className="shrink-0 w-64 lg:w-auto"
+                                                className="shrink-0 w-64 lg:w-auto  lg:h-[30%]"
                                             >
                                                 <BlogPortrait content={news} orientation="horizontal" tags={tags} />
                                             </article>
@@ -117,7 +117,7 @@ export default function NovedadesPage() {
                                     .filter((news) => news.featured_pos === null)
                                     .map((news, newsKey) => (
                                         <article className="border-2 border-[#802326] rounded-3xl" key={newsKey}>
-                                            <BlogPortrait content={news} orientation="vertical" tags={tags}/>
+                                            <BlogPortrait content={news} orientation="vertical" tags={tags} />
                                         </article>
                                     ))}
                             </div>

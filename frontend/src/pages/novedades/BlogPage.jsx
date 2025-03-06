@@ -1,25 +1,33 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
-import pdfDownloader from "../../components/utils/pdfDownloader.js"
-
+import pdfDownloader from "../../components/utils/pdfDownloader.js";
+import Toast from "../../components/Toast"; // Asegúrate de importar el Toast
 
 export default function BlogPage() {
     const location = useLocation();
     const { content } = location.state || {};
+    const [toastVisible, setToastVisible] = useState(false);
+    const [toastMessage, setToastMessage] = useState("");
 
     useEffect(() => {
         const handleClick = (event) => {
             // Verifica si el click ocurrió en un botón de descarga
-            if (event.target.matches("[data-pdf-url]")) {
-                const pdfUrl = event.target.getAttribute("data-pdf-url");
-                const pdfTitle = event.target.getAttribute("data-pdf-title") || "document";
-                pdfDownloader(pdfUrl, pdfTitle);
+            if (event.target.matches("[data-pdf-url]") || event.target.closest("[data-pdf-url]")) {
+                // Obtener el botón (por si se hace clic en un elemento hijo)
+                const btn = event.target.closest("button[data-pdf-url]");
+                if (btn) {
+                    const pdfUrl = btn.getAttribute("data-pdf-url");
+                    const pdfTitle = btn.getAttribute("data-pdf-title") || "document";
+                    // Mostrar el Toast de descarga
+                    setToastMessage("Descargando PDF...");
+                    setToastVisible(true);
+                    // Llamar a la función de descarga
+                    pdfDownloader(pdfUrl, pdfTitle);
+                }
             }
         };
 
-        // Delegación de eventos en el contenedor
         document.addEventListener("click", handleClick);
-
         return () => {
             document.removeEventListener("click", handleClick);
         };
@@ -44,6 +52,13 @@ export default function BlogPage() {
                 <section className="pt-28 pb-14 px-6 md:px-0" dangerouslySetInnerHTML={{ __html: content.content_sections }}>
                 </section>
             </article>
+
+            {/* Toast para feedback de descarga */}
+            <Toast
+                message={toastMessage}
+                visible={toastVisible}
+                onClose={() => setToastVisible(false)}
+            />
         </div>
     );
 }

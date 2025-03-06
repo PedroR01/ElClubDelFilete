@@ -264,9 +264,8 @@ export class BlogRepository {
     featuredPos,
     bucketFolderUrl
   ) {
-    // Si el blog se quiere destacar, se debe verificar el corrimiento
     if (featuredPos != null) {
-      // Obtener los blogs con featured_pos mayor o igual al que se quiere insertar
+      // Obtener todos los blogs con featured_pos >= el deseado
       let { data: blogs, error } = await supabase
         .from("blogs")
         .select("*")
@@ -277,72 +276,110 @@ export class BlogRepository {
         throw error;
       }
 
-      // Ordenar los blogs en orden descendente por featured_pos
+      // Ordenar en orden descendente para actualizar primero el de mayor posición
       blogs.sort((a, b) => b.featured_pos - a.featured_pos);
 
       const lastFeaturedPos = 4;
-
-      // Iterar sobre los blogs y actualizar su posición
-      for (const blog of blogs) {
+      // Recolectamos todas las actualizaciones en un array de promesas
+      const updatePromises = blogs.map((blog) => {
+        // Si el blog está en la posición máxima, se desasigna
         if (blog.featured_pos === lastFeaturedPos) {
-          // Si ya está en la última posición, se desasigna la posición destacada
-          const { data, error } = await supabase
+          return supabase
             .from("blogs")
             .update({ featured_pos: null })
             .eq("id", blog.id)
             .select();
-          if (error) {
-            console.error(
-              "Error al actualizar blog (set null):",
-              error.message
-            );
-            throw error;
-          }
         } else {
-          // Incrementar la posición
+          // Incrementa su posición en 1
           const newPos = blog.featured_pos + 1;
-          const { data, error } = await supabase
+          return supabase
             .from("blogs")
             .update({ featured_pos: newPos })
             .eq("id", blog.id)
             .select();
-          if (error) {
-            console.error(
-              "Error al actualizar blog (incremento):",
-              error.message
-            );
-            throw error;
-          }
         }
+      });
+
+      // Ejecutar todas las actualizaciones en paralelo
+      try {
+        await Promise.all(updatePromises);
+        // Insertar el nuevo blog
+        const { data, error: insertError } = await supabase
+          .from("blogs")
+          .insert({
+            content_sections: content,
+            tag: tag,
+            title: title,
+            description: description,
+            featured_pos: featuredPos,
+            bucket_folder_url: bucketFolderUrl,
+          })
+          .select();
+
+        if (insertError) {
+          console.log("Error al insertar blog:", insertError.message);
+        }
+        return { data, error: insertError };
+      } catch (e) {
+        console.error("Error en las actualizaciones de featured_pos:", e);
+        throw e;
       }
     }
-
-    // Insertar el nuevo blog
-    const { data, error } = await supabase
-      .from("blogs")
-      .insert({
-        content_sections: content,
-        tag: tag,
-        title: title,
-        description: description,
-        featured_pos: featuredPos,
-        bucket_folder_url: bucketFolderUrl,
-      })
-      .select();
-
-    if (error) {
-      console.log("Error al insertar blog:", error.message);
-    }
-    return { data, error };
   }
 
   static async modifyBlog(oldTitle, validFields) {
-    const { data, error } = await supabase
-      .from("blogs")
-      .update(validFields)
-      .eq("title", oldTitle)
-      .select();
-    return { data, error };
+    if (featuredPos != null) {
+      // Obtener todos los blogs con featured_pos >= el deseado
+      let { data: blogs, error } = await supabase
+        .from("blogs")
+        .select("*")
+        .filter("featured_pos", "gte", featuredPos);
+
+      if (error) {
+        console.error("Error al obtener blogs:", error.message);
+        throw error;
+      }
+
+      // Ordenar en orden descendente para actualizar primero el de mayor posición
+      blogs.sort((a, b) => b.featured_pos - a.featured_pos);
+
+      const lastFeaturedPos = 4;
+      // Recolectamos todas las actualizaciones en un array de promesas
+      const updatePromises = blogs.map((blog) => {
+        // Si el blog está en la posición máxima, se desasigna
+        if (blog.featured_pos === lastFeaturedPos) {
+          return supabase
+            .from("blogs")
+            .update({ featured_pos: null })
+            .eq("id", blog.id)
+            .select();
+        } else {
+          // Incrementa su posición en 1
+          const newPos = blog.featured_pos + 1;
+          return supabase
+            .from("blogs")
+            .update({ featured_pos: newPos })
+            .eq("id", blog.id)
+            .select();
+        }
+      });
+
+      // Ejecutar todas las actualizaciones en paralelo
+      try {
+        await Promise.all(updatePromises);
+        // Actualizar el blog a editar
+        const { data, error } = await supabase
+          .from("blogs")
+          .update(validFields)
+          .eq("title", oldTitle)
+          .select();
+
+        return { data, error };
+      } catch (e) {
+        console.error("Error en las actualizaciones de featured_pos:", e);
+        throw e;
+      }
+    }
   }
 
   static async deleteBlog(title) {
