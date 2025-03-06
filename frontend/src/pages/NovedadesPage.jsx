@@ -1,7 +1,7 @@
 import { Helmet } from "react-helmet-async";
 import { useNovedadesFetch } from "../hooks/useNovedadesFetch";
 import { useNavigate } from 'react-router-dom';
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { AuthContext } from '../context/AuthContextFunct';
 import BlogPortrait from "../components/BlogPortrait";
 import BlogSkeletonLoader from "../components/skeleton-loaders/BlogSkeletonLoader";
@@ -13,8 +13,8 @@ import ErrorPage from "./ErrorPage";
 
 
 export default function NovedadesPage() {
+    // const [currentPage, setCurrentPage] = useState(0);
     const { novedades, loading, error, tags } = useNovedadesFetch();
-    //const { novedades, loading, error } = useContext(AuthContext); // Accedes al valor de isAuthenticated
 
     // Función que maneja la redirección al presionar el botón
     const { isAuthenticated } = useContext(AuthContext); // Obtenemos el estado de autenticación
@@ -121,6 +121,11 @@ export default function NovedadesPage() {
                                         </article>
                                     ))}
                             </div>
+
+                            {/* <div className="mt-12">
+                                <Button text={"Mostrar más novedades"} btnType={"button"} event={() => setCurrentPage(currentPage + 1)}></Button>
+                            </div> */}
+
                         </section>
 
 

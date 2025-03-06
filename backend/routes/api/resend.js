@@ -17,8 +17,8 @@ resendRouter.post("/", validateResendData, async (req, res) => {
     const { nombre, email, descripcion } = req.body;
 
     const { data, error } = await resend.emails.send({
-      from: `${nombre} <onboarding@resend.dev>`,
-      to: "peporobinet01@gmail.com",
+      from: `${nombre} <contacto@elclubdelfilete.com.ar>`,
+      to: "elclubdelfilete@gmail.com",
       subject: "Consulta",
       html: `<p>Hola, mi nombre es ${nombre}. ${descripcion}</p>
                    <p>Mi email de contacto es: ${email}</p>`,
