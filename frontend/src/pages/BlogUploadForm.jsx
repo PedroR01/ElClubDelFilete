@@ -48,31 +48,32 @@ export default function BlogUploadForm() {
     }
   }, []);
   useEffect(() => {
-    if(isFetch){
-      const allImages = [getValues("coverImage"), ...(getValues("contenImages")|| [])].filter(Boolean);
+    if (isFetch) {
+      const allImages = [getValues("coverImage"), ...(getValues("contenImages") || [])].filter(Boolean);
       allImages.forEach((imgUrl) => downloadImage(imgUrl))
-      console.log("Resultado final"+ imageFiles)}
+      console.log("Resultado final" + imageFiles)
+    }
   }, [isFetch]);
-  
-    const downloadImage = async (imageUrl) => {
-      try {
-        const response = await fetch(imageUrl); // Solicita la imagen
-        const blob = await response.blob(); // Convierte la respuesta en un Blob
-  
-        // Obtén el nombre del archivo de la URL (puedes cambiar esto según tu lógica)
-        const fileName = imageUrl.split('/').pop();
-        const decodifiedTitle = decodeURIComponent(fileName);
-  
-        // Crea un objeto File a partir del Blob
-        const file = new File([blob], decodifiedTitle, { type: blob.type });
-  
-        setImageFiles((prevFiles) => [...prevFiles, file]);
-  
-        console.log(file); // Muestra el archivo en la consola (opcional)
-      } catch (error) {
-        console.error('Error al descargar la imagen:', error);
-      }
-    };
+
+  const downloadImage = async (imageUrl) => {
+    try {
+      const response = await fetch(imageUrl); // Solicita la imagen
+      const blob = await response.blob(); // Convierte la respuesta en un Blob
+
+      // Obtén el nombre del archivo de la URL (puedes cambiar esto según tu lógica)
+      const fileName = imageUrl.split('/').pop();
+      const decodifiedTitle = decodeURIComponent(fileName);
+
+      // Crea un objeto File a partir del Blob
+      const file = new File([blob], decodifiedTitle, { type: blob.type });
+
+      setImageFiles((prevFiles) => [...prevFiles, file]);
+
+      // console.log(file); // Muestra el archivo en la consola (opcional)
+    } catch (error) {
+      console.error('Error al descargar la imagen:', error);
+    }
+  };
   const fetchBlogData = async () => {
     try {
       if (novedad) {
@@ -261,7 +262,7 @@ export default function BlogUploadForm() {
 
       const method = title ? "PUT" : "POST";
       const url = title ? `${serverUrl.produccion}/api/blogs/update/${oldTitle}` : `${serverUrl.produccion}/api/blogs`;
-      console.log(url)
+      // console.log(url)
       const responseImgUpload = await fetch(`${serverUrl.produccion}/api/${getImgEndpoint()}`, {
         method: method,
         body: imgData
@@ -271,13 +272,13 @@ export default function BlogUploadForm() {
 
       // Solo si la imagen se sube correctamente se procede a subir la info del blog
       if (!responseImgUpload.ok) {
-        if (responseImgUpload.status === 409) 
+        if (responseImgUpload.status === 409)
           throw new Error(`${resultImg.message}: ${resultImg.description}`)
-        
+
         throw new Error(`Error en la subida de imágenes: ${resultImg.message || "Error desconocido"}`);
       } else {
 
-        console.log(resultImg);
+        // console.log(resultImg);
         /* Si la imagen no fue cambiada, la URL ya contiene el nombre de la carpeta.
           En el frontend, se agrega "/portrait" automáticamente, por lo que aquí lo eliminamos 
           para evitar que la URL termine con "/portrait/portrait".
@@ -316,40 +317,40 @@ export default function BlogUploadForm() {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(imagenEliminar)
           });
-          if (responseImgDelete.ok)
-            console.log("Imagen eliminada con exito");
-          if(method === "PUT"){
+          // if (responseImgDelete.ok)
+          //   console.log("Imagen eliminada con exito");
+          if (method === "PUT") {
             const imgDataBackup = new FormData();
             imgDataBackup.append("folderName", oldTitle);
             imageFiles.forEach((file) => imgDataBackup.append("images", file))
             const backUpEndPoint = data.contentImages.length > 1
-            ? "storage/array"
-            : "storage"
+              ? "storage/array"
+              : "storage"
             // En el caso del PUT volvemos a cargar las imagenes que se encontraban previamente (gracias a un backup)
             const responseImgBackup = await fetch(`${serverUrl.produccion}/api/${backUpEndPoint}`, {
-            method: "POST",
-            body: imgDataBackup
+              method: "POST",
+              body: imgDataBackup
             });
-            if (responseImgBackup.ok)
-              console.log("Imagen/es restaurada/s con exito");
+            // if (responseImgBackup.ok)
+            //   console.log("Imagen/es restaurada/s con exito");
 
           }
-          
+
           // Error cuando ya se encuentra el titulo ocupado.          
-          if (resultData.status === 409){
+          if (resultData.status === 409) {
             setIsSubmit(false);
             throw new Error(`${resultData.message}: ${resultData.description}`)
           }
-          
-          
+
+
           throw new Error(`Error en la subida de imágenes: ${responseDataUpload.message || "Error desconocido"}`);
-        } 
+        }
         else {
-          console.log("Img Result: ", resultImg);
-          console.log("Data Result: ", resultData);
+          // console.log("Img Result: ", resultImg);
+          // console.log("Data Result: ", resultData);
         }
       }
-      console.log("Formulario enviado con éxito:", blogData);
+      // console.log("Formulario enviado con éxito:", blogData);
       navigate("/novedades");
     } catch (error) {
       console.error("Error:", error.message);

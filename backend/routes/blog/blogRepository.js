@@ -117,10 +117,13 @@ export class BlogRepository {
     if (listError && !existingFiles) {
       throw new AppError("InternalError", 500, "No se pudo insertar la imagen");
     }
-    if(!editing && existingFiles && existingFiles.length > 0){
-      console.log(existingFiles)
-      console.log("Me fui en el post")
-      throw new AppError("Ya existe novedad con ese título", 409, "Ya existe novedad con ese título")}
+    if (!editing && existingFiles && existingFiles.length > 0) {
+      throw new AppError(
+        "Ya existe novedad con ese título",
+        409,
+        "Ya existe novedad con ese título"
+      );
+    }
     if (existingFiles && existingFiles.length > 1) {
       const filesToDelete = existingFiles.filter(
         (file) => file.name !== imgName
@@ -158,14 +161,10 @@ export class BlogRepository {
         contentType: mimeType,
         upsert: true,
       });
-      console.log(error)
+    console.log(error);
     if (error) {
       console.log("Img Error: " + error.message);
-      throw new AppError(
-        "BadRequestError",
-        400,
-        error.message
-      );
+      throw new AppError("BadRequestError", 400, error.message);
     }
 
     const { url } = await getFileUrl(folderName);
@@ -191,9 +190,13 @@ export class BlogRepository {
         "No se pudo obtener la lista de imágenes"
       );
     }
-    if(!editing && existingFiles && existingFiles.length > 0){
-      console.log("Me fui en el post")
-      throw new AppError("Ya existe novedad con ese título", 409, "Ya existe novedad con ese título")}
+    if (!editing && existingFiles && existingFiles.length > 0) {
+      throw new AppError(
+        "Ya existe novedad con ese título",
+        409,
+        "Ya existe novedad con ese título"
+      );
+    }
     // 2. Extraer los nombres de los archivos que vienen en el array.
     const newFileNames = files
       .map((file) => {
@@ -382,36 +385,41 @@ export class BlogRepository {
   static async modifyBlog(oldTitle, validFields) {
     const featuredPos = validFields.featured_pos;
     const title = validFields.title;
-    if(title && oldTitle !== title){
-      const { data: novelties, error: err} = await supabase
-      .from('blogs')
-      .select()
-      .eq('title', title)
-      if(!err && Array.isArray(novelties) && novelties.length > 0)
-          throw new AppError("Ya existe novedad con ese título", 409, "Ya existe novedad con ese título")
-      
+    if (title && oldTitle !== title) {
+      const { data: novelties, error: err } = await supabase
+        .from("blogs")
+        .select()
+        .eq("title", title);
+      if (!err && Array.isArray(novelties) && novelties.length > 0)
+        throw new AppError(
+          "Ya existe novedad con ese título",
+          409,
+          "Ya existe novedad con ese título"
+        );
     }
     if (featuredPos != null) {
       // Obtener todos los blogs con featured_pos >= el deseado
       let { data: blogs, error } = await supabase
         .from("blogs")
         .select()
-        .gte('featured_pos', featuredPos)
-      
+        .gte("featured_pos", featuredPos);
+
       if (error) {
         console.error("Error al obtener blogs:", error.message);
         throw error;
       }
       // verifico que la pos esté libre antes del corrimiento
-      const exists = blogs.some(blog => blog.featured_pos === featuredPos && blog.title !== oldTitle);
-      if(!exists){
+      const exists = blogs.some(
+        (blog) => blog.featured_pos === featuredPos && blog.title !== oldTitle
+      );
+      if (!exists) {
         // si la pos no está ocupada inserto sin problemas
         const { data, error } = await supabase
           .from("blogs")
           .update(validFields)
           .eq("title", oldTitle)
           .select();
-          return {data, error};
+        return { data, error };
       }
       // Ordenar en orden descendente para actualizar primero el de mayor posición
       blogs.sort((a, b) => b.featured_pos - a.featured_pos);
@@ -452,14 +460,13 @@ export class BlogRepository {
         console.error("Error en las actualizaciones de featured_pos:", e);
         throw e;
       }
-    }
-    else {
+    } else {
       const { data, error } = await supabase
-          .from("blogs")
-          .update(validFields)
-          .eq("title", oldTitle)
-          .select();
-          return {data, error};
+        .from("blogs")
+        .update(validFields)
+        .eq("title", oldTitle)
+        .select();
+      return { data, error };
     }
   }
 
@@ -503,15 +510,19 @@ export class BlogRepository {
     }
   }
 
-  static async isTitleBusy(folderName){
+  static async isTitleBusy(folderName) {
     // Se utiliza solo con el storage este
     const { data, error } = await supabase
       .from("blogs")
       .select()
-      .eq("title", folderName)
-      if (error)
-        throw new AppError(error.code, error.status, "Error al verificar si titulo de novedad existe");
-      console.log((Array.isArray(data) && data.length > 0))
-      return (Array.isArray(data) && data.length > 0);
+      .eq("title", folderName);
+    if (error)
+      throw new AppError(
+        error.code,
+        error.status,
+        "Error al verificar si titulo de novedad existe"
+      );
+    console.log(Array.isArray(data) && data.length > 0);
+    return Array.isArray(data) && data.length > 0;
   }
 }

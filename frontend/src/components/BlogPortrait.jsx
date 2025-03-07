@@ -31,7 +31,6 @@ export default function BlogPortrait({ content, orientation, tags }) {
     // Advertencia
     const handleDeleteWarning = (blogContent) => {
         // Abrir modal de confirmación para eliminar la novedad
-        console.log(blogContent);
         setTargetBlog(blogContent);
         setConfirmationModal(true);
     }
@@ -59,7 +58,6 @@ export default function BlogPortrait({ content, orientation, tags }) {
                 throw new Error('Error en la eliminación del blog');
             }
             else {
-                console.log("Contenido del blog eliminado");
                 const responseDeleteImg = await fetch(`${serverUrl.produccion}/api/storage`, {
                     method: 'DELETE', // Método DELETE para eliminar
                     headers: {
@@ -74,7 +72,7 @@ export default function BlogPortrait({ content, orientation, tags }) {
                         body: JSON.stringify(filteredData)
                     });
                     if (responseDataUpload.ok) {
-                        console.log("Hubo un error al eliminar las imagenes, se revirtió la eliminacion")
+                        // console.log("Hubo un error al eliminar las imagenes, se revirtió la eliminacion")
                     }
 
                 }
@@ -83,7 +81,7 @@ export default function BlogPortrait({ content, orientation, tags }) {
             }
         }
         catch (err) {
-            console.log(err)
+            // console.log(err)
         }
     }
 

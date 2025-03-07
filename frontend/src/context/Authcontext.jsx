@@ -22,7 +22,7 @@ export default function AuthContextProvider({ children }) {
         const data = await response.json();
         setIsAuthenticated(true);
       } catch (e) {
-        console.log('Error al comunicarse con el servidor', e);
+        // console.log('Error al comunicarse con el servidor', e);
       }
       finally {
         setIsLoading(false); // Termina la carga

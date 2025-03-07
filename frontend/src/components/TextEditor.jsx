@@ -195,7 +195,7 @@ export default function TextEditor({ blogContent, onChange, onAddImage }) {
         if (editor && blogContent) {
             if (editor.getHTML() !== blogContent) {
                 editor.commands.setContent(blogContent);
-                console.log(blogContent)
+                // console.log(blogContent)
             }
         }
     }, [blogContent, editor]);
