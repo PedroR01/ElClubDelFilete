@@ -49,7 +49,9 @@ export default function BlogPage() {
                 </div>
 
                 {/* Contenido de la noticia */}
-                <section className="pt-28 pb-14 px-6 md:px-0" dangerouslySetInnerHTML={{ __html: content.content_sections }}>
+                <section className="pt-28 pb-14 px-6 md:px-0" >
+                <div className="[&>ul]:text-white [&>ol]:text-white [&>ul]:list-disc [&>ol]:list-decimal [&>ul]:pl-5 [&>ol]:pl-5" 
+                dangerouslySetInnerHTML={{ __html: content.content_sections }}/>
                 </section>
             </article>
 
