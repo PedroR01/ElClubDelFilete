@@ -271,27 +271,31 @@ export class BlogRepository {
     featuredPos,
     bucketFolderUrl
   ) {
-    const { data: novelties, error: err} = await supabase
-    .from('blogs')
-    .select()
-    .eq('title', title)
-    if(!err && Array.isArray(novelties) && novelties.length > 0)
-        throw new AppError("Ya existe novedad con ese título", 409, "Ya existe novedad con ese título")
-    
+    const { data: novelties, error: err } = await supabase
+      .from("blogs")
+      .select()
+      .eq("title", title);
+    if (!err && Array.isArray(novelties) && novelties.length > 0)
+      throw new AppError(
+        "Ya existe novedad con ese título",
+        409,
+        "Ya existe novedad con ese título"
+      );
+
     if (featuredPos != null) {
       // Obtener todos los blogs con featured_pos >= el deseado
       let { data: blogs, error } = await supabase
         .from("blogs")
         .select()
-        .gte('featured_pos', featuredPos)
+        .gte("featured_pos", featuredPos);
 
       if (error) {
         console.error("Error al obtener blogs:", error.message);
         throw error;
       }
       // verifico que la pos esté libre antes del corrimiento
-      const exists = blogs.some(blog => blog.featured_pos === featuredPos);
-      if(!exists){
+      const exists = blogs.some((blog) => blog.featured_pos === featuredPos);
+      if (!exists) {
         // si la pos no está ocupada inserto sin problemas
         const { data, error: insertError } = await supabase
           .from("blogs")
@@ -358,6 +362,20 @@ export class BlogRepository {
         console.error("Error en las actualizaciones de featured_pos:", e);
         throw e;
       }
+    } else {
+      // Insertar el nuevo blog
+      const { data, error: insertError } = await supabase
+        .from("blogs")
+        .insert({
+          content_sections: content,
+          tag: tag,
+          title: title,
+          description: description,
+          featured_pos: featuredPos,
+          bucket_folder_url: bucketFolderUrl,
+        })
+        .select();
+      return { data, error: insertError };
     }
   }
 

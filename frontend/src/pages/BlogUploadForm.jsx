@@ -36,15 +36,43 @@ export default function BlogUploadForm() {
   const [customCategory, setCustomCategory] = useState("");
   const [isFeatured, setIsFeatured] = useState(false);
   const [charCount, setCharCount] = useState(0);
+  const [imageFiles, setImageFiles] = useState([])
+  const [isFetch, setIsFetch] = useState(false);
   const maxChar = 200;
   // Lógica para cargar datos si estamos en modo edición
   useEffect(() => {
     if (title) {
       // Aquí puedes hacer la llamada al backend para obtener los datos del blog
       fetchBlogData(); // Suponiendo que fetchBlogData es una función para obtener los datos
+      setIsFetch(true);
     }
   }, []);
-
+  useEffect(() => {
+    if(isFetch){
+      const allImages = [getValues("coverImage"), ...(getValues("contenImages")|| [])].filter(Boolean);
+      allImages.forEach((imgUrl) => downloadImage(imgUrl))
+      console.log("Resultado final"+ imageFiles)}
+  }, [isFetch]);
+  
+    const downloadImage = async (imageUrl) => {
+      try {
+        const response = await fetch(imageUrl); // Solicita la imagen
+        const blob = await response.blob(); // Convierte la respuesta en un Blob
+  
+        // Obtén el nombre del archivo de la URL (puedes cambiar esto según tu lógica)
+        const fileName = imageUrl.split('/').pop();
+        const decodifiedTitle = decodeURIComponent(fileName);
+  
+        // Crea un objeto File a partir del Blob
+        const file = new File([blob], decodifiedTitle, { type: blob.type });
+  
+        setImageFiles((prevFiles) => [...prevFiles, file]);
+  
+        console.log(file); // Muestra el archivo en la consola (opcional)
+      } catch (error) {
+        console.error('Error al descargar la imagen:', error);
+      }
+    };
   const fetchBlogData = async () => {
     try {
       if (novedad) {
@@ -232,9 +260,9 @@ export default function BlogUploadForm() {
       }
 
       const method = title ? "PUT" : "POST";
-      const url = title ? `${serverUrl.testLocal}/api/blogs/update/${oldTitle}` : `${serverUrl.testLocal}/api/blogs`;
+      const url = title ? `${serverUrl.produccion}/api/blogs/update/${oldTitle}` : `${serverUrl.produccion}/api/blogs`;
       console.log(url)
-      const responseImgUpload = await fetch(`${serverUrl.testLocal}/api/${getImgEndpoint()}`, {
+      const responseImgUpload = await fetch(`${serverUrl.produccion}/api/${getImgEndpoint()}`, {
         method: method,
         body: imgData
       });
@@ -275,22 +303,48 @@ export default function BlogUploadForm() {
         const resultData = await responseDataUpload.json();
 
         // Si falla el ingreso del blog, se elimina la imagen previamente subida.
+        // Si falla el ingreso del blog, se elimina la imagen previamente subida.
         if (!responseDataUpload.ok) {
-          if (resultData.status === 409) 
-            throw new Error(`${resultData.message}: ${resultData.description}`)
+
+          // Hacer distinción entre el caso de editar (put) y el caso de crear (post)
+          // En ambos casos hay que borrar la carpeta con las imagenes
           const imagenEliminar = {
             folderName: data.title
           }
-          const responseImgDelete = await fetch(`${serverUrl.testLocal}/api/storage`, {
+          const responseImgDelete = await fetch(`${serverUrl.produccion}/api/storage`, {
             method: "DELETE",
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(imagenEliminar)
           });
           if (responseImgDelete.ok)
             console.log("Imagen eliminada con exito");
+          if(method === "PUT"){
+            const imgDataBackup = new FormData();
+            imgDataBackup.append("folderName", oldTitle);
+            imageFiles.forEach((file) => imgDataBackup.append("images", file))
+            const backUpEndPoint = data.contentImages.length > 1
+            ? "storage/array"
+            : "storage"
+            // En el caso del PUT volvemos a cargar las imagenes que se encontraban previamente (gracias a un backup)
+            const responseImgBackup = await fetch(`${serverUrl.produccion}/api/${backUpEndPoint}`, {
+            method: "POST",
+            body: imgDataBackup
+            });
+            if (responseImgBackup.ok)
+              console.log("Imagen/es restaurada/s con exito");
+
+          }
+          
+          // Error cuando ya se encuentra el titulo ocupado.          
+          if (resultData.status === 409){
+            setIsSubmit(false);
+            throw new Error(`${resultData.message}: ${resultData.description}`)
+          }
+          
           
           throw new Error(`Error en la subida de imágenes: ${responseDataUpload.message || "Error desconocido"}`);
-        } else {
+        } 
+        else {
           console.log("Img Result: ", resultImg);
           console.log("Data Result: ", resultData);
         }
