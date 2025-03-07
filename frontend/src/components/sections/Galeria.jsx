@@ -94,10 +94,10 @@ export default function Galeria() {
               className="w-full border-solid border-2 border-black object-fill h-full"
             />
             <div className="absolute inset-0 bg-black bg-opacity-55 transition-opacity flex flex-col justify-end">
-              <p className="hamston absolute top-2 left-2 text-[#CDA053] text-xs p-1 rounded">
+              <p className="afacad-bold absolute top-2 left-2 text-[#CDA053] text-sm p-1 rounded">
                 {img.autor}
               </p>
-              <p className="absolute bottom-1 left-1 text-[#FEFFEB] text-sm p-2 rounded w-3/4 hamston">
+              <p className="afacad-normal absolute bottom-1 left-1 text-[#FEFFEB] text-base p-2 rounded w-3/4">
                 {`"${img.titulo}"`}
               </p>
             </div>
@@ -128,14 +128,13 @@ export default function Galeria() {
       {cantVisible < 34 && (
         <div className="flex justify-center relative">
           <div
-            className={`absolute bottom-[30px] w-full flex justify-center translate-y-0
+            className={`absolute bottom-[30px] w-auto flex justify-center translate-y-0
         transition-all duration-500 ease-in-out`}
           >
             <Button
               text={"Ver más"}
               btnType={"button"}
               event={cargarMasImagenes}
-              className="text-sm bg-gray-800 text-white rounded block"
             />
           </div>
         </div>

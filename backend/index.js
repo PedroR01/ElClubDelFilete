@@ -2,9 +2,17 @@ import dotenv from "dotenv";
 import { fileURLToPath } from "url";
 import path from "path";
 import express from "express";
-import cors from "cors";
-import bodyParser from "body-parser";
-import { Resend } from "resend";
+import resendRouter from "./routes/api/resend.js";
+import loginRouter from "./routes/user/auth/login.js";
+import logoutRouter from "./routes/user/auth/logout.js";
+import registerRouter from "./routes/user/auth/signUp.js";
+import confirmAuthUserRouter from "./routes/user/webhooks/confirmAuthUser.js";
+import blogInfoRouter from "./routes/blog/blogInfo.js";
+import blogImgRouter from "./routes/blog/blogBucket.js";
+import logedUserCookiesRouter from "./routes/user/cookies/userCookie.js";
+import cookieParser from "cookie-parser";
+import errorHandler from "./middlewares/errorHandler.js";
+import corsMiddleware from "./middlewares/corsMiddleware.js";
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -14,97 +22,47 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 dotenv.config({ path: path.resolve(__dirname, ".env") });
-const resend = new Resend(process.env.RESEND_API_KEY);
 
-app.use(
-  cors({
-    origin: "https://elclubdelfilete.com.ar",
-    methods: ["POST", "GET"],
-  })
-);
-app.use(bodyParser.json());
+app.disable("x-powered-by");
+app.use(corsMiddleware);
+app.use(express.json());
+app.use(cookieParser());
 
 app.get("/", (req, res) => {
   const htmlResponse = `
     <html>
       <head>
-        <title>NodeJs y Express en Vercel</title>
+        <title>Servidor ElClubDelFilete</title>
       </head>
-      <body>
-        <h1>Soy un proyecto Back end en vercel</h1>
-      </body>
     </html>
   `;
   res.send(htmlResponse);
 });
 
-app.get("/api/submit", (req, res) => {
-  const htmlResponse = `
-    <html>
-      <body>
-        <h1>Esta es la dirección donde se comúnica con la API Resend.</h1>
-      </body>
-    </html>
-  `;
-  res.send(htmlResponse);
-});
+// Email API (RESEND)
+app.use("/api/submitResend", resendRouter);
 
-app.post("/api/submit", async (req, res) => {
-  try {
-    const { nombre, email, descripcion } = req.body;
+// USER
+app.use("/login", loginRouter);
+app.use("/logout", logoutRouter);
+app.use("/signup", registerRouter);
+app.use("/webhook/confirmed_auth_user", confirmAuthUserRouter);
 
-    if (!nombre || !email || !descripcion) {
-      return res
-        .status(400)
-        .json({ error: "Todos los campos son obligatorios" });
-    }
+// COOKIES
+app.use("/api/verify", logedUserCookiesRouter);
 
-    if (!/^[A-Za-z\s]+$/.test(nombre)) {
-      return res.status(400).json({ error: "Nombre inválido" });
-    }
+// BLOGS
+app.use("/api/blogs", blogInfoRouter);
+app.use("/api/storage", blogImgRouter);
 
-    if (!/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/.test(email)) {
-      return res.status(400).json({ error: "Email inválido" });
-    }
-
-    if (descripcion.length > 200) {
-      return res
-        .status(400)
-        .json({ error: "La descripción es demasiado larga" });
-    }
-
-    const { data, error } = await resend.emails.send({
-      from: `${nombre} <contacto@elclubdelfilete.com.ar>`,
-      to: "elclubdelfilete@gmail.com",
-      subject: "Consulta",
-      html: `<p>Hola, mi nombre es ${nombre}. ${descripcion}</p>
-                 <p>Mi email de contacto es: ${email}</p>`,
-    });
-
-    if (error) {
-      console.error(error);
-      return res.status(error.code).json({
-        title: "Error con API al intentar enviar el mail",
-        error: error.name,
-        description: error.message,
-      });
-    }
-
-    return res
-      .status(200)
-      .json({ message: "Correo enviado exitosamente", data });
-  } catch (e) {
-    console.error(e);
-    return res
-      .status(500)
-      .json({ error: "Error en el servidor", description: e.message });
-  }
-});
+// app.use("/protected", protectedRouter);
 
 // Ruta para manejar cualquier otra solicitud (404)
 app.use((req, res) => {
-  res.status(404).send("<h1>Recurso no encontrado</h1>");
+  res.status(404).send("Recurso no encontrado");
 });
+
+app.use(errorHandler); // Esto debe ir al final para manejar cualquier error no capturado
 
 app.listen(PORT, () => {
   console.log(`Servidor corriendo en ${PORT}`);
