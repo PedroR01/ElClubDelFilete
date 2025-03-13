@@ -3,7 +3,7 @@ import bgTexture from "../img/misc/productTextureBg.svg"
 // import { ShoppingCartIcon } from "lucide-react";
 import { Mail } from "lucide-react";
 
-export default function ProductCard({ title, description, imageSrc }) {
+export default function ProductCard({ title, description, imageSrc, onClickEvent = null }) {
     return (
         <div className="border-2 md:min-h-96 md:max-w-72 border-[#2D2B35] p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300">
             {/* Recuadro de la imagen y Imagen del producto */}
@@ -29,9 +29,9 @@ export default function ProductCard({ title, description, imageSrc }) {
                     <button
                         className="w-full flex gap-2 justify-center py-2 bg-[#CDA053] text-[#FEFFFB] afacad-normal rounded-lg text-lg transition-all duration-300 ease-in-out brightness-100 enabled:hover:scale-105  enabled:active:scale-95 border-2 border-[#b58c46] shadow-xl"
                         type="button"
-                        onClick={() => (1)}
+                        onClick={ onClickEvent ?  onClickEvent : () => (1) }
                     >
-                        <Mail /> Consultar precio
+                        <Mail /> Hace tu pedido
                     </button>
                 </div>
             </div>

@@ -43,11 +43,13 @@ export default function TiendaPage() {
                                 title="Pinceles Carnevale"
                                 description="Pinceles de alta calidad para tus proyectos artísticos."
                                 imageSrc={pincelesFondo}
+                                onClickEvent={handleEmailClick}
                             />
                             <ProductCard
                                 title="Pinceles Tigre Serie 803"
                                 description="Precisión y durabilidad en cada trazo con los pinceles Tigre."
                                 imageSrc={pincelesFondo}
+                                onClickEvent={handleEmailClick}
                             />
                         </div>
 
@@ -66,11 +68,13 @@ export default function TiendaPage() {
                                 title="Esmalte al Agua 130ml"
                                 description="Colores rojo, amarillo, azul, blanco y negro para todo tipo de superficies."
                                 imageSrc={pincelesFondo}
+                                onClickEvent={handleEmailClick}
                             />
                             <ProductCard
                                 title="Barniz al Agua 130ml"
                                 description="Protege y da acabado a tus proyectos con nuestro barniz."
                                 imageSrc={pincelesFondo}
+                                onClickEvent={handleEmailClick}
                             />
                         </div>
                     </div>
