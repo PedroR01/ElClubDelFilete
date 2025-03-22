@@ -184,7 +184,11 @@ export default function TextEditor({ blogContent, onChange, onAddImage }) {
         if (embedUrl) {
             editor.chain().focus().insertContent({
                 type: "youtube",
-                attrs: { src: embedUrl, width: 200, height: 200 },
+                attrs: { 
+                    src: embedUrl, 
+                    width: "100%", 
+                    height: "auto" // Se ajustará con `aspect-ratio`
+                },
             }).run();
         } else {
             alert("URL no válida, por favor ingrese un enlace de YouTube.");

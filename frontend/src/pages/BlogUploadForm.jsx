@@ -216,7 +216,29 @@ export default function BlogUploadForm() {
     // Devolvemos el contenido HTML actualizado como string
     return doc.documentElement.outerHTML;
   };
-
+  const cleanYoutubeVideos = async (htmlString) => {
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(htmlString, "text/html");
+    const videos =  doc.querySelectorAll("div[data-youtube-video]")
+    videos.forEach((video) => {
+      video.style.cursor = "auto";
+  
+      const iframe = video.querySelector("iframe");
+      if (iframe) {
+        iframe.style.pointerEvents = "auto"; // Habilita la interacción con el video
+        iframe.style.cursor = "auto"; // Evita que el cursor sea "grab"
+      }
+  
+      // Elimina el div superpuesto con cursor: grab
+      const overlay = video.querySelector("div[style*='position: absolute']");
+      if (overlay) {
+        overlay.remove();
+      }
+    });
+  
+    return doc.documentElement.outerHTML;
+  };
+  
 
   // Los datos del formulario a enviar se dividen en 2 partes: Blog (texto y numero de prioridad) e Imagen (información completa de la imagen y codificada para guardarla correctamente en la BD).
   const onSubmit = async (data) => {
@@ -290,19 +312,18 @@ export default function BlogUploadForm() {
         } else {
           blogData.bucket_folder_url = resultImg.url;
         }
-
+        const modifiedHtml = await cleanYoutubeVideos(blogData.content_sections);
+        blogData.content_sections = modifiedHtml;
         if (getValues("contentImages").length > 0) {
           const newHtml = await replaceImageUrlsInContent(blogData.content_sections, resultImg.url)
           blogData.content_sections = newHtml;
         }
-
         const responseDataUpload = await fetch(url, {
           method: method,
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(blogData)
         });
         const resultData = await responseDataUpload.json();
-
         // Si falla el ingreso del blog, se elimina la imagen previamente subida.
         // Si falla el ingreso del blog, se elimina la imagen previamente subida.
         if (!responseDataUpload.ok) {
