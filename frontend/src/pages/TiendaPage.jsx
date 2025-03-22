@@ -28,11 +28,11 @@ export default function TiendaPage() {
                     </h1>
                     <p className="text-xl mt-2">
                         ¡Tenemos todo lo que necesitas y hacemos envíos a todo el Mundo!<br />
-                        Hacé tu pedido directamente a nosotros <span className="font-semibold text-[#CDA053]">elclubdelfilete@gmail.com</span>
+                        {/* Hacé tu pedido directamente a nosotros <span className="font-semibold text-[#CDA053]">elclubdelfilete@gmail.com</span> */}
                     </p>
-                    <div className="w-fit justify-self-center mt-6">
+                    {/*<div className="w-fit justify-self-center mt-6">
                         <Button text={"Consultar Precios"} btnType={"button"} event={handleEmailClick} />
-                    </div>
+                    </div>*/}
                 </header>
 
                 <main className="max-w-6xl mx-auto py-8">
