@@ -9,7 +9,7 @@ export default function ProductCard({ title, description, imageSrc, onClickEvent
             {/* Recuadro de la imagen y Imagen del producto */}
             <div className="flex">
                 <div className="relative bg-[#B89A6B] min-w-full min-h-full rounded-xl shadow-blog-main -translate-y-12">
-                    <img className="absolute max-w-[40%] max-h-[75%] place-self-anchor-center rounded-lg" src={imageSrc} alt={title} />
+                    <img className="absolute max-w-[65%] max-h-[75%] place-self-anchor-center rounded-lg" src={imageSrc} alt={title} />
                     <img src={bgTexture} alt="background texture" />
                 </div>
             </div>

@@ -1,11 +1,23 @@
 import { Helmet } from "react-helmet-async";
 import ProductCard from "../components/ProductCard";
-import Button from "../components/Button";
-import pincelesFondo from "../img/tienda/fondoTienda.jpeg";
-import listaPrecios from "../img/tienda/listaPrecios2024.jpg"
-
+// import Button from "../components/Button";
+// import pincelesFondo from "../img/tienda/fondoTienda.jpeg";
+// import listaPrecios from "../img/tienda/listaPrecios2024.jpg"
+import  Hidroesmaltes from "../img/tienda/hidroesmaltes.jpg"
+import  PincelesTigre from "../img/tienda/pincelesTigre.jpg"
+import  PincelesCarnavale from "../img/tienda/pincelesCarnavale.jpg"
 export default function TiendaPage() {
-
+    const formattedDescriptions = [`Pinceles Carnevale de pelo largo y virola chata
+    Nº 1 - $5.700 (USD 6)
+    Nº 2 - $6.200 (USD 6,5)
+    Nº 4 - $6.500 (USD 7)
+    Nº 6 - $7.100 (USD 7,5)
+    Nº 10 - $9.000 (USD 9)
+    Juego Completo Nº 1, 2, 4, 6, 10 - 
+    $32.000 (USD 34)`,`Juego de pinceles Tigre Serie 803, 6 unidades $9.000` , 
+    `Hidroesmalte por 130cc, colores rojo, amarillo, azul, blanco y negro. $5.000 c/u
+    Barniz al agua por 130cc $6.000 c/u`];
+    
     const handleEmailClick = () => {
         // Redirige al cliente de correo con el mail predefinido
         window.location.href = `mailto:elclubdelfilete@gmail.com`;
@@ -41,19 +53,23 @@ export default function TiendaPage() {
                         <div className="space-y-8">
                             <ProductCard
                                 title="Pinceles Carnevale"
-                                description="Pinceles de alta calidad para tus proyectos artísticos."
-                                imageSrc={pincelesFondo}
+                                description={formattedDescriptions[0]}
+                                imageSrc={PincelesCarnavale}
                                 onClickEvent={handleEmailClick}
+                                
                             />
-                            <ProductCard
+                        </div>
+                        <div className="space-y-8">
+                        <ProductCard
                                 title="Pinceles Tigre Serie 803"
-                                description="Precisión y durabilidad en cada trazo con los pinceles Tigre."
-                                imageSrc={pincelesFondo}
+                                description={formattedDescriptions[1]}
+                                imageSrc={PincelesTigre}
                                 onClickEvent={handleEmailClick}
                             />
                         </div>
 
                         {/* Columna 2: Imagen */}
+                        {/*
                         <div className="hidden md:flex justify-center items-start">
                             <img
                                 src={listaPrecios}
@@ -61,22 +77,23 @@ export default function TiendaPage() {
                                 className="h-auto w-auto rounded-lg shadow-xl"
                             />
                         </div>
-
+                            */}
                         {/* Columna 3: Cards */}
                         <div className="space-y-8">
                             <ProductCard
-                                title="Esmalte al Agua 130ml"
-                                description="Colores rojo, amarillo, azul, blanco y negro para todo tipo de superficies."
-                                imageSrc={pincelesFondo}
+                                title="Hidroesmaltes, Barniz al agua"
+                                description={formattedDescriptions[2]}
+                                imageSrc={Hidroesmaltes}
                                 onClickEvent={handleEmailClick}
-                            />
+                            />{/*
                             <ProductCard
                                 title="Barniz al Agua 130ml"
                                 description="Protege y da acabado a tus proyectos con nuestro barniz."
                                 imageSrc={pincelesFondo}
                                 onClickEvent={handleEmailClick}
-                            />
+                            />*/}
                         </div>
+                        
                     </div>
                 </main>
             </div>
